@@ -23,6 +23,6 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "npx mocha"
   }
 }
