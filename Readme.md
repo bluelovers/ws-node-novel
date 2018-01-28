@@ -7,7 +7,7 @@
 ## Installation
 
 ```
-$ npm install mdconf
+$ npm install mdconf2
 ```
 
 ## ports
@@ -17,7 +17,7 @@ $ npm install mdconf
 ## API
 
 ```js
-let parse = require('mdconf');
+let parse = require('mdconf2');
 parse('string of markdown');
 // => Object
 ```
