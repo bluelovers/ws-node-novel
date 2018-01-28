@@ -1,22 +1,22 @@
 /**
  * Module dependencies.
  */
-
 import * as md from 'marked';
 
 /**
  * Parse the given `str` of markdown.
  *
- * @param {String} str
+ * @param {String | Buffer} str
  * @param {Object} options
  * @return {Object}
  * @api public
  */
-
-export = function parse(str, options)
+function parse(str: string, options?): { [key: string]: any, }
+function parse(str: Buffer, options?): { [key: string]: any, }
+function parse(str: string | Buffer, options = {}): { [key: string]: any, }
 {
 	options = options || {};
-	let toks = md.lexer(str);
+	let toks = md.lexer(str.toString());
 	let conf = {};
 	let keys = [];
 	let depth = 0;
@@ -52,7 +52,9 @@ export = function parse(str, options)
 	});
 
 	return conf;
-};
+}
+
+export = parse;
 
 /**
  * Add `str` to `obj` with the given `keys`
@@ -64,7 +66,6 @@ export = function parse(str, options)
  * @param {Object} table
  * @api private
  */
-
 function put(obj, keys, str, code?, table?)
 {
 	let target = obj;
