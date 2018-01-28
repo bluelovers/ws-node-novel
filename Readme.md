@@ -17,7 +17,7 @@ $ npm install mdconf
 ## API
 
 ```js
-var parse = require('mdconf');
+let parse = require('mdconf');
 parse('string of markdown');
 // => Object
 ```
