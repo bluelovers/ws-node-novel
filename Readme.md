@@ -195,3 +195,10 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## links
+
+- [node-novel-info](https://www.npmjs.com/package/node-novel-info)
+- [mdconf2](https://www.npmjs.com/package/mdconf2)
+- [mdconf-stringify](https://www.npmjs.com/package/mdconf-stringify)
+
