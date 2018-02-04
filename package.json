@@ -1,6 +1,6 @@
 {
   "name": "mdconf2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Markdown configuration parse => data / stringify => Markdown",
   "keywords": [
     "conf",
@@ -8,10 +8,7 @@
     "configuration",
     "info",
     "json",
-    "json",
     "markdown",
-    "markdown",
-    "md",
     "md",
     "mdconf",
     "mdconfig",
@@ -21,11 +18,20 @@
     "stringify",
     "txt"
   ],
+  "homepage": "https://github.com/bluelovers/mdconf#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/mdconf/issues"
+  },
+  "license": "ISC",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tj/mdconf.git"
+    "url": "git+https://github.com/bluelovers/mdconf.git"
   },
   "scripts": {
     "test": "npx mocha"
