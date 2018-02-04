@@ -20,8 +20,11 @@ $ npm install mdconf2
 
 ```js
 let mdconf = require('mdconf2');
-mdconf.parse('string of markdown');
+let data = mdconf.parse('string of markdown');
 // => Object
+
+mdconf.stringify(data)
+// ==> string
 ```
 
 ## Example

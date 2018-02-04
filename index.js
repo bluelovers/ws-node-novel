@@ -26,7 +26,12 @@ function parse(str, options = {}) {
     options = deepmerge.all([{}, exports.defaultOptionsParse, options || {}]);
     let source = str.toString();
     let eol;
-    if (options.crlf) {
+    if (1) {
+        // disable crlf options
+        eol = crlf_normalize_1.LF;
+        source = crlf_normalize_1.crlf(source, eol);
+    }
+    else if (options.crlf) {
         eol = options.crlf;
         source = crlf_normalize_1.crlf(source, eol);
     }
@@ -272,18 +277,19 @@ function stringify(dataInput, level = 1, skip = [], k) {
             else if (isRawObject || typeof row == 'string' && /[\r\n]|^\s/g.test(row)) {
                 let lang;
                 let val = row;
+                val = val.replace(/^[\r\n]+|\s+$/g, '');
                 if (isRawObject) {
                     let rawData = data[k].getRawData();
                     lang = rawData.lang;
                     if (rawData.type != 'html') {
-                        val = makeCodeBlock(row, lang);
+                        val = makeCodeBlock(val, lang);
                     }
                     else {
                         val = crlf_normalize_1.LF + val + crlf_normalize_1.LF;
                     }
                 }
                 else {
-                    val = makeCodeBlock(row, lang);
+                    val = makeCodeBlock(val, lang);
                 }
                 rs2.push('#'.repeat(level) + ' ' + k + crlf_normalize_1.LF);
                 rs2.push(val);
@@ -302,18 +308,19 @@ function stringify(dataInput, level = 1, skip = [], k) {
         }
         let lang;
         let val = data;
+        val = val.replace(/^[\r\n]+|\s+$/g, '');
         if (isRawObject) {
             let rawData = dataInput.getRawData();
             lang = rawData.lang;
             if (rawData.type != 'html') {
-                val = makeCodeBlock(data, lang);
+                val = makeCodeBlock(val, lang);
             }
             else {
                 val = crlf_normalize_1.LF + val + crlf_normalize_1.LF;
             }
         }
         else {
-            val = makeCodeBlock(data, lang);
+            val = makeCodeBlock(val, lang);
         }
         rs2.push(val);
     }

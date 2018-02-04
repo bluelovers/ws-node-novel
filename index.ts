@@ -49,7 +49,13 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 	let source: string = str.toString();
 	let eol: string;
 
-	if (options.crlf)
+	if (1)
+	{
+		// disable crlf options
+		eol = LF;
+		source = crlf(source, eol);
+	}
+	else if (options.crlf)
 	{
 		eol = options.crlf;
 		source = crlf(source, eol);
@@ -388,6 +394,8 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 				let lang: string;
 				let val = row;
 
+				val = val.replace(/^[\r\n]+|\s+$/g, '');
+
 				if (isRawObject)
 				{
 					let rawData = data[k].getRawData();
@@ -395,7 +403,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 
 					if (rawData.type != 'html')
 					{
-						val = makeCodeBlock(row, lang);
+						val = makeCodeBlock(val, lang);
 					}
 					else
 					{
@@ -404,7 +412,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 				}
 				else
 				{
-					val = makeCodeBlock(row, lang);
+					val = makeCodeBlock(val, lang);
 				}
 
 				rs2.push('#'.repeat(level) + ' ' + k + LF);
@@ -432,6 +440,8 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 
 		let val = data;
 
+		val = val.replace(/^[\r\n]+|\s+$/g, '');
+
 		if (isRawObject)
 		{
 			let rawData = dataInput.getRawData();
@@ -439,7 +449,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 
 			if (rawData.type != 'html')
 			{
-				val = makeCodeBlock(data, lang);
+				val = makeCodeBlock(val, lang);
 			}
 			else
 			{
@@ -448,7 +458,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 		}
 		else
 		{
-			val = makeCodeBlock(data, lang);
+			val = makeCodeBlock(val, lang);
 		}
 
 		rs2.push(val);
