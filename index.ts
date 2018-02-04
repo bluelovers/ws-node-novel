@@ -357,8 +357,10 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 			{
 				let bool = (!RawObject.isRawObject(value) && typeof value == 'object');
 
-				rs1.push(stringify(value, level, [], bool ? index : null));
-			})
+				rs1.push(stringify(value, level, [], bool ? index : null).replace(/\n+$/g, ''));
+			});
+
+			//rs1.push('');
 		}
 	}
 	else if (typeof data == 'object')

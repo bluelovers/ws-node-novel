@@ -1,6 +1,6 @@
 {
   "name": "mdconf2",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Markdown configuration parse => data / stringify => Markdown",
   "keywords": [
     "conf",

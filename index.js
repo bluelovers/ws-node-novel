@@ -252,8 +252,9 @@ function stringify(dataInput, level = 1, skip = [], k) {
         else {
             data.forEach(function (value, index, array) {
                 let bool = (!RawObject.isRawObject(value) && typeof value == 'object');
-                rs1.push(stringify(value, level, [], bool ? index : null));
+                rs1.push(stringify(value, level, [], bool ? index : null).replace(/\n+$/g, ''));
             });
+            //rs1.push('');
         }
     }
     else if (typeof data == 'object') {

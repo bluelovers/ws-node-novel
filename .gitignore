@@ -2,5 +2,5 @@ node_modules
 package-lock.json
 /test/*.d.ts
 /test/*.js
-/test/**/*.ts
+/test/**/*.d.ts
 /test/**/*.js
