@@ -16,9 +16,11 @@ $ npm install mdconf2
 
 ## API
 
+* [API](index.d.ts)
+
 ```js
-let parse = require('mdconf2');
-parse('string of markdown');
+let mdconf = require('mdconf2');
+mdconf.parse('string of markdown');
 // => Object
 ```
 

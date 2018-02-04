@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 const testUtils = require('./test-utils');
-const parse = require('../index');
+const mdconf = require('../index');
+
+const parse = mdconf.parse;
 
 describe('mdconf integration tests', function ()
 {
@@ -19,7 +21,22 @@ describe('mdconf integration tests', function ()
 			{
 				it('should match expected output with no options', () =>
 				{
-					expect(parse(testCase.md)).to.deep.eql(testCase.json);
+					let data = parse(testCase.md);
+
+					//console.log(data);
+
+					//console.log(mdconf.stringify(data));
+
+					let data3 = parse(mdconf.stringify(data));
+
+					let data2 = mdconf.RawObject.removeRawData(data);
+
+					//console.log(data2);
+					//console.log(data3);
+
+					expect(data2).to.deep.eql(testCase.json);
+					expect(data2).to.deep.eql(mdconf.RawObject.removeRawData(data3));
+
 				});
 			});
 		});

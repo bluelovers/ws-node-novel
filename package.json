@@ -1,6 +1,6 @@
 {
   "name": "mdconf2",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Markdown configuration",
   "keywords": [
     "conf",
@@ -31,9 +31,14 @@
     "test": "npx mocha"
   },
   "dependencies": {
-    "marked": "^0.3.12"
+    "crlf-normalize": "^1.0.0",
+    "deepmerge-plus": "^2.0.4",
+    "is-plain-object": "^2.0.4",
+    "marked": "^0.3.12",
+    "moment": "^2.20.1"
   },
   "devDependencies": {
+    "@types/marked": "^0.3.0",
     "@types/node": "^9.4.0",
     "chai": "^4.1.2",
     "fs-extra": "^4.0.2",
