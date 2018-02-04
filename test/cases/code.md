@@ -3,7 +3,7 @@
 
   Just some example styles:
 
-```
+```scss
 body {
   padding: 50px;
 }
@@ -11,7 +11,7 @@ body {
 
  And some styles for buttons:
 
-```
+```css
 button {
   padding: 5px 10px;
 }
