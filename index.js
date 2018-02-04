@@ -283,9 +283,9 @@ function stringify(dataInput, level = 1, skip = [], k) {
                 let val = row;
                 val = val.replace(/^[\r\n]+|\s+$/g, '');
                 if (isRawObject) {
-                    let rawData = data[k].getRawData();
-                    lang = rawData.lang;
+                    let rawData = data[k].getRawData() || {};
                     if (rawData.type != 'html') {
+                        lang = rawData.lang;
                         val = makeCodeBlock(val, lang);
                     }
                     else {
@@ -314,7 +314,7 @@ function stringify(dataInput, level = 1, skip = [], k) {
         let val = data;
         val = val.replace(/^[\r\n]+|\s+$/g, '');
         if (isRawObject) {
-            let rawData = dataInput.getRawData();
+            let rawData = dataInput.getRawData() || {};
             lang = rawData.lang;
             if (rawData.type != 'html') {
                 val = makeCodeBlock(val, lang);

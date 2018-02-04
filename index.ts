@@ -403,11 +403,12 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 
 				if (isRawObject)
 				{
-					let rawData = data[k].getRawData();
-					lang = rawData.lang;
+					let rawData = data[k].getRawData() || {};
 
 					if (rawData.type != 'html')
 					{
+						lang = rawData.lang;
+
 						val = makeCodeBlock(val, lang);
 					}
 					else
@@ -449,7 +450,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 
 		if (isRawObject)
 		{
-			let rawData = dataInput.getRawData();
+			let rawData = dataInput.getRawData() || {};
 			lang = rawData.lang;
 
 			if (rawData.type != 'html')
