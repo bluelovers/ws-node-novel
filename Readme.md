@@ -1,6 +1,6 @@
 # mdconf
 
-  Markdown driven configuration!
+  Markdown configuration parse => data / stringify => Markdown
 
   Using the fantastic markdown parser [marked](https://github.com/chjj/marked).
 
@@ -23,7 +23,10 @@ let mdconf = require('mdconf2');
 let data = mdconf.parse('string of markdown');
 // => Object
 
-mdconf.stringify(data)
+mdconf.stringify(data);
+
+// will remove hidden data and get source data
+let data2 = mdconf.RawObject.removeRawData(data);
 // ==> string
 ```
 

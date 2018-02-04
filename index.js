@@ -139,8 +139,11 @@ function parse(str, options = {}) {
         for (let i in keys) {
             let k = keys[i];
             if (/^\d+$/.test(k)) {
+                // @ts-ignore
                 let kk = keys[i - 1];
+                // @ts-ignore
                 let parent = getobjectbyid(keys.slice(0, i - 1), conf);
+                // @ts-ignore
                 let obj = getobjectbyid(keys.slice(0, i), conf);
                 let ok = true;
                 for (let j in obj) {

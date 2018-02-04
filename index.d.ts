@@ -36,6 +36,11 @@ export declare class RawObject {
     getRawData(): any;
     getRawValue(): any;
     static isRawObject(v: object): boolean;
+    /**
+     * will remove hidden data and get source data
+     *
+     * @param {RawObject} data
+     */
     static removeRawData(data: RawObject): any;
     static removeRawData(data: any): any;
 }

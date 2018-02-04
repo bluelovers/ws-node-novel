@@ -201,9 +201,12 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 			if (/^\d+$/.test(k))
 			{
+				// @ts-ignore
 				let kk = keys[i-1];
 
+				// @ts-ignore
 				let parent = getobjectbyid(keys.slice(0, i-1), conf);
+				// @ts-ignore
 				let obj = getobjectbyid(keys.slice(0, i), conf);
 
 				let ok = true;
@@ -540,6 +543,11 @@ export class RawObject
 		return (v instanceof RawObject);
 	}
 
+	/**
+	 * will remove hidden data and get source data
+	 *
+	 * @param {RawObject} data
+	 */
 	static removeRawData(data: RawObject)
 	static removeRawData(data)
 	static removeRawData(data)
