@@ -24,10 +24,11 @@ let data = mdconf.parse('string of markdown');
 // => Object
 
 mdconf.stringify(data);
+// ==> string
 
 // will remove hidden data and get source data
 let data2 = mdconf.RawObject.removeRawData(data);
-// ==> string
+// => Object
 ```
 
 ## Example
