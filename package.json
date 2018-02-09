@@ -1,34 +1,43 @@
 {
   "name": "novel-text",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "node-novel core module",
   "keywords": [
     "chinese",
+    "format",
+    "keywords",
+    "match",
     "node-novel",
     "node-text",
     "novel",
-    "format",
-    "text",
-    "replace",
-    "regexp",
-    "regex",
-    "keywords",
-    "match",
     "parse",
     "re",
     "regex",
     "regexp",
     "regular",
     "regular expression",
+    "replace",
     "sort",
+    "text",
     "txt"
   ],
-  "author": "",
+  "homepage": "https://github.com/bluelovers/node-novel-text#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/node-novel-text/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/node-novel-text.git"
+  },
   "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "blank-line": "^1.0.0",
     "str-util": "^2.3.3",
