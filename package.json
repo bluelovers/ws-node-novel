@@ -1,6 +1,6 @@
 {
   "name": "novel-text",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "node-novel core module",
   "keywords": [
     "chinese",
@@ -41,7 +41,7 @@
   "dependencies": {
     "blank-line": "^1.0.0",
     "str-util": "^2.3.3",
-    "tieba-harmony": "^1.2.0"
+    "tieba-harmony": "^1.2.1"
   },
   "devDependencies": {
     "@types/node": "^8.9.1"
