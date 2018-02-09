@@ -1,0 +1,40 @@
+{
+  "name": "novel-text",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chinese",
+    "node-novel",
+    "node-text",
+    "novel",
+    "format",
+    "text",
+    "replace",
+    "regexp",
+    "regex",
+    "keywords",
+    "match",
+    "parse",
+    "re",
+    "regex",
+    "regexp",
+    "regular",
+    "regular expression",
+    "sort",
+    "txt"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "blank-line": "^1.0.0",
+    "str-util": "^2.3.3",
+    "tieba-harmony": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.9.1"
+  }
+}
