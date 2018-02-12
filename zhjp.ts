@@ -23,6 +23,7 @@ export function jp(txt: string): string
 		}))
 		.replace(/诅/g, '詛')
 		.replace(/复仇/g, '復仇')
+		.replace(/戦斗/g, '戦闘')
 		;
 }
 
