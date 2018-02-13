@@ -1,9 +1,10 @@
 {
   "name": "novel-text",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "node-novel core module",
   "keywords": [
     "chinese",
+    "expression",
     "format",
     "keywords",
     "match",
@@ -39,11 +40,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "blank-line": "^1.0.0",
-    "str-util": "^2.3.3",
-    "tieba-harmony": "^1.2.1"
+    "blank-line": "latest",
+    "str-util": "latest",
+    "tieba-harmony": "latest"
   },
   "devDependencies": {
-    "@types/node": "^8.9.1"
+    "@types/node": "latest"
   }
 }
