@@ -37,6 +37,7 @@ export function zh(txt: string): string
 		.replace(/価/, '價')
 		.replace(/[觉覚覺]/g, '覺')
 		.replace(/亏/g, '虧')
+		.replace(/[·‧・···•]/g, '・')
 		//.replace(/当/g, '當')
 		;
 }

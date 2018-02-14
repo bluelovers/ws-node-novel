@@ -27,7 +27,8 @@ function zh(txt) {
         .replace(/[亜亚亞]/g, '亞')
         .replace(/価/, '價')
         .replace(/[觉覚覺]/g, '覺')
-        .replace(/亏/g, '虧');
+        .replace(/亏/g, '虧')
+        .replace(/[·‧・···•]/g, '・');
 }
 exports.zh = zh;
 const self = require("./zhjp");
