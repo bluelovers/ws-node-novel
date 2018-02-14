@@ -1,18 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const StrUtil = require("str-util");
-function filename(name) {
-    return jp(name)
+function filename(name, options = {}) {
+    return jp(name, options)
         .replace(/·/g, '・');
 }
 exports.filename = filename;
-function word(name) {
-    return jp(name);
+function word(name, options = {}) {
+    return jp(name, options);
 }
 exports.word = word;
-function jp(txt) {
+function jp(txt, options = {}) {
     return zh(StrUtil.zh2jp(txt, {
-        skip: '龙竜龍制征里像拜',
+        skip: '龙竜龍制征里像拜冰' + (options.skip || ''),
     }))
         .replace(/诅/g, '詛')
         .replace(/复仇/g, '復仇')
@@ -21,7 +21,7 @@ function jp(txt) {
         .replace(/^エピローグ/, '終章');
 }
 exports.jp = jp;
-function zh(txt) {
+function zh(txt, options = {}) {
     return txt
         .replace(/与/g, '與')
         .replace(/[亜亚亞]/g, '亞')

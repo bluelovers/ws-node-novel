@@ -4,22 +4,23 @@
 
 import * as StrUtil from 'str-util';
 
-export function filename(name: string): string
+export function filename(name: string, options = {}): string
 {
-	return jp(name)
+	return jp(name, options)
 		.replace(/·/g, '・')
 		;
 }
 
-export function word(name: string): string
+export function word(name: string, options = {}): string
 {
-	return jp(name);
+	return jp(name, options);
 }
 
-export function jp(txt: string): string
+export function jp(txt: string, options = {}): string
 {
 	return zh(StrUtil.zh2jp(txt, {
-		skip: '龙竜龍制征里像拜',
+		// @ts-ignore
+		skip: '龙竜龍制征里像拜冰' + (options.skip || ''),
 		}))
 		.replace(/诅/g, '詛')
 		.replace(/复仇/g, '復仇')
@@ -29,7 +30,7 @@ export function jp(txt: string): string
 		;
 }
 
-export function zh(txt: string): string
+export function zh(txt: string, options = {}): string
 {
 	return txt
 		.replace(/与/g, '與')
