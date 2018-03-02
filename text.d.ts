@@ -1,4 +1,3 @@
-/// <reference types="node" />
 export declare const SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・。·]|\\*|□|圌)";
 export declare const SP_KEY = "#_@_#";
 export interface IOptions {
@@ -31,27 +30,8 @@ export declare class enspace {
         m0: RegExp;
         r1: RegExp;
         rtrim: RegExp;
-        words: NovelText.IWordsOutput[];
+        words: any[];
     };
-    options: {};
-    _words_r1: string;
-    constructor(options?: any);
-    static create(...argv: any[]): NovelText.enspace;
-    _words1(arr: string[], words?: any[]): IWordsOutput[];
-    _words2(words: any): IWordsOutput[];
-    replace(text: any, options?: IOptions): string;
-    replace_words(_ret: any, words: IWordsOutput[], _cache_words?: any): {
-        value: string;
-        cache: any;
-    };
-    paddingEng(text: string): string;
-    clearLF(text: string): string;
-    trim(text: Buffer, options?: any): string;
-    trim(text: string, options?: any): string;
-    trim(text: number, options?: any): string;
-    toStr(str: Buffer | string | number | any, options?: IToStrOptions): string;
-    toStr(str: Buffer | string | number | any, options?: string): string;
-    textlayout(html: any, options?: ITextLayoutOptions): string;
 }
 import * as NovelText from './text';
 export default NovelText;
