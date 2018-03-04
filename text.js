@@ -235,7 +235,10 @@ class enspace {
         }, options);
         let ret = str
             .toString()
-            .replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n");
+            .replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n")
+            .replace(/[\u2000-\u200F]/g, '')
+            .replace(/[\u2028-\u202F]/g, '')
+            .replace(/[\u205F-\u2060]/g, '');
         if (!options.allow_bom) {
             ret = ret.replace(/\uFEFF/g, '');
         }
