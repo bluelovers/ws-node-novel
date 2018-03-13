@@ -4,10 +4,9 @@
 
 import * as StrUtil from 'str-util';
 import chkBlankLine from 'blank-line';
-import tiebaHarmony from 'tieba-harmony';
+import tiebaHarmony, { SP_REGEXP, SP_KEY } from 'tieba-harmony';
 
-export const SP_REGEXP = tiebaHarmony.SP_REGEXP;
-export const SP_KEY = tiebaHarmony.SP_KEY;
+export { SP_REGEXP, SP_KEY };
 
 export interface IOptions
 {

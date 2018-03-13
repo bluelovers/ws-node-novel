@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const StrUtil = require("str-util");
 const blank_line_1 = require("blank-line");
 const tieba_harmony_1 = require("tieba-harmony");
-exports.SP_REGEXP = tieba_harmony_1.default.SP_REGEXP;
-exports.SP_KEY = tieba_harmony_1.default.SP_KEY;
+exports.SP_REGEXP = tieba_harmony_1.SP_REGEXP;
+exports.SP_KEY = tieba_harmony_1.SP_KEY;
 class enspace {
     constructor(options) {
         this._cache_ = {
@@ -49,7 +49,7 @@ class enspace {
             ],
         };
         this.options = {};
-        this._words_r1 = exports.SP_REGEXP;
+        this._words_r1 = tieba_harmony_1.SP_REGEXP;
         let _self = this;
         let r = this._words_r1;
         let arr = []
@@ -92,10 +92,10 @@ class enspace {
                     flags: value[2],
                 };
             }
-            if (typeof value.s == 'string' && value.s.match(new RegExp(`${exports.SP_KEY}(.+)$`))) {
+            if (typeof value.s == 'string' && value.s.match(new RegExp(`${tieba_harmony_1.SP_KEY}(.+)$`))) {
                 if (!value._source)
                     value._source = value.s;
-                let a = value.s.split(exports.SP_KEY);
+                let a = value.s.split(tieba_harmony_1.SP_KEY);
                 let s = a.join(`)${r}(`);
                 value.s = new RegExp(`(${s})`, value.flags ? value.flags : 'g');
                 if (value.r === null) {
