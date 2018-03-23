@@ -10,13 +10,25 @@
 $ npm install mdconf2
 ```
 
-## ports
-
-- [Python port](https://github.com/hit9/mdconf.py)
-
 ## API
 
 * [API](index.d.ts)
+
+### Options
+
+```ts
+export interface IOptionsParse
+{
+	crlf?: string,
+	oldParseApi?: boolean,
+
+	allowBlockquote?: boolean,
+
+	disableKeyToLowerCase?: boolean,
+}
+```
+
+### Demo
 
 ```js
 let mdconf = require('mdconf2');
@@ -179,6 +191,10 @@ output json:
   ]
 }
 ```
+
+## ports
+
+- [Python port](https://github.com/hit9/mdconf.py)
 
 ## License
 

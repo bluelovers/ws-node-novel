@@ -1,6 +1,7 @@
 const expect = require('chai').expect;
 const testUtils = require('./test-utils');
 const mdconf = require('../index');
+import { describe, before, it } from 'mocha';
 
 const parse = mdconf.parse;
 
@@ -11,6 +12,8 @@ describe('mdconf integration tests', function ()
 	before(async function ()
 	{
 		allTestCases = await testUtils.getTestCases();
+
+		console.log(__filename);
 	});
 
 	it('should pass integration tests', function ()

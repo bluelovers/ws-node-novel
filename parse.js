@@ -2,13 +2,15 @@
 /**
  * Created by user on 2018/2/4/004.
  */
-const index_1 = require("./index");
+const core_1 = require("./core");
 /**
  * for old api user
  */
 function parse(str, options = {
         oldParseApi: true,
     }) {
-    return index_1.default.parse(str, options);
+    return core_1.default.parse(str, options);
 }
-module.exports = parse;
+const _s = parse;
+_s.default = _s.parse = parse;
+module.exports = _s;

@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "allowJs": false,
 
+    //"sourceRoot": ".",
     //"sourceMap": true,
     //"inlineSourceMap": true,
     //"inlineSources": true,
@@ -25,7 +26,6 @@
     //"removeComments": true,
 
     "baseUrl": ".",
-    "sourceRoot": ".",
     "rootDir": ".",
     "outDir": ".",
 

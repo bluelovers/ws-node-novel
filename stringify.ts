@@ -3,4 +3,12 @@
  */
 
 import { stringify } from './index';
-export = stringify;
+
+const _s = stringify as typeof stringify & {
+	default: typeof stringify,
+	stringify: typeof stringify,
+};
+
+_s.default = _s.stringify = stringify;
+
+export = _s;

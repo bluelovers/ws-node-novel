@@ -1,5 +1,5 @@
-/**
- * Created by user on 2018/2/4/004.
- */
-import { stringify } from './index';
-export = stringify;
+declare const _s: ((dataInput: any, level?: number, skip?: any[], k?: any) => string) & {
+    default: (dataInput: any, level?: number, skip?: any[], k?: any) => string;
+    stringify: (dataInput: any, level?: number, skip?: any[], k?: any) => string;
+};
+export = _s;
