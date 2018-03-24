@@ -285,7 +285,15 @@ class enspace {
             .replace(/([^\n])(\n+)(fin|\<完\>)(\n|$)/ig, "$1$2\n$3$4");
         html = html
             .replace(/^\n+|[\s　]+$/g, '')
-            .replace(/(\n){3,}/g, "\n\n\n");
+            .replace(/(\n){4,}/g, "\n\n\n\n");
+        if (options.allow_lf3) {
+            html = html
+                .replace(/(\n){3,}/g, "\n\n\n");
+        }
+        else {
+            html = html
+                .replace(/(\n){3}/g, "\n\n");
+        }
         return html;
     }
 }

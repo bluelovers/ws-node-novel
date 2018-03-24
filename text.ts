@@ -40,6 +40,7 @@ export interface IToStrOptions
 export interface ITextLayoutOptions extends IToStrOptions
 {
 	allow_lf2?: boolean,
+	allow_lf3?: boolean,
 }
 
 export class enspace
@@ -567,9 +568,22 @@ export class enspace
 			.replace(/(\n){4,}/g, "\n\n\n\n")
 			.replace(/(\n){3}/g, "\n\n")
 			*/
-			//.replace(/(\n){4,}/g, "\n\n\n\n")
-			.replace(/(\n){3,}/g, "\n\n\n")
+			.replace(/(\n){4,}/g, "\n\n\n\n")
+
 		;
+
+			if (options.allow_lf3)
+			{
+				html = html
+					.replace(/(\n){3,}/g, "\n\n\n")
+				;
+			}
+			else
+			{
+				html = html
+					.replace(/(\n){3}/g, "\n\n")
+				;
+			}
 
 		return html;
 	}

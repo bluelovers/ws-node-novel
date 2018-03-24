@@ -21,6 +21,7 @@ export interface IToStrOptions {
 }
 export interface ITextLayoutOptions extends IToStrOptions {
     allow_lf2?: boolean;
+    allow_lf3?: boolean;
 }
 export declare class enspace {
     _cache_: {
