@@ -4,6 +4,7 @@
 
 import * as StrUtil from 'str-util';
 import chkBlankLine from 'blank-line';
+import crlf, { LF } from 'crlf-normalize';
 import tiebaHarmony, { SP_REGEXP, SP_KEY } from 'tieba-harmony';
 
 export { SP_REGEXP, SP_KEY };
@@ -447,9 +448,10 @@ export class enspace
 			allow_bom: false,
 		}, options);
 
-		let ret = str
-			.toString()
-			.replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n")
+
+
+		let ret = crlf(str.toString(), options.LF || "\n")
+			//.replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n")
 			// http://www.charbase.com/202a-unicode-left-to-right-embedding
 			.replace(/[\u2000-\u200F]/g, '')
 			.replace(/[\u2028-\u202F]/g, '')
@@ -478,8 +480,9 @@ export class enspace
 	{
 		html = this.trim(html, options);
 
-		html = html
-			.replace(/\r\n|\r(?!\n)/g, "\n")
+		html = //html
+			//.replace(/\r\n|\r(?!\n)/g, "\n")
+			html
 			.replace(/[ 　\t]+\n/g, "\n")
 			.replace(/[\s　]+$/g, '')
 			.replace(/^[\n \t]+/g, '')
@@ -560,8 +563,12 @@ export class enspace
 
 		html = html
 			.replace(/^\n+|[\s　]+$/g, '')
+			/*
 			.replace(/(\n){4,}/g, "\n\n\n\n")
 			.replace(/(\n){3}/g, "\n\n")
+			*/
+			//.replace(/(\n){4,}/g, "\n\n\n\n")
+			.replace(/(\n){3,}/g, "\n\n\n")
 		;
 
 		return html;

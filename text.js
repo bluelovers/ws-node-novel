@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const StrUtil = require("str-util");
 const blank_line_1 = require("blank-line");
+const crlf_normalize_1 = require("crlf-normalize");
 const tieba_harmony_1 = require("tieba-harmony");
 exports.SP_REGEXP = tieba_harmony_1.SP_REGEXP;
 exports.SP_KEY = tieba_harmony_1.SP_KEY;
@@ -233,9 +234,7 @@ class enspace {
             allow_nbsp: false,
             allow_bom: false,
         }, options);
-        let ret = str
-            .toString()
-            .replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n")
+        let ret = crlf_normalize_1.default(str.toString(), options.LF || "\n")
             .replace(/[\u2000-\u200F]/g, '')
             .replace(/[\u2028-\u202F]/g, '')
             .replace(/[\u205F-\u2060]/g, '');
@@ -249,12 +248,12 @@ class enspace {
     }
     textlayout(html, options = {}) {
         html = this.trim(html, options);
-        html = html
-            .replace(/\r\n|\r(?!\n)/g, "\n")
-            .replace(/[ 　\t]+\n/g, "\n")
-            .replace(/[\s　]+$/g, '')
-            .replace(/^[\n \t]+/g, '')
-            .replace(/\n{4,}/g, "\n\n\n\n");
+        html =
+            html
+                .replace(/[ 　\t]+\n/g, "\n")
+                .replace(/[\s　]+$/g, '')
+                .replace(/^[\n \t]+/g, '')
+                .replace(/\n{4,}/g, "\n\n\n\n");
         if (!html.match(/[^\n]\n[^\n]/g)) {
             let [min, mid, max] = blank_line_1.default(html.toString());
             if (min > 2) {
@@ -286,8 +285,7 @@ class enspace {
             .replace(/([^\n])(\n+)(fin|\<完\>)(\n|$)/ig, "$1$2\n$3$4");
         html = html
             .replace(/^\n+|[\s　]+$/g, '')
-            .replace(/(\n){4,}/g, "\n\n\n\n")
-            .replace(/(\n){3}/g, "\n\n");
+            .replace(/(\n){3,}/g, "\n\n\n");
         return html;
     }
 }
