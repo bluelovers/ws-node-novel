@@ -43,7 +43,7 @@
     "blank-line": "^1.0.0",
     "cjk-conv": "^1.0.18",
     "crlf-normalize": "^1.0.1",
-    "str-util": "^2.3.13",
+    "str-util": "^2.3.14",
     "tieba-harmony": "^1.2.8"
   },
   "devDependencies": {

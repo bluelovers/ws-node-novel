@@ -234,16 +234,8 @@ class enspace {
             allow_nbsp: false,
             allow_bom: false,
         }, options);
-        let ret = crlf_normalize_1.default(str.toString(), options.LF || "\n")
-            .replace(/[\u2000-\u200F]/g, '')
-            .replace(/[\u2028-\u202F]/g, '')
-            .replace(/[\u205F-\u2060]/g, '');
-        if (!options.allow_bom) {
-            ret = ret.replace(/\uFEFF/g, '');
-        }
-        if (!options.allow_nbsp) {
-            ret = ret.replace(/[  \xA0]/g, ' ');
-        }
+        let ret = crlf_normalize_1.default(str.toString(), options.LF || "\n");
+        ret = StrUtil.normalize(ret, options);
         return ret;
     }
     textlayout(html, options = {}) {

@@ -20,3 +20,11 @@ test/**/*.d.ts
 test/*.js
 test/*.d.ts
 texst/temp
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen

@@ -449,16 +449,20 @@ export class enspace
 			allow_bom: false,
 		}, options);
 
-
-
 		let ret = crlf(str.toString(), options.LF || "\n")
 			//.replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n")
 			// http://www.charbase.com/202a-unicode-left-to-right-embedding
+
+			/*
 			.replace(/[\u2000-\u200F]/g, '')
 			.replace(/[\u2028-\u202F]/g, '')
 			.replace(/[\u205F-\u2060]/g, '')
+			*/
 		;
 
+		ret = StrUtil.normalize(ret, options);
+
+		/*
 		if (!options.allow_bom)
 		{
 			ret = ret.replace(/\uFEFF/g, '');
@@ -468,6 +472,7 @@ export class enspace
 		{
 			ret = ret.replace(/[  \xA0]/g, ' ');
 		}
+		*/
 
 		return ret;
 	}
