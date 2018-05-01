@@ -85,7 +85,7 @@ class enspace {
             if (value.no_regex) {
                 return value;
             }
-            if (Array.isArray(value) && (value.length == 2 || value.length == 3)) {
+            if (Array.isArray(value) && (value.length == 2 || value.length >= 3)) {
                 value = {
                     _source: value,
                     s: value[0],
