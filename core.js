@@ -21,9 +21,19 @@ exports.SYMBOL_RAW_VALUE = Symbol.for('raw_value');
 exports.defaultOptionsParse = {
     crlf: crlf_normalize_1.LF,
     allowBlockquote: true,
+    markedOptions: Object.assign({}, 
+    // @ts-ignore
+    md.defaults, {
+        breaks: true,
+    }),
 };
 function parse(str, options = {}) {
-    options = deepmerge.all([{}, exports.defaultOptionsParse, options || {}]);
+    {
+        let markedOptions = Object.assign({}, exports.defaultOptionsParse.markedOptions, options.markedOptions);
+        options = Object.assign({}, exports.defaultOptionsParse, options, {
+            markedOptions,
+        });
+    }
     let source = str.toString();
     let eol;
     if (1) {
@@ -39,7 +49,8 @@ function parse(str, options = {}) {
         let ck = crlf_normalize_1.chkcrlf(source);
         eol = ck.lf ? crlf_normalize_1.LF : (ck.crlf ? crlf_normalize_1.CRLF : crlf_normalize_1.CR);
     }
-    let toks = md.lexer(source);
+    let lexer = new md.Lexer(options.markedOptions);
+    let toks = lexer.lex(source);
     let conf = {};
     let keys = [];
     let depth = 0;
@@ -48,11 +59,20 @@ function parse(str, options = {}) {
     let paragraph2 = [];
     let last_tok;
     let blockquote_start;
+    let inline_lexer = createInlineLexer(toks, options);
     toks.forEach(function (tok) {
         // @ts-ignore
         let val = tok.text;
         let _skip;
-        switch (tok.type) {
+        let type = tok.type;
+        if (type == 'text') {
+            let r = inline_lexer.output(val);
+            if (val !== r && /<a href=/.test(r)) {
+                // @ts-ignore
+                type = 'text2';
+            }
+        }
+        switch (type) {
             case 'heading':
                 while (depth-- >= tok.depth)
                     keys.pop();
@@ -66,8 +86,12 @@ function parse(str, options = {}) {
             case 'list_item_end':
                 inlist = false;
                 break;
+            // @ts-ignore
+            case 'text2':
             case 'text':
-                put(conf, keys, tok.text, undefined, undefined, options);
+                put(conf, keys, tok.text, undefined, undefined, options, {
+                    type,
+                });
                 break;
             case 'blockquote_start':
                 blockquote_start = true;
@@ -173,13 +197,9 @@ exports.getobjectbyid = getobjectbyid;
  * Add `str` to `obj` with the given `keys`
  * which represents the traversal path.
  *
- * @param {Object} obj
- * @param {Array} keys
- * @param {String} str
- * @param {Object} table
  * @api private
  */
-function put(obj, keys, str, code, table, options = {}) {
+function put(obj, keys, str, code, table, options = {}, others = {}) {
     let target = obj;
     let last;
     let key;
@@ -209,9 +229,19 @@ function put(obj, keys, str, code, table, options = {}) {
         }
         return;
     }
+    let isKey;
     let i = str.indexOf(':');
+    if (options.filterObjectKey) {
+        if (typeof options.filterObjectKey == 'function') {
+            isKey = options.filterObjectKey(str, obj, others);
+        }
+        else {
+            i = str.search(options.filterObjectKey);
+            isKey = i != -1;
+        }
+    }
     // list
-    if (-1 == i) {
+    if ((isKey === false || -1 == i || others.type == 'text2')) {
         if (!Array.isArray(last[key]))
             last[key] = [];
         last[key].push(str.trim());
@@ -398,3 +428,10 @@ class RawObject {
 exports.RawObject = RawObject;
 const self = require("./core");
 exports.default = self;
+function createInlineLexer(toks, options) {
+    let opts = Object.assign({}, exports.defaultOptionsParse.markedOptions, options.markedOptions);
+    // @ts-ignore
+    let inline = new md.InlineLexer(toks.links, opts);
+    return inline;
+}
+exports.createInlineLexer = createInlineLexer;

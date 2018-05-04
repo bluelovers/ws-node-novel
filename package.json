@@ -1,6 +1,6 @@
 {
   "name": "mdconf2",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Markdown configuration parse => data / stringify => Markdown",
   "keywords": [
     "conf",
@@ -37,15 +37,15 @@
     "test": "npx mocha"
   },
   "dependencies": {
-    "crlf-normalize": "^1.0.1",
-    "deepmerge-plus": "^2.1.1",
+    "crlf-normalize": "^1.0.2",
+    "deepmerge-plus": "^2.1.2",
     "is-plain-object": "^2.0.4",
-    "marked": "^0.3.18",
-    "moment": "^2.21.0"
+    "marked": "^0.3.19",
+    "moment": "^2.22.1"
   },
   "devDependencies": {
     "@types/marked": "^0.3.0",
-    "@types/node": "^9.6.0",
-    "fs-extra": "^5.0.0"
+    "@types/node": "^10.0.3",
+    "fs-extra": "^6.0.0"
   }
 }

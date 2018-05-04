@@ -1,17 +1,24 @@
+/// <reference types="marked" />
 /// <reference types="node" />
+/**
+ * Module dependencies.
+ */
+import * as md from 'marked';
 import { crlf, LF, CRLF, CR } from 'crlf-normalize';
 import * as deepmerge from 'deepmerge-plus';
 import * as moment from 'moment';
 import * as isPlainObject from 'is-plain-object';
 export { isPlainObject, moment, deepmerge };
 export { crlf, LF, CRLF, CR };
-export declare const SYMBOL_RAW_DATA: symbol;
-export declare const SYMBOL_RAW_VALUE: symbol;
+export declare const SYMBOL_RAW_DATA: unique symbol;
+export declare const SYMBOL_RAW_VALUE: unique symbol;
 export interface IOptionsParse {
     crlf?: string;
     oldParseApi?: boolean;
     allowBlockquote?: boolean;
     disableKeyToLowerCase?: boolean;
+    markedOptions?: md.MarkedOptions;
+    filterObjectKey?: any;
 }
 export declare const defaultOptionsParse: IOptionsParse;
 export interface IObjectParse {
@@ -32,13 +39,11 @@ export declare function getobjectbyid(a: any, conf: any): any;
  * Add `str` to `obj` with the given `keys`
  * which represents the traversal path.
  *
- * @param {Object} obj
- * @param {Array} keys
- * @param {String} str
- * @param {Object} table
  * @api private
  */
-export declare function put(obj: any, keys: string[], str: string, code?: boolean, table?: ITable, options?: IOptionsParse): void;
+export declare function put(obj: any, keys: string[], str: string, code?: boolean, table?: ITable, options?: IOptionsParse, others?: {
+    type?: string;
+}): void;
 /**
  * Normalize `str`.
  */
@@ -68,3 +73,4 @@ export interface ITable {
 }
 import * as self from './core';
 export default self;
+export declare function createInlineLexer(toks: md.TokensList, options: IOptionsParse): any;

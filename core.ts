@@ -22,11 +22,23 @@ export interface IOptionsParse
 	allowBlockquote?: boolean,
 
 	disableKeyToLowerCase?: boolean,
+
+	markedOptions?: md.MarkedOptions,
+
+	filterObjectKey?,
 }
 
 export const defaultOptionsParse: IOptionsParse = {
 	crlf: LF,
 	allowBlockquote: true,
+
+	markedOptions: Object.assign({},
+		// @ts-ignore
+		md.defaults,
+		{
+			breaks: true,
+		},
+	),
 };
 
 export interface IObjectParse
@@ -46,7 +58,13 @@ export function parse(str: string, options?: IOptionsParse): IObjectParse
 export function parse(str: Buffer, options?: IOptionsParse): IObjectParse
 export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjectParse
 {
-	options = deepmerge.all([{}, defaultOptionsParse, options || {}]);
+	{
+		let markedOptions = Object.assign({}, defaultOptionsParse.markedOptions, options.markedOptions);
+
+		options = Object.assign({}, defaultOptionsParse, options, {
+			markedOptions,
+		});
+	}
 
 	let source: string = str.toString();
 	let eol: string;
@@ -68,7 +86,9 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 		eol = ck.lf ? LF : (ck.crlf ? CRLF : CR);
 	}
 
-	let toks = md.lexer(source);
+	let lexer = new md.Lexer(options.markedOptions);
+
+	let toks = lexer.lex(source);
 	let conf = {};
 	let keys = [];
 	let depth = 0;
@@ -79,13 +99,27 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 	let last_tok: md.Token;
 	let blockquote_start: boolean;
 
+	let inline_lexer = createInlineLexer(toks, options);
+
 	toks.forEach(function (tok)
 	{
 		// @ts-ignore
 		let val = tok.text;
 		let _skip;
+		let type = tok.type;
 
-		switch (tok.type)
+		if (type == 'text')
+		{
+			let r = inline_lexer.output(val);
+
+			if (val !== r && /<a href=/.test(r))
+			{
+				// @ts-ignore
+				type = 'text2';
+			}
+		}
+
+		switch (type)
 		{
 			case 'heading':
 				while (depth-- >= tok.depth) keys.pop();
@@ -101,8 +135,12 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 			case 'list_item_end':
 				inlist = false;
 				break;
+				// @ts-ignore
+			case 'text2':
 			case 'text':
-				put(conf, keys, tok.text, undefined, undefined, options);
+				put(conf, keys, tok.text, undefined, undefined, options, {
+					type,
+				});
 				break;
 			case 'blockquote_start':
 				blockquote_start = true;
@@ -248,13 +286,11 @@ export function getobjectbyid(a, conf)
  * Add `str` to `obj` with the given `keys`
  * which represents the traversal path.
  *
- * @param {Object} obj
- * @param {Array} keys
- * @param {String} str
- * @param {Object} table
  * @api private
  */
-export function put(obj, keys: string[], str: string, code?: boolean, table?: ITable, options: IOptionsParse = {})
+export function put(obj, keys: string[], str: string, code?: boolean, table?: ITable, options: IOptionsParse = {}, others: {
+	type?: string,
+} = {})
 {
 	let target = obj;
 	let last;
@@ -292,10 +328,24 @@ export function put(obj, keys: string[], str: string, code?: boolean, table?: IT
 		return;
 	}
 
-	let i = str.indexOf(':');
+	let isKey: boolean;
+	let i: number = str.indexOf(':');
+
+	if (options.filterObjectKey)
+	{
+		if (typeof options.filterObjectKey == 'function')
+		{
+			isKey = options.filterObjectKey(str, obj, others);
+		}
+		else
+		{
+			i = str.search(options.filterObjectKey);
+			isKey = i != -1;
+		}
+	}
 
 	// list
-	if (-1 == i)
+	if ((isKey === false || -1 == i || others.type == 'text2'))
 	{
 		if (!Array.isArray(last[key])) last[key] = [];
 		last[key].push(str.trim());
@@ -591,3 +641,13 @@ export interface ITable
 import * as self from './core';
 
 export default self;
+
+export function createInlineLexer(toks: md.TokensList, options: IOptionsParse)
+{
+	let opts = Object.assign({}, defaultOptionsParse.markedOptions, options.markedOptions);
+
+	// @ts-ignore
+	let inline = new md.InlineLexer(toks.links, opts);
+
+	return inline;
+}

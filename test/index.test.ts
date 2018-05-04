@@ -26,9 +26,11 @@ describe('mdconf integration tests', function ()
 				{
 					let data = parse(testCase.md);
 
-					//console.log(data);
+					console.dir(data, {
+						colors: true,
+					});
 
-					//console.log(mdconf.stringify(data));
+					console.log(mdconf.stringify(data));
 
 					let data3 = parse(mdconf.stringify(data));
 

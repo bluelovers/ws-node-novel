@@ -7,8 +7,8 @@ const core_1 = require("./core");
  * for old api user
  */
 function parse(str, options = {
-        oldParseApi: true,
-    }) {
+    oldParseApi: true,
+}) {
     return core_1.default.parse(str, options);
 }
 const _s = parse;

@@ -72,7 +72,9 @@
 
 ## textlayout
 
+## regex
 
+- r: `/(.*|k)?/g`
 
 # link
 
