@@ -65,7 +65,7 @@ function parse(str, options = {}) {
         let val = tok.text;
         let _skip;
         let type = tok.type;
-        if (type == 'text') {
+        if (type == 'text' && val.match(/^[a-z]+\:\/\//i)) {
             let r = inline_lexer.output(val);
             if (val !== r && /<a href=/.test(r)) {
                 // @ts-ignore

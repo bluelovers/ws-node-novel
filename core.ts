@@ -108,7 +108,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 		let _skip;
 		let type = tok.type;
 
-		if (type == 'text')
+		if (type == 'text' && val.match(/^[a-z]+\:\/\//i))
 		{
 			let r = inline_lexer.output(val);
 
