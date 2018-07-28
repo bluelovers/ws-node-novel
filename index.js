@@ -21,7 +21,7 @@ function get_ids(cwd, filter) {
     ], {
         deep: 1,
         onlyDirectories: true,
-        markDirectories: true,
+        markDirectories: false,
         cwd,
     }))
         .then(function (ls) {
@@ -64,7 +64,9 @@ function processToc(DIST_NOVEL_ROOT, filter) {
                 let item = ret[item_id];
                 item.link = `[${item_id}](${md_href(item_id)}/)`;
                 let target_id = IS_OUT ? pathMain.replace(/_out$/, '') : pathMain + '_out';
-                if (fs.existsSync(path.join(DIST_NOVEL_ROOT, target_id, item_id))) {
+                let link_path = path.join(DIST_NOVEL_ROOT, target_id, item_id);
+                //console.log(link_path, fs.existsSync(link_path));
+                if (fs.existsSync(link_path)) {
                     item[IS_OUT
                         ? 'link_source'
                         : 'link_output'] = `[${item_id}](../${target_id}/${md_href(item_id)}/)`;
