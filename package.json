@@ -1,5 +1,5 @@
 {
-  "name": "novel-toc",
+  "name": "@node-novel/toc",
   "version": "1.0.0",
   "description": "",
   "homepage": "https://github.com/bluelovers/node-novel-toc#readme",
@@ -19,15 +19,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "array-uniq": "^1.0.3",
+    "array-hyper-unique": "^1.0.2",
     "bluebird": "^3.5.1",
-    "fs-extra": "^5.0.0",
-    "globby": "^8.0.1",
-    "node-novel-info": "^2.3.5",
+    "fast-glob": "^2.2.2",
+    "fs-extra": "^7.0.0",
+    "node-novel-info": "^2.3.6",
     "sort-object-keys2": "^1.0.3",
-    "upath2": "^2.1.2",
-    "yargs": "^11.0.0"
+    "upath2": "^2.1.2"
   },
   "devDependencies": {}
 }

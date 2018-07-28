@@ -26,3 +26,27 @@ tests/temp*
 
 *.iml
 
+### test template
+*.spec.ts
+*.spec.js
+*.spec.js.map
+*.test.ts
+*.test.js
+*.test.js.map### Example user template template
+### Example user template
+
+# IntelliJ project files
+out
+gen### temp template
+/~*
+
+
+/*.log
+/*.lock
+
+*.tmp### git2 template
+
+
+
+
+

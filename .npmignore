@@ -23,3 +23,36 @@ tests
 
 *.iml
 
+### npm2 template
+.idea
+
+~ci.list.txt
+~ci.log.txt
+~ci.errors.txt
+
+*.stackdump
+*.bak
+*.old
+
+tsconfig.json
+#package-lock.json
+
+test
+
+.github
+.gitkeep
+
+/.*
+
+test
+tests
+
+.github
+.gitkeep
+
+/.*
+
+/~*
+
+__test__
+__tests__
