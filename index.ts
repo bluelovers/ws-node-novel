@@ -54,15 +54,17 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 		{
 			console.log(`[TOC] 開始建立 toc 列表`);
 		})
-		.mapSeries(function (pathMain: string)
+		.reduce(async function (toc_ls, pathMain: string)
 		{
 			const cwd = path.join(DIST_NOVEL_ROOT, pathMain);
 
 			const IS_OUT = /_out$/.test(pathMain);
 
-			console.log(`[TOC] ${pathMain}`);
+			//console.log(`[TOC] 檢查 ${pathMain}`);
 
-			return Promise
+			let bool = false;
+
+			await Promise
 				.reduce(FastGlob<string>([
 					'*/README.md',
 				], {
@@ -73,7 +75,17 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 				}, {} as IRet)
 				.tap(async function (ret)
 				{
-					if (!Object.keys(ret).length) return null;
+					if (!Object.keys(ret).length)
+					{
+						console.log(`[TOC] 忽略 ${pathMain}`);
+						return null;
+					}
+
+					bool = true;
+
+					console.log(`[TOC] 處理 ${pathMain}`);
+
+					toc_ls[pathMain] = ret;
 
 					ret = Object.keys(ret)
 						.sort()
@@ -153,6 +165,10 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 					await fs.writeFile(path.join(cwd, 'README.md'), md);
 				})
 				;
+
+			return toc_ls;
+		}, {} as {
+			[k: string]: IRet,
 		})
 		.tap(function ()
 		{

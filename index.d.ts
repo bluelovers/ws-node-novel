@@ -4,7 +4,9 @@
 import * as Promise from 'bluebird';
 export { Promise };
 export declare function get_ids(cwd: string, filter?: typeof defaultFilter): Promise<string[]>;
-export declare function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilter): Promise<IRet[]>;
+export declare function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilter): Promise<{
+    [k: string]: IRet;
+}>;
 export interface IRetRow {
     titles: string[];
     tags?: string[];
