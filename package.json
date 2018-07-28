@@ -1,7 +1,7 @@
 {
   "name": "@node-novel/toc",
   "version": "1.0.0",
-  "description": "",
+  "description": "此模組用來建立 novel 索引",
   "homepage": "https://github.com/bluelovers/node-novel-toc#readme",
   "bugs": {
     "url": "https://github.com/bluelovers/node-novel-toc/issues"
@@ -19,9 +19,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
     "array-hyper-unique": "^1.0.2",
     "bluebird": "^3.5.1",
@@ -31,5 +28,8 @@
     "sort-object-keys2": "^1.0.3",
     "upath2": "^2.1.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
 }
