@@ -32,6 +32,11 @@ export function processTocContents(basePath: string, outputFile?: string)
 		})
 		.then(function (ls)
 		{
+			if (!ls.length)
+			{
+				return '';
+			}
+
 			let lastTop: string;
 			let lastTop2: string;
 
@@ -86,7 +91,7 @@ export function processTocContents(basePath: string, outputFile?: string)
 		})
 		.tap(function (ls)
 		{
-			if (outputFile)
+			if (ls && outputFile)
 			{
 				return fs.outputFile(outputFile, ls);
 			}

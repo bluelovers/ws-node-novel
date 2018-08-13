@@ -23,6 +23,9 @@ function processTocContents(basePath, outputFile) {
         return glob_sort_1.sortTree(ls);
     })
         .then(function (ls) {
+        if (!ls.length) {
+            return '';
+        }
         let lastTop;
         let lastTop2;
         return ls.reduce(function (a, b) {
@@ -56,7 +59,7 @@ function processTocContents(basePath, outputFile) {
         ]).join("\n");
     })
         .tap(function (ls) {
-        if (outputFile) {
+        if (ls && outputFile) {
             return fs.outputFile(outputFile, ls);
         }
     });
