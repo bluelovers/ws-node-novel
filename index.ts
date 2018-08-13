@@ -271,7 +271,7 @@ export async function createReadmeData(cwd: string, ret: IRet, item: string): Pr
 
 export function md_href(href: string)
 {
-	return encodeURIComponent(href);
+	return href.split('/').map(encodeURIComponent).join('/');
 }
 
 export function defaultFilter(value: string): boolean

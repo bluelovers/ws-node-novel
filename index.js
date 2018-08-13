@@ -178,7 +178,7 @@ async function createReadmeData(cwd, ret, item) {
 }
 exports.createReadmeData = createReadmeData;
 function md_href(href) {
-    return encodeURIComponent(href);
+    return href.split('/').map(encodeURIComponent).join('/');
 }
 exports.md_href = md_href;
 function defaultFilter(value) {
