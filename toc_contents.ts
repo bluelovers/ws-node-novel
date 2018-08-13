@@ -84,10 +84,7 @@ export function processTocContents(basePath: string, outputFile?: string)
 				lastTop = nowTop;
 
 				return a;
-			}, [
-				`# CONTENTS\n`,
-				path.basename(basePath),
-			]).join("\n")
+			}, makHeader(basePath)).join("\n")
 		})
 		.tap(function (ls)
 		{
@@ -97,6 +94,53 @@ export function processTocContents(basePath: string, outputFile?: string)
 			}
 		})
 	;
+}
+
+export function makHeader(basePath: string)
+{
+	let arr = [
+		`# CONTENTS\n`,
+		path.basename(basePath),
+	];
+
+	let _appended = [];
+
+	let _path: string;
+
+	_path = 'README.md';
+
+	if (fs.existsSync(path.join(basePath, _path)))
+	{
+		let md = makeLink(`README.md`, _path);
+
+		_appended.push(`- ${md} - 簡介與其他資料`)
+	}
+
+	_path = 'ja.md';
+
+	if (fs.existsSync(path.join(basePath, _path)))
+	{
+		let md = makeLink(`含有原文的章節`, _path);
+
+		_appended.push(`- ${md} - 可能為未翻譯或者吞樓，等待圖轉文之類`)
+	}
+
+	_path = '待修正屏蔽字.md';
+
+	if (fs.existsSync(path.join(basePath, _path)))
+	{
+		let md = makeLink(`待修正屏蔽字`, _path);
+
+		_appended.push(`- ${md} - 需要有人協助將 \`**\` 內的字補上`);
+	}
+
+	if (_appended.length)
+	{
+		arr.push("\n");
+		arr.push(..._appended);
+	}
+
+	return arr;
 }
 
 export function makeLink(title: string, link: string, isDir?: boolean)
