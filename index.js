@@ -154,6 +154,8 @@ async function createReadmeData(cwd, ret, item) {
             titles.push(meta.novel.title_source);
             // @ts-ignore
             titles.push(meta.novel.title_other);
+            // @ts-ignore
+            titles.push(meta.novel.title_output);
             if (meta.novel.series) {
                 titles.push(meta.novel.series.name);
                 titles.push(meta.novel.series.name_short);
