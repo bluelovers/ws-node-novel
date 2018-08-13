@@ -116,6 +116,15 @@ export function makHeader(basePath: string)
 		_appended.push(`- ${md} - 簡介與其他資料`)
 	}
 
+	_path = '譯名對照.md';
+
+	if (fs.existsSync(path.join(basePath, _path)))
+	{
+		let md = makeLink(`譯名對照`, _path);
+
+		_appended.push(`- ${md}`)
+	}
+
 	_path = 'ja.md';
 
 	if (fs.existsSync(path.join(basePath, _path)))
