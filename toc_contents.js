@@ -85,6 +85,7 @@ function getList(basePath) {
         '**/*.txt',
     ], {
         cwd: basePath,
+        throwEmpty: false,
     });
 }
 exports.getList = getList;

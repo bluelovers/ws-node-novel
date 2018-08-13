@@ -127,6 +127,7 @@ export function getList(basePath: string)
 		'**/*.txt',
 	], {
 		cwd: basePath,
+		throwEmpty: false,
 	})
 }
 
