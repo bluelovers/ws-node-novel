@@ -84,7 +84,7 @@ export function processTocContents(basePath: string, outputFile?: string)
 				lastTop = nowTop;
 
 				return a;
-			}, makHeader(basePath)).join("\n")
+			}, makHeader(basePath)).join("\n") + "\n\n"
 		})
 		.tap(function (ls)
 		{

@@ -53,7 +53,7 @@ function processTocContents(basePath, outputFile) {
             a.push(`- ${md}`);
             lastTop = nowTop;
             return a;
-        }, makHeader(basePath)).join("\n");
+        }, makHeader(basePath)).join("\n") + "\n\n";
     })
         .tap(function (ls) {
         if (ls && outputFile) {
