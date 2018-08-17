@@ -23,14 +23,14 @@ processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_
 ;
 */
 
-export function processTocContents(basePath: string, outputFile?: string, fnHeader: typeof makeHeader = makeHeader)
+export function processTocContents(basePath: string, outputFile?: string, fnHeader: typeof makeHeader | typeof makeHeaderAsync = makeHeader)
 {
 	return getList(basePath)
 		.then(function (ls)
 		{
 			return sortTree(ls)
 		})
-		.then(function (ls)
+		.then(async function (ls)
 		{
 			if (!ls.length)
 			{
@@ -84,7 +84,7 @@ export function processTocContents(basePath: string, outputFile?: string, fnHead
 				lastTop = nowTop;
 
 				return a;
-			}, fnHeader(basePath)).join("\n") + "\n\n"
+			}, await fnHeader(basePath)).join("\n") + "\n\n"
 		})
 		.tap(function (ls)
 		{
@@ -94,6 +94,11 @@ export function processTocContents(basePath: string, outputFile?: string, fnHead
 			}
 		})
 	;
+}
+
+export function makeHeaderAsync(basePath: string)
+{
+	return Promise.resolve(makeHeader(basePath))
 }
 
 export function makeHeader(basePath: string)

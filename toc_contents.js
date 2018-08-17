@@ -3,6 +3,7 @@
  * Created by user on 2018/8/13/013.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const Promise = require("bluebird");
 const path = require("upath2");
 const fs = require("fs-extra");
 const index_1 = require("./index");
@@ -22,7 +23,7 @@ function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
         .then(function (ls) {
         return glob_sort_1.sortTree(ls);
     })
-        .then(function (ls) {
+        .then(async function (ls) {
         if (!ls.length) {
             return '';
         }
@@ -53,7 +54,7 @@ function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
             a.push(`- ${md}`);
             lastTop = nowTop;
             return a;
-        }, fnHeader(basePath)).join("\n") + "\n\n";
+        }, await fnHeader(basePath)).join("\n") + "\n\n";
     })
         .tap(function (ls) {
         if (ls && outputFile) {
@@ -62,6 +63,10 @@ function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     });
 }
 exports.processTocContents = processTocContents;
+function makeHeaderAsync(basePath) {
+    return Promise.resolve(makeHeader(basePath));
+}
+exports.makeHeaderAsync = makeHeaderAsync;
 function makeHeader(basePath) {
     let arr = [
         `# CONTENTS\n`,
