@@ -23,7 +23,7 @@ processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_
 ;
 */
 
-export function processTocContents(basePath: string, outputFile?: string)
+export function processTocContents(basePath: string, outputFile?: string, fnHeader: typeof makeHeader = makeHeader)
 {
 	return getList(basePath)
 		.then(function (ls)
@@ -84,7 +84,7 @@ export function processTocContents(basePath: string, outputFile?: string)
 				lastTop = nowTop;
 
 				return a;
-			}, makHeader(basePath)).join("\n") + "\n\n"
+			}, fnHeader(basePath)).join("\n") + "\n\n"
 		})
 		.tap(function (ls)
 		{
@@ -96,7 +96,7 @@ export function processTocContents(basePath: string, outputFile?: string)
 	;
 }
 
-export function makHeader(basePath: string)
+export function makeHeader(basePath: string)
 {
 	let arr = [
 		`# CONTENTS\n`,

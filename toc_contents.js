@@ -17,7 +17,7 @@ processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_
     })
 ;
 */
-function processTocContents(basePath, outputFile) {
+function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     return getList(basePath)
         .then(function (ls) {
         return glob_sort_1.sortTree(ls);
@@ -53,7 +53,7 @@ function processTocContents(basePath, outputFile) {
             a.push(`- ${md}`);
             lastTop = nowTop;
             return a;
-        }, makHeader(basePath)).join("\n") + "\n\n";
+        }, fnHeader(basePath)).join("\n") + "\n\n";
     })
         .tap(function (ls) {
         if (ls && outputFile) {
@@ -62,7 +62,7 @@ function processTocContents(basePath, outputFile) {
     });
 }
 exports.processTocContents = processTocContents;
-function makHeader(basePath) {
+function makeHeader(basePath) {
     let arr = [
         `# CONTENTS\n`,
         path.basename(basePath),
@@ -95,7 +95,7 @@ function makHeader(basePath) {
     }
     return arr;
 }
-exports.makHeader = makHeader;
+exports.makeHeader = makeHeader;
 function makeLink(title, link, isDir) {
     let t = normalize_1.normalize_strip(title, isDir);
     if (!isDir) {
