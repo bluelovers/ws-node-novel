@@ -2,7 +2,7 @@
  * Created by user on 2018/8/13/013.
  */
 
-import * as Promise from 'bluebird';
+import * as BluebirdPromise from 'bluebird';
 import * as FastGlob from 'fast-glob';
 import path = require('upath2');
 import * as fs from 'fs-extra';
@@ -23,7 +23,12 @@ processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_
 ;
 */
 
-export function processTocContents(basePath: string, outputFile?: string, fnHeader: typeof makeHeader | typeof makeHeaderAsync = makeHeader)
+export type IFnHeader = typeof makeHeader
+	| typeof makeHeaderAsync
+	| any
+	;
+
+export function processTocContents(basePath: string, outputFile?: string, fnHeader: IFnHeader = makeHeader)
 {
 	return getList(basePath)
 		.then(function (ls)
@@ -84,6 +89,7 @@ export function processTocContents(basePath: string, outputFile?: string, fnHead
 				lastTop = nowTop;
 
 				return a;
+				// @ts-ignore
 			}, await fnHeader(basePath)).join("\n") + "\n\n"
 		})
 		.tap(function (ls)
@@ -93,15 +99,15 @@ export function processTocContents(basePath: string, outputFile?: string, fnHead
 				return fs.outputFile(outputFile, ls);
 			}
 		})
-	;
+		;
 }
 
-export function makeHeaderAsync(basePath: string)
+export function makeHeaderAsync(basePath: string, ...argv)
 {
-	return Promise.resolve(makeHeader(basePath))
+	return BluebirdPromise.resolve(makeHeader(basePath))
 }
 
-export function makeHeader(basePath: string)
+export function makeHeader(basePath: string, ...argv)
 {
 	let arr = [
 		`# CONTENTS\n`,
@@ -146,6 +152,12 @@ export function makeHeader(basePath: string)
 		let md = makeLink(`待修正屏蔽字`, _path);
 
 		_appended.push(`- ${md} - 需要有人協助將 \`**\` 內的字補上`);
+	}
+
+	{
+		let md = makeLink(`Discord`, 'https://discord.gg/MnXkpmX');
+
+		_appended.push(`- ${md} - 小說交流群`);
 	}
 
 	if (_appended.length)

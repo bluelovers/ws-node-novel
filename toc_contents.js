@@ -3,21 +3,13 @@
  * Created by user on 2018/8/13/013.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const Promise = require("bluebird");
+const BluebirdPromise = require("bluebird");
 const path = require("upath2");
 const fs = require("fs-extra");
 const index_1 = require("./index");
 const novelGlobby = require("node-novel-globby/g");
 const glob_sort_1 = require("node-novel-globby/lib/glob-sort");
 const normalize_1 = require("@node-novel/normalize");
-/*
-processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel/user/豚公爵に転生したから、今度は君に好きと言いたい', './test/temp/123.txt')
-    .tap(function (ls)
-    {
-        console.log(ls);
-    })
-;
-*/
 function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     return getList(basePath)
         .then(function (ls) {
@@ -54,6 +46,7 @@ function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
             a.push(`- ${md}`);
             lastTop = nowTop;
             return a;
+            // @ts-ignore
         }, await fnHeader(basePath)).join("\n") + "\n\n";
     })
         .tap(function (ls) {
@@ -63,11 +56,11 @@ function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     });
 }
 exports.processTocContents = processTocContents;
-function makeHeaderAsync(basePath) {
-    return Promise.resolve(makeHeader(basePath));
+function makeHeaderAsync(basePath, ...argv) {
+    return BluebirdPromise.resolve(makeHeader(basePath));
 }
 exports.makeHeaderAsync = makeHeaderAsync;
-function makeHeader(basePath) {
+function makeHeader(basePath, ...argv) {
     let arr = [
         `# CONTENTS\n`,
         path.basename(basePath),
