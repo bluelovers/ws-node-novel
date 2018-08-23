@@ -154,12 +154,6 @@ export function makeHeader(basePath: string, ...argv)
 		_appended.push(`- ${md} - 需要有人協助將 \`**\` 內的字補上`);
 	}
 
-	{
-		let md = makeLink(`Discord`, 'https://discord.gg/MnXkpmX');
-
-		_appended.push(`- ${md} - 小說交流群`);
-	}
-
 	if (_appended.length)
 	{
 		arr.push("\n");
