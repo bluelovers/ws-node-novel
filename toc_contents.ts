@@ -136,6 +136,15 @@ export function makeHeader(basePath: string, ...argv)
 		_appended.push(`- ${md}`)
 	}
 
+	_path = '整合樣式.md';
+
+	if (fs.existsSync(path.join(basePath, _path)))
+	{
+		let md = makeLink(`整合樣式`, _path);
+
+		_appended.push(`- ${md}`)
+	}
+
 	_path = 'ja.md';
 
 	if (fs.existsSync(path.join(basePath, _path)))
