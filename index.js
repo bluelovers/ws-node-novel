@@ -11,6 +11,17 @@ const fs = require("fs-extra");
 const node_novel_info_1 = require("node-novel-info");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const sortObjectKeys = require("sort-object-keys2");
+const debug_color2_1 = require("debug-color2");
+exports.console = new debug_color2_1.Console(null, {
+    enabled: true,
+    inspectOptions: {
+        colors: true,
+    },
+    chalkOptions: {
+        enabled: true,
+    },
+});
+exports.console.enabledColor = true;
 function get_ids(cwd, filter) {
     return Promise.resolve(FastGlob([
         '*',
@@ -41,7 +52,7 @@ function processToc(DIST_NOVEL_ROOT, filter) {
         return ls;
     })
         .tap(function () {
-        console.log(`[TOC] 開始建立 toc 列表`);
+        exports.console.debug(`[TOC] 開始建立 toc 列表`);
     })
         .reduce(async function (toc_ls, pathMain) {
         const cwd = path.join(DIST_NOVEL_ROOT, pathMain);
@@ -58,11 +69,11 @@ function processToc(DIST_NOVEL_ROOT, filter) {
         }, {})
             .tap(async function (ret) {
             if (!Object.keys(ret).length) {
-                console.log(`[TOC] 忽略 ${pathMain}`);
+                exports.console.gray(`[TOC] 忽略 ${pathMain}`);
                 return null;
             }
             bool = true;
-            console.log(`[TOC] 處理 ${pathMain}`);
+            exports.console.debug(`[TOC] 處理 ${pathMain}`);
             toc_ls[pathMain] = ret;
             ret = Object.keys(ret)
                 .sort()
@@ -119,7 +130,7 @@ function processToc(DIST_NOVEL_ROOT, filter) {
         return toc_ls;
     }, {})
         .tap(function () {
-        console.log(`[TOC] 結束建立 toc 列表`);
+        exports.console.debug(`[TOC] 結束建立 toc 列表`);
     });
 }
 exports.processToc = processToc;
@@ -130,7 +141,7 @@ async function createReadmeData(cwd, ret, item) {
     let meta = await fs.readFile(meta_file)
         .then(node_novel_info_1.mdconf_parse)
         .catch(function (err) {
-        console.error(err.toString());
+        exports.console.error(err.toString());
         return null;
     });
     ret[item_id] = {

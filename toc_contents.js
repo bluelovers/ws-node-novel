@@ -77,6 +77,11 @@ function makeHeader(basePath, ...argv) {
         let md = makeLink(`譯名對照`, _path);
         _appended.push(`- ${md}`);
     }
+    _path = '整合樣式.md';
+    if (fs.existsSync(path.join(basePath, _path))) {
+        let md = makeLink(`整合樣式`, _path);
+        _appended.push(`- ${md}`);
+    }
     _path = 'ja.md';
     if (fs.existsSync(path.join(basePath, _path))) {
         let md = makeLink(`含有原文的章節`, _path);

@@ -9,6 +9,18 @@ import * as fs from 'fs-extra';
 import novelInfo, { mdconf_parse, IMdconfMeta, stringify, mdconf } from 'node-novel-info';
 import { array_unique } from 'array-hyper-unique';
 import * as sortObjectKeys from 'sort-object-keys2';
+import { Console } from 'debug-color2';
+export const console = new Console(null, {
+	enabled: true,
+	inspectOptions: {
+		colors: true,
+	},
+	chalkOptions: {
+		enabled: true,
+	},
+});
+
+console.enabledColor = true;
 
 export { Promise }
 
@@ -52,7 +64,7 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 		})
 		.tap(function ()
 		{
-			console.log(`[TOC] 開始建立 toc 列表`);
+			console.debug(`[TOC] 開始建立 toc 列表`);
 		})
 		.reduce(async function (toc_ls, pathMain: string)
 		{
@@ -77,13 +89,13 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 				{
 					if (!Object.keys(ret).length)
 					{
-						console.log(`[TOC] 忽略 ${pathMain}`);
+						console.gray(`[TOC] 忽略 ${pathMain}`);
 						return null;
 					}
 
 					bool = true;
 
-					console.log(`[TOC] 處理 ${pathMain}`);
+					console.debug(`[TOC] 處理 ${pathMain}`);
 
 					toc_ls[pathMain] = ret;
 
@@ -172,7 +184,7 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 		})
 		.tap(function ()
 		{
-			console.log(`[TOC] 結束建立 toc 列表`);
+			console.debug(`[TOC] 結束建立 toc 列表`);
 		})
 		;
 
