@@ -40,12 +40,12 @@
     "crlf-normalize": "^1.0.2",
     "deepmerge-plus": "^2.1.2",
     "is-plain-object": "^2.0.4",
-    "marked": "^0.3.19",
-    "moment": "^2.22.1"
+    "marked": "^0.5.0",
+    "moment": "^2.22.2"
   },
   "devDependencies": {
-    "@types/marked": "^0.3.0",
-    "@types/node": "^10.1.0",
-    "fs-extra": "^6.0.1"
+    "@types/marked": "^0.4.1",
+    "@types/node": "^10.9.2",
+    "fs-extra": "^7.0.0"
   }
 }

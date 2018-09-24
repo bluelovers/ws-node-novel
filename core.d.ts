@@ -1,4 +1,3 @@
-/// <reference types="marked" />
 /// <reference types="node" />
 /**
  * Module dependencies.
