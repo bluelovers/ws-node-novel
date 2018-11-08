@@ -32,12 +32,12 @@ export declare class enspace {
         m0: RegExp;
         r1: RegExp;
         rtrim: RegExp;
-        words: NovelText.IWordsOutput[];
+        words: IWordsOutput[];
     };
     options: {};
     _words_r1: string;
     constructor(options?: any);
-    static create(...argv: any[]): NovelText.enspace;
+    static create(...argv: any[]): enspace;
     _words1(arr: string[], words?: any[]): IWordsOutput[];
     _words2(words: any): IWordsOutput[];
     replace(text: any, options?: IOptions): string;
