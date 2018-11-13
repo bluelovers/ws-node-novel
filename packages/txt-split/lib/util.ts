@@ -5,6 +5,7 @@ import { IContext, IDataVolume, IOptionsWithData, IPathLike, Resolvable } from '
 import Bluebird = require('bluebird');
 import iconv = require('iconv-jschardet');
 import StrUtil = require('str-util');
+import { crlf, LF } from 'crlf-normalize';
 
 export function logWarn(...argv)
 {
@@ -61,9 +62,9 @@ export function _wrapMethod<R, F extends (...args: unknown[]) => Resolvable<R>>(
 
 export function _handleReadFile(data: IContext, file: IPathLike)
 {
-	chkEncoding(data, file)
+	chkEncoding(data, file);
 
-	return novelText.trim(String(data))
+	return crlf(novelText.trim(String(data)), LF)
 }
 
 export function _outputFile<O extends Partial<IOptionsWithData>>(data: IDataVolume | IOptionsWithData, options?: O): {

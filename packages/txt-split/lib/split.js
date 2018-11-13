@@ -2,23 +2,32 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = require("./util");
 const execall2_1 = require("execall2");
+const console_1 = require("./console");
 function splitVolumeSync(txt, cache) {
     let _vs;
     txt = String(txt);
     if (!cache || !cache.chapter || !cache.chapter.r) {
         throw new RangeError(`options.chapter.r is required`);
     }
-    if (cache.volume) {
+    if (cache.beforeStart) {
+        cache.beforeStart(cache);
+    }
+    MAIN: if (cache.volume) {
         let _r = cache.volume.r;
-        let _m = execall2_1.execall(_r, txt);
+        let _m = execall2_1.execall(_r, txt, {
+            cloneRegexp,
+        });
         //console.debug(_r, _m, txt);
         if (!_m || !_m.length) {
-            throw new Error();
+            let msg = `volume match is empty ${_r}`;
+            console_1.console.warn(msg);
+            break MAIN;
+            throw new Error(msg);
         }
         //console.log(_r, _m, _r.test(txt));
         _vs = splitChapterSync(txt, cache, _m, cache.volume.cb);
     }
-    else {
+    if (!_vs) {
         _vs = {};
         _vs['00000_unknow'] = txt;
     }
@@ -27,7 +36,9 @@ function splitVolumeSync(txt, cache) {
     for (let vn in _vs) {
         let txt = _vs[vn];
         let _r = cache.chapter.r;
-        let _m = execall2_1.execall(_r, txt);
+        let _m = execall2_1.execall(_r, txt, {
+            cloneRegexp,
+        });
         //console.log(_r, _m, txt);
         //console.log(cache.ix);
         if (!_m || !_m.length) {
@@ -42,6 +53,15 @@ function splitVolumeSync(txt, cache) {
             _out[vn][cn] = _cs[cn];
         }
     }
+    function cloneRegexp(re) {
+        let flags = (re.flags || '');
+        if (flags.indexOf('g') === -1) {
+            flags += 'g';
+        }
+        // @ts-ignore
+        let r = new (cache.useRegExpCJK || RegExp)(re, flags);
+        return r;
+    }
     //console.log(_out);
     return _out;
 }
@@ -50,6 +70,7 @@ function splitChapterSync(txt, cache, _m, cb) {
     let _files = {};
     let idx = 0;
     txt = String(txt);
+    cache.txt = txt;
     let m_last;
     let i;
     let ix = cache.ix || 0;

@@ -6,6 +6,7 @@ const index_1 = require("./index");
 const Bluebird = require("bluebird");
 const iconv = require("iconv-jschardet");
 const StrUtil = require("str-util");
+const crlf_normalize_1 = require("crlf-normalize");
 function logWarn(...argv) {
     return console_1.console.warn(...argv);
 }
@@ -46,7 +47,7 @@ function _wrapMethod(fn) {
 exports._wrapMethod = _wrapMethod;
 function _handleReadFile(data, file) {
     chkEncoding(data, file);
-    return novel_text_1.default.trim(String(data));
+    return crlf_normalize_1.crlf(novel_text_1.default.trim(String(data)), crlf_normalize_1.LF);
 }
 exports._handleReadFile = _handleReadFile;
 function _outputFile(data, options) {

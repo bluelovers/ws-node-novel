@@ -24,24 +24,38 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 		throw new RangeError(`options.chapter.r is required`)
 	}
 
+	if (cache.beforeStart)
+	{
+		cache.beforeStart(cache);
+	}
+
+	MAIN:
 	if (cache.volume)
 	{
 		let _r = cache.volume.r;
 
-		let _m = execall(_r, txt);
+		let _m = execall(_r, txt, {
+			cloneRegexp,
+		});
 
 		//console.debug(_r, _m, txt);
 
 		if (!_m || !_m.length)
 		{
-			throw new Error();
+			let msg = `volume match is empty ${_r}`;
+
+			console.warn(msg);
+
+			break MAIN;
+			throw new Error(msg);
 		}
 
 		//console.log(_r, _m, _r.test(txt));
 
 		_vs = splitChapterSync(txt, cache, _m, cache.volume.cb);
 	}
-	else
+
+	if (!_vs)
 	{
 		_vs = {};
 		_vs['00000_unknow'] = txt;
@@ -56,7 +70,9 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 		let txt = _vs[vn];
 
 		let _r = cache.chapter.r;
-		let _m = execall(_r, txt);
+		let _m = execall(_r, txt, {
+			cloneRegexp,
+		});
 
 		//console.log(_r, _m, txt);
 
@@ -83,6 +99,21 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 		}
 	}
 
+	function cloneRegexp(re)
+	{
+		let flags = (re.flags || '');
+
+		if (flags.indexOf('g') === -1)
+		{
+			flags += 'g';
+		}
+
+		// @ts-ignore
+		let r = new (cache.useRegExpCJK || RegExp)(re, flags);
+
+		return r
+	}
+
 	//console.log(_out);
 
 	return _out;
@@ -94,6 +125,8 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 	let idx = 0;
 
 	txt = String(txt);
+
+	cache.txt = txt;
 
 	let m_last;
 

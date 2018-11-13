@@ -4,6 +4,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_iconv_1 = require("fs-iconv");
+const regexp_cjk_1 = require("regexp-cjk");
 const upath2_1 = require("upath2");
 const split_1 = require("./split");
 const util_1 = require("./util");
@@ -13,15 +14,63 @@ exports.defaultOptions = Object.freeze({
     dirname: null,
     outDir: null,
     indexPadLength: 5,
+    useRegExpCJK: true,
 });
 function makeOptions(inputFile, options) {
-    let cache = Object.assign(Object.assign({}, exports.defaultOptions, { file: inputFile }), options);
+    let cache = Object.assign(Object.assign({}, exports.defaultOptions, { file: inputFile }), options, {
+        file: options.file || inputFile
+    });
     cache.dirname = upath2_1.default.dirname(cache.file);
+    if (cache.useRegExpCJK) {
+        if (typeof cache.useRegExpCJK !== 'function') {
+            cache.useRegExpCJK = regexp_cjk_1.zhRegExp;
+        }
+    }
     return cache;
 }
 exports.makeOptions = makeOptions;
+function _handleOptions(options) {
+    let opts = Object.assign(Object.assign({}, exports.defaultOptions), Object.assign({}, options), {
+        volume: options.volume ? Object.assign({}, options.volume) : undefined,
+        chapter: options.chapter ? Object.assign({}, options.chapter) : undefined,
+    });
+    _re(opts.volume);
+    _re(opts.chapter);
+    function _re(data) {
+        if (data) {
+            if (data.r) {
+                const FLAGS = data.flags || 'gim';
+                if (Array.isArray(data.r)) {
+                    data.r = data.r.join('');
+                }
+                if (opts.useRegExpCJK || !(data.r instanceof RegExp)) {
+                    let RE;
+                    if (typeof opts.useRegExpCJK === 'function') {
+                        // @ts-ignore
+                        RE = opts.useRegExpCJK;
+                    }
+                    else if (opts.useRegExpCJK === true) {
+                        // @ts-ignore
+                        RE = regexp_cjk_1.zhRegExp;
+                    }
+                    else {
+                        // @ts-ignore
+                        RE = RegExp;
+                    }
+                    // @ts-ignore
+                    data.r = new RE(data.r, data.r.flags || FLAGS);
+                }
+            }
+            return true;
+        }
+    }
+    // @ts-ignore
+    return opts;
+}
+exports._handleOptions = _handleOptions;
 async function autoFile(inputFile, options) {
-    let ret = await readFile(inputFile, options);
+    let opts = _handleOptions(options);
+    let ret = await readFile(inputFile, opts);
     let ls = await outputFile(ret);
     return Object.assign(ret, {
         ls,

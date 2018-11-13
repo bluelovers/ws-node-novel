@@ -3,6 +3,7 @@
  */
 
 import fsIconv, { trimFilename } from 'fs-iconv';
+import { zhRegExp } from 'regexp-cjk';
 import path from 'upath2';
 import {
 	IContext,
@@ -10,7 +11,8 @@ import {
 	IOptions,
 	IOptionsWithData,
 	IPathLike,
-	IOptionsRequired,
+	IOptionsRequired, IRegExpLike,
+	IOptionsRequiredUser, Overwrite, ISplitOption,
 } from './interface';
 import { splitVolumeSync } from './split';
 import { _handleReadFile, _outputFile, _wrapMethod } from './util';
@@ -22,6 +24,7 @@ export const defaultOptions = Object.freeze({
 	dirname: null,
 	outDir: null,
 	indexPadLength: 5,
+	useRegExpCJK: true,
 } as IOptions);
 
 export function makeOptions<O extends IOptions>(inputFile: IPathLike, options: O): O
@@ -29,16 +32,92 @@ export function makeOptions<O extends IOptions>(inputFile: IPathLike, options: O
 	let cache: O = Object.assign({
 		...defaultOptions,
 		file: inputFile,
-	}, options);
+	}, options, {
+		file: options.file || inputFile
+	});
 
 	cache.dirname = path.dirname(cache.file);
+
+	if (cache.useRegExpCJK)
+	{
+		if (typeof cache.useRegExpCJK !== 'function')
+		{
+			cache.useRegExpCJK = zhRegExp
+		}
+	}
 
 	return cache;
 }
 
-export async function autoFile<O extends IOptionsRequired>(inputFile: IPathLike, options: O)
+export function _handleOptions<O extends IOptions | IOptionsRequiredUser>(options: O): Overwrite<O, IOptionsRequired<IRegExpLike>>
 {
-	let ret = await readFile(inputFile, options);
+	let opts = Object.assign({
+		...defaultOptions,
+	}, {
+		...options,
+	}, {
+		volume: options.volume ? {
+			...options.volume,
+		} : undefined,
+		chapter: options.chapter ? {
+			...options.chapter,
+		} : undefined,
+	});
+
+	_re(opts.volume);
+	_re(opts.chapter);
+
+	function _re(data: ISplitOption<any>): data is ISplitOption
+	{
+		if (data)
+		{
+			if (data.r)
+			{
+				const FLAGS = data.flags || 'gim';
+
+				if (Array.isArray(data.r))
+				{
+					data.r = data.r.join('');
+				}
+
+				if (opts.useRegExpCJK || !(data.r instanceof RegExp))
+				{
+					let RE: RegExp;
+
+					if (typeof opts.useRegExpCJK === 'function')
+					{
+						// @ts-ignore
+						RE = opts.useRegExpCJK
+					}
+					else if (opts.useRegExpCJK === true)
+					{
+						// @ts-ignore
+						RE = zhRegExp
+					}
+					else
+					{
+						// @ts-ignore
+						RE = RegExp
+					}
+
+					// @ts-ignore
+					data.r = new RE(data.r, data.r.flags || FLAGS);
+				}
+			}
+
+			return true
+		}
+	}
+
+	// @ts-ignore
+	return opts
+}
+
+export async function autoFile<O extends IOptionsRequired | IOptionsRequiredUser>(inputFile: IPathLike, options: O)
+{
+	let opts = _handleOptions(options);
+
+	let ret = await readFile(inputFile, opts);
 
 	let ls: string[] = await outputFile(ret);
 

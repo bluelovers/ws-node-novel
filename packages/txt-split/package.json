@@ -21,7 +21,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "crlf-normalize": "^1.0.2",
     "bluebird": "^3.5.3",
+    "cjk-conv": "^1.0.110",
     "debug-color2": "^1.0.6",
     "execall2": "^1.1.0",
     "fs-extra": "^7.0.1",
@@ -29,6 +31,7 @@
     "globby": "^8.0.1",
     "iconv-jschardet": "^1.0.7",
     "novel-text": "^1.1.17",
+    "regexp-cjk": "^2.0.13",
     "upath2": "^2.1.3"
   },
   "devDependencies": {},
