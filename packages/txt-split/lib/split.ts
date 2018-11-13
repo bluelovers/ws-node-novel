@@ -8,7 +8,7 @@ import {
 	ISplitCB,
 	ISplitMatch,
 	ISplitMatchItem,
-	IOptionsRequired,
+	IOptionsRequired, ISplitOption,
 } from './interface';
 import { execall } from 'execall2';
 import { console } from './console';
@@ -52,7 +52,7 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 
 		//console.log(_r, _m, _r.test(txt));
 
-		_vs = splitChapterSync(txt, cache, _m, cache.volume.cb);
+		_vs = splitChapterSync(txt, cache, _m, cache.volume);
 	}
 
 	if (!_vs)
@@ -89,7 +89,7 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 			continue;
 		}
 
-		let _cs = splitChapterSync(txt, cache, _m, cache.chapter.cb);
+		let _cs = splitChapterSync(txt, cache, _m, cache.chapter);
 
 		_out[vn] = {};
 
@@ -119,10 +119,12 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 	return _out;
 }
 
-export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, cache: O, _m: ISplitMatch, cb: ISplitCB): IDataChapter<string>
+export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, cache: O, _m: ISplitMatch, splitOption: ISplitOption): IDataChapter<string>
 {
 	let _files: IDataChapter = {};
 	let idx = 0;
+
+	let { cb, ignoreCb, ignoreRe } = splitOption;
 
 	txt = String(txt);
 
@@ -140,12 +142,40 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 
 		let m = _m[i];
 
+		if (ignoreRe)
+		{
+			if (ignoreRe.test(m.match))
+			{
+				/**
+				 * @todo here maybe will has bug, need test
+				 */
+				continue;
+			}
+
+			ignoreRe.lastIndex = 0;
+		}
+
 		if (!m_last && idx == 0 && m.index != 0)
 		{
 			//console.log(m);
 
 			let id = padIndex(ii, 5, '0');
 			let name = 'unknow';
+
+			if (ignoreCb && ignoreCb({
+				i,
+				id,
+				name,
+				m,
+				m_last,
+				_files,
+				ii,
+				cache,
+				idx,
+			}))
+			{
+				continue;
+			}
 
 			if (cb)
 			{
@@ -184,6 +214,21 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 		{
 			let id = padIndex(ii, 5, '0');
 			let name = fix_name(m_last.match);
+
+			if (ignoreCb && ignoreCb({
+				i,
+				id,
+				name,
+				m,
+				m_last,
+				_files,
+				ii,
+				cache,
+				idx,
+			}))
+			{
+				continue;
+			}
 
 			if (cb)
 			{

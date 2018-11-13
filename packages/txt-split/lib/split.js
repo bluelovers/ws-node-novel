@@ -25,7 +25,7 @@ function splitVolumeSync(txt, cache) {
             throw new Error(msg);
         }
         //console.log(_r, _m, _r.test(txt));
-        _vs = splitChapterSync(txt, cache, _m, cache.volume.cb);
+        _vs = splitChapterSync(txt, cache, _m, cache.volume);
     }
     if (!_vs) {
         _vs = {};
@@ -47,7 +47,7 @@ function splitVolumeSync(txt, cache) {
             _out[vn][`${id}_unknow`] = txt;
             continue;
         }
-        let _cs = splitChapterSync(txt, cache, _m, cache.chapter.cb);
+        let _cs = splitChapterSync(txt, cache, _m, cache.chapter);
         _out[vn] = {};
         for (let cn in _cs) {
             _out[vn][cn] = _cs[cn];
@@ -66,9 +66,10 @@ function splitVolumeSync(txt, cache) {
     return _out;
 }
 exports.splitVolumeSync = splitVolumeSync;
-function splitChapterSync(txt, cache, _m, cb) {
+function splitChapterSync(txt, cache, _m, splitOption) {
     let _files = {};
     let idx = 0;
+    let { cb, ignoreCb, ignoreRe } = splitOption;
     txt = String(txt);
     cache.txt = txt;
     let m_last;
@@ -78,10 +79,32 @@ function splitChapterSync(txt, cache, _m, cb) {
     for (i in _m) {
         ii = (parseInt(i) + ix).toString();
         let m = _m[i];
+        if (ignoreRe) {
+            if (ignoreRe.test(m.match)) {
+                /**
+                 * @todo here maybe will has bug, need test
+                 */
+                continue;
+            }
+            ignoreRe.lastIndex = 0;
+        }
         if (!m_last && idx == 0 && m.index != 0) {
             //console.log(m);
             let id = util_1.padIndex(ii, 5, '0');
             let name = 'unknow';
+            if (ignoreCb && ignoreCb({
+                i,
+                id,
+                name,
+                m,
+                m_last,
+                _files,
+                ii,
+                cache,
+                idx,
+            })) {
+                continue;
+            }
             if (cb) {
                 let _ret = cb({
                     i,
@@ -110,6 +133,19 @@ function splitChapterSync(txt, cache, _m, cb) {
         else if (m_last) {
             let id = util_1.padIndex(ii, 5, '0');
             let name = util_1.fix_name(m_last.match);
+            if (ignoreCb && ignoreCb({
+                i,
+                id,
+                name,
+                m,
+                m_last,
+                _files,
+                ii,
+                cache,
+                idx,
+            })) {
+                continue;
+            }
             if (cb) {
                 let _ret = cb({
                     i,

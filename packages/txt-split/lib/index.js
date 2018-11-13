@@ -61,6 +61,29 @@ function _handleOptions(options) {
                     data.r = new RE(data.r, data.r.flags || FLAGS);
                 }
             }
+            if (data.ignoreRe) {
+                const FLAGS = data.ignoreFlags || 'i';
+                if (Array.isArray(data.ignoreRe)) {
+                    data.ignoreRe = data.ignoreRe.join('');
+                }
+                if (opts.useRegExpCJK || !(data.ignoreRe instanceof RegExp)) {
+                    let RE;
+                    if (typeof opts.useRegExpCJK === 'function') {
+                        // @ts-ignore
+                        RE = opts.useRegExpCJK;
+                    }
+                    else if (opts.useRegExpCJK === true) {
+                        // @ts-ignore
+                        RE = regexp_cjk_1.zhRegExp;
+                    }
+                    else {
+                        // @ts-ignore
+                        RE = RegExp;
+                    }
+                    // @ts-ignore
+                    data.ignoreRe = new RE(data.ignoreRe, data.ignoreRe.flags || FLAGS);
+                }
+            }
             return true;
         }
     }

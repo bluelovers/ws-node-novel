@@ -105,6 +105,40 @@ export function _handleOptions<O extends IOptions | IOptionsRequiredUser>(option
 				}
 			}
 
+			if (data.ignoreRe)
+			{
+				const FLAGS = data.ignoreFlags || 'i';
+
+				if (Array.isArray(data.ignoreRe))
+				{
+					data.ignoreRe = data.ignoreRe.join('');
+				}
+
+				if (opts.useRegExpCJK || !(data.ignoreRe instanceof RegExp))
+				{
+					let RE: RegExp;
+
+					if (typeof opts.useRegExpCJK === 'function')
+					{
+						// @ts-ignore
+						RE = opts.useRegExpCJK
+					}
+					else if (opts.useRegExpCJK === true)
+					{
+						// @ts-ignore
+						RE = zhRegExp
+					}
+					else
+					{
+						// @ts-ignore
+						RE = RegExp
+					}
+
+					// @ts-ignore
+					data.ignoreRe = new RE(data.ignoreRe, data.ignoreRe.flags || FLAGS);
+				}
+			}
+
 			return true
 		}
 	}

@@ -85,7 +85,14 @@ export interface ISplitOption<T extends RegExp | string | string[] = RegExp>
 	 */
 	cb?: ISplitCB,
 
-	ignore?: T,
+	/**
+	 * 檢查 配對後的內容 如果符合 則忽略
+	 * 適用於某些狀況下無法將特定內容排除 導致被錯誤切割
+	 * 例如 黑之魔王 的整合
+	 */
+	ignoreRe?: T,
+	ignoreFlags?: string,
+	ignoreCb?: ISplitIgnoreCB,
 }
 
 export interface ISplitCache extends IOptions
@@ -157,6 +164,11 @@ export interface ISplitCBReturn
 export interface ISplitCB extends Function
 {
 	(argv: ISplitCBParameters): ISplitCBReturn;
+}
+
+export interface ISplitIgnoreCB extends Function
+{
+	(argv: ISplitCBParameters): boolean;
 }
 
 export interface IOptionsWithData<T extends IContext = string> extends IOptions
