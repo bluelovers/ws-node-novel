@@ -13,6 +13,7 @@ import { get_ids, md_href } from './index';
 import * as novelGlobby from 'node-novel-globby/g';
 import { sortTree } from 'node-novel-globby/lib/glob-sort';
 import { normalize_strip } from '@node-novel/normalize';
+import { getNovelTitles, loadReadmeMeta, loadReadmeMetaSync } from './lib/util';
 
 /*
 processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel/user/豚公爵に転生したから、今度は君に好きと言いたい', './test/temp/123.txt')
@@ -109,9 +110,26 @@ export function makeHeaderAsync(basePath: string, ...argv)
 
 export function makeHeader(basePath: string, ...argv)
 {
+
+	let titles: string[] = [
+		path.basename(basePath),
+	];
+
+	let meta = loadReadmeMetaSync(path.join(basePath, 'README.md'));
+
+	if (meta && meta.novel)
+	{
+		let arr = getNovelTitles(meta);
+
+		if (arr.length)
+		{
+			titles = array_unique(titles.concat(arr));
+		}
+	}
+
 	let arr = [
 		`# CONTENTS\n`,
-		path.basename(basePath),
+		...titles,
 	];
 
 	let _appended = [];

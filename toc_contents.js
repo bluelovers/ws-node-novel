@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const BluebirdPromise = require("bluebird");
 const path = require("upath2");
 const fs = require("fs-extra");
+const array_hyper_unique_1 = require("array-hyper-unique");
 const index_1 = require("./index");
 const novelGlobby = require("node-novel-globby/g");
 const glob_sort_1 = require("node-novel-globby/lib/glob-sort");
 const normalize_1 = require("@node-novel/normalize");
+const util_1 = require("./lib/util");
 function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     return getList(basePath)
         .then(function (ls) {
@@ -61,9 +63,19 @@ function makeHeaderAsync(basePath, ...argv) {
 }
 exports.makeHeaderAsync = makeHeaderAsync;
 function makeHeader(basePath, ...argv) {
+    let titles = [
+        path.basename(basePath),
+    ];
+    let meta = util_1.loadReadmeMetaSync(path.join(basePath, 'README.md'));
+    if (meta && meta.novel) {
+        let arr = util_1.getNovelTitles(meta);
+        if (arr.length) {
+            titles = array_hyper_unique_1.array_unique(titles.concat(arr));
+        }
+    }
     let arr = [
         `# CONTENTS\n`,
-        path.basename(basePath),
+        ...titles,
     ];
     let _appended = [];
     let _path;

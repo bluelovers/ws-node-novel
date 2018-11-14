@@ -56,3 +56,11 @@ tests
 
 __test__
 __tests__
+
+### jsonly template
+*.ts
+!*.d.ts
+### jsonly_bin template
+bin/*.ts
+bin/*.d.ts
+
