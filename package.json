@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/toc",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "此模組用來建立 novel 索引",
   "homepage": "https://github.com/bluelovers/node-novel-toc#readme",
   "bugs": {

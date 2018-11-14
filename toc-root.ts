@@ -22,7 +22,6 @@ export function searchByRoot(rootPath: string)
 			'!docs',
 			'*/*/**/README.md',
 
-
 			'!*.new.*',
 			'!*.out.*',
 			'!*.raw',
@@ -34,12 +33,21 @@ export function searchByRoot(rootPath: string)
 
 		], {
 			cwd: rootPath,
-			deep: 1,
+			deep: 2,
 		}))
-		.tap(v => console.log(v))
+		//.tap(v => console.info(v))
 		.then(function (ls)
 		{
 			return filterList(ls, rootPath)
+		})
+		.tap(function (ls)
+		{
+			if (!ls.length)
+			{
+				console.warn(rootPath);
+
+				return BluebirdPromise.reject(`list is empty`)
+			}
 		})
 		;
 }
@@ -90,11 +98,18 @@ export function filterList(ls: string[], rootPath?: string)
 
 		return arr;
 	}, [] as string[])
+		.tap(function (ls)
+		{
+			if (!ls.length)
+			{
+				return BluebirdPromise.reject(`list is empty`)
+			}
+		})
 }
 
 export function processDataByAuthor(ls: string[], rootPath: string)
 {
-	return BluebirdPromise.reduce(ls, async function (data, file)
+	return BluebirdPromise.reduce(ls, async function (data: IDataAuthor, file)
 	{
 		let dl = file.split('/');
 

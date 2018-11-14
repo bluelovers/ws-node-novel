@@ -28,11 +28,17 @@ function searchByRoot(rootPath) {
         '!raw',
     ], {
         cwd: rootPath,
-        deep: 1,
+        deep: 2,
     }))
-        .tap(v => console.log(v))
+        //.tap(v => console.info(v))
         .then(function (ls) {
         return filterList(ls, rootPath);
+    })
+        .tap(function (ls) {
+        if (!ls.length) {
+            console.warn(rootPath);
+            return BluebirdPromise.reject(`list is empty`);
+        }
     });
 }
 exports.searchByRoot = searchByRoot;
@@ -66,7 +72,12 @@ function filterList(ls, rootPath) {
             arr.push(dir);
         }
         return arr;
-    }, []);
+    }, [])
+        .tap(function (ls) {
+        if (!ls.length) {
+            return BluebirdPromise.reject(`list is empty`);
+        }
+    });
 }
 exports.filterList = filterList;
 function processDataByAuthor(ls, rootPath) {
