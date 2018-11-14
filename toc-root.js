@@ -3,6 +3,7 @@
  * Created by user on 2018/11/14/014.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const array_hyper_unique_1 = require("array-hyper-unique");
 const crlf_normalize_1 = require("crlf-normalize");
 const FastGlob = require("fast-glob");
 const path = require("upath2");
@@ -103,7 +104,14 @@ function processDataByAuthor(ls, rootPath) {
             meta,
         });
         return data;
-    }, {});
+    }, {})
+        .then(data => {
+        let key = 'unknow';
+        let old = data[key];
+        delete data[key];
+        data[key] = old;
+        return data;
+    });
 }
 exports.processDataByAuthor = processDataByAuthor;
 function stringifyDataAuthor(data, rootPath) {
@@ -116,21 +124,35 @@ function stringifyDataAuthor(data, rootPath) {
         .forEach(function ([author, row], author_idx) {
         arr_author.push(`### ${author}\n`);
         Object.entries(row)
-            .forEach(function ([NovelID, list]) {
-            arr_author.push(`#### ${NovelID}\n`);
+            .forEach(function ([novelID, list]) {
+            arr_author.push(`#### ${novelID}\n`);
+            let skip = [
+                novelID,
+            ];
+            let titles = [];
+            let arr_item = [];
             list.forEach(function (item, index) {
                 let link = path.dirname(item.file);
                 let link2 = path.join(link, '導航目錄.md');
                 if (fs.existsSync(path.join(rootPath, link2))) {
                     link = link2;
                 }
-                let md = toc_contents_1.makeLink(`${NovelID}`, link);
-                arr_author.push(`- ${md} - *${item.pathMain}*`);
+                skip.push(novelID);
+                let md = toc_contents_1.makeLink(`${novelID}`, link);
+                arr_item.push(`- ${md} - *${item.pathMain}*`);
+                titles = titles.concat(util_1.getNovelTitles(item.meta));
             });
-            arr_author.push(`\n`);
+            titles = array_hyper_unique_1.array_unique(titles)
+                .filter(v => !skip.includes(v));
+            if (titles.length) {
+                arr_author.push(`> ${titles.join(' , ')}\n`);
+            }
+            arr_author = arr_author.concat(arr_item);
+            arr_author.push(crlf_normalize_1.LF);
         });
     });
     arr = arr.concat(arr_author);
+    arr.push(crlf_normalize_1.LF);
     return arr.join(crlf_normalize_1.LF);
 }
 exports.stringifyDataAuthor = stringifyDataAuthor;
@@ -150,4 +172,4 @@ function createTocRoot(_root, outputFile) {
 }
 exports.createTocRoot = createTocRoot;
 exports.default = createTocRoot;
-//createTocRoot('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel')
+//createTocRoot('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel').tap(v => console.dir(v))

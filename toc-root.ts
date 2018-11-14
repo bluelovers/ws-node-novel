@@ -2,6 +2,7 @@
  * Created by user on 2018/11/14/014.
  */
 
+import { array_unique } from 'array-hyper-unique';
 import { LF } from 'crlf-normalize';
 import * as FastGlob from 'fast-glob';
 import path = require('upath2');
@@ -10,7 +11,7 @@ import * as fs from 'fs-extra';
 import * as novelGlobby from 'node-novel-globby/g';
 import { defaultPatternsExclude } from 'node-novel-globby/lib/options';
 import { IMdconfMeta } from 'node-novel-info';
-import { globFirst, loadReadmeMeta } from './lib/util';
+import { globFirst, loadReadmeMeta, getNovelTitles } from './lib/util';
 import { makeLink } from './toc_contents';
 
 export function searchByRoot(rootPath: string)
@@ -144,6 +145,17 @@ export function processDataByAuthor(ls: string[], rootPath: string)
 
 		return data;
 	}, {} as IDataAuthor)
+		.then(data => {
+
+			let key = 'unknow';
+			let old = data[key];
+
+			delete data[key];
+
+			data[key] = old;
+
+			return data;
+		})
 }
 
 export interface IDataAuthor
@@ -155,7 +167,7 @@ export interface IDataAuthor
 			file: string,
 			meta: IMdconfMeta,
 		}[]
-	}
+	},
 }
 
 export function stringifyDataAuthor(data: IDataAuthor, rootPath: string)
@@ -174,10 +186,18 @@ export function stringifyDataAuthor(data: IDataAuthor, rootPath: string)
 			arr_author.push(`### ${author}\n`)
 
 			Object.entries(row)
-				.forEach(function ([NovelID, list])
+				.forEach(function ([novelID, list])
 				{
 
-					arr_author.push(`#### ${NovelID}\n`);
+					arr_author.push(`#### ${novelID}\n`);
+
+					let skip = [
+						novelID,
+					];
+
+					let titles = [];
+
+					let arr_item = [];
 
 					list.forEach(function (item, index)
 					{
@@ -190,18 +210,35 @@ export function stringifyDataAuthor(data: IDataAuthor, rootPath: string)
 							link = link2
 						}
 
-						let md = makeLink(`${NovelID}`, link);
+						skip.push(novelID);
 
-						arr_author.push(`- ${md} - *${item.pathMain}*`);
+						let md = makeLink(`${novelID}`, link);
+
+						arr_item.push(`- ${md} - *${item.pathMain}*`);
+
+						titles = titles.concat(getNovelTitles(item.meta))
 					});
 
-					arr_author.push(`\n`);
+					titles = array_unique(titles)
+						.filter(v => !skip.includes(v))
+					;
+
+					if (titles.length)
+					{
+						arr_author.push(`> ${titles.join(' , ')}\n`);
+					}
+
+					arr_author = arr_author.concat(arr_item);
+
+					arr_author.push(LF);
 				})
 			;
 		})
 	;
 
 	arr = arr.concat(arr_author);
+
+	arr.push(LF);
 
 	return arr.join(LF)
 }
@@ -229,4 +266,4 @@ export function createTocRoot(_root: string, outputFile?: string)
 
 export default createTocRoot
 
-//createTocRoot('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel')
+//createTocRoot('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel').tap(v => console.dir(v))
