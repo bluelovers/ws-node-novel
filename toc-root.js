@@ -85,22 +85,29 @@ function processDataByAuthor(ls, rootPath) {
     return BluebirdPromise.reduce(ls, async function (data, file) {
         let dl = file.split('/');
         let meta = await util_1.loadReadmeMeta(path.join(rootPath, file));
-        let key = 'unknow';
-        if (meta && meta.novel) {
-            if (meta.novel.author) {
-                key = meta.novel.author;
-            }
-            else if (meta.novel.authors && meta.novel.authors.length) {
-                key = meta.novel.authors[0];
+        let author = 'unknow';
+        if (meta) {
+            if (meta.novel) {
+                if (meta.novel.author) {
+                    author = meta.novel.author;
+                }
+                else if (meta.novel.authors && meta.novel.authors.length) {
+                    author = meta.novel.authors[0];
+                }
             }
         }
-        data[key] = data[key] || {};
-        let NovelID = dl[1];
-        data[key][NovelID] = data[key][NovelID] || [];
-        data[key][NovelID].push({
+        else {
+            return data;
+        }
+        data[author] = data[author] || {};
+        let novelID = dl[1];
+        data[author][novelID] = data[author][novelID] || [];
+        data[author][novelID].push({
             novelID: dl[1],
             pathMain: dl[0],
             file,
+            author,
+            // @ts-ignore
             meta,
         });
         return data;
@@ -109,7 +116,9 @@ function processDataByAuthor(ls, rootPath) {
         let key = 'unknow';
         let old = data[key];
         delete data[key];
-        data[key] = old;
+        if (old) {
+            data[key] = old;
+        }
         return data;
     });
 }
@@ -161,8 +170,8 @@ function createTocRoot(_root, outputFile) {
         .then(function (ls) {
         return processDataByAuthor(ls, _root);
     })
-        .then(function (ls) {
-        return stringifyDataAuthor(ls, _root);
+        .then(function (data) {
+        return stringifyDataAuthor(data, _root);
     })
         .tap(function (v) {
         if (outputFile) {

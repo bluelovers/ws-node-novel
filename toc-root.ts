@@ -72,33 +72,33 @@ export function isNovelID(dir: string, rootPath?: string)
 export function filterList(ls: string[], rootPath?: string)
 {
 	return BluebirdPromise.reduce(ls, async function (arr, dir)
-	{
-		let dl = dir.split('/');
-
-		if (dl.length > 3)
 		{
-			return arr;
-		}
+			let dl = dir.split('/');
 
-		if (!/_out$/.test(dl[0]))
-		{
-			let out = [dl[0] + '_out', ...dl.slice(1)];
-
-			if (ls.includes(out.join('/')))
+			if (dl.length > 3)
 			{
 				return arr;
 			}
-		}
 
-		let hasTxt = await isNovelID(dir, rootPath);
+			if (!/_out$/.test(dl[0]))
+			{
+				let out = [dl[0] + '_out', ...dl.slice(1)];
 
-		if (hasTxt)
-		{
-			arr.push(dir);
-		}
+				if (ls.includes(out.join('/')))
+				{
+					return arr;
+				}
+			}
 
-		return arr;
-	}, [] as string[])
+			let hasTxt = await isNovelID(dir, rootPath);
+
+			if (hasTxt)
+			{
+				arr.push(dir);
+			}
+
+			return arr;
+		}, [] as string[])
 		.tap(function (ls)
 		{
 			if (!ls.length)
@@ -108,69 +108,90 @@ export function filterList(ls: string[], rootPath?: string)
 		})
 }
 
-export function processDataByAuthor(ls: string[], rootPath: string)
+export function processDataByAuthor<T extends IMdconfMeta = IMdconfMeta>(ls: string[], rootPath: string)
 {
-	return BluebirdPromise.reduce(ls, async function (data: IDataAuthor, file)
-	{
-		let dl = file.split('/');
-
-		let meta = await loadReadmeMeta(path.join(rootPath, file));
-
-		let key = 'unknow';
-
-		if (meta && meta.novel)
+	return BluebirdPromise.reduce(ls, async function (data, file)
 		{
-			if (meta.novel.author)
+			let dl = file.split('/');
+
+			let meta = await loadReadmeMeta(path.join(rootPath, file));
+
+			let author = 'unknow';
+
+			if (meta)
 			{
-				key = meta.novel.author
+				if (meta.novel)
+				{
+					if (meta.novel.author)
+					{
+						author = meta.novel.author
+					}
+					else if (meta.novel.authors && meta.novel.authors.length)
+					{
+						author = meta.novel.authors[0]
+					}
+				}
 			}
-			else if (meta.novel.authors && meta.novel.authors.length)
+			else
 			{
-				key = meta.novel.authors[0]
+				return data;
 			}
-		}
 
-		data[key] = data[key] || {};
+			data[author] = data[author] || {};
 
-		let NovelID = dl[1];
+			let novelID = dl[1];
 
-		data[key][NovelID] = data[key][NovelID] || [];
+			data[author][novelID] = data[author][novelID] || [];
 
-		data[key][NovelID].push({
-			novelID: dl[1],
-			pathMain: dl[0],
-			file,
-			meta,
-		});
+			data[author][novelID].push({
+				novelID: dl[1],
+				pathMain: dl[0],
+				file,
+				author,
+				// @ts-ignore
+				meta,
+			});
 
-		return data;
-	}, {} as IDataAuthor)
-		.then(data => {
+			return data;
+		}, {} as IDataAuthor<T>)
+		.then(data =>
+		{
 
 			let key = 'unknow';
 			let old = data[key];
 
 			delete data[key];
 
-			data[key] = old;
+			if (old)
+			{
+				data[key] = old;
+			}
 
 			return data;
 		})
 }
 
-export interface IDataAuthor
+export interface IDataAuthor<T extends IMdconfMeta = IMdconfMeta>
 {
-	[author: string]: {
-		[novelID: string]: {
-			novelID: string,
-			pathMain: string,
-			file: string,
-			meta: IMdconfMeta,
-		}[]
-	},
+	[author: string]: IDataAuthorNovel<T>,
+	unknow?: IDataAuthorNovel<T>,
 }
 
-export function stringifyDataAuthor(data: IDataAuthor, rootPath: string)
+export interface IDataAuthorNovel<T extends IMdconfMeta = IMdconfMeta>
+{
+	[novelID: string]: IDataAuthorNovelItem<T>[]
+}
+
+export interface IDataAuthorNovelItem<T extends IMdconfMeta = IMdconfMeta>
+{
+	novelID: string,
+	pathMain: string,
+	file: string,
+	author: string | 'unknow',
+	meta: T,
+}
+
+export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: IDataAuthor<T>, rootPath: string)
 {
 	let arr = [
 		`# TOC\n`,
@@ -214,6 +235,7 @@ export function stringifyDataAuthor(data: IDataAuthor, rootPath: string)
 
 						let md = makeLink(`${novelID}`, link);
 
+
 						arr_item.push(`- ${md} - *${item.pathMain}*`);
 
 						titles = titles.concat(getNovelTitles(item.meta))
@@ -243,16 +265,16 @@ export function stringifyDataAuthor(data: IDataAuthor, rootPath: string)
 	return arr.join(LF)
 }
 
-export function createTocRoot(_root: string, outputFile?: string)
+export function createTocRoot<T extends IMdconfMeta = IMdconfMeta>(_root: string, outputFile?: string)
 {
 	return searchByRoot(_root)
 		.then(function (ls)
 		{
-			return processDataByAuthor(ls, _root);
+			return processDataByAuthor<T>(ls, _root);
 		})
-		.then(function (ls)
+		.then(function (data)
 		{
-			return stringifyDataAuthor(ls, _root)
+			return stringifyDataAuthor<T>(data, _root)
 		})
 		.tap(function (v)
 		{
@@ -261,7 +283,7 @@ export function createTocRoot(_root: string, outputFile?: string)
 				return fs.outputFile(outputFile, v);
 			}
 		})
-	;
+		;
 }
 
 export default createTocRoot
