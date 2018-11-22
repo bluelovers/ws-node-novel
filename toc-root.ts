@@ -39,7 +39,7 @@ export function searchByRoot(rootPath: string)
 		//.tap(v => console.info(v))
 		.then(function (ls)
 		{
-			return filterList(ls, rootPath).sort()
+			return filterList(ls.sort(), rootPath)
 		})
 		.tap(function (ls)
 		{

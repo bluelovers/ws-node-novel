@@ -33,7 +33,7 @@ function searchByRoot(rootPath) {
     }))
         //.tap(v => console.info(v))
         .then(function (ls) {
-        return filterList(ls, rootPath);
+        return filterList(ls.sort(), rootPath);
     })
         .tap(function (ls) {
         if (!ls.length) {
