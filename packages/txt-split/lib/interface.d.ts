@@ -46,6 +46,10 @@ export interface IOptions<P = boolean | IRegExpLike> {
      */
     useRegExpCJK?: P;
     beforeStart?<O extends IOptions>(options: O): void;
+    /**
+     * 允許在讀取檔案後 先對檔案內容做處理變更
+     */
+    readFileAfter?(txt: string): string | void;
     [key: string]: any;
 }
 export interface ISplitOption<T extends RegExp | string | string[] = RegExp> {

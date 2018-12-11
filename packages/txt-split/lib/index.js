@@ -105,6 +105,15 @@ async function readFile(inputFile, options) {
     let txt = await fs_iconv_1.default.readFile(cache.file)
         .then(function (data) {
         return util_1._handleReadFile(data, cache.file);
+    })
+        .then(async (txt) => {
+        if (options.readFileAfter) {
+            let ret = await options.readFileAfter(txt);
+            if (typeof ret === 'string') {
+                return ret;
+            }
+        }
+        return txt;
     });
     let data = await split_1.splitVolumeSync(txt, cache);
     return {
@@ -119,6 +128,12 @@ function readFileSync(inputFile, options) {
     {
         let data = fs_iconv_1.default.readFileSync(cache.file);
         txt = util_1._handleReadFile(data, cache.file);
+        if (options.readFileAfter) {
+            let ret = options.readFileAfter(txt);
+            if (typeof ret === 'string') {
+                txt = ret;
+            }
+        }
     }
     let data = split_1.splitVolumeSync(txt, cache);
     return {

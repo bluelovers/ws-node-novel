@@ -164,10 +164,24 @@ export async function readFile<O extends IOptions>(inputFile: IPathLike, options
 {
 	let cache = makeOptions(inputFile, options);
 
-	let txt = await fsIconv.readFile(cache.file)
+	let txt: string = await fsIconv.readFile(cache.file)
 		.then(function (data)
 		{
 			return _handleReadFile(data, cache.file);
+		})
+		.then(async (txt) => {
+
+			if (options.readFileAfter)
+			{
+				let ret = await options.readFileAfter(txt);
+
+				if (typeof ret === 'string')
+				{
+					return ret;
+				}
+			}
+
+			return txt;
 		})
 	;
 
@@ -189,6 +203,16 @@ export function readFileSync<O extends IOptions>(inputFile: IPathLike, options: 
 		let data = fsIconv.readFileSync(cache.file);
 
 		txt = _handleReadFile(data, cache.file)
+
+		if (options.readFileAfter)
+		{
+			let ret = options.readFileAfter(txt);
+
+			if (typeof ret === 'string')
+			{
+				txt = ret;
+			}
+		}
 	}
 
 	let data = splitVolumeSync(txt, cache);
