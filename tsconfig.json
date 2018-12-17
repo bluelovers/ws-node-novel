@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "target": "es2017",
+    "target": "esnext",
 
     "moduleResolution": "node",
     "allowJs": true,
 
-//    "sourceMap": true,
-//    "inlineSourceMap": true,
-//    "inlineSources": true,
+    "sourceMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
 
     "declaration": true,
     "experimentalDecorators": true,

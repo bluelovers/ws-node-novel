@@ -1,0 +1,25 @@
+{
+  "name": "@node-novel/sort",
+  "version": "1.0.1",
+  "description": "ws-novel",
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/node-novel-sortt#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "string-natural-compare": "^2.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

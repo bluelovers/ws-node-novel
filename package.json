@@ -21,5 +21,10 @@
     "url": "https://github.com/bluelovers/ws-node-novel/issues"
   },
   "homepage": "https://github.com/bluelovers/ws-node-novel#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "fast-glob": "^2.2.4",
+    "fs-extra": "^7.0.1",
+    "sort-package-json": "^1.17.1"
+  }
 }
