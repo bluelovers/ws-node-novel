@@ -105,7 +105,8 @@ export function md_anchor_gitee(title: string)
 {
 	let anchor = title
 		.toLowerCase()
-		.replace(/[\.．\/]/g, '')
+		.replace(/[\.．\/／　＠@（）\(\)～~]/g, '')
+		.replace(/[ ]/g, '-')
 	;
 
 	return md_href(anchor);
