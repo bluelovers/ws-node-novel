@@ -208,8 +208,7 @@ export interface IDataAuthorNovelItem<T extends IMdconfMeta = IMdconfMeta>
 
 export interface IOptions<T extends IMdconfMeta>
 {
-	cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): string,
-	cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): void,
+	cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): void | string,
 }
 
 export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: IDataAuthor<T>, rootPath: string, options?: IOptions<T>)

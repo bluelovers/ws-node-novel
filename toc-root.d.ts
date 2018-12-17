@@ -22,8 +22,7 @@ export interface IDataAuthorNovelItem<T extends IMdconfMeta = IMdconfMeta> {
     meta: T;
 }
 export interface IOptions<T extends IMdconfMeta> {
-    cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): string;
-    cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): void;
+    cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): void | string;
 }
 export declare function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: IDataAuthor<T>, rootPath: string, options?: IOptions<T>): string;
 export declare function createTocRoot<T extends IMdconfMeta = IMdconfMeta>(_root: string, outputFile?: string, options?: IOptions<T>): BluebirdPromise<string>;
