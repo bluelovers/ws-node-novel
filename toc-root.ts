@@ -13,6 +13,8 @@ import { defaultPatternsExclude } from 'node-novel-globby/lib/options';
 import { IMdconfMeta } from 'node-novel-info';
 import { globFirst, loadReadmeMeta, getNovelTitles } from './lib/util';
 import { makeLink } from './toc_contents';
+import sortObject = require('sort-object-keys2');
+import { defaultSortCallback, createSortCallback } from '@node-novel/sort';
 
 export function searchByRoot(rootPath: string)
 {
@@ -108,7 +110,7 @@ export function filterList(ls: string[], rootPath?: string)
 		})
 }
 
-export function processDataByAuthor<T extends IMdconfMeta = IMdconfMeta>(ls: string[], rootPath: string)
+export function processDataByAuthor<T extends IMdconfMeta = IMdconfMeta>(ls: string[], rootPath: string, options?: IOptions<T>)
 {
 	return BluebirdPromise.reduce(ls, async function (data, file)
 		{
@@ -157,6 +159,19 @@ export function processDataByAuthor<T extends IMdconfMeta = IMdconfMeta>(ls: str
 		.then(data =>
 		{
 
+			sortObject(data, {
+				sort: defaultSortCallback,
+				useSource: true,
+			});
+
+			Object.keys(data).forEach(function (author)
+			{
+				sortObject(data[author], {
+					sort: defaultSortCallback,
+					useSource: true,
+				});
+			});
+
 			let key = 'unknow';
 			let old = data[key];
 
@@ -191,7 +206,13 @@ export interface IDataAuthorNovelItem<T extends IMdconfMeta = IMdconfMeta>
 	meta: T,
 }
 
-export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: IDataAuthor<T>, rootPath: string)
+export interface IOptions<T extends IMdconfMeta>
+{
+	cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): string,
+	cbForEachSubNovel?(text: string, item: IDataAuthorNovelItem<T>): void,
+}
+
+export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: IDataAuthor<T>, rootPath: string, options?: IOptions<T>)
 {
 	let arr = [
 		`# TOC\n`,
@@ -200,6 +221,8 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 	let arr_author: string[] = [];
 
 	arr_author.push(`## Author\n`);
+
+	options = options || {};
 
 	Object.entries(data)
 		.forEach(function ([author, row], author_idx)
@@ -235,8 +258,19 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 
 						let md = makeLink(`${novelID}`, link);
 
+						let text = `- ${md} - *${item.pathMain}*`;
 
-						arr_item.push(`- ${md} - *${item.pathMain}*`);
+						if (options.cbForEachSubNovel)
+						{
+							let ret = options.cbForEachSubNovel(text, item);
+
+							if (typeof ret === 'string')
+							{
+								text = ret;
+							}
+						}
+
+						arr_item.push(text);
 
 						titles = titles.concat(getNovelTitles(item.meta))
 					});
@@ -265,16 +299,18 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 	return arr.join(LF)
 }
 
-export function createTocRoot<T extends IMdconfMeta = IMdconfMeta>(_root: string, outputFile?: string)
+export function createTocRoot<T extends IMdconfMeta = IMdconfMeta>(_root: string, outputFile?: string, options?: IOptions<T>)
 {
+	options = options || {};
+
 	return searchByRoot(_root)
 		.then(function (ls)
 		{
-			return processDataByAuthor<T>(ls, _root);
+			return processDataByAuthor<T>(ls, _root, options);
 		})
 		.then(function (data)
 		{
-			return stringifyDataAuthor<T>(data, _root)
+			return stringifyDataAuthor<T>(data, _root, options)
 		})
 		.tap(function (v)
 		{
