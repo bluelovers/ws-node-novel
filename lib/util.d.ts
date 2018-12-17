@@ -11,3 +11,4 @@ export declare function globFirst(...argv: Parameters<typeof FastGlob["stream"]>
 export declare function md_href(href: string): string;
 export declare function md_anchor_gitee(title: string): string;
 export declare function md_link_escape(text: string): string;
+export declare const tocSortCallback: (a: string, b: string, isSub?: boolean) => any;

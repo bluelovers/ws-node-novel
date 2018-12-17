@@ -11,7 +11,15 @@ import * as fs from 'fs-extra';
 import * as novelGlobby from 'node-novel-globby/g';
 import { defaultPatternsExclude } from 'node-novel-globby/lib/options';
 import { IMdconfMeta } from 'node-novel-info';
-import { globFirst, loadReadmeMeta, getNovelTitles, md_anchor_gitee, md_href, md_link_escape } from './lib/util';
+import {
+	globFirst,
+	loadReadmeMeta,
+	getNovelTitles,
+	md_anchor_gitee,
+	md_href,
+	md_link_escape,
+	tocSortCallback,
+} from './lib/util';
 import { makeLink } from './toc_contents';
 import sortObject = require('sort-object-keys2');
 import { defaultSortCallback, createSortCallback } from '@node-novel/sort';
@@ -160,14 +168,14 @@ export function processDataByAuthor<T extends IMdconfMeta = IMdconfMeta>(ls: str
 		{
 
 			sortObject(data, {
-				sort: defaultSortCallback,
+				sort: tocSortCallback,
 				useSource: true,
 			});
 
 			Object.keys(data).forEach(function (author)
 			{
 				sortObject(data[author], {
-					sort: defaultSortCallback,
+					sort: tocSortCallback,
 					useSource: true,
 				});
 			});
