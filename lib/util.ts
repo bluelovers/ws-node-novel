@@ -2,8 +2,8 @@
  * Created by user on 2018/11/14/014.
  */
 
-import * as FastGlob from 'fast-glob';
 import { array_unique } from 'array-hyper-unique';
+import * as FastGlob from 'fast-glob';
 import * as fs from 'fs-iconv';
 import { IMdconfMeta, mdconf_parse } from 'node-novel-info';
 import BluebirdPromise = require('bluebird');
@@ -93,5 +93,28 @@ export function globFirst(...argv: Parameters<typeof FastGlob["stream"]>): Blueb
 		});
 		fgs.once('error', reject);
 		fgs.once('end', () => resolve(undefined));
+	})
+}
+
+export function md_href(href: string)
+{
+	return href.split('/').map(encodeURIComponent).join('/');
+}
+
+export function md_anchor_gitee(title: string)
+{
+	let anchor = title
+		.toLowerCase()
+		.replace(/[\.．\/]/g, '')
+	;
+
+	return md_href(anchor);
+}
+
+export function md_link_escape(text: string)
+{
+	return text.replace(/[\[\]]/g, function (s)
+	{
+		return '\\' + s;
 	})
 }

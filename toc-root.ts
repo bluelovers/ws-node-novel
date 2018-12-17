@@ -11,7 +11,7 @@ import * as fs from 'fs-extra';
 import * as novelGlobby from 'node-novel-globby/g';
 import { defaultPatternsExclude } from 'node-novel-globby/lib/options';
 import { IMdconfMeta } from 'node-novel-info';
-import { globFirst, loadReadmeMeta, getNovelTitles } from './lib/util';
+import { globFirst, loadReadmeMeta, getNovelTitles, md_anchor_gitee, md_href, md_link_escape } from './lib/util';
 import { makeLink } from './toc_contents';
 import sortObject = require('sort-object-keys2');
 import { defaultSortCallback, createSortCallback } from '@node-novel/sort';
@@ -215,18 +215,21 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 {
 	let arr = [
 		`# TOC\n`,
+		`## Author\n`
 	];
 
 	let arr_author: string[] = [];
 
-	arr_author.push(`## Author\n`);
+	let authors: string[] = [];
 
 	options = options || {};
 
 	Object.entries(data)
 		.forEach(function ([author, row], author_idx)
 		{
-			arr_author.push(`### ${author}\n`)
+			arr_author.push(`### ${author}\n`);
+
+			authors.push(author);
 
 			Object.entries(row)
 				.forEach(function ([novelID, list])
@@ -290,6 +293,12 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 			;
 		})
 	;
+
+	let authors_anchor = authors.map(name => {
+		return `[${md_link_escape(name)}](${md_anchor_gitee(name)})`;
+	}).join('  ／  ') + '\n';
+
+	arr.push(authors_anchor);
 
 	arr = arr.concat(arr_author);
 

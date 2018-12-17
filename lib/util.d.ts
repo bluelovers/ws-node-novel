@@ -8,3 +8,6 @@ export declare function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file
 export declare function loadReadmeMetaSync<T extends IMdconfMeta = IMdconfMeta>(file: string): T;
 export declare function getNovelTitles<T extends IMdconfMeta = IMdconfMeta>(meta: T): string[];
 export declare function globFirst(...argv: Parameters<typeof FastGlob["stream"]>): BluebirdPromise<string>;
+export declare function md_href(href: string): string;
+export declare function md_anchor_gitee(title: string): string;
+export declare function md_link_escape(text: string): string;

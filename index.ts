@@ -2,14 +2,18 @@
  * Created by user on 2018/5/1/001.
  */
 
-import * as Promise from 'bluebird';
-import * as FastGlob from 'fast-glob';
-import path = require('upath2');
-import * as fs from 'fs-extra';
-import novelInfo, { mdconf_parse, IMdconfMeta, stringify, mdconf } from 'node-novel-info';
 import { array_unique } from 'array-hyper-unique';
-import * as sortObjectKeys from 'sort-object-keys2';
+import * as Promise from 'bluebird';
 import { Console } from 'debug-color2';
+import * as FastGlob from 'fast-glob';
+import * as fs from 'fs-extra';
+import { IMdconfMeta, mdconf, mdconf_parse } from 'node-novel-info';
+import * as sortObjectKeys from 'sort-object-keys2';
+import * as self from './index';
+import { md_href } from './lib/util';
+import path = require('upath2');
+export { md_href }
+
 export const console = new Console(null, {
 	enabled: true,
 	inspectOptions: {
@@ -281,15 +285,9 @@ export async function createReadmeData(cwd: string, ret: IRet, item: string): Pr
 	return ret;
 }
 
-export function md_href(href: string)
-{
-	return href.split('/').map(encodeURIComponent).join('/');
-}
-
 export function defaultFilter(value: string): boolean
 {
 	return true;
 }
 
-import * as self from './index';
 export default self

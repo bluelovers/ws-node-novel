@@ -2,18 +2,15 @@
  * Created by user on 2018/8/13/013.
  */
 
-import * as BluebirdPromise from 'bluebird';
-import * as FastGlob from 'fast-glob';
-import path = require('upath2');
-import * as fs from 'fs-extra';
-import novelInfo, { mdconf_parse, IMdconfMeta, stringify, mdconf } from 'node-novel-info';
+import { normalize_strip } from '@node-novel/normalize';
 import { array_unique } from 'array-hyper-unique';
-import * as sortObjectKeys from 'sort-object-keys2';
-import { get_ids, md_href } from './index';
+import * as BluebirdPromise from 'bluebird';
+import * as fs from 'fs-extra';
 import * as novelGlobby from 'node-novel-globby/g';
 import { sortTree } from 'node-novel-globby/lib/glob-sort';
-import { normalize_strip } from '@node-novel/normalize';
-import { getNovelTitles, loadReadmeMeta, loadReadmeMetaSync } from './lib/util';
+import { getNovelTitles, loadReadmeMetaSync, md_href, md_link_escape } from './lib/util';
+import path = require('upath2');
+export { md_href, md_link_escape }
 
 /*
 processTocContents('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel/user/豚公爵に転生したから、今度は君に好きと言いたい', './test/temp/123.txt')
@@ -202,14 +199,6 @@ export function makeLink(title: string, link: string, isDir?: boolean)
 	t = md_link_escape(t);
 
 	return `[${t}](${md_href(link)})`
-}
-
-export function md_link_escape(text: string)
-{
-	return text.replace(/[\[\]]/g, function (s)
-	{
-		return '\\' + s;
-	})
 }
 
 export function getList(basePath: string)
