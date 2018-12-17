@@ -48,6 +48,15 @@ FastGlob.async<string>([
 			fs.copySync(path.join(__dirname, '.npmignore'), path.join(dir, '.npmignore'));
 		}
 
+		json.keywords = json.keywords || [];
+
+		json.keywords.push('@node-novel', 'node-novel');
+
+		if (json.name.split('/').length)
+		{
+			json.keywords.push(...json.name.split('/'));
+		}
+
 		fs.writeJSONSync(filepath, sortPackageJson(json), {
 			spaces: 2,
 		});

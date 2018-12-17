@@ -2,6 +2,11 @@
   "name": "@node-novel/txt-split",
   "version": "1.0.2",
   "description": "> split from [node-novel/test/txt-split](https://github.com/bluelovers/node-novel/tree/master/test/txt-split)",
+  "keywords": [
+    "@node-novel",
+    "node-novel",
+    "txt-split"
+  ],
   "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/txt-split#readme",
   "bugs": {
     "url": "https://github.com/bluelovers/ws-node-novel/issues"
