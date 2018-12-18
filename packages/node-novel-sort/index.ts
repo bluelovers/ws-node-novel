@@ -4,18 +4,59 @@
 
 import * as naturalCompare from 'string-natural-compare';
 
+export enum EnumToLowerCase
+{
+	toLowerCase = 1,
+	toLocaleLowerCase = 2,
+}
+
 export function createSortCallback(options: {
 	dotNum?: boolean,
 	failbackSort?(a, b): number,
 	trigger?(a, b): number,
-	transpile?(input, isSub?): string,
+	transpile?(input, isSub?, ...argv): string,
+	toLowerCase?: EnumToLowerCase | boolean | ((input, isSub?, ...argv) => string),
 } = {})
 {
 	const r = options.dotNum ? /^(\d+(?:\.\d+)?)/ : /^(\d+)/;
 
 	const failbackSort = options.failbackSort || naturalCompare;
 	const trigger = options.trigger || _match;
-	const transpile = options.transpile || _trim;
+	let transpile = options.transpile || _trim;
+
+	if (options.toLowerCase)
+	{
+		if (typeof options.toLowerCase === 'function')
+		{
+			const fn = options.toLowerCase;
+
+			transpile = ((old) => {
+				return function (input, ...argv)
+				{
+					return fn(old(input, ...argv), ...argv)
+				}
+			})(transpile);
+		}
+		else
+		{
+			let fn = 'toLowerCase';
+
+			if (typeof options.toLowerCase === 'number')
+			{
+				if (options.toLowerCase !== EnumToLowerCase.toLowerCase)
+				{
+					fn = 'toLocaleLowerCase';
+				}
+			}
+
+			transpile = ((old) => {
+				return function (input, ...argv)
+				{
+					return old(input, ...argv)[fn]()
+				}
+			})(transpile);
+		}
+	}
 
 	return function defaultSortCallback(a: string, b: string, isSub?: boolean)
 	{
