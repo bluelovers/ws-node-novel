@@ -126,6 +126,6 @@ export const tocSortCallback = createSortCallback({
 	dotNum: true,
 	transpile(input: any, isSub?: any)
 	{
-		return StrUtil.toHalfWidth(_trim(input))
+		return StrUtil.toHalfWidth(_trim(input)).toLocaleLowerCase()
 	},
 });
