@@ -10,19 +10,40 @@ export enum EnumToLowerCase
 	toLocaleLowerCase = 2,
 }
 
-export function createSortCallback(options: {
+export declare function defaultSortCallback(a: string, b: string, isSub?: boolean): number;
+export declare namespace defaultSortCallback
+{
+	export function failbackSort(a, b): number
+	export function trigger(a, b, data: ITriggerData): number
+	export function transpile(input, isSub?, ...argv): string
+	export function transpileBase(input, isSub?, ...argv): string
+
+	export function fnSortCallback(a: string, b: string, isSub?: boolean): number
+}
+
+export type IFnSortCallback = typeof defaultSortCallback;
+
+export type ICreateSortCallbackOptions = {
 	dotNum?: boolean,
-	failbackSort?(a, b): number,
-	trigger?(a, b): number,
-	transpile?(input, isSub?, ...argv): string,
 	toLowerCase?: EnumToLowerCase | boolean | ((input, isSub?, ...argv) => string),
-} = {})
+} & IFnSortCallbackProp;
+
+export interface IFnSortCallbackProp
+{
+	failbackSort?(a, b): number,
+	trigger?(a, b, data: ITriggerData): number,
+	transpile?(input, isSub?, ...argv): string,
+	transpileBase?(input, isSub?, ...argv): string,
+}
+
+export function createSortCallback(options: ICreateSortCallbackOptions = {}): IFnSortCallback
 {
 	const r = options.dotNum ? /^(\d+(?:\.\d+)?)/ : /^(\d+)/;
 
 	const failbackSort = options.failbackSort || naturalCompare;
 	const trigger = options.trigger || _match;
 	let transpile = options.transpile || _trim;
+	let transpileBase = options.transpileBase;
 
 	if (options.toLowerCase)
 	{
@@ -58,7 +79,7 @@ export function createSortCallback(options: {
 		}
 	}
 
-	return function defaultSortCallback(a: string, b: string, isSub?: boolean)
+	let fnSortCallback: IFnSortCallback = function fnSortCallback(a: string, b: string, isSub?: boolean): number
 	{
 		if (a === b)
 		{
@@ -67,27 +88,63 @@ export function createSortCallback(options: {
 
 		let ret = trigger(transpile(a, isSub), transpile(b, isSub), {
 			r,
-			mainFn: defaultSortCallback,
+			mainFn: fnSortCallback as IFnSortCallback,
 			isSub,
 		});
 
 		return (typeof ret == 'number') ? ret : failbackSort(a, b);
+	} as IFnSortCallback;
+
+	if (transpileBase)
+	{
+		fnSortCallback = (function (oldFn)
+		{
+			return function (a: string, b: string, isSub?: boolean): number
+			{
+				if (a === b)
+				{
+					return 0;
+				}
+
+				if (isSub)
+				{
+					return oldFn(a, b, isSub);
+				}
+
+				return oldFn(transpileBase(a), transpileBase(b), isSub);
+			} as IFnSortCallback
+		})(fnSortCallback);
 	}
+
+	fnSortCallback.failbackSort = failbackSort;
+	fnSortCallback.trigger = trigger;
+	fnSortCallback.transpile = transpile;
+	fnSortCallback.transpileBase = transpileBase;
+	fnSortCallback.fnSortCallback = fnSortCallback;
+
+	return fnSortCallback;
 }
 
 export { naturalCompare }
 
-export const defaultSortCallback = createSortCallback({
+exports.defaultSortCallback = createSortCallback({
 	dotNum: true,
 });
 
-export default defaultSortCallback
+export default exports.defaultSortCallback as typeof defaultSortCallback
+
+export interface ITriggerData
+{
+	r: RegExp,
+	mainFn: IFnSortCallback,
+	isSub: boolean,
+}
 
 export function _match(a: string, b: string, {
 	r,
 	mainFn,
 	isSub,
-})
+}: ITriggerData)
 {
 	let ta: RegExpExecArray;
 	let tb: RegExpExecArray;
