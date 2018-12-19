@@ -14,7 +14,7 @@ export declare function defaultSortCallback(a: string, b: string, isSub?: boolea
 export declare namespace defaultSortCallback
 {
 	export function failbackSort(a, b): number
-	export function trigger(a, b, data: ITriggerData): number
+	export function trigger(a: string, b: string, data: ITriggerData): number
 	export function transpile(input, isSub?, ...argv): string
 	export function transpileBase(input, isSub?, ...argv): string
 
@@ -25,17 +25,38 @@ export type IFnSortCallback = typeof defaultSortCallback;
 
 export type ICreateSortCallbackOptions = {
 	dotNum?: boolean,
+	/**
+	 * will change base input value
+	 */
 	toLowerCase?: EnumToLowerCase | boolean | ((input, isSub?, ...argv) => string),
 } & IFnSortCallbackProp;
 
 export interface IFnSortCallbackProp
 {
+	/**
+	 * failback compare
+	 */
 	failbackSort?(a, b): number,
-	trigger?(a, b, data: ITriggerData): number,
+
+	/**
+	 * compare transpile value
+	 */
+	trigger?(a: string, b: string, data: ITriggerData): number,
+
+	/**
+	 * will change input value for trigger only
+	 */
 	transpile?(input, isSub?, ...argv): string,
+	/**
+	 * will change base input value
+	 */
 	transpileBase?(input, isSub?, ...argv): string,
 }
 
+/**
+ * create a compare callback by (transpileBase value) -> trigger(transpile value) -> failbackSort
+ * @param options
+ */
 export function createSortCallback(options: ICreateSortCallbackOptions = {}): IFnSortCallback
 {
 	const r = options.dotNum ? /^(\d+(?:\.\d+)?)/ : /^(\d+)/;
@@ -47,16 +68,11 @@ export function createSortCallback(options: ICreateSortCallbackOptions = {}): IF
 
 	if (options.toLowerCase)
 	{
+		let fnLowerCase: (input: string, ...argv) => string;
+
 		if (typeof options.toLowerCase === 'function')
 		{
-			const fn = options.toLowerCase;
-
-			transpile = ((old) => {
-				return function (input, ...argv)
-				{
-					return fn(old(input, ...argv), ...argv)
-				}
-			})(transpile);
+			fnLowerCase = options.toLowerCase;
 		}
 		else
 		{
@@ -70,12 +86,24 @@ export function createSortCallback(options: ICreateSortCallbackOptions = {}): IF
 				}
 			}
 
-			transpile = ((old) => {
-				return function (input, ...argv)
-				{
-					return old(input, ...argv)[fn]()
-				}
-			})(transpile);
+			fnLowerCase = (input: string, ...argv) => input[fn](...argv);
+		}
+
+		if (fnLowerCase)
+		{
+			if (transpileBase)
+			{
+				transpileBase = ((old) => {
+					return function (input, ...argv)
+					{
+						return fnLowerCase(old(input, ...argv), ...argv)
+					}
+				})(transpileBase);
+			}
+			else
+			{
+				transpileBase = fnLowerCase;
+			}
 		}
 	}
 
@@ -115,6 +143,10 @@ export function createSortCallback(options: ICreateSortCallbackOptions = {}): IF
 			} as IFnSortCallback
 		})(fnSortCallback);
 	}
+	else
+	{
+		transpileBase = (input: string) => input;
+	}
 
 	fnSortCallback.failbackSort = failbackSort;
 	fnSortCallback.trigger = trigger;
@@ -143,7 +175,6 @@ export interface ITriggerData
 export function _match(a: string, b: string, {
 	r,
 	mainFn,
-	isSub,
 }: ITriggerData)
 {
 	let ta: RegExpExecArray;
@@ -186,3 +217,6 @@ export function _trim(input: string): string
 		.trim()
 		;
 }
+
+// @ts-ignore
+exports = Object.freeze(exports);
