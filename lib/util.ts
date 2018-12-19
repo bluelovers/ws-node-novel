@@ -2,13 +2,13 @@
  * Created by user on 2018/11/14/014.
  */
 
-import { createSortCallback, _trim } from '@node-novel/sort';
+import { _trim, createSortCallback, defaultSortCallback, EnumToLowerCase } from '@node-novel/sort';
 import { array_unique } from 'array-hyper-unique';
 import * as FastGlob from 'fast-glob';
 import * as fs from 'fs-iconv';
 import { IMdconfMeta, mdconf_parse } from 'node-novel-info';
-import StrUtil = require('str-util');
 import BluebirdPromise = require('bluebird');
+import StrUtil = require('str-util');
 
 export async function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file: string): Promise<T>
 {
@@ -124,8 +124,10 @@ export function md_link_escape(text: string)
 
 export const tocSortCallback = createSortCallback({
 	dotNum: true,
-	transpile(input: any, isSub?: any)
+	transpileBase(input: string, isSub?: any)
 	{
-		return StrUtil.toHalfWidth(_trim(input)).toLocaleLowerCase()
+		let s = StrUtil.toHalfWidth(input);
+		return s
 	},
+	toLowerCase: EnumToLowerCase.toLocaleLowerCase,
 });

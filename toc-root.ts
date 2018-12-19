@@ -304,9 +304,9 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 
 	let authors_anchor = authors.map(name => {
 		return `[${md_link_escape(name)}](#${md_anchor_gitee(name)})`;
-	}).join('  ／  ');
+	}).join('\n  ／  ');
 
-	arr.push(`> ${authors_anchor}'\n'`);
+	arr.push(`> ${authors_anchor}\n`);
 
 	arr = arr.concat(arr_author);
 

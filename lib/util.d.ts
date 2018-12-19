@@ -1,6 +1,7 @@
 /**
  * Created by user on 2018/11/14/014.
  */
+import { defaultSortCallback } from '@node-novel/sort';
 import * as FastGlob from 'fast-glob';
 import { IMdconfMeta } from 'node-novel-info';
 import BluebirdPromise = require('bluebird');
@@ -11,4 +12,4 @@ export declare function globFirst(...argv: Parameters<typeof FastGlob["stream"]>
 export declare function md_href(href: string): string;
 export declare function md_anchor_gitee(title: string): string;
 export declare function md_link_escape(text: string): string;
-export declare const tocSortCallback: (a: string, b: string, isSub?: boolean) => any;
+export declare const tocSortCallback: typeof defaultSortCallback;
