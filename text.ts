@@ -6,6 +6,7 @@ import * as StrUtil from 'str-util';
 import chkBlankLine from 'blank-line';
 import crlf, { LF } from 'crlf-normalize';
 import tiebaHarmony, { SP_REGEXP, SP_KEY } from 'tieba-harmony';
+import { envVal, envBool } from 'env-bool';
 
 export { SP_REGEXP, SP_KEY };
 
@@ -477,6 +478,15 @@ export class enspace
 		return ret;
 	}
 
+	fixOptions(options: ITextLayoutOptions)
+	{
+		Object.entries(options)
+			.forEach(([k, v]) => options[k] = envVal(v))
+		;
+
+		return options;
+	}
+
 	/**
 	 * 通用型段落調整
 	 *
@@ -484,6 +494,8 @@ export class enspace
 	 */
 	textlayout(html, options: ITextLayoutOptions = {}): string
 	{
+		options = this.fixOptions(options);
+
 		html = this.trim(html, options);
 
 		html = //html

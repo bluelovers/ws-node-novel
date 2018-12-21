@@ -52,6 +52,7 @@ export declare class enspace {
     trim(text: number, options?: any): string;
     toStr(str: Buffer | string | number | any, options?: IToStrOptions): string;
     toStr(str: Buffer | string | number | any, options?: string): string;
+    fixOptions(options: ITextLayoutOptions): ITextLayoutOptions;
     textlayout(html: any, options?: ITextLayoutOptions): string;
 }
 import * as NovelText from './text';

@@ -6,9 +6,9 @@
     "moduleResolution": "node",
     "allowJs": false,
 
-    //"sourceMap": true,
-    //"inlineSourceMap": true,
-    //"inlineSources": true,
+    "sourceMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
 
     "declaration": true,
     "experimentalDecorators": true,
@@ -24,14 +24,14 @@
 
     "removeComments": true,
 
-    "baseUrl": ".",
-    "sourceRoot": ".",
-    "rootDir": ".",
-    "outDir": ".",
-
-    "paths": {
-
-    },
+//    "baseUrl": ".",
+//    "sourceRoot": ".",
+//    "rootDir": ".",
+//    "outDir": ".",
+//
+//    "paths": {
+//
+//    },
 
     "traceResolution": true,
     "newLine": "lf"
