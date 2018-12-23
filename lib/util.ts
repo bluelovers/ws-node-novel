@@ -26,7 +26,7 @@ export async function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file: 
 		{
 			return null;
 		})
-	;
+		;
 }
 
 export function loadReadmeMetaSync<T extends IMdconfMeta = IMdconfMeta>(file: string): T
@@ -58,6 +58,8 @@ export function getNovelTitles<T extends IMdconfMeta = IMdconfMeta>(meta: T): st
 		let arr = [
 				'title',
 				'title_source',
+				'title_jp',
+				'title_ja',
 				'title_zh',
 				'title_tw',
 				'title_cn',
@@ -73,6 +75,12 @@ export function getNovelTitles<T extends IMdconfMeta = IMdconfMeta>(meta: T): st
 			}, [])
 		;
 
+		if (meta.novel.series)
+		{
+			arr.push(meta.novel.series.name);
+			arr.push(meta.novel.series.name_short);
+		}
+
 		arr = array_unique(arr.filter(v => v));
 
 		return arr;
@@ -87,7 +95,8 @@ export function globFirst(...argv: Parameters<typeof FastGlob["stream"]>): Blueb
 	{
 		let fgs = FastGlob.stream(...argv);
 
-		fgs.on('data', (entry) => {
+		fgs.on('data', (entry) =>
+		{
 			resolve(entry);
 
 			// @ts-ignore

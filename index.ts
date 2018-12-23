@@ -10,7 +10,7 @@ import * as fs from 'fs-extra';
 import { IMdconfMeta, mdconf, mdconf_parse } from 'node-novel-info';
 import * as sortObjectKeys from 'sort-object-keys2';
 import * as self from './index';
-import { md_href } from './lib/util';
+import { getNovelTitles, md_href } from './lib/util';
 import path = require('upath2');
 export { md_href }
 
@@ -237,27 +237,7 @@ export async function createReadmeData(cwd: string, ret: IRet, item: string): Pr
 
 		if (meta)
 		{
-			titles.push(meta.novel.title);
-			titles.push(meta.novel.title_zh);
-			titles.push(meta.novel.title_jp);
-			titles.push(meta.novel.title_en);
-			titles.push(meta.novel.title_short);
-			// @ts-ignore
-			titles.push(meta.novel.title_tw);
-			// @ts-ignore
-			titles.push(meta.novel.title_cn);
-			// @ts-ignore
-			titles.push(meta.novel.title_source);
-			// @ts-ignore
-			titles.push(meta.novel.title_other);
-			// @ts-ignore
-			titles.push(meta.novel.title_output);
-
-			if (meta.novel.series)
-			{
-				titles.push(meta.novel.series.name);
-				titles.push(meta.novel.series.name_short);
-			}
+			titles.push(...getNovelTitles(meta));
 
 			if (meta.novel.author)
 			{
