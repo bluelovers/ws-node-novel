@@ -81,7 +81,11 @@ export function getNovelTitles<T extends IMdconfMeta = IMdconfMeta>(meta: T): st
 			arr.push(meta.novel.series.name_short);
 		}
 
-		arr = array_unique(arr.filter(v => v));
+		arr = array_unique(arr.filter(v => v && ![
+			'undefined',
+			'長編 【連載】',
+			'連載中',
+		].includes(v)));
 
 		return arr;
 	}

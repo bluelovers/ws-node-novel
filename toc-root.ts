@@ -286,6 +286,7 @@ export function stringifyDataAuthor<T extends IMdconfMeta = IMdconfMeta>(data: I
 					});
 
 					titles = array_unique(titles)
+						.filter(v => v && v != 'undefined')
 						.filter(v => !skip.includes(v))
 					;
 
