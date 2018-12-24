@@ -450,7 +450,7 @@ export class enspace
 			allow_bom: false,
 		}, options);
 
-		let ret = crlf(str.toString(), options.LF || "\n")
+		let ret = crlf(str.toString(), options.LF || LF)
 			//.replace(/\r\n|\r(?!\n)|\n/g, options.LF || "\n")
 			// http://www.charbase.com/202a-unicode-left-to-right-embedding
 
@@ -520,7 +520,7 @@ export class enspace
 			{
 				if (min > 2)
 				{
-					let r = new RegExp(`\\n{${min - 1}}(\\n*)`, 'g');
+					let r = new RegExp(`\\n{${min - 1}}(\\n+)`, 'g');
 
 					html = html
 						//.replace(/\n{2}(\n*)/g, '$1')
@@ -533,6 +533,8 @@ export class enspace
 					//.replace(/\n{2}/g, "\n")
 				;
 			}
+
+			//console.log(options);
 
 			if (!options.allow_lf2)
 			{
