@@ -3,7 +3,7 @@
  */
 
 import * as StrUtil from 'str-util';
-import chkBlankLine from 'blank-line';
+import getMinMidMax from 'blank-line';
 import crlf, { LF } from 'crlf-normalize';
 import tiebaHarmony, { SP_REGEXP, SP_KEY } from 'tieba-harmony';
 import { envVal, envBool } from 'env-bool';
@@ -509,7 +509,7 @@ export class enspace
 
 		if (!html.match(/[^\n]\n[^\n]/g))
 		{
-			let [min, mid, max] = chkBlankLine(html.toString());
+			let [min, mid, max] = getMinMidMax(html.toString());
 
 			if (min > 2)
 			{
