@@ -161,7 +161,7 @@ export function git_fake_author(name?: string, email?: string)
 	try
 	{
 		name = name
-			.replace(/[\p{Punctuation}]/ig, function (s)
+			.replace(/[\p{Punctuation}]/ug, function (s)
 			{
 				if (/^[\.]$/.test(s))
 				{
@@ -170,7 +170,7 @@ export function git_fake_author(name?: string, email?: string)
 
 				return ' ';
 			})
-			.replace(/^[\s　\p{Punctuation}]+|[\s　\p{Punctuation}]+$/g, '')
+			.replace(/^[\s　\p{Punctuation}]+|[\s　\p{Punctuation}]+$/ug, '')
 		;
 	}
 	catch (e)

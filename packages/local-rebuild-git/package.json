@@ -1,5 +1,5 @@
 {
-  "name": "local-rebuild-git",
+  "name": "@node-novel/local-rebuild-git",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
