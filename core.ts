@@ -1,12 +1,13 @@
 /**
  * Module dependencies.
  */
-import * as md from 'marked';
+import { Token, TokensList, Tokens } from 'marked';
+import md = require('marked');
 import * as util from 'util';
 import { crlf, LF, CRLF, CR, chkcrlf } from 'crlf-normalize';
-import * as deepmerge from 'deepmerge-plus';
-import * as moment from 'moment';
-import * as isPlainObject from 'is-plain-object';
+import deepmerge = require('deepmerge-plus');
+import moment = require('moment');
+import isPlainObject = require('is-plain-object');
 
 export { isPlainObject, moment, deepmerge }
 export { crlf, LF, CRLF, CR }
@@ -90,25 +91,25 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 	let toks = lexer.lex(source);
 	let conf = {};
-	let keys = [];
+	let keys: string[] = [];
 	let depth = 0;
 	let inlist = false;
 
-	let paragraph = [];
-	let paragraph2 = [];
+	let paragraph: string[] = [];
+	let paragraph2: string[] = [];
 	let last_tok: md.Token;
 	let blockquote_start: boolean;
 
 	let inline_lexer = createInlineLexer(toks, options);
 
-	toks.forEach(function (tok)
+	(toks as Token[]).forEach(function (tok, index)
 	{
 		// @ts-ignore
 		let val = tok.text;
-		let _skip;
+		let _skip: boolean;
 		let type = tok.type;
 
-		if (type == 'text' && val.match(/^[a-z]+\:\/\//i))
+		if (type == 'text' && val.match(/[a-z]+\:\/\//i))
 		{
 			let r = inline_lexer.output(val);
 
@@ -119,7 +120,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 			}
 		}
 
-		switch (type)
+		switch (tok.type)
 		{
 			case 'heading':
 				while (depth-- >= tok.depth) keys.pop();
@@ -166,6 +167,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 					if (!options.oldParseApi)
 					{
+						// @ts-ignore
 						val = new RawObject(val, {
 							type: 'blockquote',
 							text: paragraph,
@@ -194,7 +196,9 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 				if (!options.oldParseApi)
 				{
+					// @ts-ignore
 					val = new RawObject(val, tok);
+					// @ts-ignore
 					val.getRawData()['paragraph'] = paragraph;
 				}
 
@@ -208,7 +212,9 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 				if (!options.oldParseApi)
 				{
+					// @ts-ignore
 					val = new RawObject(val, tok);
+					// @ts-ignore
 					val.getRawData()['paragraph'] = paragraph;
 				}
 

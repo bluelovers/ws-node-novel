@@ -1,6 +1,6 @@
 {
   "name": "mdconf2",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Markdown configuration parse => data / stringify => Markdown",
   "keywords": [
     "conf",
@@ -34,18 +34,18 @@
     "url": "git+https://github.com/bluelovers/mdconf.git"
   },
   "scripts": {
-    "test": "npx mocha"
+    "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.+(test|spec).js\""
   },
   "dependencies": {
-    "crlf-normalize": "^1.0.2",
+    "crlf-normalize": "^1.0.3",
     "deepmerge-plus": "^2.1.2",
     "is-plain-object": "^2.0.4",
-    "marked": "^0.5.0",
-    "moment": "^2.22.2"
+    "marked": "^0.6.0",
+    "moment": "^2.23.0"
   },
   "devDependencies": {
-    "@types/marked": "^0.4.1",
-    "@types/node": "^10.9.2",
-    "fs-extra": "^7.0.0"
+    "@types/marked": "^0.6.0",
+    "@types/node": "^10.12.18",
+    "fs-extra": "^7.0.1"
   }
 }

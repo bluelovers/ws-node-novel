@@ -6,5 +6,5 @@ export { mdconf, parse, stringify };
 export { SYMBOL_RAW_DATA, SYMBOL_RAW_VALUE, IOptionsParse, defaultOptionsParse, IObjectParse, RawObject, ITable } from './core';
 export { isPlainObject, moment, deepmerge } from './core';
 export { crlf, LF, CRLF, CR } from './core';
-import * as self from './index';
+import self = require('./index');
 export default self;

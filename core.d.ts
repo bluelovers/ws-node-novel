@@ -1,12 +1,9 @@
 /// <reference types="node" />
-/**
- * Module dependencies.
- */
-import * as md from 'marked';
+import md = require('marked');
 import { crlf, LF, CRLF, CR } from 'crlf-normalize';
-import * as deepmerge from 'deepmerge-plus';
-import * as moment from 'moment';
-import * as isPlainObject from 'is-plain-object';
+import deepmerge = require('deepmerge-plus');
+import moment = require('moment');
+import isPlainObject = require('is-plain-object');
 export { isPlainObject, moment, deepmerge };
 export { crlf, LF, CRLF, CR };
 export declare const SYMBOL_RAW_DATA: unique symbol;
@@ -54,7 +51,7 @@ export declare class RawObject {
     inspect(): string;
     toJSON(): any;
     toString(): any;
-    getTypeof(): "string" | "number" | "boolean" | "symbol" | "undefined" | "object" | "function" | "array";
+    getTypeof(): "string" | "number" | "bigint" | "boolean" | "symbol" | "undefined" | "object" | "function" | "array";
     getRawData(): any;
     getRawValue(): any;
     static isRawObject(v: object): boolean;

@@ -1,14 +1,16 @@
-const expect = require('chai').expect;
-const testUtils = require('./test-utils');
-const mdconf = require('../index');
-import { describe, before, it } from 'mocha';
+import { expect } from 'chai';
+import testUtils = require('./test-utils');
+import mdconf = require('../index');
+//import { describe, before, it } from 'mocha';
 
 const parse = mdconf.parse;
 
+// @ts-ignore
 describe('mdconf integration tests', function ()
 {
 	let allTestCases;
 
+	// @ts-ignore
 	before(async function ()
 	{
 		allTestCases = await testUtils.getTestCases();
@@ -16,12 +18,15 @@ describe('mdconf integration tests', function ()
 		console.log(__filename);
 	});
 
+	// @ts-ignore
 	it('should pass integration tests', function ()
 	{
 		allTestCases.forEach(testCase =>
 		{
+			// @ts-ignore
 			describe('Test Case(s) for ' + testCase.testName, function ()
 			{
+				// @ts-ignore
 				it('should match expected output with no options', () =>
 				{
 					let data = parse(testCase.md);

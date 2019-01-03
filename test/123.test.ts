@@ -3,24 +3,27 @@
  */
 
 import { chai, relative, expect, path, assert, util } from './_local-dev';
-// @ts-ignore
-import { describe, before, beforeEach, it, ITest } from 'mocha';
 
 // @ts-ignore
 describe(relative(__filename), () =>
 {
-	let currentTest: ITest;
+	// @ts-ignore
+	let currentTest;
 
+	// @ts-ignore
 	beforeEach(function ()
 	{
+		// @ts-ignore
 		currentTest = this.currentTest as ITest;
 
 		//console.log('it:before', currentTest.title);
 		//console.log('it:before', currentTest.fullTitle());
 	});
 
+	// @ts-ignore
 	describe(`suite`, () =>
 	{
+		// @ts-ignore
 		it(`label`, async function ()
 		{
 			//console.log('it:inner', currentTest.title);
