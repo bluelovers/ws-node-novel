@@ -100,7 +100,9 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 	let last_tok: md.Token;
 	let blockquote_start: boolean;
 
-	let inline_lexer = createInlineLexer(toks, options);
+	let inline_lexer = createInlineLexer(toks, Object.assign({}, options, {
+
+	}));
 
 	(toks as Token[]).forEach(function (tok, index)
 	{
@@ -109,7 +111,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 		let _skip: boolean;
 		let type = tok.type;
 
-		if (type == 'text' && val.match(/[a-z]+\:\/\//i))
+		if (type == 'text' && val.match(/^[a-z]+\:\/\//i))
 		{
 			let r = inline_lexer.output(val);
 
