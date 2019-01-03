@@ -8,6 +8,7 @@ import { crlf, LF, CRLF, CR, chkcrlf } from 'crlf-normalize';
 import deepmerge = require('deepmerge-plus');
 import moment = require('moment');
 import isPlainObject = require('is-plain-object');
+import MarkdownIt = require('markdown-it');
 
 export { isPlainObject, moment, deepmerge }
 export { crlf, LF, CRLF, CR }
@@ -104,6 +105,12 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 	}));
 
+	/*
+	let _inline_md = new MarkdownIt({
+		linkify: false,
+	});
+	*/
+
 	(toks as Token[]).forEach(function (tok, index)
 	{
 		// @ts-ignore
@@ -111,11 +118,12 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 		let _skip: boolean;
 		let type = tok.type;
 
-		if (type == 'text' && val.match(/^[a-z]+\:\/\//i))
+		if (type == 'text' && val.match(/[a-z]+\:\/\//i))
 		{
 			let r = inline_lexer.output(val);
+			//let r = _inline_md.renderInline(val);
 
-			if (val !== r && /<a href=/.test(r))
+			if (val !== r && /^\s*<a href=/.test(r))
 			{
 				// @ts-ignore
 				type = 'text2';
