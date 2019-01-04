@@ -1,9 +1,10 @@
 {
   "name": "@node-novel/normalize",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "keywords": [
     "@node-novel",
+    "filename",
     "node-novel",
     "normalize"
   ],
@@ -22,8 +23,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "cjk-conv": "^1.1.0",
+    "cjk-conv": "^1.1.4",
     "normalize-num": "^1.0.0",
     "str-util": "^2.3.16"
-  }
+  },
+  "devDependencies": {}
 }

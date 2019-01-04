@@ -2,6 +2,19 @@
   "name": "@node-novel/local-rebuild-git",
   "version": "1.0.0",
   "description": "",
+  "keywords": [
+    "@node-novel",
+    "local-rebuild-git",
+    "node-novel"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/local-rebuild-gitt#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+  },
   "license": "ISC",
   "author": "",
   "main": "index.js",

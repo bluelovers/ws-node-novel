@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "fix-pkg": "ts-node ./script/fix-pkg.js",
     "sort-package-json": "oao run-script \"sort-package-json2\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
