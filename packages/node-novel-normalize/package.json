@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "cjk-conv": "^1.1.4",
-    "normalize-num": "^1.0.0",
-    "str-util": "^2.3.16"
+    "normalize-num": "^1.0.1",
+    "str-util": "^2.3.17"
   },
   "devDependencies": {}
 }
