@@ -1,0 +1,29 @@
+{
+  "name": "@node-novel/normalize",
+  "version": "1.0.3",
+  "description": "",
+  "keywords": [
+    "@node-novel",
+    "node-novel",
+    "normalize"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/node-novel-normalizet#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cjk-conv": "^1.1.0",
+    "normalize-num": "^1.0.0",
+    "str-util": "^2.3.16"
+  }
+}
