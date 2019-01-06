@@ -19,6 +19,8 @@
 
     "resolveJsonModule": true,
 
+//    "strictBindCallApply": true,
+
     //"forceConsistentCasingInFileNames": true,
 
     "locale": "zh-TW",
