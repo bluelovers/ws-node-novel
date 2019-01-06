@@ -1,8 +1,10 @@
 /**
  * Created by user on 2019/1/6/006.
  */
+import { createMoment } from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
+export { createMoment };
 /**
  * 所有 timestamp 為 Unix timestamp in milliseconds 為 utc +8
  * pathMain 為 主資夾名稱

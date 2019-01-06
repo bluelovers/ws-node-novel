@@ -2,7 +2,7 @@
  * Created by user on 2019/1/6/006.
  */
 
-import todayMomentTimestamp, { baseSortObject, cacheSortCallback, freezeProperty } from './lib/util';
+import todayMomentTimestamp, { baseSortObject, cacheSortCallback, freezeProperty, createMoment } from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
 import path = require('upath2');
@@ -11,6 +11,8 @@ import { array_unique } from 'array-hyper-unique';
 import sortObject = require('sort-object-keys2');
 
 const openedMap = new WeakMap<Partial<INovelStatCacheOptions>, NovelStatCache>();
+
+export { createMoment }
 
 /**
  * 所有 timestamp 為 Unix timestamp in milliseconds 為 utc +8
