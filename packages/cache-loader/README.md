@@ -1,8 +1,17 @@
-/**
- * Created by user on 2019/1/6/006.
- */
+# @node-novel/cache-loader
 
-import create, { createFromJSON, INovelStatCache } from '../';
+    讀寫 novel-stat.json
+
+## install
+
+```base
+npm install @node-novel/cache-loader
+```
+
+## demo
+
+```ts
+import create, { createFromJSON } from '@node-novel/cache-loader';
 import path = require('upath2');
 
 /**
@@ -29,3 +38,4 @@ const data: INovelStatCache = {
 const novelStatCache2 = createFromJSON(data);
 
 console.dir(novelStatCache2);
+```

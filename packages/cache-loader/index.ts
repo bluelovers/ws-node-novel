@@ -21,6 +21,12 @@ export { createMoment }
  */
 export interface INovelStatCache
 {
+
+	meta?: {
+		todayTimestamp?: number,
+		timestamp?: number,
+	},
+
 	/**
 	 * 小說緩存狀態
 	 */
@@ -144,6 +150,11 @@ export interface INovelStatCacheOptions
 
 	history_max?: number,
 	history_keep?: number,
+
+	/**
+	 * options.readonly && options.data 必須同時啟用
+	 */
+	data?: INovelStatCache,
 }
 
 const defaultOptions: Readonly<Partial<INovelStatCacheOptions>> = Object.freeze({
@@ -181,10 +192,38 @@ export class NovelStatCache
 	{
 		options = NovelStatCache.fixOptions(options);
 
-		if (!options.file)
+		let _chk: boolean = false;
+
+		if (options.data)
+		{
+			if (!(options.data && options.data.history && options.data.novels && options.data.mdconf))
+			{
+				throw new TypeError(`options.data is not allow data`);
+			}
+
+			_chk = true;
+		}
+
+		if (!options.file && (!options.readonly || !_chk))
 		{
 			throw new RangeError(`options.file is required`);
 		}
+		else
+		{
+			delete options.data;
+		}
+
+		this._init(options);
+	}
+
+	protected _init(options: INovelStatCacheOptions)
+	{
+		if (options.data)
+		{
+			this.data = options.data;
+		}
+
+		delete options.data;
 
 		this.options = options;
 
@@ -212,7 +251,11 @@ export class NovelStatCache
 		{
 			this.inited = true;
 
-			if (this.exists())
+			if (this.data)
+			{
+				//
+			}
+			else if (this.exists())
 			{
 				this.data = fs.readJSONSync(this.file);
 			}
@@ -227,6 +270,7 @@ export class NovelStatCache
 			this.data.history = this.data.history || {};
 			this.data.novels = this.data.novels || {};
 			this.data.mdconf = this.data.mdconf || {};
+			this.data.meta = this.data.meta || {};
 
 			freezeProperty(this, 'inited');
 		}
@@ -406,7 +450,6 @@ export class NovelStatCache
 			{
 				_list.forEach(function (data)
 				{
-
 					let _a = [
 							data.init_date,
 							data.epub_date,
@@ -437,8 +480,12 @@ export class NovelStatCache
 					{
 						data.update_count = (data.update_count | 0) + 1;
 					}
-				})
+				});
+
+				this.data.meta.timestamp = createMoment().valueOf();
 			}
+
+			this.data.meta.todayTimestamp = timestamp;
 		}
 
 		let ks = Object.keys(this.data.history);
@@ -464,10 +511,11 @@ export class NovelStatCache
 		sortObject(this.data, {
 			useSource: true,
 			keys: [
+				'meta',
 				'history',
 				'novels',
 				'mdconf',
-			],
+			] as (keyof INovelStatCache)[],
 		});
 
 		return this;
@@ -566,13 +614,14 @@ export class NovelStatCache
 		return this.data.history[timestamp];
 	}
 
-	static fixOptions(options?: INovelStatCacheOptions)
+	static fixOptions(options?: INovelStatCacheOptions, extraOptions?: Partial<INovelStatCacheOptions>)
 	{
 		options = {
 			file_git: undefined,
 			file: undefined,
 			...(defaultOptions as INovelStatCacheOptions),
 			...options,
+			...extraOptions,
 		};
 
 		options.history_max = options.history_max > 0 ? options.history_max : defaultOptions.history_max;
@@ -604,6 +653,24 @@ export class NovelStatCache
 	}
 
 	/**
+	 * 允許用其他方式取得 data 來建立物件
+	 */
+	static createFromJSON(data: INovelStatCache | Buffer, options?: Partial<INovelStatCacheOptions>)
+	{
+		if (Buffer.isBuffer(data))
+		{
+			data = JSON.parse(data.toString()) as INovelStatCache;
+		}
+
+		options = this.fixOptions(options as INovelStatCacheOptions, {
+			readonly: (!options || options.readonly == null) ? true : options.readonly,
+			data,
+		});
+
+		return this.create(options as INovelStatCacheOptions);
+	}
+
+	/**
 	 * @param bool - 清理物件多餘資料
 	 */
 	toJSON(bool?: boolean | number | EnumBeforeSave)
@@ -626,9 +693,10 @@ export enum EnumBeforeSave
 
 NovelStatCache.fixOptions = NovelStatCache.fixOptions.bind(NovelStatCache);
 NovelStatCache.create = NovelStatCache.create.bind(NovelStatCache);
+NovelStatCache.createFromJSON = NovelStatCache.createFromJSON.bind(NovelStatCache);
 
-const { create, fixOptions } = NovelStatCache;
-export { create, fixOptions }
+const { create, fixOptions, createFromJSON } = NovelStatCache;
+export { create, fixOptions, createFromJSON }
 
 export default NovelStatCache.create
 exports = Object.freeze(exports);

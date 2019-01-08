@@ -1,6 +1,7 @@
 /**
  * Created by user on 2019/1/6/006.
  */
+/// <reference types="node" />
 import { createMoment } from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
@@ -11,6 +12,10 @@ export { createMoment };
  * novelID 為 小說資料夾名稱
  */
 export interface INovelStatCache {
+    meta?: {
+        todayTimestamp?: number;
+        timestamp?: number;
+    };
     /**
      * 小說緩存狀態
      */
@@ -117,6 +122,10 @@ export interface INovelStatCacheOptions {
     readonly?: boolean;
     history_max?: number;
     history_keep?: number;
+    /**
+     * options.readonly && options.data 必須同時啟用
+     */
+    data?: INovelStatCache;
 }
 /**
  * @example NovelStatCache.create()
@@ -139,6 +148,7 @@ export declare class NovelStatCache {
      * @deprecated
      */
     constructor(options: INovelStatCacheOptions);
+    protected _init(options: INovelStatCacheOptions): void;
     /**
      * 檢查 file 是否存在
      */
@@ -196,11 +206,15 @@ export declare class NovelStatCache {
      * 取得今天的 history 資料
      */
     historyToday(): INovelStatCacheHistory;
-    static fixOptions(options?: INovelStatCacheOptions): INovelStatCacheOptions;
+    static fixOptions(options?: INovelStatCacheOptions, extraOptions?: Partial<INovelStatCacheOptions>): INovelStatCacheOptions;
     /**
      * 建立 NovelStatCache 物件
      */
     static create(options?: INovelStatCacheOptions): NovelStatCache;
+    /**
+     * 允許用其他方式取得 data 來建立物件
+     */
+    static createFromJSON(data: INovelStatCache | Buffer, options?: Partial<INovelStatCacheOptions>): NovelStatCache;
     /**
      * @param bool - 清理物件多餘資料
      */
@@ -211,7 +225,7 @@ export declare enum EnumBeforeSave {
     OPTIMIZE = 1,
     OPTIMIZE_AND_UPDATE = 2
 }
-declare const create: typeof NovelStatCache.create, fixOptions: typeof NovelStatCache.fixOptions;
-export { create, fixOptions };
+declare const create: typeof NovelStatCache.create, fixOptions: typeof NovelStatCache.fixOptions, createFromJSON: typeof NovelStatCache.createFromJSON;
+export { create, fixOptions, createFromJSON };
 declare const _default: typeof NovelStatCache.create;
 export default _default;

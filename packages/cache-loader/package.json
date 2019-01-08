@@ -1,10 +1,13 @@
 {
   "name": "@node-novel/cache-loader",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "讀寫 novel-stat.json",
   "keywords": [
     "@node-novel",
     "cache-loader",
+    "conf",
+    "config",
+    "json",
     "node-novel"
   ],
   "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/cache-loadert#readme",
@@ -30,7 +33,7 @@
     "array-hyper-unique": "^1.0.7",
     "fs-extra": "^7.0.1",
     "moment": "^2.23.0",
-    "node-novel-info": "^2.3.15",
+    "node-novel-info": "^2.3.17",
     "sort-object-keys2": "^1.0.3",
     "str-util": "^2.3.17",
     "upath2": "^2.1.3"
