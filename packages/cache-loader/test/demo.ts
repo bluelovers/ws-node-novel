@@ -13,7 +13,7 @@ const novelStatCache = create({
 	//file_git: path.join(__dirname, 'res', 'novel-stat.json'),
 });
 
-console.dir(novelStatCache);
+//console.dir(novelStatCache);
 
 /**
  * 從其他方式取得 data 來輸入資料
@@ -28,4 +28,6 @@ const data: INovelStatCache = {
 
 const novelStatCache2 = createFromJSON(data);
 
-console.dir(novelStatCache2);
+//console.dir(novelStatCache2);
+
+console.log(novelStatCache.filterNovel());

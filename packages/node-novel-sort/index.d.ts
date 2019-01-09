@@ -1,7 +1,7 @@
 /**
  * Created by user on 2018/2/12/012.
  */
-import * as naturalCompare from 'string-natural-compare';
+import naturalCompare = require('string-natural-compare');
 export declare enum EnumToLowerCase {
     toLowerCase = 1,
     toLocaleLowerCase = 2

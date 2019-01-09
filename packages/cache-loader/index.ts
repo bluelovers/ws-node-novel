@@ -2,7 +2,13 @@
  * Created by user on 2019/1/6/006.
  */
 
-import todayMomentTimestamp, { baseSortObject, cacheSortCallback, freezeProperty, createMoment } from './lib/util';
+import todayMomentTimestamp, {
+	baseSortObject,
+	cacheSortCallback,
+	freezeProperty,
+	createMoment,
+	naturalCompare,
+} from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
 import path = require('upath2');
@@ -157,6 +163,26 @@ export interface INovelStatCacheOptions
 	data?: INovelStatCache,
 }
 
+export interface IFilterNovelData
+{
+	pathMain: string,
+	pathMain_base: string,
+	novelID: string,
+
+	mdconf: IMdconfMeta,
+	cache: INovelStatCacheNovel,
+
+	is_out: boolean,
+	base_exists: boolean,
+}
+
+export interface IFilterNovel
+{
+	[pathMain: string]: {
+		[novelID: string]: IFilterNovelData,
+	},
+}
+
 const defaultOptions: Readonly<Partial<INovelStatCacheOptions>> = Object.freeze({
 
 	history_max: 14,
@@ -286,7 +312,127 @@ export class NovelStatCache
 		return array_unique(Object.keys(this.data.novels)
 			.concat(Object.keys(this.data.mdconf)))
 			.sort()
-		;
+			;
+	}
+
+	/**
+	 * 取得所有小說的最終狀態(預設時)
+	 * 例如 當 同時存在 xxx 與 xxx_out 時，只會回傳 xxx_out
+	 */
+	filterNovel(type: EnumFilterNovelType = EnumFilterNovelType.DEST)
+	{
+		let ks = this.pathMainList();
+		let self = this;
+
+		if (type & EnumFilterNovelType.SOURCE_ONLY)
+		{
+			ks = ks.filter(pathMain => !/_out$/.test(pathMain))
+		}
+		else if (type & EnumFilterNovelType.OUTPUT_ONLY)
+		{
+			ks = ks.filter(pathMain => /_out$/.test(pathMain))
+		}
+
+		return ks
+			.sort(function (a, b)
+			{
+				if (a.replace(/_out$/, '') === b.replace(/_out$/, ''))
+				{
+					if (/_out$/.test(a))
+					{
+						return 1;
+					}
+					else
+					{
+						return -1;
+					}
+				}
+
+				return naturalCompare(a, b);
+			})
+			.reduce((ls, pathMain) =>
+			{
+
+				let _m = pathMain.match(/^(.+?)(_out)?$/);
+
+				let is_out = !!_m[2];
+				let pathMain_base = _m[1];
+
+				ls[pathMain_base] = ls[pathMain_base] || {};
+
+				Object.entries(self._mdconf_get_main(pathMain))
+					.forEach(function ([novelID, mdconf])
+					{
+						let cache = {
+							...self.novel(pathMain, novelID),
+						};
+
+						let base_exists: boolean;
+
+						if (is_out)
+						{
+							let _src = self.novelExists(pathMain_base, novelID);
+
+							if (_src)
+							{
+								([
+									'segment',
+									'segment_date',
+									'segment_old',
+								] as (keyof INovelStatCacheNovel)[])
+									.forEach(function (key)
+									{
+										if (_src[key] != null)
+										{
+											cache[key] = _src[key]
+										}
+									})
+								;
+							}
+
+							base_exists = !!_src;
+						}
+
+						ls[pathMain_base][novelID] = {
+							pathMain,
+							pathMain_base,
+							novelID,
+
+							mdconf,
+							cache,
+
+							is_out,
+							base_exists,
+						};
+					})
+				;
+
+				return ls;
+			}, {} as IFilterNovel)
+	}
+
+	/**
+	 * (請小心使用) 移除指定 pathMain & novelID
+	 */
+	remove(pathMain: string, novelID: string)
+	{
+		let bool: boolean;
+
+		if (this.data.novels[pathMain])
+		{
+			bool = bool || !!this.data.novels[pathMain][novelID];
+
+			delete this.data.novels[pathMain][novelID]
+		}
+
+		if (this.data.mdconf[pathMain])
+		{
+			bool = bool || !!this.data.mdconf[pathMain][novelID];
+
+			delete this.data.mdconf[pathMain][novelID]
+		}
+
+		return bool;
 	}
 
 	/**
@@ -295,6 +441,17 @@ export class NovelStatCache
 	pathMain(pathMain: string)
 	{
 		return this.data.novels[pathMain] = this.data.novels[pathMain] || {};
+	}
+
+	novelExists(pathMain: string, novelID: string): INovelStatCacheNovel
+	{
+		if (this.data.novels[pathMain]
+			&& this.data.novels[pathMain][novelID]
+			&& Object.keys(this.data.novels[pathMain][novelID]).length
+			&& this.data.novels[pathMain][novelID])
+		{
+			return this.data.novels[pathMain][novelID]
+		}
 	}
 
 	/**
@@ -309,14 +466,19 @@ export class NovelStatCache
 		return this.data.novels[pathMain][novelID];
 	}
 
+	protected _mdconf_get_main(pathMain: string)
+	{
+		return this.data.mdconf[pathMain] || {};
+	}
+
 	/**
 	 * 取得指定 pathMain novelID 的 mdconf 資料
 	 */
-	mdconf_get(pathMain: string, novelID: string)
+	mdconf_get(pathMain: string, novelID: string): IMdconfMeta
 	{
-		this.data.mdconf[pathMain] = this.data.mdconf[pathMain] || {};
+		let _data = this._mdconf_get_main(pathMain);
 
-		return this.data.mdconf[pathMain][novelID];
+		return _data[novelID];
 	}
 
 	/**
@@ -689,6 +851,22 @@ export enum EnumBeforeSave
 	NONE = 0,
 	OPTIMIZE = 1,
 	OPTIMIZE_AND_UPDATE = 2,
+}
+
+export enum EnumFilterNovelType
+{
+	/**
+	 * 取得所有小說的最終狀態(預設)
+	 */
+	DEST = 0x0000,
+	/**
+	 * 只取得原始資料
+	 */
+	SOURCE_ONLY = 0x0001,
+	/**
+	 * 只取得 _out 後資料
+	 */
+	OUTPUT_ONLY = 0x0002,
 }
 
 NovelStatCache.fixOptions = NovelStatCache.fixOptions.bind(NovelStatCache);

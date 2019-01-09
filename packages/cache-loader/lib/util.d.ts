@@ -2,7 +2,8 @@
  * Created by user on 2019/1/6/006.
  */
 import moment = require('moment');
-import { defaultSortCallback } from '@node-novel/sort';
+import { defaultSortCallback, naturalCompare } from '@node-novel/sort';
+export { naturalCompare };
 export declare function createMoment(...argv: any[]): moment.Moment;
 export declare let todayMomentTimestamp: number;
 export declare let todayMomentOffset: number;

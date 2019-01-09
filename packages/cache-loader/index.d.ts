@@ -127,6 +127,20 @@ export interface INovelStatCacheOptions {
      */
     data?: INovelStatCache;
 }
+export interface IFilterNovelData {
+    pathMain: string;
+    pathMain_base: string;
+    novelID: string;
+    mdconf: IMdconfMeta;
+    cache: INovelStatCacheNovel;
+    is_out: boolean;
+    base_exists: boolean;
+}
+export interface IFilterNovel {
+    [pathMain: string]: {
+        [novelID: string]: IFilterNovelData;
+    };
+}
 /**
  * @example NovelStatCache.create()
  */
@@ -159,15 +173,28 @@ export declare class NovelStatCache {
      */
     pathMainList(): string[];
     /**
+     * 取得所有小說的最終狀態(預設時)
+     * 例如 當 同時存在 xxx 與 xxx_out 時，只會回傳 xxx_out
+     */
+    filterNovel(type?: EnumFilterNovelType): IFilterNovel;
+    /**
+     * (請小心使用) 移除指定 pathMain & novelID
+     */
+    remove(pathMain: string, novelID: string): boolean;
+    /**
      * 取得指定 pathMain 的 novel 狀態集合
      */
     pathMain(pathMain: string): {
         [novelID: string]: INovelStatCacheNovel;
     };
+    novelExists(pathMain: string, novelID: string): INovelStatCacheNovel;
     /**
      * 取得指定 pathMain novelID 的 novel 狀態緩存
      */
     novel(pathMain: string, novelID: string): INovelStatCacheNovel;
+    protected _mdconf_get_main(pathMain: string): {
+        [novelID: string]: IMdconfMeta;
+    };
     /**
      * 取得指定 pathMain novelID 的 mdconf 資料
      */
@@ -224,6 +251,20 @@ export declare enum EnumBeforeSave {
     NONE = 0,
     OPTIMIZE = 1,
     OPTIMIZE_AND_UPDATE = 2
+}
+export declare enum EnumFilterNovelType {
+    /**
+     * 取得所有小說的最終狀態(預設)
+     */
+    DEST = 0,
+    /**
+     * 只取得原始資料
+     */
+    SOURCE_ONLY = 1,
+    /**
+     * 只取得 _out 後資料
+     */
+    OUTPUT_ONLY = 2
 }
 declare const create: typeof NovelStatCache.create, fixOptions: typeof NovelStatCache.fixOptions, createFromJSON: typeof NovelStatCache.createFromJSON;
 export { create, fixOptions, createFromJSON };

@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/cache-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "讀寫 novel-stat.json",
   "keywords": [
     "@node-novel",

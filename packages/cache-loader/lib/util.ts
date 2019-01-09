@@ -3,11 +3,13 @@
  */
 
 import moment = require('moment');
-import { _trim, createSortCallback, defaultSortCallback, EnumToLowerCase } from '@node-novel/sort';
+import { _trim, createSortCallback, defaultSortCallback, EnumToLowerCase, naturalCompare } from '@node-novel/sort';
 import StrUtil = require('str-util');
 import sortObject = require('sort-object-keys2');
 
 let defaultOffset = 8;
+
+export { naturalCompare }
 
 export function createMoment(...argv)
 {
