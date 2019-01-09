@@ -163,19 +163,50 @@ export interface INovelStatCacheOptions
 	data?: INovelStatCache,
 }
 
+/**
+ * 取得小說的最終狀態(預設時)
+ * 例如 當 同時存在 xxx 與 xxx_out 時，只會回傳 xxx_out
+ */
 export interface IFilterNovelData
 {
+	/**
+	 * 實際上的 pathMain
+	 */
 	pathMain: string,
+	/**
+	 * 沒有 out 前的 pathMain 路徑
+	 */
 	pathMain_base: string,
 	novelID: string,
 
+	/**
+	 * 解析 README.md 後的資料
+	 */
 	mdconf: IMdconfMeta,
+	/**
+	 * 合併 out 前與 out 後的緩存資料
+	 */
 	cache: INovelStatCacheNovel,
 
+	/**
+	 * 此小說是 out 後小說
+	 */
 	is_out: boolean,
+	/**
+	 * 是否存在此小說 out 前的資料
+	 * 大部分狀況下此值都是為 true 但少部分情況下會有其他值
+	 *
+	 * 例如
+	 * cm 下的大多都沒有存在 out 後資料 所以會回傳 undefined
+	 * z.abandon 下大多都只存在 out 後資料 所以會回傳 false
+	 */
 	base_exists: boolean,
 }
 
+/**
+ * 為了統一與枚舉方便 pathMain 會統一為 基礎名(也就是沒有 _out)
+ * 實際上的 pathMain 請由 IFilterNovelData 內取得
+ */
 export interface IFilterNovel
 {
 	[pathMain: string]: {
@@ -191,6 +222,9 @@ const defaultOptions: Readonly<Partial<INovelStatCacheOptions>> = Object.freeze(
 });
 
 /**
+ * 透過解析 novel-stat.json 來取得小說狀態
+ * 也因此如果 novel-stat.json 內沒有紀錄或者沒有更新的就會判斷不精準
+ *
  * @example NovelStatCache.create()
  */
 export class NovelStatCache

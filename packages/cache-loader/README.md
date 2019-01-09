@@ -38,4 +38,10 @@ const data: INovelStatCache = {
 const novelStatCache2 = createFromJSON(data);
 
 console.dir(novelStatCache2);
+
+/**
+ * 取得所有小說的最終狀態(預設時)
+ * 例如 當 同時存在 xxx 與 xxx_out 時，只會回傳 xxx_out
+ */
+console.log(novelStatCache.filterNovel());
 ```
