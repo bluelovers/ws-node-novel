@@ -7,12 +7,12 @@ import todayMomentTimestamp, {
 	cacheSortCallback,
 	freezeProperty,
 	createMoment,
-	naturalCompare,
+	naturalCompare, tryRequireFS,
 } from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
 import path = require('upath2');
-import fs = require('fs-extra');
+//import fs = require('fs-extra');
 import { array_unique } from 'array-hyper-unique';
 import sortObject = require('sort-object-keys2');
 
@@ -302,7 +302,9 @@ export class NovelStatCache
 	 */
 	exists()
 	{
-		return this.file && fs.pathExistsSync(this.file)
+		const fs = tryRequireFS();
+
+		return this.file && fs && fs.pathExistsSync(this.file)
 	}
 
 	protected open()
@@ -311,15 +313,17 @@ export class NovelStatCache
 		{
 			this.inited = true;
 
+			const fs = tryRequireFS();
+
 			if (this.data)
 			{
 				//
 			}
-			else if (this.exists())
+			else if (fs && this.exists())
 			{
 				this.data = fs.readJSONSync(this.file);
 			}
-			else if (this.file_git && fs.pathExistsSync(this.file_git))
+			else if (fs && this.file_git && fs.pathExistsSync(this.file_git))
 			{
 				this.data = fs.readJSONSync(this.file_git);
 			}
@@ -729,7 +733,9 @@ export class NovelStatCache
 			throw new Error(`options.readonly is set, can't not save file`)
 		}
 
-		fs.outputJSONSync(this.file, this.toJSON(bool || true), {
+		const fs = tryRequireFS();
+
+		fs && fs.outputJSONSync(this.file, this.toJSON(bool || true), {
 			spaces: 2,
 		});
 

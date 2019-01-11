@@ -96,4 +96,19 @@ export function baseSortObject<T>(data: T): T
 	});
 }
 
+export function tryRequireFS(): typeof import('fs-extra')
+{
+	let fs: typeof import('fs-extra');
+
+	try
+	{
+		fs = require('fs-extra');
+		return fs;
+	}
+	catch (e)
+	{
+
+	}
+}
+
 exports = Object.freeze(exports);
