@@ -275,7 +275,7 @@ export declare class NovelStatCache {
     /**
      * 允許用其他方式取得 data 來建立物件
      */
-    static createFromJSON(data: INovelStatCache | Buffer, options?: Partial<INovelStatCacheOptions>): NovelStatCache;
+    static createFromJSON(data: INovelStatCache | Buffer | object, options?: Partial<INovelStatCacheOptions>): NovelStatCache;
     /**
      * @param bool - 清理物件多餘資料
      */

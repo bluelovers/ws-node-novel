@@ -268,7 +268,7 @@ export class NovelStatCache
 		{
 			throw new RangeError(`options.file is required`);
 		}
-		else
+		else if (!_chk)
 		{
 			delete options.data;
 		}
@@ -857,7 +857,7 @@ export class NovelStatCache
 	/**
 	 * 允許用其他方式取得 data 來建立物件
 	 */
-	static createFromJSON(data: INovelStatCache | Buffer, options?: Partial<INovelStatCacheOptions>)
+	static createFromJSON(data: INovelStatCache | Buffer | object, options?: Partial<INovelStatCacheOptions>)
 	{
 		if (Buffer.isBuffer(data))
 		{
@@ -866,6 +866,7 @@ export class NovelStatCache
 
 		options = this.fixOptions(options as INovelStatCacheOptions, {
 			readonly: (!options || options.readonly == null) ? true : options.readonly,
+			// @ts-ignore
 			data,
 		});
 
