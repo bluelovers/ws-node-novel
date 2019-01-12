@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/cache-loader",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "讀寫 novel-stat.json",
   "keywords": [
     "@node-novel",
@@ -33,7 +33,7 @@
     "array-hyper-unique": "^1.0.7",
     "fs-extra": "^7.0.1",
     "moment": "^2.23.0",
-    "node-novel-info": "^2.3.18",
+    "node-novel-info": "^2.3.19",
     "sort-object-keys2": "^1.1.0",
     "str-util": "^2.3.17",
     "upath2": "^2.1.3"
