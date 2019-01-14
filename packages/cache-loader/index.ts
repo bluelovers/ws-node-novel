@@ -28,9 +28,33 @@ export { createMoment }
 export interface INovelStatCache
 {
 
+	/**
+	 * 此 json api 的相關資料
+	 */
 	meta?: {
+		/**
+		 * 此 json 資料更新的當日起始(已含時區)
+		 */
 		todayTimestamp?: number,
+		/**
+		 * 此 json 資料更新的實際時間
+		 * 只有當使用以下參數時才會更新
+		 *
+		 * novelStatCache.save(EnumBeforeSave.OPTIMIZE_AND_UPDATE)
+		 * novelStatCache.save(2)
+		 */
 		timestamp?: number,
+
+		/**
+		 * 打包前的網址
+		 * https://gitee.com/bluelovers/novel/tree/master
+		 */
+		sourceUrl?: string,
+		/**
+		 * 打包後的網址
+		 * https://gitlab.com/demonovel/epub-txt/blob/master
+		 */
+		outputUrl?: string,
 	},
 
 	/**
