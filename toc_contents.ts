@@ -126,7 +126,7 @@ export function makeHeader(basePath: string, ...argv)
 
 	let arr = [
 		`# CONTENTS\n`,
-		...titles,
+		titles.join('  \n'),
 	];
 
 	let _appended = [];
