@@ -139,25 +139,34 @@ export function makeHeader(basePath: string, ...argv)
 	{
 		let md = makeLink(`README.md`, _path);
 
-		_appended.push(`- ${md} - 簡介與其他資料`)
+		_appended.push(`-  :closed_book: ${md} - 簡介與其他資料`)
 	}
 
-	_path = '譯名對照.md';
-
-	if (fs.existsSync(path.join(basePath, _path)))
 	{
-		let md = makeLink(`譯名對照`, _path);
+		let _arr: string[] = [];
 
-		_appended.push(`- ${md}`)
-	}
+		_path = '譯名對照.md';
 
-	_path = '整合樣式.md';
+		if (fs.existsSync(path.join(basePath, _path)))
+		{
+			let md = makeLink(`譯名對照`, _path);
 
-	if (fs.existsSync(path.join(basePath, _path)))
-	{
-		let md = makeLink(`整合樣式`, _path);
+			_arr.push(`${md}`)
+		}
 
-		_appended.push(`- ${md}`)
+		_path = '整合樣式.md';
+
+		if (fs.existsSync(path.join(basePath, _path)))
+		{
+			let md = makeLink(`整合樣式`, _path);
+
+			_arr.push(`${md}`)
+		}
+
+		if (_arr.length)
+		{
+			_appended.push(`-  :pencil: ${_arr.join(' ／ ')}`)
+		}
 	}
 
 	_path = 'ja.md';
