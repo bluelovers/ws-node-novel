@@ -129,6 +129,11 @@ export function makeHeader(basePath: string, ...argv)
 		titles.join('  \n'),
 	];
 
+	if (meta && meta.novel && meta.novel.author)
+	{
+		arr.push(`作者： ${meta.novel.author}  \n`);
+	}
+
 	let _appended = [];
 
 	let _path: string;
@@ -139,7 +144,7 @@ export function makeHeader(basePath: string, ...argv)
 	{
 		let md = makeLink(`README.md`, _path);
 
-		_appended.push(`-  :closed_book: ${md} - 簡介與其他資料`)
+		_appended.push(`- :closed_book: ${md} - 簡介與其他資料`)
 	}
 
 	{
@@ -165,7 +170,7 @@ export function makeHeader(basePath: string, ...argv)
 
 		if (_arr.length)
 		{
-			_appended.push(`-  :pencil: ${_arr.join(' ／ ')}`)
+			_appended.push(`- :pencil: ${_arr.join(' ／ ')}`)
 		}
 	}
 
