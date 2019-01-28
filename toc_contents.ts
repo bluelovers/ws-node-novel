@@ -126,7 +126,7 @@ export function makeHeader(basePath: string, ...argv)
 
 	let arr = [
 		`# CONTENTS\n`,
-		titles.join('  \n'),
+		titles.join('  \n') + `  \n`,
 	];
 
 	if (meta && meta.novel && meta.novel.author)
