@@ -49,5 +49,8 @@
   "peerDependencies": {
     "gray-matter": "^4",
     "node-novel-info": "^2.3.27"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
