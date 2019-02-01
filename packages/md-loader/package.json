@@ -1,0 +1,53 @@
+{
+  "name": "@node-novel/md-loader",
+  "version": "1.0.0",
+  "description": "支援 Front Matter 的 node-novel-info / mdconf",
+  "keywords": [
+    "@node-novel",
+    "extract",
+    "extracting",
+    "front",
+    "front-matter",
+    "frontmatter",
+    "generate",
+    "generator",
+    "jekyll",
+    "markdown",
+    "matter",
+    "md",
+    "md-loader",
+    "mdconf",
+    "node-novel",
+    "node-novel-info",
+    "parse",
+    "parser",
+    "parsing",
+    "yaml"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/md-loader#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.2"
+  },
+  "devDependencies": {},
+  "peerDependencies": {
+    "gray-matter": "^4",
+    "node-novel-info": "^2.3.27"
+  }
+}
