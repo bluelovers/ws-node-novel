@@ -10,9 +10,9 @@ import GitRoot = require('git-root2');
 import path = require('upath2');
 import emailNormalize = require('email-normalize');
 import UString = require('uni-string');
-import { console } from 'debug-color2';
+import { Console } from 'debug-color2';
 
-let git_repo = 'C:\\Temp\\test-no-git-lfs';
+export const console = new Console();
 
 console.enabledColor = true;
 
@@ -49,7 +49,7 @@ export interface IFetchAllFileLogRowLog extends gitlog.IParseCommit
 //	})
 //;
 
-runAllJob(path.join(git_repo)).then(ret => console.log(ret));
+
 
 //fetchFileLogRow(path.join(git_repo, 'cm'), '由于世界魔物满载.epub').then(ret => console.log(ret));
 
@@ -65,17 +65,16 @@ export async function fetchFileLogRow(repo: string, file: string)
 			number: 1,
 		})
 		.then(ls => ls[0])
-		.catch();
+		.catch(e => null);
 
 	if (log)
 	{
-		let mf = [
-			gitlog.EnumGitDateFormat.AUTHOR_DATE,
-			gitlog.EnumGitDateFormat.COMMITTER_DATE,
-		];
+		//let mf = gitlog.EnumGitDateFormat.ISO_8601;
 
-		log.authorDateTimestamp = moment(log.authorDate, mf).valueOf();
-		log.committerDateTimestamp = moment(log.committerDate, mf).valueOf();
+		// @ts-ignore
+		log.authorDateTimestamp = log.authorDateUnixTimestamp * 1000;
+		// @ts-ignore
+		log.committerDateTimestamp = log.committerDateUnixTimestamp * 1000;
 
 		log.rawBody = trim(log.rawBody);
 
@@ -106,7 +105,11 @@ export function fetchAllFileLog(repo: string, options?: {
 			'**/*',
 			'!.git',
 			'!*.git',
+			'!*.git/**',
 			'!backup.git',
+			'!backup.git/**',
+			'.gitignore',
+			'.node-novel.epub.gitkeep',
 		], {
 			deep: true,
 			onlyFiles: true,
@@ -130,12 +133,12 @@ export function fetchAllFileLog(repo: string, options?: {
 				const sortFn = options.sortFn;
 				const sortDesc = !!options.sortDesc;
 
-				ls.sort(function (a, b)
+				ls = ls.sort(function (a, b)
 				{
-					let n = sortFn(a[1], b[1]) | 0;
+					let n = +sortFn(a[1], b[1]);
 
-					return sortDesc ? 0 - n : n;
-				})
+					return (sortDesc ? 0 - n : n) || 0;
+				});
 			}
 
 			return ls
@@ -207,12 +210,33 @@ export function git_commit_file(row: IFetchAllFileLogRow, cwd?: string)
 
 	return CrossSpawn.async('git', [
 		'add',
+		'--verbose',
+		'--force',
 		row.fullpath,
 	], {
 		stdio: 'inherit',
 		cwd,
 	}).then(function ()
 	{
+		let msg = row.log.rawBody;
+		let ext = path.extname(row.file)
+			.replace(/^\./, '')
+		;
+
+		if (msg == 'add miss file')
+		{
+			msg = `${row.file}`;
+
+			if (ext)
+			{
+				msg = `[${ext}]` + msg;
+			}
+		}
+		else if (ext)
+		{
+			msg = msg.replace(/\[(epub|txt)\]/i, `[${ext}]`);
+		}
+
 		return CrossSpawn.async('git', [
 
 			'commit',
@@ -223,13 +247,14 @@ export function git_commit_file(row: IFetchAllFileLogRow, cwd?: string)
 
 			'--untracked-files=no',
 
-			`--date=${moment(row.log.authorDateTimestamp).format(gitlog.EnumGitDateFormat.AUTHOR_DATE)}`,
+			// @ts-ignore
+			`--date=${moment(row.log.authorDateTimestamp).format(gitlog.EnumGitDateFormat.ISO_8601)}`,
 			`--author=${author_name}`,
 
 			//'--dry-run',
 
 			`-m`,
-			row.log.rawBody,
+			msg,
 
 			'--',
 			row.fullpath,
@@ -389,9 +414,9 @@ export function runAllJob(cwd: string)
 
 			console.info(`開始偽造檔案歷史紀錄`);
 
-			await Bluebird.mapSeries(oldData, function (item)
+			await Bluebird.mapSeries(oldData, function (item, index, len)
 			{
-				console.debug('[commit]', item[0], moment(item[1].log.authorDateTimestamp).format());
+				console.debug('[commit]', `[${index}/${len}]`, item[0], moment(item[1].log.authorDateTimestamp).format());
 
 				return git_commit_file(item[1], cwd);
 			})

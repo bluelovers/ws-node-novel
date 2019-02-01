@@ -30,7 +30,7 @@ FastGlob.async<string>([
 		{
 			if (!json.homepage)
 			{
-				json.homepage = `https://github.com/bluelovers/ws-node-novel/tree/master/packages/${dir_id}t#readme`;
+				json.homepage = `https://github.com/bluelovers/ws-node-novel/tree/master/packages/${dir_id}#readme`;
 			}
 
 			json.bugs = Object.assign({

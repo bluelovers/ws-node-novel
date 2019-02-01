@@ -2,12 +2,13 @@
   "name": "@node-novel/local-rebuild-git",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "keywords": [
     "@node-novel",
     "local-rebuild-git",
     "node-novel"
   ],
-  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/local-rebuild-gitt#readme",
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/local-rebuild-git#readme",
   "bugs": {
     "url": "https://github.com/bluelovers/ws-node-novel/issues"
   },
@@ -24,16 +25,16 @@
   "dependencies": {
     "array-hyper-unique": "^1.0.7",
     "bluebird": "^3.5.3",
-    "cross-spawn-extra": "^1.0.3",
+    "cross-spawn-extra": "^1.0.4",
     "debug-color2": "^1.0.6",
     "dotenv": "^6.2.0",
     "email-normalize": "^1.0.0",
-    "fast-glob": "^2.2.4",
+    "fast-glob": "^2.2.6",
     "fs-extra": "^7.0.1",
-    "git-diff-from": "^1.1.4",
+    "git-diff-from": "^1.1.5",
     "git-root2": "^1.0.4",
-    "gitlog2": "^4.1.1",
-    "moment": "^2.23.0",
+    "gitlog2": "^5.0.2",
+    "moment": "^2.24.0",
     "uni-string": "^1.1.0",
     "upath2": "^2.1.3",
     "yargs": "^12.0.5"

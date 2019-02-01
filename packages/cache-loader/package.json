@@ -10,7 +10,7 @@
     "json",
     "node-novel"
   ],
-  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/cache-loadert#readme",
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/cache-loader#readme",
   "bugs": {
     "url": "https://github.com/bluelovers/ws-node-novel/issues"
   },
@@ -33,7 +33,7 @@
     "array-hyper-unique": "^1.0.7",
     "fs-extra": "^7.0.1",
     "moment": "^2.24.0",
-    "node-novel-info": "^2.3.22",
+    "node-novel-info": "^2.3.27",
     "sort-object-keys2": "^1.1.0",
     "str-util": "^2.3.17",
     "upath2": "^2.1.3"
