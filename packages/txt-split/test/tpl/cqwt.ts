@@ -5,11 +5,7 @@
 import { _handleOptions, makeOptions } from '../../lib/index';
 import { IOptions, IOptionsRequired, IOptionsRequiredUser } from '../../lib/interface';
 
-import { console } from '../../';
-
-console.inspectOptions = {
-	colors: true,
-};
+import { console } from '../util';
 
 export const tplOptions: IOptionsRequiredUser = {
 

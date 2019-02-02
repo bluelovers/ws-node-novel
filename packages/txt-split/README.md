@@ -1,6 +1,6 @@
 # @node-novel/txt-split
 
-> split from [node-novel/test/txt-split](https://github.com/bluelovers/node-novel/tree/master/test/txt-split)
+split from [node-novel/test/txt-split](https://github.com/bluelovers/node-novel/tree/master/test/txt-split)
 
 ## install
 

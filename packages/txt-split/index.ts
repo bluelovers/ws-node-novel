@@ -16,5 +16,4 @@ export {
 export * from './lib/interface';
 export { console } from './lib/console';
 
-import * as txtSplit from './index';
-export default txtSplit;
+export default exports as typeof import('./index');

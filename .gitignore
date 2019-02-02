@@ -33,3 +33,4 @@ package-lock.json
 *.lock
 *.log
 **/node_modules/
+**/test/**/*.map

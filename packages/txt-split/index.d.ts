@@ -4,5 +4,5 @@
 export { autoFile, makeOptions, outputFile, outputFileSync, readFile, readFileSync, } from './lib';
 export * from './lib/interface';
 export { console } from './lib/console';
-import * as txtSplit from './index';
-export default txtSplit;
+declare const _default: typeof import(".");
+export default _default;
