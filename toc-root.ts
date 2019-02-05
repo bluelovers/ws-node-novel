@@ -4,11 +4,11 @@
 
 import { array_unique } from 'array-hyper-unique';
 import { LF } from 'crlf-normalize';
-import * as FastGlob from 'fast-glob';
+import FastGlob = require('fast-glob');
 import path = require('upath2');
 import BluebirdPromise = require('bluebird');
-import * as fs from 'fs-extra';
-import * as novelGlobby from 'node-novel-globby/g';
+import fs = require('fs-extra');
+import novelGlobby = require('node-novel-globby/g');
 import { defaultPatternsExclude } from 'node-novel-globby/lib/options';
 import { IMdconfMeta } from 'node-novel-info';
 import {

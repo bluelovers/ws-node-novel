@@ -2,7 +2,7 @@
  * Created by user on 2018/11/14/014.
  */
 import { defaultSortCallback } from '@node-novel/sort';
-import * as FastGlob from 'fast-glob';
+import FastGlob = require('fast-glob');
 import { IMdconfMeta } from 'node-novel-info';
 import BluebirdPromise = require('bluebird');
 export declare function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file: string): Promise<T>;

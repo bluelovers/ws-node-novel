@@ -4,9 +4,9 @@
 
 import { normalize_strip } from '@node-novel/normalize';
 import { array_unique } from 'array-hyper-unique';
-import * as BluebirdPromise from 'bluebird';
-import * as fs from 'fs-extra';
-import * as novelGlobby from 'node-novel-globby/g';
+import BluebirdPromise = require('bluebird');
+import fs = require('fs-extra');
+import novelGlobby = require('node-novel-globby/g');
 import { sortTree } from 'node-novel-globby/lib/glob-sort';
 import { getNovelTitles, loadReadmeMetaSync, md_href, md_link_escape } from './lib/util';
 import path = require('upath2');
@@ -43,11 +43,27 @@ export function processTocContents(basePath: string, outputFile?: string, fnHead
 			let lastTop: string;
 			let lastTop2: string;
 
+			let lv0: boolean = true;
+
 			return ls.reduce(function (a, b)
 			{
 				let c = b.split('/');
 
 				let nowTop = c[0];
+
+				if (c.length != 1)
+				{
+					lv0 = false;
+				}
+				else if (lv0)
+				{
+					nowTop = 'root';
+				}
+				else
+				{
+					lastTop = undefined;
+					lastTop2 = undefined;
+				}
 
 				if (nowTop != lastTop)
 				{
@@ -74,6 +90,10 @@ export function processTocContents(basePath: string, outputFile?: string, fnHead
 					lastTop2 = nowTop2;
 
 					nowFile = c[2];
+				}
+				else if (c.length == 1)
+				{
+					nowFile = b;
 				}
 				else
 				{

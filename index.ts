@@ -3,13 +3,12 @@
  */
 
 import { array_unique } from 'array-hyper-unique';
-import * as Promise from 'bluebird';
+import Promise = require('bluebird');
 import { Console } from 'debug-color2';
-import * as FastGlob from 'fast-glob';
-import * as fs from 'fs-extra';
+import FastGlob = require('fast-glob');
+import fs = require('fs-extra');
 import { IMdconfMeta, mdconf, mdconf_parse } from 'node-novel-info';
-import * as sortObjectKeys from 'sort-object-keys2';
-import * as self from './index';
+import sortObjectKeys = require('sort-object-keys2');
 import { getNovelTitles, md_href } from './lib/util';
 import path = require('upath2');
 export { md_href }
@@ -270,4 +269,4 @@ export function defaultFilter(value: string): boolean
 	return true;
 }
 
-export default self
+export default exports as typeof import('./index');

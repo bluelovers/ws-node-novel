@@ -1,7 +1,7 @@
 /**
  * Created by user on 2018/8/13/013.
  */
-import * as BluebirdPromise from 'bluebird';
+import BluebirdPromise = require('bluebird');
 import { md_href, md_link_escape } from './lib/util';
 export { md_href, md_link_escape };
 export declare type IFnHeader = typeof makeHeader | typeof makeHeaderAsync | any;
