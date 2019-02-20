@@ -2,10 +2,14 @@
  * Created by user on 2018/2/14/014.
  */
 
-import * as StrUtil from 'str-util';
+import StrUtil = require('str-util');
 import str2num from 'normalize-num';
 
-import { cn2tw, zh2jp, novelFilename } from 'cjk-conv';
+import { zh2jp } from 'cjk-conv';
+import { cn2tw, tw2cn } from 'cjk-conv/lib/zh/convert/index';
+import zhTable = require('cjk-conv/lib/zh/table/index');
+import novelFilename from 'cjk-conv/lib/novel/filename';
+import { slugify } from 'cjk-conv/lib/zh/table/list';
 
 export interface IOptions
 {
@@ -105,25 +109,38 @@ export function normalize_val(str: string, padNum: number = 5, options: IOptions
 		//.replace(/(\d)[章話]/g, '$1_')
 		//.replace(/第(\d)/g, '_$1')
 		//.replace(/\./g, '_')
-		.replace(/[―—－──\-―—─＝=]/g, '_')
+		.replace(/[―—－──\-―—─＝=―——─ー─]/g, '_')
 		.replace(/[\s　]/g, '_')
-		.replace(/[\(\)〔［【《（「『』」》）】〕］]/g, '_')
-		.replace(/[·‧・···•]/g, '_')
-		.replace(/[：：︰﹕：]/ug, '_')
+		.replace(/[\(\)〔［【《（「『』」》）】〕］〔［〕］]/g, '_')
+		.replace(/[·‧・···•・·᛫•․‧∙⋅⸱⸳・ꞏ·‧・···•˙●‧﹒]/g, '_')
+		.replace(/[：：︰﹕：︓∶:]/ug, '_')
 		.replace(/[・:,]/g, '_')
 		.replace(/_+$/g, '')
 		.replace(/_+/g, '_')
 
 	;
 
+	/*
 	str = zh2jp(cn2tw(str) as string, {
 		safe: false,
 	});
+	*/
 
-	//console.log(str);
+	/*
+	str = zhTable.auto(cn2tw(str, {
+		safe: false,
+		// @ts-ignore
+		greedyTable: true,
+	}), {
+		safe: false,
+		// @ts-ignore
+		greedyTable: true,
+	})[0];
+	*/
+
+	str = slugify(str, true);
 
 	return str;
 }
 
-import * as self from './index';
-export default self;
+export default exports as typeof import('./index');

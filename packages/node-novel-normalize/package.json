@@ -1,12 +1,15 @@
 {
   "name": "@node-novel/normalize",
-  "version": "1.0.5",
-  "description": "",
+  "version": "1.0.6",
+  "description": "normalize file name for sort",
   "keywords": [
     "@node-novel",
     "filename",
+    "id",
     "node-novel",
-    "normalize"
+    "normalize",
+    "sort",
+    "strip"
   ],
   "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/node-novel-normalizet#readme",
   "bugs": {
@@ -19,11 +22,14 @@
   "license": "ISC",
   "author": "",
   "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "cjk-conv": "^1.1.4",
+    "cjk-conv": "^1.1.14",
     "normalize-num": "^1.0.1",
     "str-util": "^2.3.17"
   },
