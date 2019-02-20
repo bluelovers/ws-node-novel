@@ -182,7 +182,7 @@ export function _match(a: string, b: string, {
 
 	if ((ta = r.exec(a)) && (tb = r.exec(b)))
 	{
-		let r = parseInt(ta[0]) - parseInt(tb[0]);
+		let r = parseFloat(ta[0]) - parseFloat(tb[0]);
 
 		if (r !== 0)
 		{
@@ -196,7 +196,7 @@ export function _match(a: string, b: string, {
 		{
 			let i = 0;
 
-			while (typeof a1[i] != 'undefined' && a1[i] == b1[i] && (!/^\d$/.test(b1[0])))
+			while (typeof a1[i] != 'undefined' && a1[i] === b1[i] && (!/^\d$/.test(b1[i])))
 			{
 				i++;
 			}
