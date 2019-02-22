@@ -487,6 +487,73 @@ export class enspace
 		return options;
 	}
 
+	reduceLine<T>(html: T, options: ITextLayoutOptions = {})
+	{
+		options = this.fixOptions(options);
+
+		if (options.allow_lf2)
+		{
+			return html;
+		}
+
+		let old = this.trim(html as any as string, options);
+
+		old = //html
+			//.replace(/\r\n|\r(?!\n)/g, "\n")
+			old
+				.replace(/[ 　\t]+\n/g, "\n")
+				.replace(/[\s　]+$/g, '')
+				.replace(/^[\n \t]+/g, '')
+				.replace(/\n{4,}/g, "\n\n\n\n")
+		;
+
+		let _html = old;
+
+		if (!_html.match(/[^\n]\n[^\n]/g))
+		{
+			let [min, mid, max] = getMinMidMax(_html.toString());
+
+			if (min > 2)
+			{
+				options.allow_lf2 = false;
+			}
+
+			if (max >= 3)
+			{
+				if (min > 2)
+				{
+					let r = new RegExp(`\\n{${min - 1}}(\\n+)`, 'g');
+
+					_html = _html
+					//.replace(/\n{2}(\n*)/g, '$1')
+						.replace(r, '$1')
+					;
+				}
+
+				_html = _html
+					.replace(/\n{3,}/g, "\n\n\n")
+				//.replace(/\n{2}/g, "\n")
+				;
+			}
+
+			//console.log(options);
+
+			if (!options.allow_lf2)
+			{
+				_html = _html
+					.replace(/\n\n/g, "\n")
+				;
+			}
+
+			if (_html != old)
+			{
+				return _html;
+			}
+		}
+
+		return html;
+	}
+
 	/**
 	 * 通用型段落調整
 	 *
