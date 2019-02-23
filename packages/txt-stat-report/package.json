@@ -1,0 +1,32 @@
+{
+  "name": "@node-novel/txt-stat-report",
+  "version": "1.0.0",
+  "description": "計算 小說 內文 統計資訊",
+  "keywords": [
+    "@node-novel",
+    "node-novel",
+    "txt-stat-report"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/txt-stat-report#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "prepublishOnly": "npm test",
+    "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\""
+  },
+  "dependencies": {
+    "array-hyper-unique": "^1.0.7",
+    "blank-line": "^1.0.1",
+    "crlf-normalize": "^1.0.3",
+    "execall2": "^1.1.1",
+    "uni-string": "^1.1.0"
+  }
+}
