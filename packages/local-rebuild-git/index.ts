@@ -11,13 +11,10 @@ import path = require('upath2');
 import emailNormalize = require('email-normalize');
 import UString = require('uni-string');
 import { Console } from 'debug-color2';
+import { _createMode002 } from './lib/create-new-empty';
+import { console } from '@git-lazy/util';
 
-export const console = new Console();
-
-console.enabledColor = true;
-
-console.inspectOptions = console.inspectOptions || {};
-console.inspectOptions.colors = true;
+export { console }
 
 export type IFetchAllFileLog = [string, IFetchAllFileLogRow][];
 
@@ -375,11 +372,14 @@ export function runAllJob(cwd: string)
 		})
 		.tap(async function (oldData)
 		{
+			await _createMode002(cwd);
+
 			let { name, email } = await git_get_user(cwd);
 
 			let _git_path = path.join(cwd, '.git');
 			let _git_path_backup = path.join(cwd, 'backup.git');
 
+			/*
 			console.info(`清除 backup.git`);
 			await fs.remove(_git_path_backup);
 
@@ -392,6 +392,7 @@ export function runAllJob(cwd: string)
 				stdio: 'inherit',
 				cwd,
 			});
+			*/
 
 			//await git_set_user(name, email, cwd);
 

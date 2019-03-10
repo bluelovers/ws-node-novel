@@ -2,8 +2,8 @@
 import CrossSpawn = require('cross-spawn-extra');
 import Bluebird = require('bluebird');
 import gitlog = require('gitlog2');
-import { Console } from 'debug-color2';
-export declare const console: Console;
+import { console } from '@git-lazy/util';
+export { console };
 export declare type IFetchAllFileLog = [string, IFetchAllFileLogRow][];
 export interface IFetchAllFileLogRow {
     file: string;

@@ -11,11 +11,9 @@ const GitRoot = require("git-root2");
 const path = require("upath2");
 const emailNormalize = require("email-normalize");
 const UString = require("uni-string");
-const debug_color2_1 = require("debug-color2");
-exports.console = new debug_color2_1.Console();
-exports.console.enabledColor = true;
-exports.console.inspectOptions = exports.console.inspectOptions || {};
-exports.console.inspectOptions.colors = true;
+const create_new_empty_1 = require("./lib/create-new-empty");
+const util_1 = require("@git-lazy/util");
+exports.console = util_1.console;
 //fetchAllFileLog(path.join(git_repo, 'dmzj_out'), {
 //	sortFn(a: IFetchAllFileLogRow, b: IFetchAllFileLogRow): number
 //	{
@@ -225,7 +223,7 @@ function runAllJob(cwd) {
     cwd = path.normalize(cwd);
     return Bluebird.resolve()
         .tap(async function () {
-        exports.console.info(`檢查路徑`);
+        util_1.console.info(`檢查路徑`);
         let file;
         file = '.git/config';
         if (!fs.pathExistsSync(path.join(cwd, file))) {
@@ -242,7 +240,7 @@ function runAllJob(cwd) {
         }
     })
         .then(function () {
-        exports.console.info(`取得所有檔案的歷史紀錄`);
+        util_1.console.info(`取得所有檔案的歷史紀錄`);
         return fetchAllFileLog(cwd, {
             sortFn(a, b) {
                 return a.log.authorDateTimestamp - b.log.authorDateTimestamp;
@@ -250,21 +248,26 @@ function runAllJob(cwd) {
         });
     })
         .tap(async function (oldData) {
+        await create_new_empty_1._createMode002(cwd);
         let { name, email } = await git_get_user(cwd);
         let _git_path = path.join(cwd, '.git');
         let _git_path_backup = path.join(cwd, 'backup.git');
-        exports.console.info(`清除 backup.git`);
+        /*
+        console.info(`清除 backup.git`);
         await fs.remove(_git_path_backup);
-        exports.console.info(`.git 更名為 backup.git`);
+
+        console.info(`.git 更名為 backup.git`);
         await fs.move(_git_path, _git_path_backup);
+
         await CrossSpawn.async('git', [
             'init',
         ], {
             stdio: 'inherit',
             cwd,
         });
+        */
         //await git_set_user(name, email, cwd);
-        exports.console.info(`複製舊有 git 設定`);
+        util_1.console.info(`複製舊有 git 設定`);
         await Bluebird.map(FastGlob.async([
             'config',
             'hooks/**/*',
@@ -275,16 +278,16 @@ function runAllJob(cwd) {
             return fs.copy(path.join(_git_path_backup, file), path.join(_git_path, file), {
                 preserveTimestamps: true,
                 overwrite: true,
-            }).then(r => exports.console.debug('[copy]', file));
+            }).then(r => util_1.console.debug('[copy]', file));
         });
-        exports.console.info(`開始偽造檔案歷史紀錄`);
+        util_1.console.info(`開始偽造檔案歷史紀錄`);
         await Bluebird.mapSeries(oldData, function (item, index, len) {
-            exports.console.debug('[commit]', `[${index}/${len}]`, item[0], moment(item[1].log.authorDateTimestamp).format());
+            util_1.console.debug('[commit]', `[${index}/${len}]`, item[0], moment(item[1].log.authorDateTimestamp).format());
             return git_commit_file(item[1], cwd);
         });
     })
         .tap(function () {
-        exports.console.debug(`Done`);
+        util_1.console.debug(`Done`);
     });
 }
 exports.runAllJob = runAllJob;
