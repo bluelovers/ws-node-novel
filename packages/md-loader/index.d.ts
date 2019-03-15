@@ -45,9 +45,9 @@ export declare function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I,
      * 回傳的 mdconf 資料 預設為 node-novel-info
      * 如果回傳的 為 {} 空物件則會被轉換為 null
      */
-    mdconf: IObject<OUT, {
+    mdconf: import("node-novel-info").IMdconfMeta | IObject<OUT, {
         [key: string]: any;
-    }> | import("node-novel-info").IMdconfMeta;
+    }>;
     /**
      * 用來將取得的物件轉換回 md
      * 當 content, mdconf 同時存在時 content > mdconf
@@ -57,7 +57,7 @@ export declare function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I,
             [key: string]: any;
         }>;
     } & {
-        content: IInput;
+        content: string | Buffer;
     }) | ({
         data?: IObject<T1, {
             [key: string]: any;
