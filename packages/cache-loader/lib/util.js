@@ -85,14 +85,17 @@ exports.tryRequireFS = tryRequireFS;
 function parsePathMainBase(pathMain) {
     let is_out = null;
     let pathMain_base = undefined;
+    let pathMain_out = undefined;
     if (pathMain != null) {
         let _m = pathMain.match(/^(.+?)(_out)?$/);
         is_out = !!_m[2];
         pathMain_base = _m[1];
+        pathMain_out = pathMain_base + '_out';
     }
     return {
         is_out,
         pathMain_base,
+        pathMain_out,
     };
 }
 exports.parsePathMainBase = parsePathMainBase;

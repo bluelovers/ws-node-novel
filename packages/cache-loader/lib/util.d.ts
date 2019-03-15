@@ -17,4 +17,5 @@ export declare function tryRequireFS(): typeof import('fs-extra');
 export declare function parsePathMainBase(pathMain: string): {
     is_out: boolean;
     pathMain_base: string;
+    pathMain_out: string;
 };
