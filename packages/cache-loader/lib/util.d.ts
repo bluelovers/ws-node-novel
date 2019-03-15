@@ -14,3 +14,7 @@ export declare const cacheSortCallback: typeof defaultSortCallback;
 export declare function freezeProperty<T>(who: T, prop: keyof T, freeze?: boolean): T;
 export declare function baseSortObject<T>(data: T): T;
 export declare function tryRequireFS(): typeof import('fs-extra');
+export declare function parsePathMainBase(pathMain: string): {
+    is_out: boolean;
+    pathMain_base: string;
+};

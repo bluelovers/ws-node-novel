@@ -1,6 +1,6 @@
 # @node-novel/cache-loader
 
-    讀寫 novel-stat.json
+    讀寫分析 novel-stat.json
 
 ## install
 

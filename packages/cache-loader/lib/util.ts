@@ -111,4 +111,23 @@ export function tryRequireFS(): typeof import('fs-extra')
 	}
 }
 
+export function parsePathMainBase(pathMain: string)
+{
+	let is_out: boolean = null;
+	let pathMain_base: string = undefined;
+
+	if (pathMain != null)
+	{
+		let _m = pathMain.match(/^(.+?)(_out)?$/);
+
+		is_out = !!_m[2];
+		pathMain_base = _m[1];
+	}
+
+	return {
+		is_out,
+		pathMain_base,
+	}
+}
+
 exports = Object.freeze(exports);

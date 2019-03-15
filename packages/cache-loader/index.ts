@@ -7,7 +7,7 @@ import todayMomentTimestamp, {
 	cacheSortCallback,
 	freezeProperty,
 	createMoment,
-	naturalCompare, tryRequireFS,
+	naturalCompare, tryRequireFS, parsePathMainBase,
 } from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
@@ -414,11 +414,7 @@ export class NovelStatCache
 			})
 			.reduce((ls, pathMain) =>
 			{
-
-				let _m = pathMain.match(/^(.+?)(_out)?$/);
-
-				let is_out = !!_m[2];
-				let pathMain_base = _m[1];
+				let { is_out, pathMain_base }= parsePathMainBase(pathMain);
 
 				ls[pathMain_base] = ls[pathMain_base] || {};
 
