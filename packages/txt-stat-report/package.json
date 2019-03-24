@@ -1,6 +1,7 @@
 {
   "name": "@node-novel/txt-stat-report",
   "version": "1.0.2",
+  "private": false,
   "description": "計算 小說 內文 統計資訊",
   "keywords": [
     "@node-novel",
@@ -18,6 +19,10 @@
   "license": "ISC",
   "author": "",
   "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
     "prepublishOnly": "npm test",
     "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\""
@@ -28,5 +33,8 @@
     "crlf-normalize": "^1.0.3",
     "execall2": "^1.1.1",
     "uni-string": "^1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
