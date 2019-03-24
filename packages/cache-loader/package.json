@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/cache-loader",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "讀寫分析 novel-stat.json",
   "keywords": [
     "@node-novel",
@@ -29,7 +29,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@node-novel/sort": "^1.0.5",
+    "@node-novel/sort": "^1.0.6",
     "array-hyper-unique": "^1.0.7",
     "fs-extra": "^7.0.1",
     "moment": "^2.24.0",
@@ -38,7 +38,6 @@
     "str-util": "^2.3.17",
     "upath2": "^2.1.3"
   },
-  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

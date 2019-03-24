@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/normalize",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "normalize file name for sort",
   "keywords": [
     "@node-novel",
@@ -32,6 +32,5 @@
     "cjk-conv": "^1.1.14",
     "normalize-num": "^1.0.1",
     "str-util": "^2.3.17"
-  },
-  "devDependencies": {}
+  }
 }
