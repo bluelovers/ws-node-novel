@@ -29,6 +29,11 @@
     "sort-package-json": "^1.17.1"
   },
   "devDependencies": {
-    "@bluelovers/tsconfig": "^1.0.1"
+    "@bluelovers/tsconfig": "^1.0.1",
+    "@types/benchmark": "^1.0.31",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.9.5",
+    "lerna": "^3.13.1"
   }
 }

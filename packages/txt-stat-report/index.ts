@@ -12,6 +12,8 @@ export type ITxtReport = ReturnType<typeof txtReport>;
 
 export function txtReport(input: string)
 {
+	let buf_length = Buffer.from(input).length;
+
 	input = crlf(removeBom(input), LF);
 
 	let js_length = input.length;
@@ -38,8 +40,6 @@ export function txtReport(input: string)
 	let hanzi_length = execall(/[\u3400-\u4DBF\u4E00-\u9FFF\u{20000}-\u{2FA1F}]/ug, input).length;
 	let ja_length = execall(/[\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF]/ug, input).length;
 
-
-
 	let punctuation_length: number;
 
 	{
@@ -57,6 +57,11 @@ export function txtReport(input: string)
 	}
 
 	return {
+		/**
+		 * buffer
+		 */
+		buf_length,
+
 		/**
 		 * js string (轉換分行為 LF 之後的長度)
 		 */
@@ -100,7 +105,7 @@ export function txtReport(input: string)
 /**
  * 將多個報告總和起來
  */
-export function txtReportMerge<T extends ITxtReport>(arr: T[])
+export function txtReportSum<T extends ITxtReport>(arr: T[])
 {
 	return arr.reduce(function (a, b)
 	{

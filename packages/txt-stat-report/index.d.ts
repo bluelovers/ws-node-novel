@@ -4,6 +4,10 @@
 export declare type ITxtReport = ReturnType<typeof txtReport>;
 export declare function txtReport(input: string): {
     /**
+     * buffer
+     */
+    buf_length: number;
+    /**
      * js string (轉換分行為 LF 之後的長度)
      */
     js_length: number;
@@ -40,4 +44,4 @@ export declare function txtReport(input: string): {
 /**
  * 將多個報告總和起來
  */
-export declare function txtReportMerge<T extends ITxtReport>(arr: T[]): T;
+export declare function txtReportSum<T extends ITxtReport>(arr: T[]): T;

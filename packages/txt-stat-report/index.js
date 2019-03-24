@@ -8,6 +8,7 @@ const crlf_normalize_1 = require("crlf-normalize");
 const execall2_1 = require("execall2");
 const util_1 = require("./lib/util");
 function txtReport(input) {
+    let buf_length = Buffer.from(input).length;
     input = crlf_normalize_1.crlf(util_1.removeBom(input), crlf_normalize_1.LF);
     let js_length = input.length;
     let uni_length = UString.size(input);
@@ -35,6 +36,10 @@ function txtReport(input) {
         space_length = js_length - s.length;
     }
     return {
+        /**
+         * buffer
+         */
+        buf_length,
         /**
          * js string (轉換分行為 LF 之後的長度)
          */
@@ -74,7 +79,7 @@ exports.txtReport = txtReport;
 /**
  * 將多個報告總和起來
  */
-function txtReportMerge(arr) {
+function txtReportSum(arr) {
     return arr.reduce(function (a, b) {
         Object.entries(b)
             .forEach(function ([k, v]) {
@@ -83,5 +88,5 @@ function txtReportMerge(arr) {
         return a;
     }, {});
 }
-exports.txtReportMerge = txtReportMerge;
+exports.txtReportSum = txtReportSum;
 //# sourceMappingURL=index.js.map

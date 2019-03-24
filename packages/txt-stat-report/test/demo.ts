@@ -1,4 +1,4 @@
-import { txtReport, txtReportMerge } from '../index';
+import { txtReport, txtReportSum } from '../index';
 
 let r = txtReport(`♀ 露絲的夢境 ♀
 
@@ -21,4 +21,4 @@ let r = txtReport(`♀ 露絲的夢境 ♀
 
 console.dir(r);
 
-console.dir(txtReportMerge([r, r, r]));
+console.dir(txtReportSum([r, r, r]));
