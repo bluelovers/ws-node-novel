@@ -21,7 +21,7 @@ function makeOptions(inputFile, options) {
         ...exports.defaultOptions,
         file: inputFile,
     }, options, {
-        file: options.file || inputFile
+        file: options.file || inputFile,
     });
     cache.dirname = upath2_1.default.dirname(cache.file);
     if (cache.useRegExpCJK) {
@@ -160,6 +160,24 @@ async function outputFile(data, options) {
     for (let vn in data) {
         for (let cn in data[vn]) {
             let file = upath2_1.default.join(fs_iconv_1.trimFilename(vn), fs_iconv_1.trimFilename(cn) + '.txt');
+            let full_file = upath2_1.default.join(path_main, file);
+            let txt = data[vn][cn];
+            if (options.saveFileBefore) {
+                let cache = {
+                    file,
+                    full_file,
+                    data,
+                    options,
+                    cn,
+                    vn,
+                };
+                let ret = options.saveFileBefore(data[vn][cn], cn, data[vn], cache);
+                if (ret == null) {
+                    continue;
+                }
+                ({ file } = cache);
+                txt = ret;
+            }
             await fs.outputFile(upath2_1.default.join(path_main, file), data[vn][cn]);
             ls.push(file);
         }

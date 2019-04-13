@@ -33,7 +33,7 @@ export function makeOptions<O extends IOptions>(inputFile: IPathLike, options: O
 		...defaultOptions,
 		file: inputFile,
 	}, options, {
-		file: options.file || inputFile
+		file: options.file || inputFile,
 	});
 
 	cache.dirname = path.dirname(cache.file);
@@ -169,7 +169,8 @@ export async function readFile<O extends IOptions>(inputFile: IPathLike, options
 		{
 			return _handleReadFile(data, cache.file);
 		})
-		.then(async (txt) => {
+		.then(async (txt) =>
+		{
 
 			if (options.readFileAfter)
 			{
@@ -238,6 +239,33 @@ export async function outputFile(data: IDataVolume | IOptionsWithData,
 		for (let cn in data[vn])
 		{
 			let file = path.join(trimFilename(vn), trimFilename(cn) + '.txt');
+
+			let full_file = path.join(path_main, file);
+
+			let txt = data[vn][cn];
+
+			if (options.saveFileBefore)
+			{
+				let cache: Parameters<typeof options.saveFileBefore>[3] = {
+					file,
+					full_file,
+					data,
+					options,
+					cn,
+					vn,
+				};
+
+				let ret = options.saveFileBefore(data[vn][cn], cn, data[vn], cache);
+
+				if (ret == null)
+				{
+					continue;
+				}
+
+				({ file } = cache);
+
+				txt = ret;
+			}
 
 			await fs.outputFile(path.join(path_main, file), data[vn][cn]);
 

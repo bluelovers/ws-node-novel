@@ -73,6 +73,15 @@ export interface IOptions<P = boolean | IRegExpLike>
 	 */
 	readFileAfter?(txt: string): string | void,
 
+	saveFileBefore?(txt: string, cn: string, data_vn: IDataChapter, cache: {
+		file: string,
+		full_file: string,
+		data: IDataVolume,
+		options: IOptions,
+		cn: string,
+		vn: string,
+	}): string | null,
+
 	[key: string]: any,
 }
 

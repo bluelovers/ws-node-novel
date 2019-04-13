@@ -50,6 +50,14 @@ export interface IOptions<P = boolean | IRegExpLike> {
      * 允許在讀取檔案後 先對檔案內容做處理變更
      */
     readFileAfter?(txt: string): string | void;
+    saveFileBefore?(txt: string, cn: string, data_vn: IDataChapter, cache: {
+        file: string;
+        full_file: string;
+        data: IDataVolume;
+        options: IOptions;
+        cn: string;
+        vn: string;
+    }): string | null;
     [key: string]: any;
 }
 export interface ISplitOption<T extends RegExp | string | string[] = RegExp> {
