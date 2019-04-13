@@ -178,7 +178,7 @@ async function outputFile(data, options) {
                 ({ file } = cache);
                 txt = ret;
             }
-            await fs.outputFile(upath2_1.default.join(path_main, file), data[vn][cn]);
+            await fs.outputFile(upath2_1.default.join(path_main, file), txt);
             ls.push(file);
         }
     }

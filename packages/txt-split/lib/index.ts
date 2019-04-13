@@ -267,7 +267,7 @@ export async function outputFile(data: IDataVolume | IOptionsWithData,
 				txt = ret;
 			}
 
-			await fs.outputFile(path.join(path_main, file), data[vn][cn]);
+			await fs.outputFile(path.join(path_main, file), txt);
 
 			ls.push(file);
 		}
