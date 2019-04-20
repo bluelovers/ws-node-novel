@@ -12,17 +12,20 @@ function splitVolumeSync(txt, cache) {
     if (cache.beforeStart) {
         cache.beforeStart(cache);
     }
-    MAIN: if (cache.volume) {
+    MAIN: if (cache.volume && !cache.volume.disable) {
         let _r = cache.volume.r;
         let _m = execall2_1.execall(_r, txt, {
             cloneRegexp,
         });
         //console.debug(_r, _m, txt);
+        //console.debug(_r, _m, txt);
         if (!_m || !_m.length) {
             let msg = `volume match is empty ${_r}`;
             console_1.console.warn(msg);
+            if (!cache.volume.allowNoMatch) {
+                throw new Error(msg);
+            }
             break MAIN;
-            throw new Error(msg);
         }
         //console.log(_r, _m, _r.test(txt));
         _vs = splitChapterSync(txt, cache, _m, cache.volume);

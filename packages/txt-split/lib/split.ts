@@ -30,7 +30,7 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 	}
 
 	MAIN:
-	if (cache.volume)
+	if (cache.volume && !cache.volume.disable)
 	{
 		let _r = cache.volume.r;
 
@@ -39,6 +39,7 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 		});
 
 		//console.debug(_r, _m, txt);
+		//console.debug(_r, _m, txt);
 
 		if (!_m || !_m.length)
 		{
@@ -46,8 +47,12 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 
 			console.warn(msg);
 
+			if (!cache.volume.allowNoMatch)
+			{
+				throw new Error(msg);
+			}
+
 			break MAIN;
-			throw new Error(msg);
 		}
 
 		//console.log(_r, _m, _r.test(txt));

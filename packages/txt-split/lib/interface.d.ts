@@ -25,14 +25,14 @@ export interface IOptionsRequired<P = boolean | IRegExpLike> extends IOptions<P>
 }
 export declare type IOptionsRequiredUser = Overwrite<IOptionsRequired, IOptionsRequiredLazyInput> | IOptionsRequired;
 export interface IOptionsRequiredLazyInput {
-    volume?: ISplitOption<string | RegExp | string[]>;
+    volume?: ISplitOptionVolume<string | RegExp | string[]>;
     chapter: ISplitOption<string | RegExp | string[]>;
     useRegExpCJK?: boolean | IRegExpLike;
 }
 export interface IOptions<P = boolean | IRegExpLike> {
     file?: IPathLike;
     outDir?: string;
-    volume?: ISplitOption;
+    volume?: ISplitOptionVolume;
     chapter?: ISplitOption;
     dirname?: string;
     /**
@@ -50,16 +50,27 @@ export interface IOptions<P = boolean | IRegExpLike> {
      * 允許在讀取檔案後 先對檔案內容做處理變更
      */
     readFileAfter?(txt: string): string | void;
-    saveFileBefore?(txt: string, cn: string, data_vn: IDataChapter, cache: {
-        file: string;
-        full_file: string;
-        data: IDataVolume;
-        options: IOptions;
-        cn: string;
-        vn: string;
-    }): string | null;
+    saveFileBefore?(txt: string, cn: string, data_vn: IDataChapter, cache: ISaveFileBeforeCache): string | null;
     [key: string]: any;
 }
+export interface ISaveFileBeforeCache {
+    file: string;
+    full_file: string;
+    data: IDataVolume;
+    options: IOptions;
+    cn: string;
+    vn: string;
+}
+export declare type ISplitOptionVolume<T extends RegExp | string | string[] = RegExp> = ISplitOption<T> & {
+    /**
+     * 禁用此規則
+     */
+    disable?: boolean;
+    /**
+     * 允許找不到配對
+     */
+    allowNoMatch?: boolean;
+};
 export interface ISplitOption<T extends RegExp | string | string[] = RegExp> {
     /**
      * 配對章節的 RegExp

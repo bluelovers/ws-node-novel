@@ -255,7 +255,7 @@ export async function outputFile(data: IDataVolume | IOptionsWithData,
 					vn,
 				};
 
-				let ret = options.saveFileBefore(data[vn][cn], cn, data[vn], cache);
+				let ret = options.saveFileBefore(txt, cn, data[vn], cache);
 
 				if (ret == null)
 				{
