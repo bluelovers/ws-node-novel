@@ -11,7 +11,7 @@ function logWarn(...argv) {
     return console_1.console.warn(...argv);
 }
 exports.logWarn = logWarn;
-function chkEncoding(data, file) {
+function chkEncoding(data, file, options) {
     let chk = iconv.detect(data);
     if (data.length === 0) {
         logWarn(file, '此檔案沒有內容');
@@ -45,9 +45,24 @@ function _wrapMethod(fn) {
     return Bluebird.method(fn);
 }
 exports._wrapMethod = _wrapMethod;
-function _handleReadFile(data, file) {
-    chkEncoding(data, file);
-    return crlf_normalize_1.crlf(novel_text_1.default.trim(String(data)), crlf_normalize_1.LF);
+function _handleReadFile(data, file, options) {
+    let chk = chkEncoding(data, file, options);
+    let txt;
+    if (options && options.autoFsIconv && chk.encoding != 'UTF-8') {
+        logWarn('嘗試自動將內容轉換為 UTF-8', chk);
+        let buf = iconv.encode(data);
+        let bool = buf.equals((Buffer.isBuffer(data) ? data : Buffer.from(data)));
+        if (bool) {
+            let chk2 = iconv.detect(buf);
+            logWarn(`內容變更`, chk, '=>', chk2);
+            data = buf;
+        }
+        else {
+            logWarn(`內容無變化`);
+        }
+    }
+    txt = String(data);
+    return crlf_normalize_1.crlf(novel_text_1.default.trim(txt), crlf_normalize_1.LF);
 }
 exports._handleReadFile = _handleReadFile;
 function _outputFile(data, options) {

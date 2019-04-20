@@ -1,18 +1,19 @@
 import novelText from 'novel-text';
 import { console } from './console';
 import { makeOptions } from './index';
-import { IContext, IDataVolume, IOptionsWithData, IPathLike, Resolvable } from './interface';
+import { IContext, IDataVolume, IOptions, IOptionsWithData, IPathLike, Resolvable } from './interface';
 import Bluebird = require('bluebird');
 import iconv = require('iconv-jschardet');
 import StrUtil = require('str-util');
 import { crlf, LF } from 'crlf-normalize';
+import fsIconv = require('fs-iconv');
 
 export function logWarn(...argv)
 {
 	return console.warn(...argv)
 }
 
-export function chkEncoding(data: IContext, file?: string)
+export function chkEncoding<O extends IOptions>(data: IContext, file?: string, options?: O)
 {
 	let chk = iconv.detect(data);
 
@@ -60,11 +61,37 @@ export function _wrapMethod<R, F extends (...args: unknown[]) => Resolvable<R>>(
 	return Bluebird.method(fn)
 }
 
-export function _handleReadFile(data: IContext, file: IPathLike)
+export function _handleReadFile<O extends IOptions>(data: IContext, file: IPathLike, options?: O)
 {
-	chkEncoding(data, file);
+	let chk = chkEncoding(data, file, options);
 
-	return crlf(novelText.trim(String(data)), LF)
+	let txt: string;
+
+	if (options && options.autoFsIconv && chk.encoding != 'UTF-8')
+	{
+		logWarn('嘗試自動將內容轉換為 UTF-8', chk);
+
+		let buf = iconv.encode(data);
+
+		let bool = buf.equals((Buffer.isBuffer(data) ? data : Buffer.from(data)));
+
+		if (bool)
+		{
+			let chk2 = iconv.detect(buf);
+
+			logWarn(`內容變更`, chk, '=>', chk2);
+
+			data = buf;
+		}
+		else
+		{
+			logWarn(`內容無變化`);
+		}
+	}
+
+	txt = String(data);
+
+	return crlf(novelText.trim(txt), LF)
 }
 
 export function _outputFile<O extends Partial<IOptionsWithData>>(data: IDataVolume | IOptionsWithData, options?: O): {

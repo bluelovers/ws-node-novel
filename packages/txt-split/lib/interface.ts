@@ -66,6 +66,11 @@ export interface IOptions<P = boolean | IRegExpLike>
 	 */
 	useRegExpCJK?: P,
 
+	/**
+	 * 自動檢測並且將內容轉換為 UTF-8
+	 */
+	autoFsIconv?: boolean,
+
 	beforeStart?<O extends IOptions>(options: O): void,
 
 	/**

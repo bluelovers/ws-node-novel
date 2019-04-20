@@ -45,6 +45,10 @@ export interface IOptions<P = boolean | IRegExpLike> {
      * @default true
      */
     useRegExpCJK?: P;
+    /**
+     * 自動檢測並且將內容轉換為 UTF-8
+     */
+    autoFsIconv?: boolean;
     beforeStart?<O extends IOptions>(options: O): void;
     /**
      * 允許在讀取檔案後 先對檔案內容做處理變更

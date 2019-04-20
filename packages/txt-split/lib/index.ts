@@ -167,7 +167,7 @@ export async function readFile<O extends IOptions>(inputFile: IPathLike, options
 	let txt: string = await fsIconv.readFile(cache.file)
 		.then(function (data)
 		{
-			return _handleReadFile(data, cache.file);
+			return _handleReadFile(data, cache.file, cache);
 		})
 		.then(async (txt) =>
 		{

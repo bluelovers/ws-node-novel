@@ -115,7 +115,7 @@ async function readFile(inputFile, options) {
     let cache = makeOptions(inputFile, options);
     let txt = await fs_iconv_1.default.readFile(cache.file)
         .then(function (data) {
-        return util_1._handleReadFile(data, cache.file);
+        return util_1._handleReadFile(data, cache.file, cache);
     })
         .then(async (txt) => {
         if (options.readFileAfter) {
