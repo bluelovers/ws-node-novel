@@ -79,6 +79,7 @@ function splitChapterSync(txt, cache, _m, splitOption) {
     let i;
     let ix = cache.ix || 0;
     let ii;
+    let name_last;
     for (i in _m) {
         ii = (parseInt(i) + ix).toString();
         let m = _m[i];
@@ -129,7 +130,7 @@ function splitChapterSync(txt, cache, _m, splitOption) {
             name = id + '_' + name;
             let txt_clip = txt.slice(idx, m.index);
             if (txt_clip) {
-                _files[name] = txt_clip;
+                _files[name_last = name] = txt_clip;
                 idx = m.index;
             }
         }
@@ -173,16 +174,37 @@ function splitChapterSync(txt, cache, _m, splitOption) {
             //name = `${id}_Act：${StrUtil.toFullWidth(i.padStart(3, '0'))}`;
             let txt_clip = txt.slice(idx, m.index);
             if (txt_clip) {
-                _files[name] = txt_clip;
+                _files[name_last = name] = txt_clip;
                 idx = m.index;
             }
         }
         m_last = m;
     }
-    if (idx < txt.length - 1) {
+    MAIN2: if (idx < txt.length - 1) {
         ii = (parseInt(i) + ix + 1).toString();
         let id = util_1.padIndex(ii, 5, '0');
         let name = util_1.fix_name(m_last.match);
+        let _skip;
+        if (ignoreRe && ignoreRe.test(m_last.match)) {
+            _skip = true;
+        }
+        else if (ignoreCb && ignoreCb({
+            i,
+            id,
+            name,
+            m: null,
+            m_last,
+            _files,
+            ii,
+            cache,
+            idx,
+        })) {
+            _skip = true;
+        }
+        if (_skip) {
+            _files[name_last] += txt.slice(idx);
+            break MAIN2;
+        }
         if (cb) {
             let m;
             let _ret = cb({

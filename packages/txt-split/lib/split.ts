@@ -141,6 +141,8 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 	let ix = cache.ix || 0;
 	let ii: string;
 
+	let name_last: string;
+
 	for (i in _m)
 	{
 		ii = (parseInt(i) + ix).toString();
@@ -210,7 +212,7 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 
 			if (txt_clip)
 			{
-				_files[name] = txt_clip;
+				_files[name_last = name] = txt_clip;
 
 				idx = m.index;
 			}
@@ -269,7 +271,7 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 
 			if (txt_clip)
 			{
-				_files[name] = txt_clip;
+				_files[name_last = name] = txt_clip;
 
 				idx = m.index;
 			}
@@ -278,12 +280,41 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 		m_last = m;
 	}
 
+	MAIN2:
 	if (idx < txt.length - 1)
 	{
 		ii = (parseInt(i) + ix + 1).toString();
 
 		let id = padIndex(ii, 5, '0');
 		let name = fix_name(m_last.match);
+
+		let _skip: boolean;
+
+		if (ignoreRe && ignoreRe.test(m_last.match))
+		{
+			_skip = true;
+		}
+		else if (ignoreCb && ignoreCb({
+			i,
+			id,
+			name,
+			m: null,
+			m_last,
+			_files,
+			ii,
+			cache,
+			idx,
+		}))
+		{
+			_skip = true;
+		}
+
+		if (_skip)
+		{
+			_files[name_last] += txt.slice(idx);
+
+			break MAIN2;
+		}
 
 		if (cb)
 		{
