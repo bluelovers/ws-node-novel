@@ -93,18 +93,24 @@ export interface ISplitOption<T extends RegExp | string | string[] = RegExp> {
     ignoreRe?: T;
     ignoreFlags?: string;
     ignoreCb?: ISplitIgnoreCB;
+    idxSkipIgnored?: boolean;
 }
 export interface ISplitCache extends IOptions {
     /**
      * 於所有章節中的序列
      * 請勿修改此值
      */
-    ix: number;
+    readonly ix: number;
     /**
      * txt 內容
      * 請勿修改此值
      */
-    txt: string;
+    readonly txt: string;
+    /**
+     * 目前於所有章節中已配對成功的章節數量
+     * 請勿修改此值
+     */
+    readonly ic_all: number;
 }
 export declare type ISplitMatch = ReturnType<typeof execall>;
 export declare type ISplitMatchItem = ISplitMatch[0];
@@ -134,6 +140,20 @@ export interface ISplitCBParameters extends ISplitCBReturn {
      */
     ii: string;
     cache: Partial<ISplitCache>;
+    /**
+     * 目前已配對成功的章節數量
+     */
+    ic: number;
+    /**
+     * 於所有章節中的序列
+     * 請勿修改此值
+     */
+    readonly ix: number;
+    /**
+     * 目前於所有章節中已配對成功的章節數量
+     * 請勿修改此值
+     */
+    readonly ic_all: number;
 }
 export interface ISplitCBReturn {
     /**

@@ -35,6 +35,7 @@ function splitVolumeSync(txt, cache) {
         _vs['00000_unknow'] = txt;
     }
     let _out = {};
+    // @ts-ignore
     cache.ix = 0;
     for (let vn in _vs) {
         let txt = _vs[vn];
@@ -45,6 +46,7 @@ function splitVolumeSync(txt, cache) {
         //console.log(_r, _m, txt);
         //console.log(cache.ix);
         if (!_m || !_m.length) {
+            // @ts-ignore
             let id = util_1.padIndex(cache.ix++, 5, '0');
             _out[vn] = {};
             _out[vn][`${id}_unknow`] = txt;
@@ -74,14 +76,21 @@ function splitChapterSync(txt, cache, _m, splitOption) {
     let idx = 0;
     let { cb, ignoreCb, ignoreRe } = splitOption;
     txt = String(txt);
+    // @ts-ignore
     cache.txt = txt;
     let m_last;
     let i;
     let ix = cache.ix || 0;
     let ii;
+    let ic = 0;
+    let ic_all = cache.ic_all || 0;
+    let ii_rebase = 0;
     let name_last;
+    let has_unknow;
+    let i_int;
     for (i in _m) {
-        ii = (parseInt(i) + ix).toString();
+        i_int = parseInt(i);
+        ii = (i_int + ix - ii_rebase).toString();
         let m = _m[i];
         if (ignoreRe) {
             if (ignoreRe.test(m.match)) {
@@ -106,6 +115,9 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                 ii,
                 cache,
                 idx,
+                ic,
+                ic_all,
+                ix,
             })) {
                 continue;
             }
@@ -120,6 +132,9 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                     ii,
                     cache,
                     idx,
+                    ic,
+                    ic_all,
+                    ix,
                 });
                 if (_ret) {
                     id = _ret.id;
@@ -127,10 +142,18 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                     idx = _ret.idx;
                 }
             }
-            name = id + '_' + name;
             let txt_clip = txt.slice(idx, m.index);
-            if (txt_clip) {
-                _files[name_last = name] = txt_clip;
+            name = id + '_' + name;
+            if (txt_clip.length) {
+                if (has_unknow == null && !txt_clip.replace(/\s+/g, '').length) {
+                    has_unknow = false;
+                    ii_rebase++;
+                }
+                else {
+                    _files[name_last = name] = txt_clip;
+                    ic++;
+                    has_unknow = true;
+                }
                 idx = m.index;
             }
         }
@@ -147,6 +170,9 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                 ii,
                 cache,
                 idx,
+                ic,
+                ic_all,
+                ix,
             })) {
                 continue;
             }
@@ -161,6 +187,9 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                     ii,
                     cache,
                     idx,
+                    ic,
+                    ic_all,
+                    ix,
                 });
                 if (_ret) {
                     id = _ret.id;
@@ -168,22 +197,21 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                     idx = _ret.idx;
                 }
             }
-            //console.log(id, name, _ret);
-            name = id + '_' + name;
-            //console.log([name]);
-            //name = `${id}_Act：${StrUtil.toFullWidth(i.padStart(3, '0'))}`;
             let txt_clip = txt.slice(idx, m.index);
-            if (txt_clip) {
+            name = id + '_' + name;
+            if (txt_clip.length) {
                 _files[name_last = name] = txt_clip;
                 idx = m.index;
+                ic++;
             }
         }
         m_last = m;
     }
     MAIN2: if (idx < txt.length - 1) {
-        ii = (parseInt(i) + ix + 1).toString();
+        ii = (i_int + ix + 1 - ii_rebase).toString();
         let id = util_1.padIndex(ii, 5, '0');
         let name = util_1.fix_name(m_last.match);
+        const id_old = id;
         let _skip;
         if (ignoreRe && ignoreRe.test(m_last.match)) {
             _skip = true;
@@ -198,6 +226,9 @@ function splitChapterSync(txt, cache, _m, splitOption) {
             ii,
             cache,
             idx,
+            ic,
+            ic_all,
+            ix,
         })) {
             _skip = true;
         }
@@ -217,6 +248,9 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                 ii,
                 cache,
                 idx,
+                ic,
+                ic_all,
+                ix,
             });
             if (_ret) {
                 id = _ret.id;
@@ -227,6 +261,7 @@ function splitChapterSync(txt, cache, _m, splitOption) {
         name = (id !== '' ? id + '_' : '') + name;
         _files[name] = txt.slice(idx);
     }
+    // @ts-ignore
     cache.ix = parseInt(ii) + 1;
     return _files;
 }

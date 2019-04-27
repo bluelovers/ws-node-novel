@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/txt-split",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "split from [node-novel/test/txt-split](https://github.com/bluelovers/node-novel/tree/master/test/txt-split)",
   "keywords": [
     "@node-novel",

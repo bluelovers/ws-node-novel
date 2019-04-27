@@ -68,6 +68,7 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 
 	let _out: IDataVolume = {};
 
+	// @ts-ignore
 	cache.ix = 0;
 
 	for (let vn in _vs)
@@ -85,6 +86,7 @@ export function splitVolumeSync<O extends Partial<ISplitCache>>(txt: IContext, c
 
 		if (!_m || !_m.length)
 		{
+			// @ts-ignore
 			let id = padIndex(cache.ix++, 5, '0');
 
 			_out[vn] = {};
@@ -133,6 +135,7 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 
 	txt = String(txt);
 
+	// @ts-ignore
 	cache.txt = txt;
 
 	let m_last;
@@ -140,12 +143,20 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 	let i: string;
 	let ix = cache.ix || 0;
 	let ii: string;
+	let ic: number = 0;
+	let ic_all = cache.ic_all || 0;
+
+	let ii_rebase: number = 0;
 
 	let name_last: string;
+	let has_unknow: boolean;
+	let i_int: number;
 
 	for (i in _m)
 	{
-		ii = (parseInt(i) + ix).toString();
+		i_int = parseInt(i);
+
+		ii = (i_int + ix - ii_rebase).toString();
 
 		let m = _m[i];
 
@@ -179,6 +190,10 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				ii,
 				cache,
 				idx,
+
+				ic,
+				ic_all,
+				ix,
 			}))
 			{
 				continue;
@@ -196,6 +211,10 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 					ii,
 					cache,
 					idx,
+
+					ic,
+					ic_all,
+					ix,
 				});
 
 				if (_ret)
@@ -206,13 +225,26 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				}
 			}
 
-			name = id + '_' + name;
-
 			let txt_clip = txt.slice(idx, m.index);
 
-			if (txt_clip)
+			name = id + '_' + name;
+
+			if (txt_clip.length)
 			{
-				_files[name_last = name] = txt_clip;
+				if (has_unknow == null && !txt_clip.replace(/\s+/g, '').length)
+				{
+					has_unknow = false;
+
+					ii_rebase++;
+				}
+				else
+				{
+					_files[name_last = name] = txt_clip;
+
+					ic++;
+
+					has_unknow = true;
+				}
 
 				idx = m.index;
 			}
@@ -232,6 +264,10 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				ii,
 				cache,
 				idx,
+
+				ic,
+				ic_all,
+				ix,
 			}))
 			{
 				continue;
@@ -249,6 +285,10 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 					ii,
 					cache,
 					idx,
+
+					ic,
+					ic_all,
+					ix,
 				});
 
 				if (_ret)
@@ -259,21 +299,17 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				}
 			}
 
-			//console.log(id, name, _ret);
+			let txt_clip = txt.slice(idx, m.index);
 
 			name = id + '_' + name;
 
-			//console.log([name]);
-
-			//name = `${id}_Act：${StrUtil.toFullWidth(i.padStart(3, '0'))}`;
-
-			let txt_clip = txt.slice(idx, m.index);
-
-			if (txt_clip)
+			if (txt_clip.length)
 			{
 				_files[name_last = name] = txt_clip;
 
 				idx = m.index;
+
+				ic++;
 			}
 		}
 
@@ -283,10 +319,12 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 	MAIN2:
 	if (idx < txt.length - 1)
 	{
-		ii = (parseInt(i) + ix + 1).toString();
+		ii = (i_int + ix + 1 - ii_rebase).toString();
 
 		let id = padIndex(ii, 5, '0');
 		let name = fix_name(m_last.match);
+
+		const id_old = id;
 
 		let _skip: boolean;
 
@@ -304,6 +342,10 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 			ii,
 			cache,
 			idx,
+
+			ic,
+			ic_all,
+			ix,
 		}))
 		{
 			_skip = true;
@@ -330,6 +372,10 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				ii,
 				cache,
 				idx,
+
+				ic,
+				ic_all,
+				ix,
 			});
 
 			if (_ret)
@@ -345,6 +391,7 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 		_files[name] = txt.slice(idx);
 	}
 
+	// @ts-ignore
 	cache.ix = parseInt(ii) + 1;
 
 	return _files;
