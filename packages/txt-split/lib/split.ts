@@ -131,7 +131,7 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 	let _files: IDataChapter = {};
 	let idx = 0;
 
-	let { cb, ignoreCb, ignoreRe } = splitOption;
+	let { cb, ignoreCb, ignoreRe, idxSkipIgnored } = splitOption;
 
 	txt = String(txt);
 
@@ -152,6 +152,8 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 	let has_unknow: boolean;
 	let i_int: number;
 
+	let i_ignored: number = 0;
+
 	for (i in _m)
 	{
 		i_int = parseInt(i);
@@ -164,6 +166,13 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 		{
 			if (ignoreRe.test(m.match))
 			{
+				i_ignored++;
+
+				if (idxSkipIgnored)
+				{
+					ii_rebase++;
+				}
+
 				/**
 				 * @todo here maybe will has bug, need test
 				 */
@@ -196,6 +205,13 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				ix,
 			}))
 			{
+				i_ignored++;
+
+				if (idxSkipIgnored)
+				{
+					ii_rebase++;
+				}
+
 				continue;
 			}
 
@@ -270,6 +286,13 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 				ix,
 			}))
 			{
+				i_ignored++;
+
+				if (idxSkipIgnored)
+				{
+					ii_rebase++;
+				}
+
 				continue;
 			}
 
@@ -353,7 +376,17 @@ export function splitChapterSync<O extends Partial<ISplitCache>>(txt: IContext, 
 
 		if (_skip)
 		{
-			_files[name_last] += txt.slice(idx);
+			if (name_last == null)
+			{
+				let name = 'unknow';
+				let name_last = id + '_' + name;
+
+				_files[name_last] = txt.slice(idx);
+			}
+			else
+			{
+				_files[name_last] += txt.slice(idx);
+			}
 
 			break MAIN2;
 		}

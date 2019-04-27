@@ -74,7 +74,7 @@ exports.splitVolumeSync = splitVolumeSync;
 function splitChapterSync(txt, cache, _m, splitOption) {
     let _files = {};
     let idx = 0;
-    let { cb, ignoreCb, ignoreRe } = splitOption;
+    let { cb, ignoreCb, ignoreRe, idxSkipIgnored } = splitOption;
     txt = String(txt);
     // @ts-ignore
     cache.txt = txt;
@@ -88,12 +88,17 @@ function splitChapterSync(txt, cache, _m, splitOption) {
     let name_last;
     let has_unknow;
     let i_int;
+    let i_ignored = 0;
     for (i in _m) {
         i_int = parseInt(i);
         ii = (i_int + ix - ii_rebase).toString();
         let m = _m[i];
         if (ignoreRe) {
             if (ignoreRe.test(m.match)) {
+                i_ignored++;
+                if (idxSkipIgnored) {
+                    ii_rebase++;
+                }
                 /**
                  * @todo here maybe will has bug, need test
                  */
@@ -119,6 +124,10 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                 ic_all,
                 ix,
             })) {
+                i_ignored++;
+                if (idxSkipIgnored) {
+                    ii_rebase++;
+                }
                 continue;
             }
             if (cb) {
@@ -174,6 +183,10 @@ function splitChapterSync(txt, cache, _m, splitOption) {
                 ic_all,
                 ix,
             })) {
+                i_ignored++;
+                if (idxSkipIgnored) {
+                    ii_rebase++;
+                }
                 continue;
             }
             if (cb) {
@@ -233,7 +246,14 @@ function splitChapterSync(txt, cache, _m, splitOption) {
             _skip = true;
         }
         if (_skip) {
-            _files[name_last] += txt.slice(idx);
+            if (name_last == null) {
+                let name = 'unknow';
+                let name_last = id + '_' + name;
+                _files[name_last] = txt.slice(idx);
+            }
+            else {
+                _files[name_last] += txt.slice(idx);
+            }
             break MAIN2;
         }
         if (cb) {
