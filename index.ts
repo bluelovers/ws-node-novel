@@ -3,7 +3,7 @@
  */
 
 export * from './text';
-import * as StrUtil from 'str-util';
+import StrUtil = require('str-util');
 import { enspace } from './text';
 import tiebaHarmony from 'tieba-harmony';
 import chkBlankLine from 'blank-line';

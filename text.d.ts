@@ -1,3 +1,6 @@
+/**
+ * Created by user on 2017/12/5/005.
+ */
 /// <reference types="node" />
 import { SP_REGEXP, SP_KEY } from 'tieba-harmony';
 export { SP_REGEXP, SP_KEY };
@@ -54,7 +57,12 @@ export declare class enspace {
     toStr(str: Buffer | string | number | any, options?: string): string;
     fixOptions(options: ITextLayoutOptions): ITextLayoutOptions;
     reduceLine<T>(html: T, options?: ITextLayoutOptions): string | T;
+    /**
+     * 通用型段落調整
+     *
+     * @returns {string}
+     */
     textlayout(html: any, options?: ITextLayoutOptions): string;
 }
-import * as NovelText from './text';
-export default NovelText;
+declare const _default: typeof import("./text");
+export default _default;

@@ -2,7 +2,7 @@
  * Created by user on 2017/12/5/005.
  */
 
-import * as StrUtil from 'str-util';
+import StrUtil = require('str-util');
 import getMinMidMax from 'blank-line';
 import crlf, { LF } from 'crlf-normalize';
 import tiebaHarmony, { SP_REGEXP, SP_KEY } from 'tieba-harmony';
@@ -676,6 +676,4 @@ export class enspace
 
 }
 
-import * as NovelText from './text';
-
-export default NovelText;
+export default exports as typeof import('./text');
