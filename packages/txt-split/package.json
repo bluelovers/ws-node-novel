@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/txt-split",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "split from [node-novel/test/txt-split](https://github.com/bluelovers/node-novel/tree/master/test/txt-split)",
   "keywords": [
     "@node-novel",
@@ -35,14 +35,14 @@
   },
   "dependencies": {
     "bluebird": "^3.5.4",
-    "cjk-conv": "^1.1.37",
+    "cjk-conv": "^1.1.40",
     "crlf-normalize": "^1.0.3",
     "debug-color2": "^1.0.7",
     "execall2": "^1.1.1",
     "fs-extra": "^7.0.1",
     "fs-iconv": "^2.0.6",
     "iconv-jschardet": "^1.1.0",
-    "novel-text": "^1.1.24",
+    "novel-text": "^1.1.25",
     "regexp-cjk": "^3.0.3",
     "upath2": "^2.1.3"
   },

@@ -9,6 +9,8 @@ const upath2_1 = require("upath2");
 const split_1 = require("./split");
 const util_1 = require("./util");
 const fs = require("fs-extra");
+const DEFAULT_REGEXP_FLAGS = 'gimu';
+const DEFAULT_REGEXP_FLAGS_IGNORE = 'iu';
 exports.defaultOptions = Object.freeze({
     file: null,
     dirname: null,
@@ -50,7 +52,7 @@ function _handleOptions(options) {
     function _re(data) {
         if (data) {
             if (data.r) {
-                const FLAGS = data.flags || 'gim';
+                const FLAGS = data.flags != null ? data.flags : DEFAULT_REGEXP_FLAGS;
                 if (Array.isArray(data.r)) {
                     data.r = data.r.join('');
                 }
@@ -69,11 +71,11 @@ function _handleOptions(options) {
                         RE = RegExp;
                     }
                     // @ts-ignore
-                    data.r = new RE(data.r, data.r.flags || FLAGS);
+                    data.r = new RE(data.r, data.r.flags != null ? data.r.flags : FLAGS);
                 }
             }
             if (data.ignoreRe) {
-                const FLAGS = data.ignoreFlags || 'i';
+                const FLAGS = data.ignoreFlags != null ? data.ignoreFlags : DEFAULT_REGEXP_FLAGS_IGNORE;
                 if (Array.isArray(data.ignoreRe)) {
                     data.ignoreRe = data.ignoreRe.join('');
                 }
@@ -92,7 +94,7 @@ function _handleOptions(options) {
                         RE = RegExp;
                     }
                     // @ts-ignore
-                    data.ignoreRe = new RE(data.ignoreRe, data.ignoreRe.flags || FLAGS);
+                    data.ignoreRe = new RE(data.ignoreRe, data.ignoreRe.flags != null ? data.ignoreRe.flags : FLAGS);
                 }
             }
             return true;

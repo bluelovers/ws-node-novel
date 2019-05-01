@@ -19,6 +19,9 @@ import { _handleReadFile, _outputFile, _wrapMethod } from './util';
 import fs = require('fs-extra');
 import { console } from './console';
 
+const DEFAULT_REGEXP_FLAGS = 'gimu';
+const DEFAULT_REGEXP_FLAGS_IGNORE = 'iu';
+
 export const defaultOptions = Object.freeze({
 	file: null,
 	dirname: null,
@@ -73,7 +76,7 @@ export function _handleOptions<O extends IOptions | IOptionsRequiredUser>(option
 		{
 			if (data.r)
 			{
-				const FLAGS = data.flags || 'gim';
+				const FLAGS = data.flags != null ? data.flags : DEFAULT_REGEXP_FLAGS;
 
 				if (Array.isArray(data.r))
 				{
@@ -101,13 +104,13 @@ export function _handleOptions<O extends IOptions | IOptionsRequiredUser>(option
 					}
 
 					// @ts-ignore
-					data.r = new RE(data.r, data.r.flags || FLAGS);
+					data.r = new RE(data.r, data.r.flags != null ? data.r.flags : FLAGS);
 				}
 			}
 
 			if (data.ignoreRe)
 			{
-				const FLAGS = data.ignoreFlags || 'i';
+				const FLAGS = data.ignoreFlags != null ? data.ignoreFlags : DEFAULT_REGEXP_FLAGS_IGNORE;
 
 				if (Array.isArray(data.ignoreRe))
 				{
@@ -135,7 +138,7 @@ export function _handleOptions<O extends IOptions | IOptionsRequiredUser>(option
 					}
 
 					// @ts-ignore
-					data.ignoreRe = new RE(data.ignoreRe, data.ignoreRe.flags || FLAGS);
+					data.ignoreRe = new RE(data.ignoreRe, data.ignoreRe.flags != null ? data.ignoreRe.flags : FLAGS);
 				}
 			}
 
