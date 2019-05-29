@@ -1,7 +1,7 @@
 {
   "name": "@node-novel/layout",
   "version": "1.0.0",
-  "description": "",
+  "description": "old name is `novel-text`",
   "license": "ISC",
   "author": "",
   "main": "index.js",
@@ -11,9 +11,16 @@
     "ncu": "npx yarn-tool ncu -u",
     "prepublishOnly": "npm run ncu && npm run sort-package-json && npm run test",
     "sort-package-json": "npx sort-package-json ./package.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha --require ts-node/register !(node_modules)/**/*.{test,spec}.{ts,tsx}"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "array-hyper-unique": "^1.0.7",
+    "blank-line": "^1.0.1",
+    "crlf-normalize": "^1.0.3",
+    "env-bool": "^1.0.3",
+    "str-util": "^2.3.21"
   }
 }

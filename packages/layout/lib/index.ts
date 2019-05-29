@@ -4,177 +4,137 @@
 
 import getMinMidMax from 'blank-line';
 import crlf, { LF } from 'crlf-normalize';
-import { envVal, envBool } from 'env-bool';
+import { envVal } from 'env-bool';
+import { array_unique } from 'array-hyper-unique';
+import {
+	EnumLF,
+	ICacheMap,
+	IConstructorOptions,
+	IRegExpCallback,
+	IReplaceOptions,
+	ITextLayoutOptions,
+	IToStrOptions, ITrimOptionsUser,
+	IWordsAll,
+	IWordsParsed,
+	IWordsRuntime,
+	ICacheMapRow,
+} from './types';
+import { _isIwordsArray, _isIwordsArray2, _isIwordsUserSp, _handleTextLayout } from './util';
 import StrUtil = require('str-util');
 
 export const SP_KEY = "#_@_#";
 export const SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
 
-export interface IOptions
+/**
+ * 排版處理核心
+ */
+export class TextLayout
 {
-	words?: boolean
-	pad_eng?: boolean
-}
+	public readonly SP_KEY: string = SP_KEY;
+	public readonly SP_REGEXP: string = SP_REGEXP;
 
-export interface IWordsOutput
-{
-	_source?: any,
+	protected _RegExpClass: typeof RegExp;
 
-	s?: RegExp,
-	r?: string | IRegExpCallback,
-
-	flags?: string,
-}
-
-export interface IRegExpCallback
-{
-	($0: string, $1?: string, $2?: string, $3?: string, ...argv): string;
-}
-
-export interface IToStrOptions
-{
-	LF?: string,
-	allow_nbsp?: boolean,
-	allow_bom?: boolean,
-}
-
-export interface ITextLayoutOptions extends IToStrOptions
-{
-	allow_lf2?: boolean,
-	allow_lf3?: boolean,
-}
-
-export class enspace
-{
-	public _cache_ = {
-		replace: [],
-		words: new Map(),
+	protected _cache_ = {
+		replace: [] as {
+			old: string[],
+			new: string[],
+			data?,
+		}[],
+		words: new Map() as ICacheMap,
 	};
-	public _data_ = {
+
+	protected _data_ = {
 		m0: /([^a-z0-9\-\.\s])?([a-z0-9\-\.]+(?:[a-z0-9\-\.\s]+[a-z0-9\-\.]+)?)([^a-z0-9\-\.\s])?/uig,
-		r1: /[「」①→\'\":\-\+（）╮（╯＿╰）╭\(\)\[\]■【】《》~～“”‘’:：：，*＊@。ω・、。`　─一\d『』◆~、？！\?\!×\.\<\>=…・]/i,
+		r1: /[「」①→\'\":\-\+（）╮（╯＿╰）╭\(\)\[\]■【】《》~～“”‘’:：：，*＊@。ω・、。`\u3000─一\d『』◆~、？！\?\!×\.\<\>=…・]/i,
 
-		rtrim: /[ \t\uFEFF\xA0　]+$/,
+		rtrim: /[ \t\uFEFF\xA0\u3000]+$/,
 
-		words: [
-			/*
-			{
-				s: '（·）',
-				r: '',
-			},
-			*/
-			{
-				s: /\.{3}/g,
-				r: '…',
-			},
-			{
-				s: /…\.{1,2}/g,
-				r: '……',
-			},
-
-			/*
-			{
-				s: /(第)(?:[\_\t\uFEFF\xA0　]+)(\d+)(?:[\_\t\uFEFF\xA0　]+)(话|頁|夜|章)/g,
-				r: '$1 $2 $3',
-			},
-			{
-				s: /(第)(?:[\_\t\uFEFF\xA0　]+)?(\d+)(?:[\_\t\uFEFF\xA0　]+)(话|頁|夜|章)/g,
-				r: '$1 $2 $3',
-			},
-			{
-				s: /(第)(?:[\_\t\uFEFF\xA0　]+)(\d+)(?:[\_\t\uFEFF\xA0　]+)?(话|頁|夜|章)/g,
-				r: '$1 $2 $3',
-			},
-			*/
-			{
-				s: /(话|日|章)[\_\t\uFEFF\xA0]+/ig,
-				r: '$1 ',
-			},
-			{
-				s: '！　',
-				r: '！',
-
-				no_regex: false,
-			},
-			/*
-			{
-				r: /([「」【】《》『』（）])/ig,
-				s: '$1',
-			},
-			*/
-			/*
-			{
-				s: /(\?\?)[ \t　]+(\?\?)/ig,
-				r: '$1$2',
-			},
-			{
-				s: /「([^「『』」]+)?『([^\n』]+)」([^「『』」]+)?』/,
-				r: '「$1『$2』$3」',
-			},
-			{
-				s: /『([^「『』」]+)?「([^\n」]+)』([^「『』」]+)?」/,
-				r: '『$1「$2」$3』',
-			},
-			{
-				s: /情\s*se\s*小说/ig,
-				r: '情色小说',
-			},
-			*/
-			{
-				s: /^([^「『“”』」]+)?(“)([^「『“”』」]+)[』」]([^”]+)?$/m,
-				r: '$1$2$3”$4',
-			},
-			{
-				s: /，——/g,
-				r: '——',
-			},
-			{
-				s: /(?:話|话)/ug,
-				r: '話',
-			},
-			[/　[ \t]+（/g, '　（'],
-
-			//['製止', '制止'],
-
-			//['預防性雞鴨', '預防性羈押'],
-
-			//['查水[錶表]', '查水錶'],
-
-		] as IWordsOutput[],
-
+		words: [] as IWordsRuntime[],
 	};
-	public options = {};
+	protected options: IConstructorOptions = null;
 
-	public _words_r1 = SP_REGEXP;
-
-	constructor(options?)
+	constructor(options?: IConstructorOptions, ...argv)
 	{
-		let _self = this;
+		let arr: string[] = (options && options.words_block) ? options.words_block.slice() : [];
 
-		let r = this._words_r1;
-
-		let arr = []
-			.concat(options && options.words_block ? options.words_block : null)
-		;
-
-		this._data_.words = this._words1(arr, this._data_.words);
-		this._data_.words = this._words2(this._data_.words);
-	}
-
-	static create(...argv)
-	{
-		return new this(...argv);
-	}
-
-	_words1(arr: string[], words = []): IWordsOutput[]
-	{
-		let r = this._words_r1;
-
-		arr
-			.filter(function (el, index, arr)
+		if (options)
+		{
+			if (options.rtrim)
 			{
-				return el && (index == arr.indexOf(el));
-			})
+				this._data_.rtrim = options.rtrim;
+			}
+
+			if (options.words)
+			{
+				this._data_.words = options.words;
+			}
+
+			if (options.m0)
+			{
+				this._data_.m0 = options.m0;
+			}
+
+			if (options.r1)
+			{
+				this._data_.r1 = options.r1;
+			}
+
+			if (options.SP_KEY)
+			{
+				this.SP_KEY = options.SP_KEY;
+			}
+
+			if (options.SP_REGEXP)
+			{
+				let v: string | RegExp = options.SP_REGEXP;
+
+				if (v instanceof RegExp)
+				{
+					v = v.source;
+				}
+
+				this.SP_REGEXP = v;
+			}
+
+			if (options.RegExpClass)
+			{
+				this._RegExpClass = options.RegExpClass;
+			}
+		}
+
+		this.options = options || null;
+
+		this._init(arr);
+	}
+
+	public static create(options?: IConstructorOptions, ...argv)
+	{
+		return new this(options, ...argv);
+	}
+
+	protected _init(arr: string[])
+	{
+		this._data_.words = this._words1(arr, this._data_.words as any);
+		this._data_.words = this._words2(this._data_.words as any);
+	}
+
+	public get RegExp(): typeof RegExp
+	{
+		return this._RegExpClass || RegExp;
+	}
+
+	/**
+	 * 簡易型樣式處理 適用於 屏蔽字或者人名或者因為編碼問題而變成 ? 那些之類的點
+	 *
+	 * @private
+	 */
+	_words1(arr: string[], words: IWordsParsed[] = []): IWordsRuntime[]
+	{
+		const SP_REGEXP = this.SP_REGEXP;
+		const RC = this.RegExp;
+
+		array_unique(arr)
 			.forEach(function (value)
 			{
 				let a = value.split('@');
@@ -186,10 +146,10 @@ export class enspace
 				});
 				*/
 
-				let s = a.join(`)${r}(`);
+				let s = a.join(`)${SP_REGEXP}(`);
 
 				words.push({
-					s: new RegExp(`(${s})`, 'g'),
+					s: new RC(`(${s})`, 'g'),
 					r: a.map(function (value, index, array)
 					{
 						return '$' + (index + 1);
@@ -201,11 +161,17 @@ export class enspace
 		return words;
 	}
 
-	_words2(words): IWordsOutput[]
+	/**
+	 * 將樣式轉換成實際使用的樣式物件
+	 *
+	 * @private
+	 */
+	_words2(words: IWordsAll[]): IWordsRuntime[]
 	{
-		let r = this._words_r1;
+		const SP_REGEXP = this.SP_REGEXP;
+		const RC = this.RegExp;
 
-		return words.map(function (value, index, array)
+		return words.map(function (value: IWordsAll, index, array)
 		{
 			// @ts-ignore
 			if (value.no_regex)
@@ -213,7 +179,7 @@ export class enspace
 				return value;
 			}
 
-			if (Array.isArray(value) && (value.length == 2 || value.length >= 3))
+			if (_isIwordsArray(value))
 			{
 				value = {
 					_source: value,
@@ -222,18 +188,22 @@ export class enspace
 					r: value[1],
 
 					flags: value[2],
-				};
+				} as IWordsParsed;
 			}
 
-			if (typeof value.s == 'string' && (value.s as string).match(new RegExp(`${SP_KEY}(.+)$`)))
+			if (_isIwordsArray2(value))
 			{
-				// @ts-ignore
+				return value[0];
+			}
+			else if (_isIwordsUserSp(value))
+			{
 				if (!value._source) value._source = value.s;
 
 				let a = value.s.split(SP_KEY);
-				let s = a.join(`)${r}(`);
+				let s = a.join(`)${SP_REGEXP}(`);
 
-				value.s = new RegExp(`(${s})`, value.flags ? value.flags : 'g');
+				// @ts-ignore
+				value.s = new RC(`(${s})`, value.flags ? value.flags : 'g');
 
 				//console.log(value.s);
 
@@ -250,22 +220,18 @@ export class enspace
 				// @ts-ignore
 				if (!value._source) value._source = value.s;
 
-				value.s = new RegExp(value.s, value.flags ? value.flags : 'g');
-			}
-			else if (Array.isArray(value) && value.length == 1 && typeof value[0] == 'function')
-			{
-				value = value[0];
+				value.s = new RC(value.s, value.flags ? value.flags : 'g');
 			}
 			else if (typeof value.fn == 'function')
 			{
-				value = value.fn;
+				return value.fn;
 			}
 
-			return value;
+			return value as any;
 		});
 	}
 
-	replace(text, options: IOptions = {}): string
+	replace(text, options: IReplaceOptions = {}): string
 	{
 		if (!text || !/[^\s]/.test(text))
 		{
@@ -291,35 +257,48 @@ export class enspace
 		return _ret;
 	}
 
-	replace_words(_ret, words: IWordsOutput[], _cache_words?)
+	replace_words(_ret: string, words: IWordsRuntime[], cacheMap?: ICacheMap | true)
 	{
-		if (!_cache_words)
+		if (cacheMap)
 		{
-			_cache_words = new Map();
+			if (cacheMap === true)
+			{
+				cacheMap = new Map();
+			}
+		}
+		else
+		{
+			cacheMap = null as ICacheMap;
 		}
 
-		for (let i in words)
+		for (let value of words)
 		{
-			let _new;
+			let _new: string;
 
-			if (typeof words[i] == 'function')
+			if (typeof value == 'function')
 			{
-				_new = (words[i] as Function)(_ret, _cache_words);
+				_new = value(_ret, cacheMap as ICacheMap);
 			}
 			else
 			{
-				let _r = words[i].s;
+				let _r = value.s;
 
-				_new = _ret.replace(_r, words[i].r);
+				_new = _ret.replace(_r, value.r as IRegExpCallback);
 			}
 
-			if (_new != _ret)
+			if (cacheMap && _new !== _ret)
 			{
-				let myMap = [];
+				let myMap = [] as {
+					old: string,
+					new: string,
+				}[];
 
-				if (_cache_words.has(words[i]))
+				if (cacheMap.has(value))
 				{
-					myMap = _cache_words.get(words[i]);
+					myMap = cacheMap.get(value) as {
+						old: string,
+						new: string,
+					}[];
 				}
 
 				myMap.push({
@@ -327,12 +306,12 @@ export class enspace
 					new: _new,
 				});
 
-				_cache_words.set(words[i], myMap);
-
-				_ret = _new;
+				cacheMap.set(value, myMap);
 			}
 
-			if (!/[^\s]/.test(_ret))
+			_ret = _new;
+
+			if (!/[\S]/.test(_ret))
 			{
 				break;
 			}
@@ -340,10 +319,13 @@ export class enspace
 
 		return {
 			value: _ret as string,
-			cache: _cache_words,
+			cache: cacheMap,
 		};
 	}
 
+	/**
+	 * @deprecated
+	 */
 	paddingEng(text: string)
 	{
 		let _self = this;
@@ -368,7 +350,7 @@ export class enspace
 					if (old != argv[2])
 					{
 						_self._cache_.replace.push({
-							old: old,
+							old,
 							new: argv[2],
 
 							data: argv,
@@ -387,6 +369,9 @@ export class enspace
 			;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	clearLF(text: string)
 	{
 		return this.trim(text)
@@ -395,20 +380,12 @@ export class enspace
 			;
 	}
 
-	trim(text: Buffer, options?): string
-	trim(text: string, options?): string
-	trim(text: number, options?): string
-	trim(text, options?): string
+	trim(text: Buffer | string | number, options?: ITrimOptionsUser): string
 	{
-		let ret = this.toStr(text, options)
-			.replace(/[ \t　\xA0\u3000]+\n/g, '\n')
-			.replace(/^\n+|[\s　\xA0\u3000]+$/g, '')
-		;
-
 		if (typeof options == 'boolean')
 		{
 			options = {
-				trim: !!options,
+				trim: options,
 			}
 		}
 		else if (typeof options == 'string')
@@ -418,24 +395,30 @@ export class enspace
 			}
 		}
 
+		let ret = this.toStr(text, options)
+			.replace(/[ \t\u3000\xA0\u3000]+\n/g, '\n')
+			.replace(/^\n+|[\s\u3000\xA0\u3000]+$/g, '')
+		;
+
 		if (options)
 		{
 			if (typeof options.trim == 'string')
 			{
-				ret = StrUtil.trim(ret, '　' + options.trim);
+				ret = StrUtil.trim(ret, '\u3000' + options.trim);
 			}
 			else if (options.trim)
 			{
-				ret = StrUtil.trim(ret, '　');
+				ret = StrUtil.trim(ret, '\u3000');
 			}
 		}
 
 		return ret;
 	}
 
-	toStr(str: Buffer | string | number | any, options?: IToStrOptions): string
-	toStr(str: Buffer | string | number | any, options?: string): string
-	toStr(str, options?: string | IToStrOptions): string
+	/**
+	 * 轉換為文字並且標準化
+	 */
+	toStr(str: Buffer | string | number | unknown, options?: string | IToStrOptions): string
 	{
 		if (typeof options == 'string')
 		{
@@ -487,6 +470,9 @@ export class enspace
 		return options;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	reduceLine<T>(html: T, options: ITextLayoutOptions = {})
 	{
 		options = this.fixOptions(options);
@@ -501,8 +487,8 @@ export class enspace
 		old = //html
 					//.replace(/\r\n|\r(?!\n)/g, "\n")
 			old
-				.replace(/[ 　\t]+\n/g, "\n")
-				.replace(/[\s　]+$/g, '')
+				.replace(/[ \u3000\t]+\n/g, "\n")
+				.replace(/[\s\u3000]+$/g, '')
 				.replace(/^[\n \t]+/g, '')
 				.replace(/\n{4,}/g, "\n\n\n\n")
 		;
@@ -559,119 +545,22 @@ export class enspace
 	 *
 	 * @returns {string}
 	 */
-	textlayout(html, options: ITextLayoutOptions = {}): string
+	textlayout(input: any, options: ITextLayoutOptions = {}): string
 	{
 		options = this.fixOptions(options);
 
-		html = this.trim(html, options);
+		let html = this.trim(input, options);
 
-		html = //html
-			//.replace(/\r\n|\r(?!\n)/g, "\n")
-			html
-				.replace(/[ 　\t]+\n/g, "\n")
-				.replace(/[\s　]+$/g, '')
+		html = html
+				.replace(/[ \u3000\t]+\n/g, "\n")
+				.replace(/[\s\u3000]+$/g, '')
 				.replace(/^[\n \t]+/g, '')
-				.replace(/\n{4,}/g, "\n\n\n\n")
+				.replace(/\n{4,}/g, EnumLF.LF4)
 		;
 
-		if (!html.match(/[^\n]\n[^\n]/g))
-		{
-			let [min, mid, max] = getMinMidMax(html.toString());
-
-			if (min > 2)
-			{
-				options.allow_lf2 = false;
-			}
-
-			if (max >= 3)
-			{
-				if (min > 2)
-				{
-					let r = new RegExp(`\\n{${min - 1}}(\\n+)`, 'g');
-
-					html = html
-					//.replace(/\n{2}(\n*)/g, '$1')
-						.replace(r, '$1')
-					;
-				}
-
-				html = html
-					.replace(/\n{3,}/g, "\n\n\n")
-				//.replace(/\n{2}/g, "\n")
-				;
-			}
-
-			//console.log(options);
-
-			if (!options.allow_lf2)
-			{
-				html = html
-					.replace(/\n\n/g, "\n")
-				;
-			}
-		}
-
-		html = html
-		// for ts
-			.toString()
-			.replace(/([^\n「」【】《》“”『』（）\[\]"](?:[！？?!。]*)?)\n((?:[—]+)?[「」“”【】《》（）『』])/ug, "$1\n\n$2")
-
-			.replace(/([「」【】《》“”『』（）―\[\]"](?:[！？?!。]*)?)\n((?:　*)[^\n「」“”【】《》（）『』])/ug, "$1\n\n$2")
-			.replace(/([^\n「」【】《》“”『』（）\[\]"≪≫](?:[！？?!。]*)?)\n((?:[—]+)?[≪≫「」“”【】《》（）『』])/ug, "$1\n\n$2")
-
-			.replace(/([「」【】《》“”『』（）―\[\]"](?:[！？?!。]*)?)\n((?:　*)[^\n「」“”【】《》（）『』])/ug, "$1\n\n$2")
-
-			.replace(/(）(?:[！？?!。]*)?)\n([「」【】《》『』“”])/ug, "$1\n\n$2")
-
-			/**
-			 * https://tieba.baidu.com/p/5400503864
-			 *
-			 * 「第三试炼也，多亏了妮露而通过了吗……」
-			 『心神守护的白羽毛』，这个从妮露那里收到的护身符，确实地守护了我的心。
-
-			 */
-			.replace(/([「」【】《》“”『』（）―](?:[！？?!。]*)?)\n((?:[「」“”【】《》（）『』])(?:[^\n]+)([^\n「」【】《》“”『』（）―](?:[！？?!。]*)?)\n)/ug, "$1\n$2\n")
-
-			/**
-			 * 住手，住手，我就是我。不是其他的任何人。
-			 　表示出要必死地进行抵抗的意志，但是侵入脑内的这个『什么东西』，并不能被阻止。不能被，阻止……
-			 */
-			.replace(/(\n(?:[^　\n][^\n]+))\n([　])/g, '$1\n\n$2')
-
-			/**
-			 * 这样一直在这高兴着
-
-			 。
-			 */
-			//.replace(/([^\n])(\n+)((?:[吧呢]*)?[。！？，、])\n/ug, "$1$3$2")
-
-			.replace(/([^\n])(\n+)(fin|\<完\>)(\n|$)/ig, "$1$2\n$3$4")
-		;
-
-		html = html
-			.replace(/^\n+|[\s　]+$/g, '')
-			/*
-			.replace(/(\n){4,}/g, "\n\n\n\n")
-			.replace(/(\n){3}/g, "\n\n")
-			*/
-			.replace(/(\n){4,}/g, "\n\n\n\n")
-
-		;
-
-		if (options.allow_lf3)
-		{
-			html = html
-				.replace(/(\n){3,}/g, "\n\n\n")
-			;
-		}
-		else
-		{
-			html = html
-				.replace(/(\n){3}/g, "\n\n")
-			;
-		}
-
-		return html;
+		return _handleTextLayout(html, options)
 	}
 
 }
+
+export default TextLayout;

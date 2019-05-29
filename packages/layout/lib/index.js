@@ -6,114 +6,79 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const blank_line_1 = require("blank-line");
 const crlf_normalize_1 = require("crlf-normalize");
 const env_bool_1 = require("env-bool");
+const array_hyper_unique_1 = require("array-hyper-unique");
+const util_1 = require("./util");
 const StrUtil = require("str-util");
 exports.SP_KEY = "#_@_#";
 exports.SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
-class enspace {
-    constructor(options) {
+/**
+ * 排版處理核心
+ */
+class TextLayout {
+    constructor(options, ...argv) {
+        this.SP_KEY = exports.SP_KEY;
+        this.SP_REGEXP = exports.SP_REGEXP;
         this._cache_ = {
             replace: [],
             words: new Map(),
         };
         this._data_ = {
             m0: /([^a-z0-9\-\.\s])?([a-z0-9\-\.]+(?:[a-z0-9\-\.\s]+[a-z0-9\-\.]+)?)([^a-z0-9\-\.\s])?/uig,
-            r1: /[「」①→\'\":\-\+（）╮（╯＿╰）╭\(\)\[\]■【】《》~～“”‘’:：：，*＊@。ω・、。`　─一\d『』◆~、？！\?\!×\.\<\>=…・]/i,
-            rtrim: /[ \t\uFEFF\xA0　]+$/,
-            words: [
-                /*
-                {
-                    s: '（·）',
-                    r: '',
-                },
-                */
-                {
-                    s: /\.{3}/g,
-                    r: '…',
-                },
-                {
-                    s: /…\.{1,2}/g,
-                    r: '……',
-                },
-                /*
-                {
-                    s: /(第)(?:[\_\t\uFEFF\xA0　]+)(\d+)(?:[\_\t\uFEFF\xA0　]+)(话|頁|夜|章)/g,
-                    r: '$1 $2 $3',
-                },
-                {
-                    s: /(第)(?:[\_\t\uFEFF\xA0　]+)?(\d+)(?:[\_\t\uFEFF\xA0　]+)(话|頁|夜|章)/g,
-                    r: '$1 $2 $3',
-                },
-                {
-                    s: /(第)(?:[\_\t\uFEFF\xA0　]+)(\d+)(?:[\_\t\uFEFF\xA0　]+)?(话|頁|夜|章)/g,
-                    r: '$1 $2 $3',
-                },
-                */
-                {
-                    s: /(话|日|章)[\_\t\uFEFF\xA0]+/ig,
-                    r: '$1 ',
-                },
-                {
-                    s: '！　',
-                    r: '！',
-                    no_regex: false,
-                },
-                /*
-                {
-                    r: /([「」【】《》『』（）])/ig,
-                    s: '$1',
-                },
-                */
-                /*
-                {
-                    s: /(\?\?)[ \t　]+(\?\?)/ig,
-                    r: '$1$2',
-                },
-                {
-                    s: /「([^「『』」]+)?『([^\n』]+)」([^「『』」]+)?』/,
-                    r: '「$1『$2』$3」',
-                },
-                {
-                    s: /『([^「『』」]+)?「([^\n」]+)』([^「『』」]+)?」/,
-                    r: '『$1「$2」$3』',
-                },
-                {
-                    s: /情\s*se\s*小说/ig,
-                    r: '情色小说',
-                },
-                */
-                {
-                    s: /^([^「『“”』」]+)?(“)([^「『“”』」]+)[』」]([^”]+)?$/m,
-                    r: '$1$2$3”$4',
-                },
-                {
-                    s: /，——/g,
-                    r: '——',
-                },
-                {
-                    s: /(?:話|话)/ug,
-                    r: '話',
-                },
-                [/　[ \t]+（/g, '　（'],
-            ],
+            r1: /[「」①→\'\":\-\+（）╮（╯＿╰）╭\(\)\[\]■【】《》~～“”‘’:：：，*＊@。ω・、。`\u3000─一\d『』◆~、？！\?\!×\.\<\>=…・]/i,
+            rtrim: /[ \t\uFEFF\xA0\u3000]+$/,
+            words: [],
         };
-        this.options = {};
-        this._words_r1 = exports.SP_REGEXP;
-        let _self = this;
-        let r = this._words_r1;
-        let arr = []
-            .concat(options && options.words_block ? options.words_block : null);
+        this.options = null;
+        let arr = (options && options.words_block) ? options.words_block.slice() : [];
+        if (options) {
+            if (options.rtrim) {
+                this._data_.rtrim = options.rtrim;
+            }
+            if (options.words) {
+                this._data_.words = options.words;
+            }
+            if (options.m0) {
+                this._data_.m0 = options.m0;
+            }
+            if (options.r1) {
+                this._data_.r1 = options.r1;
+            }
+            if (options.SP_KEY) {
+                this.SP_KEY = options.SP_KEY;
+            }
+            if (options.SP_REGEXP) {
+                let v = options.SP_REGEXP;
+                if (v instanceof RegExp) {
+                    v = v.source;
+                }
+                this.SP_REGEXP = v;
+            }
+            if (options.RegExpClass) {
+                this._RegExpClass = options.RegExpClass;
+            }
+        }
+        this.options = options || null;
+        this._init(arr);
+    }
+    static create(options, ...argv) {
+        return new this(options, ...argv);
+    }
+    _init(arr) {
         this._data_.words = this._words1(arr, this._data_.words);
         this._data_.words = this._words2(this._data_.words);
     }
-    static create(...argv) {
-        return new this(...argv);
+    get RegExp() {
+        return this._RegExpClass || RegExp;
     }
+    /**
+     * 簡易型樣式處理 適用於 屏蔽字或者人名或者因為編碼問題而變成 ? 那些之類的點
+     *
+     * @private
+     */
     _words1(arr, words = []) {
-        let r = this._words_r1;
-        arr
-            .filter(function (el, index, arr) {
-            return el && (index == arr.indexOf(el));
-        })
+        const SP_REGEXP = this.SP_REGEXP;
+        const RC = this.RegExp;
+        array_hyper_unique_1.array_unique(arr)
             .forEach(function (value) {
             let a = value.split('@');
             /*
@@ -122,9 +87,9 @@ class enspace {
                 r: '$1$2',
             });
             */
-            let s = a.join(`)${r}(`);
+            let s = a.join(`)${SP_REGEXP}(`);
             words.push({
-                s: new RegExp(`(${s})`, 'g'),
+                s: new RC(`(${s})`, 'g'),
                 r: a.map(function (value, index, array) {
                     return '$' + (index + 1);
                 }).join(''),
@@ -132,14 +97,20 @@ class enspace {
         });
         return words;
     }
+    /**
+     * 將樣式轉換成實際使用的樣式物件
+     *
+     * @private
+     */
     _words2(words) {
-        let r = this._words_r1;
+        const SP_REGEXP = this.SP_REGEXP;
+        const RC = this.RegExp;
         return words.map(function (value, index, array) {
             // @ts-ignore
             if (value.no_regex) {
                 return value;
             }
-            if (Array.isArray(value) && (value.length == 2 || value.length >= 3)) {
+            if (util_1._isIwordsArray(value)) {
                 value = {
                     _source: value,
                     s: value[0],
@@ -147,13 +118,16 @@ class enspace {
                     flags: value[2],
                 };
             }
-            if (typeof value.s == 'string' && value.s.match(new RegExp(`${exports.SP_KEY}(.+)$`))) {
-                // @ts-ignore
+            if (util_1._isIwordsArray2(value)) {
+                return value[0];
+            }
+            else if (util_1._isIwordsUserSp(value)) {
                 if (!value._source)
                     value._source = value.s;
                 let a = value.s.split(exports.SP_KEY);
-                let s = a.join(`)${r}(`);
-                value.s = new RegExp(`(${s})`, value.flags ? value.flags : 'g');
+                let s = a.join(`)${SP_REGEXP}(`);
+                // @ts-ignore
+                value.s = new RC(`(${s})`, value.flags ? value.flags : 'g');
                 //console.log(value.s);
                 if (value.r === null) {
                     value.r = a.map(function (value, index, array) {
@@ -165,13 +139,10 @@ class enspace {
                 // @ts-ignore
                 if (!value._source)
                     value._source = value.s;
-                value.s = new RegExp(value.s, value.flags ? value.flags : 'g');
-            }
-            else if (Array.isArray(value) && value.length == 1 && typeof value[0] == 'function') {
-                value = value[0];
+                value.s = new RC(value.s, value.flags ? value.flags : 'g');
             }
             else if (typeof value.fn == 'function') {
-                value = value.fn;
+                return value.fn;
             }
             return value;
         });
@@ -191,40 +162,48 @@ class enspace {
         }
         return _ret;
     }
-    replace_words(_ret, words, _cache_words) {
-        if (!_cache_words) {
-            _cache_words = new Map();
+    replace_words(_ret, words, cacheMap) {
+        if (cacheMap) {
+            if (cacheMap === true) {
+                cacheMap = new Map();
+            }
         }
-        for (let i in words) {
+        else {
+            cacheMap = null;
+        }
+        for (let value of words) {
             let _new;
-            if (typeof words[i] == 'function') {
-                _new = words[i](_ret, _cache_words);
+            if (typeof value == 'function') {
+                _new = value(_ret, cacheMap);
             }
             else {
-                let _r = words[i].s;
-                _new = _ret.replace(_r, words[i].r);
+                let _r = value.s;
+                _new = _ret.replace(_r, value.r);
             }
-            if (_new != _ret) {
+            if (cacheMap && _new !== _ret) {
                 let myMap = [];
-                if (_cache_words.has(words[i])) {
-                    myMap = _cache_words.get(words[i]);
+                if (cacheMap.has(value)) {
+                    myMap = cacheMap.get(value);
                 }
                 myMap.push({
                     old: _ret,
                     new: _new,
                 });
-                _cache_words.set(words[i], myMap);
-                _ret = _new;
+                cacheMap.set(value, myMap);
             }
-            if (!/[^\s]/.test(_ret)) {
+            _ret = _new;
+            if (!/[\S]/.test(_ret)) {
                 break;
             }
         }
         return {
             value: _ret,
-            cache: _cache_words,
+            cache: cacheMap,
         };
     }
+    /**
+     * @deprecated
+     */
     paddingEng(text) {
         let _self = this;
         return this.toStr(text)
@@ -239,7 +218,7 @@ class enspace {
                 }
                 if (old != argv[2]) {
                     _self._cache_.replace.push({
-                        old: old,
+                        old,
                         new: argv[2],
                         data: argv,
                     });
@@ -252,18 +231,18 @@ class enspace {
             return argv[0];
         });
     }
+    /**
+     * @deprecated
+     */
     clearLF(text) {
         return this.trim(text)
             .replace(/\n{4,}/g, '\n\n')
             .replace(/\n{3,}/g, '\n\n');
     }
     trim(text, options) {
-        let ret = this.toStr(text, options)
-            .replace(/[ \t　\xA0\u3000]+\n/g, '\n')
-            .replace(/^\n+|[\s　\xA0\u3000]+$/g, '');
         if (typeof options == 'boolean') {
             options = {
-                trim: !!options,
+                trim: options,
             };
         }
         else if (typeof options == 'string') {
@@ -271,16 +250,22 @@ class enspace {
                 trim: options,
             };
         }
+        let ret = this.toStr(text, options)
+            .replace(/[ \t\u3000\xA0\u3000]+\n/g, '\n')
+            .replace(/^\n+|[\s\u3000\xA0\u3000]+$/g, '');
         if (options) {
             if (typeof options.trim == 'string') {
-                ret = StrUtil.trim(ret, '　' + options.trim);
+                ret = StrUtil.trim(ret, '\u3000' + options.trim);
             }
             else if (options.trim) {
-                ret = StrUtil.trim(ret, '　');
+                ret = StrUtil.trim(ret, '\u3000');
             }
         }
         return ret;
     }
+    /**
+     * 轉換為文字並且標準化
+     */
     toStr(str, options) {
         if (typeof options == 'string') {
             options = {
@@ -312,6 +297,9 @@ class enspace {
             .forEach(([k, v]) => options[k] = env_bool_1.envVal(v));
         return options;
     }
+    /**
+     * @deprecated
+     */
     reduceLine(html, options = {}) {
         options = this.fixOptions(options);
         if (options.allow_lf2) {
@@ -321,8 +309,8 @@ class enspace {
         old = //html
             //.replace(/\r\n|\r(?!\n)/g, "\n")
             old
-                .replace(/[ 　\t]+\n/g, "\n")
-                .replace(/[\s　]+$/g, '')
+                .replace(/[ \u3000\t]+\n/g, "\n")
+                .replace(/[\s\u3000]+$/g, '')
                 .replace(/^[\n \t]+/g, '')
                 .replace(/\n{4,}/g, "\n\n\n\n");
         let _html = old;
@@ -357,82 +345,17 @@ class enspace {
      *
      * @returns {string}
      */
-    textlayout(html, options = {}) {
+    textlayout(input, options = {}) {
         options = this.fixOptions(options);
-        html = this.trim(html, options);
-        html = //html
-            //.replace(/\r\n|\r(?!\n)/g, "\n")
-            html
-                .replace(/[ 　\t]+\n/g, "\n")
-                .replace(/[\s　]+$/g, '')
-                .replace(/^[\n \t]+/g, '')
-                .replace(/\n{4,}/g, "\n\n\n\n");
-        if (!html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = blank_line_1.default(html.toString());
-            if (min > 2) {
-                options.allow_lf2 = false;
-            }
-            if (max >= 3) {
-                if (min > 2) {
-                    let r = new RegExp(`\\n{${min - 1}}(\\n+)`, 'g');
-                    html = html
-                        //.replace(/\n{2}(\n*)/g, '$1')
-                        .replace(r, '$1');
-                }
-                html = html
-                    .replace(/\n{3,}/g, "\n\n\n");
-            }
-            //console.log(options);
-            if (!options.allow_lf2) {
-                html = html
-                    .replace(/\n\n/g, "\n");
-            }
-        }
+        let html = this.trim(input, options);
         html = html
-            // for ts
-            .toString()
-            .replace(/([^\n「」【】《》“”『』（）\[\]"](?:[！？?!。]*)?)\n((?:[—]+)?[「」“”【】《》（）『』])/ug, "$1\n\n$2")
-            .replace(/([「」【】《》“”『』（）―\[\]"](?:[！？?!。]*)?)\n((?:　*)[^\n「」“”【】《》（）『』])/ug, "$1\n\n$2")
-            .replace(/([^\n「」【】《》“”『』（）\[\]"≪≫](?:[！？?!。]*)?)\n((?:[—]+)?[≪≫「」“”【】《》（）『』])/ug, "$1\n\n$2")
-            .replace(/([「」【】《》“”『』（）―\[\]"](?:[！？?!。]*)?)\n((?:　*)[^\n「」“”【】《》（）『』])/ug, "$1\n\n$2")
-            .replace(/(）(?:[！？?!。]*)?)\n([「」【】《》『』“”])/ug, "$1\n\n$2")
-            /**
-             * https://tieba.baidu.com/p/5400503864
-             *
-             * 「第三试炼也，多亏了妮露而通过了吗……」
-             『心神守护的白羽毛』，这个从妮露那里收到的护身符，确实地守护了我的心。
-
-             */
-            .replace(/([「」【】《》“”『』（）―](?:[！？?!。]*)?)\n((?:[「」“”【】《》（）『』])(?:[^\n]+)([^\n「」【】《》“”『』（）―](?:[！？?!。]*)?)\n)/ug, "$1\n$2\n")
-            /**
-             * 住手，住手，我就是我。不是其他的任何人。
-              表示出要必死地进行抵抗的意志，但是侵入脑内的这个『什么东西』，并不能被阻止。不能被，阻止……
-             */
-            .replace(/(\n(?:[^　\n][^\n]+))\n([　])/g, '$1\n\n$2')
-            /**
-             * 这样一直在这高兴着
-
-             。
-             */
-            //.replace(/([^\n])(\n+)((?:[吧呢]*)?[。！？，、])\n/ug, "$1$3$2")
-            .replace(/([^\n])(\n+)(fin|\<完\>)(\n|$)/ig, "$1$2\n$3$4");
-        html = html
-            .replace(/^\n+|[\s　]+$/g, '')
-            /*
-            .replace(/(\n){4,}/g, "\n\n\n\n")
-            .replace(/(\n){3}/g, "\n\n")
-            */
-            .replace(/(\n){4,}/g, "\n\n\n\n");
-        if (options.allow_lf3) {
-            html = html
-                .replace(/(\n){3,}/g, "\n\n\n");
-        }
-        else {
-            html = html
-                .replace(/(\n){3}/g, "\n\n");
-        }
-        return html;
+            .replace(/[ \u3000\t]+\n/g, "\n")
+            .replace(/[\s\u3000]+$/g, '')
+            .replace(/^[\n \t]+/g, '')
+            .replace(/\n{4,}/g, "\n\n\n\n" /* LF4 */);
+        return util_1._handleTextLayout(html, options);
     }
 }
-exports.enspace = enspace;
+exports.TextLayout = TextLayout;
+exports.default = TextLayout;
 //# sourceMappingURL=index.js.map

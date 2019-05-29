@@ -2,65 +2,75 @@
  * Created by user on 2019/5/29.
  */
 /// <reference types="node" />
+import { ICacheMap, IConstructorOptions, IReplaceOptions, ITextLayoutOptions, IToStrOptions, ITrimOptionsUser, IWordsAll, IWordsParsed, IWordsRuntime, ICacheMapRow } from './types';
 export declare const SP_KEY = "#_@_#";
 export declare const SP_REGEXP = "(?:@|\uFF08\u00B7?\uFF09|-|/|\\(\\)|%|\uFFE5|_|\\?|\uFF1F|\\||#|\\$|[\uFF08\\(](?:\u548C\u8C10|\u6CB3\u87F9)[\\)\uFF09]|\uFF08\u6CB3\uFF09\uFF08\u87F9\uFF09|[\uFF08\\(][\u6CB3\u87F9]{1,2}[\\)\uFF09]| |\\.|[\u30FB\u00B7]|\\*|\u25A1|\u570C|[=\uFF1D]|\\\\\\\\|\\/\\/|\uFF5C)";
-export interface IOptions {
-    words?: boolean;
-    pad_eng?: boolean;
-}
-export interface IWordsOutput {
-    _source?: any;
-    s?: RegExp;
-    r?: string | IRegExpCallback;
-    flags?: string;
-}
-export interface IRegExpCallback {
-    ($0: string, $1?: string, $2?: string, $3?: string, ...argv: any[]): string;
-}
-export interface IToStrOptions {
-    LF?: string;
-    allow_nbsp?: boolean;
-    allow_bom?: boolean;
-}
-export interface ITextLayoutOptions extends IToStrOptions {
-    allow_lf2?: boolean;
-    allow_lf3?: boolean;
-}
-export declare class enspace {
-    _cache_: {
-        replace: any[];
-        words: Map<any, any>;
+/**
+ * 排版處理核心
+ */
+export declare class TextLayout {
+    readonly SP_KEY: string;
+    readonly SP_REGEXP: string;
+    protected _RegExpClass: typeof RegExp;
+    protected _cache_: {
+        replace: {
+            old: string[];
+            new: string[];
+            data?: any;
+        }[];
+        words: Map<IWordsRuntime, ICacheMapRow[]>;
     };
-    _data_: {
+    protected _data_: {
         m0: RegExp;
         r1: RegExp;
         rtrim: RegExp;
-        words: IWordsOutput[];
+        words: IWordsRuntime[];
     };
-    options: {};
-    _words_r1: string;
-    constructor(options?: any);
-    static create(...argv: any[]): enspace;
-    _words1(arr: string[], words?: any[]): IWordsOutput[];
-    _words2(words: any): IWordsOutput[];
-    replace(text: any, options?: IOptions): string;
-    replace_words(_ret: any, words: IWordsOutput[], _cache_words?: any): {
+    protected options: IConstructorOptions;
+    constructor(options?: IConstructorOptions, ...argv: any[]);
+    static create(options?: IConstructorOptions, ...argv: any[]): TextLayout;
+    protected _init(arr: string[]): void;
+    readonly RegExp: typeof RegExp;
+    /**
+     * 簡易型樣式處理 適用於 屏蔽字或者人名或者因為編碼問題而變成 ? 那些之類的點
+     *
+     * @private
+     */
+    _words1(arr: string[], words?: IWordsParsed[]): IWordsRuntime[];
+    /**
+     * 將樣式轉換成實際使用的樣式物件
+     *
+     * @private
+     */
+    _words2(words: IWordsAll[]): IWordsRuntime[];
+    replace(text: any, options?: IReplaceOptions): string;
+    replace_words(_ret: string, words: IWordsRuntime[], cacheMap?: ICacheMap | true): {
         value: string;
-        cache: any;
+        cache: Map<IWordsRuntime, ICacheMapRow[]>;
     };
+    /**
+     * @deprecated
+     */
     paddingEng(text: string): string;
+    /**
+     * @deprecated
+     */
     clearLF(text: string): string;
-    trim(text: Buffer, options?: any): string;
-    trim(text: string, options?: any): string;
-    trim(text: number, options?: any): string;
-    toStr(str: Buffer | string | number | any, options?: IToStrOptions): string;
-    toStr(str: Buffer | string | number | any, options?: string): string;
+    trim(text: Buffer | string | number, options?: ITrimOptionsUser): string;
+    /**
+     * 轉換為文字並且標準化
+     */
+    toStr(str: Buffer | string | number | unknown, options?: string | IToStrOptions): string;
     fixOptions(options: ITextLayoutOptions): ITextLayoutOptions;
+    /**
+     * @deprecated
+     */
     reduceLine<T>(html: T, options?: ITextLayoutOptions): string | T;
     /**
      * 通用型段落調整
      *
      * @returns {string}
      */
-    textlayout(html: any, options?: ITextLayoutOptions): string;
+    textlayout(input: any, options?: ITextLayoutOptions): string;
 }
+export default TextLayout;

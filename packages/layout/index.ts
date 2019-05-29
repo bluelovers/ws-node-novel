@@ -3,8 +3,13 @@
  */
 
 export * from './lib';
-import { enspace } from './lib';
+import { TextLayout } from './lib';
 
-export const novelText = enspace.create();
-export default novelText;
+/**
+ * 預設的 排版處理核心 如需要自訂預設值 可以 使用 `TextLayout.create(options)`
+ *
+ * @type {TextLayout}
+ */
+export const textLayout = TextLayout.create();
 
+export default textLayout;

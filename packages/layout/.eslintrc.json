@@ -1,6 +1,5 @@
 {
   "extends": [
     "bluelovers"
-  ],
-  "rules": {}
+  ]
 }
