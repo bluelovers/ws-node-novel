@@ -357,5 +357,6 @@ class TextLayout {
     }
 }
 exports.TextLayout = TextLayout;
+exports.create = TextLayout.create.bind(TextLayout);
 exports.default = TextLayout;
 //# sourceMappingURL=index.js.map

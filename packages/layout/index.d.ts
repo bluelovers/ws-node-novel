@@ -9,4 +9,8 @@ import { TextLayout } from './lib';
  * @type {TextLayout}
  */
 export declare const textLayout: TextLayout;
+/**
+ * @deprecated
+ */
+export declare const novelText: TextLayout;
 export default textLayout;

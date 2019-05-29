@@ -73,4 +73,5 @@ export declare class TextLayout {
      */
     textlayout(input: any, options?: ITextLayoutOptions): string;
 }
+export declare const create: typeof TextLayout.create;
 export default TextLayout;

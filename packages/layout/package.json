@@ -1,7 +1,28 @@
 {
   "name": "@node-novel/layout",
-  "version": "1.0.0",
-  "description": "old name is `novel-text`",
+  "version": "2.0.0",
+  "description": "node-novel core module",
+  "keywords": [
+    "chinese",
+    "expression",
+    "format",
+    "keywords",
+    "layout",
+    "match",
+    "node-novel",
+    "node-text",
+    "novel",
+    "parse",
+    "re",
+    "regex",
+    "regexp",
+    "regular",
+    "regular expression",
+    "replace",
+    "sort",
+    "text",
+    "txt"
+  ],
   "license": "ISC",
   "author": "",
   "main": "index.js",
@@ -10,11 +31,9 @@
     "lint": "npx eslint **/*.ts",
     "ncu": "npx yarn-tool ncu -u",
     "prepublishOnly": "npm run ncu && npm run sort-package-json && npm run test",
+    "postpublish": "git commit -m \"publish new version\" .",
     "sort-package-json": "npx sort-package-json ./package.json",
     "test": "npx mocha --require ts-node/register !(node_modules)/**/*.{test,spec}.{ts,tsx}"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "dependencies": {
     "array-hyper-unique": "^1.0.7",
@@ -22,5 +41,8 @@
     "crlf-normalize": "^1.0.3",
     "env-bool": "^1.0.3",
     "str-util": "^2.3.21"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

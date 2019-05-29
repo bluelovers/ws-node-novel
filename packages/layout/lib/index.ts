@@ -295,10 +295,7 @@ export class TextLayout
 
 				if (cacheMap.has(value))
 				{
-					myMap = cacheMap.get(value) as {
-						old: string,
-						new: string,
-					}[];
+					myMap = cacheMap.get(value);
 				}
 
 				myMap.push({
@@ -562,5 +559,7 @@ export class TextLayout
 	}
 
 }
+
+export const create = TextLayout.create.bind(TextLayout);
 
 export default TextLayout;

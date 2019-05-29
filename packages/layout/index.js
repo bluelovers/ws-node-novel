@@ -13,6 +13,10 @@ const lib_1 = require("./lib");
  *
  * @type {TextLayout}
  */
-exports.textLayout = lib_1.TextLayout.create();
+exports.textLayout = lib_1.create();
+/**
+ * @deprecated
+ */
+exports.novelText = exports.textLayout;
 exports.default = exports.textLayout;
 //# sourceMappingURL=index.js.map
