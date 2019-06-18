@@ -3,6 +3,7 @@
  */
 import { novelDiffFromLog } from '../index';
 import { NovelDiffFromLogParser } from '../class';
+import { extname } from 'upath2'
 
 let data = novelDiffFromLog({
 	novelRoot: 'G:\\Users\\The Project\\nodejs-test\\node-novel2\\dist_novel',
@@ -21,3 +22,5 @@ console.dir(cd.files().length);
 let ps = cd.filterPathMains((s) => /_out$/.test(s));
 
 console.dir(NovelDiffFromLogParser.files(ps).length);
+
+console.dir(cd.files((value) => extname(value.basename) === '.md').length);

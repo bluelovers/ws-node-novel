@@ -46,9 +46,9 @@ export class NovelDiffFromLogParser
 	 * 回傳所有檔案列表
 	 */
 	@ArrayUniqueDecorator
-	files()
+	files(filter?: (value: IListFileRow) => boolean)
 	{
-		return NovelDiffFromLogParser.files(this.data.list)
+		return NovelDiffFromLogParser.files(this.data.list, filter)
 	}
 
 	@ArrayUniqueDecorator
@@ -61,10 +61,15 @@ export class NovelDiffFromLogParser
 			}, [] as string[])
 	}
 
-	@ArrayUniqueDecorator
-	static files(list: INovelDiffFromLog["list"])
+	static filterFiles(list: IListFileRow[], filter: (value: IListFileRow) => boolean)
 	{
-		return Object.values(list)
+		return list.filter(filter)
+	}
+
+	@ArrayUniqueDecorator
+	static files(list: INovelDiffFromLog["list"], filter?: (value: IListFileRow) => boolean)
+	{
+		let ls = Object.values(list)
 			.reduce((ls, listTop) => {
 
 				Object.values(listTop)
@@ -75,6 +80,13 @@ export class NovelDiffFromLogParser
 
 				return ls;
 			}, [] as IListFileRow[]);
+
+		if (filter)
+		{
+			return NovelDiffFromLogParser.filterFiles(ls, filter)
+		}
+
+		return ls;
 	}
 }
 

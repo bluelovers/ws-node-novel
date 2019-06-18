@@ -17,9 +17,10 @@ export declare class NovelDiffFromLogParser {
     /**
      * 回傳所有檔案列表
      */
-    files(): IListFileRow[];
+    files(filter?: (value: IListFileRow) => boolean): IListFileRow[];
     static novelIDs(list: INovelDiffFromLog["list"]): string[];
-    static files(list: INovelDiffFromLog["list"]): IListFileRow[];
+    static filterFiles(list: IListFileRow[], filter: (value: IListFileRow) => boolean): IListFileRow[];
+    static files(list: INovelDiffFromLog["list"], filter?: (value: IListFileRow) => boolean): IListFileRow[];
 }
 export declare function ArrayUniqueDecorator<T extends Function>(target: object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>): void;
 export default NovelDiffFromLogParser;
