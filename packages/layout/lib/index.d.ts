@@ -44,6 +44,10 @@ export declare class TextLayout {
      */
     _words2(words: IWordsAll[]): IWordsRuntime[];
     replace(text: any, options?: IReplaceOptions): string;
+    /**
+     * for run rule one by one
+     */
+    replace_row(_ret: string, value: IWordsRuntime, cacheMap?: ICacheMap): string;
     replace_words(_ret: string, words: IWordsRuntime[], cacheMap?: ICacheMap | true): {
         value: string;
         cache: Map<IWordsRuntime, ICacheMapRow[]>;

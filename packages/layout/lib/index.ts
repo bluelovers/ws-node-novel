@@ -257,6 +257,47 @@ export class TextLayout
 		return _ret;
 	}
 
+	/**
+	 * for run rule one by one
+	 */
+	replace_row(_ret: string, value: IWordsRuntime, cacheMap?: ICacheMap)
+	{
+		let _new: string;
+
+		if (typeof value == 'function')
+		{
+			_new = value(_ret, cacheMap);
+		}
+		else
+		{
+			let _r = value.s;
+
+			_new = _ret.replace(_r, value.r as IRegExpCallback);
+		}
+
+		if (cacheMap && _new !== _ret)
+		{
+			let myMap = [] as {
+				old: string,
+				new: string,
+			}[];
+
+			if (cacheMap.has(value))
+			{
+				myMap = cacheMap.get(value);
+			}
+
+			myMap.push({
+				old: _ret,
+				new: _new,
+			});
+
+			cacheMap.set(value, myMap);
+		}
+
+		return _new;
+	}
+
 	replace_words(_ret: string, words: IWordsRuntime[], cacheMap?: ICacheMap | true)
 	{
 		if (cacheMap)
@@ -273,40 +314,7 @@ export class TextLayout
 
 		for (let value of words)
 		{
-			let _new: string;
-
-			if (typeof value == 'function')
-			{
-				_new = value(_ret, cacheMap as ICacheMap);
-			}
-			else
-			{
-				let _r = value.s;
-
-				_new = _ret.replace(_r, value.r as IRegExpCallback);
-			}
-
-			if (cacheMap && _new !== _ret)
-			{
-				let myMap = [] as {
-					old: string,
-					new: string,
-				}[];
-
-				if (cacheMap.has(value))
-				{
-					myMap = cacheMap.get(value);
-				}
-
-				myMap.push({
-					old: _ret,
-					new: _new,
-				});
-
-				cacheMap.set(value, myMap);
-			}
-
-			_ret = _new;
+			_ret = this.replace_row(_ret, value, cacheMap);
 
 			if (!/[\S]/.test(_ret))
 			{
