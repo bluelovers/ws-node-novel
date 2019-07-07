@@ -11,7 +11,7 @@ import path = require('upath2');
 import emailNormalize = require('email-normalize');
 import UString = require('uni-string');
 import { Console } from 'debug-color2';
-import { _createMode002 } from './lib/create-new-empty';
+import { _createMode002, _createMode001 } from './lib/create-new-empty';
 import { console } from '@git-lazy/util';
 
 export { console }
@@ -372,7 +372,7 @@ export function runAllJob(cwd: string)
 		})
 		.tap(async function (oldData)
 		{
-			await _createMode002(cwd);
+			await _createMode001(cwd);
 
 			let { name, email } = await git_get_user(cwd);
 
