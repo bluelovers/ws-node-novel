@@ -117,6 +117,8 @@ export interface IRegExpCallback
 {
 	($0: string, $1?: string, $2?: string, $3?: string, ...argv: string[]): string;
 
+	(substring: string, ...args: string[]): string
+
 	(substring: string, ...args: any[]): string
 }
 
