@@ -23,7 +23,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "array-hyper-unique": "^1.0.7",
+    "array-hyper-unique": "^1.1.0",
     "git-diff-from": "^1.1.5",
     "ts-type": "^1.2.9",
     "upath2": "^2.1.3"

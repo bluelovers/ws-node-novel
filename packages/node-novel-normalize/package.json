@@ -29,8 +29,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "cjk-conv": "^1.1.44",
+    "cjk-conv": "^1.1.83",
     "normalize-num": "^1.0.1",
-    "str-util": "^2.3.19"
+    "str-util": "^2.3.21"
   }
 }

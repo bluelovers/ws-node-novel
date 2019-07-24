@@ -28,11 +28,11 @@
     "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\""
   },
   "dependencies": {
-    "array-hyper-unique": "^1.0.7",
+    "array-hyper-unique": "^1.1.0",
     "blank-line": "^1.0.1",
     "crlf-normalize": "^1.0.3",
-    "execall2": "^1.1.1",
-    "uni-string": "^1.1.0"
+    "execall2": "^1.1.4",
+    "uni-string": "^1.1.2"
   },
   "publishConfig": {
     "access": "public"
