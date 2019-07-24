@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/txt-stat-report",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
   "description": "計算 小說 內文 統計資訊",
   "keywords": [
