@@ -20,6 +20,8 @@ const zhRegExp = _zhRegExp.use({
 			autoFullHaif: true,
 		})
 	],
+	unsafe: true,
+	greedyTable: 2,
 });
 
 export const reTxtImgTag = new zhRegExp(`[(（](?:插(?:圖|畫|絵)|圖(?:片|像)|画像)([a-z0-9ａ-ｚ０-９_―——─－一─——－\u2E3A\u0332\u0331\u02CD﹘\\-]+)[)）]`, 'iug', {
