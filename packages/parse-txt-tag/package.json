@@ -1,0 +1,40 @@
+{
+  "name": "@node-novel/parse-txt-tag",
+  "private": false,
+  "version": "1.0.1",
+  "description": "分析 node-novel 風格的 txt",
+  "keywords": [
+    "@node-novel",
+    "node-novel",
+    "parse-txt-tag"
+  ],
+  "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/parse-txt-tag#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "build-cache": "ts-node ./test/script/cache.ts",
+    "prepublishOnly": "yarn run test",
+    "pretest": "yarn run build-cache",
+    "test": "ts-node ./test/demo.ts"
+  },
+  "dependencies": {
+    "str-util": "^2.3.21",
+    "ts-type": "^1.2.12"
+  },
+  "devDependencies": {
+    "regexp-cjk": "^3.3.8",
+    "regexp-cjk-plugin-escape-unicode-property": "^1.0.1",
+    "regexp-cjk-plugin-extra": "^1.0.5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
