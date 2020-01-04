@@ -38,6 +38,7 @@ readFile(join(rootDir, 'test/res', '排版格式.txt'))
 			}
 		})
 	})
+	.then(v => console.dir(v))
 ;
 ```
 
