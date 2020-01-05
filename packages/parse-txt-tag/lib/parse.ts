@@ -4,44 +4,10 @@
 
 import { reTxtHtmlTag, reTxtImgTag, IAllowedHtmlTagList } from './tags';
 import { toHalfWidth } from 'str-util/lib/fullhalf';
-import { ITSPartialRecord } from 'ts-type';
 import { _fixRubyInnerContext } from './util';
+import { IParseOptions, IParseOnTag, IParseOnMapCallback, IParseCacheMap, IAttachMap } from './types';
 
-export interface IAttachMap
-{
-	images?: Record<string, string>;
-}
-
-export interface IParseCacheMap extends Record<string, any>
-{
-
-}
-
-export interface IParseOnMapCallbackData<C extends IParseCacheMap, A extends IAttachMap>
-{
-	tagName: IParseOnTag,
-	attr: string,
-	innerContext: string,
-	cache: C,
-	attach: A,
-}
-
-export interface IIParseOnMap<C extends IParseCacheMap, A extends IAttachMap> extends ITSPartialRecord<IParseOn, (data: IParseOnMapCallbackData<C, A>) => string | null>
-{
-
-}
-
-export type IParseOnTag = IAllowedHtmlTagList | 'img';
-export type IParseOn = IAllowedHtmlTagList | 'default';
-
-export interface IParseOptions<C extends IParseCacheMap, A extends IAttachMap>
-{
-	on?: IIParseOnMap<C, A>,
-	cache?: C,
-	attach?: A,
-}
-
-export function parse<C extends IParseCacheMap, A extends IAttachMap>(source: string, options: IParseOptions<C, A>)
+export function parse<C extends IParseCacheMap = IParseCacheMap, A extends IAttachMap = IAttachMap, T extends string = IParseOnTag>(source: string, options: IParseOptions<C, A, T>)
 {
 	let context = source;
 
@@ -84,7 +50,7 @@ export function parse<C extends IParseCacheMap, A extends IAttachMap>(source: st
 		;
 
 		let tagName = 'img' as const;
-		let cb = options.on[tagName] || options.on.default;
+		let cb = (options.on[tagName] || options.on.default as IParseOnMapCallback<C, A, 'img'>);
 
 		if (cb)
 		{

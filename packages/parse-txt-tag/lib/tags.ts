@@ -10,14 +10,14 @@ export const enum EnumHtmlTag
 
 export type IAllowedHtmlTagList = "s" | "ruby" | "i" | "b" | "sup" | "sub";
 
-export const allowedHtmlTagList = [
+export const allowedHtmlTagList = Object.freeze([
 	"s",
 	"ruby",
 	"i",
 	"b",
 	"sup",
 	"sub"
-] as const;
+] as const);
 
 export const reTxtHtmlTag = /(?:[&＆][lｌ][tｔ][;；]|\u003C|[<＜])([sｓ]|[rｒ][uｕ][bｂ][yｙ]|[iｉ]|[bｂ]|[sｓ][uｕ][pｐ]|[sｓ][uｕ][bｂ])((?:\s+[\w \t＝═=ａ-ｚ０-９]*?)?)(?:[&＆][gｇ][tｔ][;；]|\u003E|[>＞])([^\n]*?)(?:[&＆][lｌ][tｔ][;；]|\u003C|[<＜])(?:(?:[\/／])\1)(?:[&＆][gｇ][tｔ][;；]|\u003E|[>＞])/giu;
 export const reHtmlRubyRt = /(?:[&＆][lｌ][tｔ][;；]|\u003C|[<＜])([rｒ][tｔ])((?:\s+[\w \t＝═=ａ-ｚ０-９]*?)?)(?:[&＆][gｇ][tｔ][;；]|\u003E|[>＞])([^\n]*?)(?:[&＆][lｌ][tｔ][;；]|\u003C|[<＜])(?:(?:[\/／])\1)(?:[&＆][gｇ][tｔ][;；]|\u003E|[>＞])/giu;

@@ -66,9 +66,9 @@ export const enum EnumHtmlTag
 
 export type IAllowedHtmlTagList = ${allowedHtmlTagList.map(v => `"${v}"`).join(' | ')};
 
-export const allowedHtmlTagList = [
+export const allowedHtmlTagList = Object.freeze([
 \t${allowedHtmlTagList.map(v => `"${v}"`).join(',\n\t')}
-] as const;
+] as const);
 
 export const reTxtHtmlTag = ${reTxtHtmlTag};
 export const reHtmlRubyRt = ${reHtmlRubyRt};

@@ -1,3 +1,4 @@
-import { parse, IParseOptions } from './lib/parse';
-export { parse, IParseOptions };
+import { parse } from './lib/parse';
+export * from './lib/types';
+export { parse };
 export default parse;
