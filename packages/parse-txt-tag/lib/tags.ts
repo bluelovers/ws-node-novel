@@ -26,5 +26,5 @@ export const reHtmlRubyRp = /(?:[&＆][lｌ][tｔ][;；]|\u003C|[<＜])([rｒ][p
 export const reHtmlTagOpen = /[&＆][lｌ][tｔ][;；]|\u003C|[<＜]/giu;
 export const reHtmlTagClose = /[&＆][gｇ][tｔ][;；]|\u003E|[>＞]/giu;
 
-export const reTxtImgTag = /[(（](?:[挿插揷](?:[図图圖]|[划劃画畫]|[絵繪绘])|[図图圖](?:片|[像象])|[划劃画畫][像象])([a-z0-9ａ-ｚ０-９_―—─－一⸺̲̱ˍ﹘\-]+)[)）]/giu;
+export const reTxtImgTag = /[(（](?:[挿插揷](?:[図图圖]|[划劃画畫]|[絵繪绘])|[図图圖](?:片|[像象])|[划劃画畫][像象]|[iｉ][mｍ][gｇ]|[iｉ][mｍ][aａ][gｇ][eｅ]|[pｐ][hｈ][oｏ][tｔ][oｏ]|[iｉ][lｌ][lｌ][uｕ][sｓ])([a-z0-9ａ-ｚ０-９_―—─－一⸺̲̱ˍ﹘\-]+)[)）]/giu;
 
