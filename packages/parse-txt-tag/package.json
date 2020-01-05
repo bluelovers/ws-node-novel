@@ -1,7 +1,7 @@
 {
   "name": "@node-novel/parse-txt-tag",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "分析 node-novel 風格的 txt",
   "keywords": [
     "@node-novel",
@@ -20,6 +20,7 @@
   "author": "",
   "main": "index.js",
   "scripts": {
+    "ncu": "npx yarn-tool ncu -u",
     "build-cache": "ts-node ./test/script/cache.ts",
     "prepublishOnly": "yarn run test",
     "pretest": "yarn run build-cache",

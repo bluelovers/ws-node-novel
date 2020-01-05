@@ -3,7 +3,7 @@
  */
 
 import { toHalfWidth } from 'str-util/lib/fullhalf';
-import { reHtmlRubyRt, reHtmlRubyRp } from './tags';
+import { reHtmlRubyRt, reHtmlRubyRp, EnumHtmlTag } from './tags';
 
 export function _fixRubyInnerContext(innerContext: string)
 {
@@ -28,4 +28,12 @@ export function _replaceHtmlTag(replacer: ((substring: string, ...args: string[]
 
 		return replacer($0, $1, $2, ...argv)
 	}
+}
+
+export function _convertHtmlTag001(input: string)
+{
+	return input
+		.replace(new RegExp(EnumHtmlTag.OPEN, 'ig'), '<')
+		.replace(new RegExp(EnumHtmlTag.CLOSE, 'ig'), '>')
+		;
 }
