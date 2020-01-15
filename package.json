@@ -1,6 +1,6 @@
 {
   "name": "mdconf2",
-  "version": "1.1.10",
+  "version": "2.0.0",
   "description": "Markdown configuration parse => data / stringify => Markdown",
   "keywords": [
     "conf",
@@ -38,8 +38,8 @@
     "lint": "npx eslint **/*.ts",
     "ncu": "npx yarn-tool ncu -u",
     "npm:publish": "npm publish",
-    "postpublish": "git commit -m \"publish new version\" .",
     "prepublishOnly": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "postpublish": "git commit -m \"publish new version\" .",
     "sort-package-json": "npx sort-package-json ./package.json",
     "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
     "tsc:default": "tsc -p tsconfig.json",
