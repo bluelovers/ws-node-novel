@@ -2,23 +2,19 @@
  * Created by user on 2018/2/4/004.
  */
 
-import mdconf from './core';
+import { parse as _parse, IOptionsParse } from './core';
+
 /**
  * for old api user
  */
-function parse(str, options: mdconf.IOptionsParse = {
+function parse(str, options: IOptionsParse = {
 	oldParseApi: true,
 })
 {
-	return mdconf.parse(str, options);
+	return _parse(str, options);
 }
 
-const _s = parse as typeof mdconf.parse & {
-	default: typeof mdconf.parse,
-	parse: typeof mdconf.parse,
-};
+parse.parse = _parse;
+parse.default = _parse;
 
-_s.default = _s.parse = parse;
-
-
-export = _s;
+export = parse;

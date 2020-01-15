@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import testUtils = require('./test-utils');
-import mdconf = require('../index');
+import * as testUtils from './test-utils';
+import mdconf from '../index';
 //import { describe, before, it } from 'mocha';
 
 const parse = mdconf.parse;
@@ -44,8 +44,8 @@ describe('mdconf integration tests', function ()
 					//console.log(data2);
 					//console.log(data3);
 
-					expect(data2).to.deep.eql(testCase.json);
-					expect(data2).to.deep.eql(mdconf.RawObject.removeRawData(data3));
+					expect(data2).to.deep.equal(testCase.json);
+					expect(data2).to.deep.equal(mdconf.RawObject.removeRawData(data3));
 
 				});
 			});

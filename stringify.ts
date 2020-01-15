@@ -2,13 +2,14 @@
  * Created by user on 2018/2/4/004.
  */
 
-import { stringify } from './index';
+import { stringify as _stringify } from './index';
 
-const _s = stringify as typeof stringify & {
-	default: typeof stringify,
-	stringify: typeof stringify,
-};
+function stringify(...argv: Parameters<typeof _stringify>)
+{
+	return _stringify(...argv)
+}
 
-_s.default = _s.stringify = stringify;
+stringify.default = _stringify;
+stringify.stringify = _stringify;
 
-export = _s;
+export = stringify;

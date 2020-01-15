@@ -1,9 +1,13 @@
 /**
  * Created by user on 2018/2/4/004.
  */
-import mdconf from './core';
-declare const _s: typeof mdconf.parse & {
-    default: typeof mdconf.parse;
-    parse: typeof mdconf.parse;
-};
-export = _s;
+import { parse as _parse, IOptionsParse } from './core';
+/**
+ * for old api user
+ */
+declare function parse(str: any, options?: IOptionsParse): import("./core").IObjectParse;
+declare namespace parse {
+    var parse: typeof _parse;
+    var default: typeof _parse;
+}
+export = parse;

@@ -1,8 +1,14 @@
+#!/usr/bin/env node
+"use strict";
 // $ node examples simple
-let fs = require('fs');
-let path = require('path');
-let file = path.resolve(process.argv[2] + '.md');
-let str = fs.readFileSync(file, 'utf8');
-let md = require('..').parse;
-console.log(JSON.stringify(md(str), null, 2));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQSx5QkFBeUI7QUFFekIsSUFBSSxFQUFFLEdBQUcsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3ZCLElBQUksSUFBSSxHQUFHLE9BQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQztBQUUzQixJQUFJLElBQUksR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLEdBQUcsS0FBSyxDQUFDLENBQUM7QUFFakQsSUFBSSxHQUFHLEdBQUcsRUFBRSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUM7QUFDeEMsSUFBSSxFQUFFLEdBQUcsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDLEtBQUssQ0FBQztBQUU3QixPQUFPLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsRUFBRSxDQUFDLEdBQUcsQ0FBQyxFQUFFLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiXG4vLyAkIG5vZGUgZXhhbXBsZXMgc2ltcGxlXG5cbmxldCBmcyA9IHJlcXVpcmUoJ2ZzJyk7XG5sZXQgcGF0aCA9IHJlcXVpcmUoJ3BhdGgnKTtcblxubGV0IGZpbGUgPSBwYXRoLnJlc29sdmUocHJvY2Vzcy5hcmd2WzJdICsgJy5tZCcpO1xuXG5sZXQgc3RyID0gZnMucmVhZEZpbGVTeW5jKGZpbGUsICd1dGY4Jyk7XG5sZXQgbWQgPSByZXF1aXJlKCcuLicpLnBhcnNlO1xuXG5jb25zb2xlLmxvZyhKU09OLnN0cmluZ2lmeShtZChzdHIpLCBudWxsLCAyKSk7XG4iXX0=
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const __1 = require("..");
+let file = path_1.default.resolve(process.argv[2] + '.md');
+let str = fs_1.default.readFileSync(file, 'utf8');
+console.log(JSON.stringify(__1.parse(str), null, 2));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUVBLHlCQUF5Qjs7Ozs7QUFFekIsNENBQW9CO0FBQ3BCLGdEQUF3QjtBQUN4QiwwQkFBMkI7QUFFM0IsSUFBSSxJQUFJLEdBQUcsY0FBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxHQUFHLEtBQUssQ0FBQyxDQUFDO0FBRWpELElBQUksR0FBRyxHQUFHLFlBQUUsQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLE1BQU0sQ0FBQyxDQUFDO0FBRXhDLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxTQUFLLENBQUMsR0FBRyxDQUFDLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIjIS91c3IvYmluL2VudiBub2RlXG5cbi8vICQgbm9kZSBleGFtcGxlcyBzaW1wbGVcblxuaW1wb3J0IGZzIGZyb20gJ2ZzJztcbmltcG9ydCBwYXRoIGZyb20gJ3BhdGgnO1xuaW1wb3J0IHsgcGFyc2UgfSBmcm9tICcuLic7XG5cbmxldCBmaWxlID0gcGF0aC5yZXNvbHZlKHByb2Nlc3MuYXJndlsyXSArICcubWQnKTtcblxubGV0IHN0ciA9IGZzLnJlYWRGaWxlU3luYyhmaWxlLCAndXRmOCcpO1xuXG5jb25zb2xlLmxvZyhKU09OLnN0cmluZ2lmeShwYXJzZShzdHIpLCBudWxsLCAyKSk7XG4iXX0=

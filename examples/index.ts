@@ -1,12 +1,13 @@
+#!/usr/bin/env node
 
 // $ node examples simple
 
-let fs = require('fs');
-let path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { parse } from '..';
 
 let file = path.resolve(process.argv[2] + '.md');
 
 let str = fs.readFileSync(file, 'utf8');
-let md = require('..').parse;
 
-console.log(JSON.stringify(md(str), null, 2));
+console.log(JSON.stringify(parse(str), null, 2));

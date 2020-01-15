@@ -1,5 +1,5 @@
-import fs = require('fs-extra');
-import path = require('path');
+import fs from 'fs-extra';
+import path from 'path';
 
 const TEST_CASES_DIRECTORY = path.join(__dirname, 'cases');
 

@@ -2,13 +2,12 @@
  * Module dependencies.
  */
 import { Token, TokensList, Tokens } from 'marked';
-import md = require('marked');
-import * as util from 'util';
+import md from 'marked';
+import util from 'util';
 import { crlf, LF, CRLF, CR, chkcrlf } from 'crlf-normalize';
-import deepmerge = require('deepmerge-plus');
-import moment = require('moment');
-import isPlainObject = require('is-plain-object');
-import MarkdownIt = require('markdown-it');
+import deepmerge from 'deepmerge-plus';
+import moment from 'moment';
+import isPlainObject from 'is-plain-object';
 
 export { isPlainObject, moment, deepmerge }
 export { crlf, LF, CRLF, CR }
@@ -35,7 +34,6 @@ export const defaultOptionsParse: IOptionsParse = {
 	allowBlockquote: true,
 
 	markedOptions: Object.assign({},
-		// @ts-ignore
 		md.defaults,
 		{
 			breaks: true,
@@ -654,9 +652,7 @@ export interface ITable
 	rows,
 }
 
-import * as self from './core';
-
-export default self;
+export default exports as typeof import('./core');
 
 export function createInlineLexer(toks: md.TokensList, options: IOptionsParse)
 {

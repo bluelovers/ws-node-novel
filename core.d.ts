@@ -1,9 +1,9 @@
 /// <reference types="node" />
-import md = require('marked');
+import md from 'marked';
 import { crlf, LF, CRLF, CR } from 'crlf-normalize';
-import deepmerge = require('deepmerge-plus');
-import moment = require('moment');
-import isPlainObject = require('is-plain-object');
+import deepmerge from 'deepmerge-plus';
+import moment from 'moment';
+import isPlainObject from 'is-plain-object';
 export { isPlainObject, moment, deepmerge };
 export { crlf, LF, CRLF, CR };
 export declare const SYMBOL_RAW_DATA: unique symbol;
@@ -67,6 +67,6 @@ export interface ITable {
     headers: string[];
     rows: any;
 }
-import * as self from './core';
-export default self;
+declare const _default: typeof import("./core");
+export default _default;
 export declare function createInlineLexer(toks: md.TokensList, options: IOptionsParse): any;

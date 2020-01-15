@@ -10,5 +10,4 @@ export { SYMBOL_RAW_DATA, SYMBOL_RAW_VALUE, IOptionsParse, defaultOptionsParse, 
 export { isPlainObject, moment, deepmerge } from './core';
 export { crlf, LF, CRLF, CR } from './core';
 
-import self = require('./index');
-export default self;
+export default exports as typeof import('./index');
