@@ -9,24 +9,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     result["default"] = mod;
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = __importStar(require("./core"));
 exports.mdconf = core_1.default;
 exports.parse = core_1.parse;
 exports.stringify = core_1.stringify;
+const is_plain_object_1 = __importDefault(require("is-plain-object"));
+exports.isPlainObject = is_plain_object_1.default;
 var core_2 = require("./core");
-exports.SYMBOL_RAW_DATA = core_2.SYMBOL_RAW_DATA;
-exports.SYMBOL_RAW_VALUE = core_2.SYMBOL_RAW_VALUE;
 exports.defaultOptionsParse = core_2.defaultOptionsParse;
-exports.RawObject = core_2.RawObject;
-var core_3 = require("./core");
-exports.isPlainObject = core_3.isPlainObject;
-exports.moment = core_3.moment;
-exports.deepmerge = core_3.deepmerge;
-var core_4 = require("./core");
-exports.crlf = core_4.crlf;
-exports.LF = core_4.LF;
-exports.CRLF = core_4.CRLF;
-exports.CR = core_4.CR;
+var RawObject_1 = require("./lib/RawObject");
+exports.RawObject = RawObject_1.RawObject;
+exports.SYMBOL_RAW_VALUE = RawObject_1.SYMBOL_RAW_VALUE;
+exports.SYMBOL_RAW_DATA = RawObject_1.SYMBOL_RAW_DATA;
 exports.default = exports;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7O0dBRUc7Ozs7Ozs7OztBQUVILCtDQUFrRDtBQUN6QyxpQkFERixjQUFNLENBQ0U7QUFBRSxnQkFEQSxZQUFLLENBQ0E7QUFBRSxvQkFEQSxnQkFBUyxDQUNBO0FBRWpDLCtCQUFnSTtBQUF2SCxpQ0FBQSxlQUFlLENBQUE7QUFBRSxrQ0FBQSxnQkFBZ0IsQ0FBQTtBQUFpQixxQ0FBQSxtQkFBbUIsQ0FBQTtBQUFnQiwyQkFBQSxTQUFTLENBQUE7QUFFdkcsK0JBQTBEO0FBQWpELCtCQUFBLGFBQWEsQ0FBQTtBQUFFLHdCQUFBLE1BQU0sQ0FBQTtBQUFFLDJCQUFBLFNBQVMsQ0FBQTtBQUN6QywrQkFBNEM7QUFBbkMsc0JBQUEsSUFBSSxDQUFBO0FBQUUsb0JBQUEsRUFBRSxDQUFBO0FBQUUsc0JBQUEsSUFBSSxDQUFBO0FBQUUsb0JBQUEsRUFBRSxDQUFBO0FBRTNCLGtCQUFlLE9BQW1DLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgdXNlciBvbiAyMDE4LzMvMjQvMDI0LlxuICovXG5cbmltcG9ydCBtZGNvbmYsIHsgcGFyc2UsIHN0cmluZ2lmeSB9IGZyb20gJy4vY29yZSc7XG5leHBvcnQgeyBtZGNvbmYsIHBhcnNlLCBzdHJpbmdpZnkgfVxuXG5leHBvcnQgeyBTWU1CT0xfUkFXX0RBVEEsIFNZTUJPTF9SQVdfVkFMVUUsIElPcHRpb25zUGFyc2UsIGRlZmF1bHRPcHRpb25zUGFyc2UsIElPYmplY3RQYXJzZSwgUmF3T2JqZWN0LCBJVGFibGUgfSBmcm9tICcuL2NvcmUnO1xuXG5leHBvcnQgeyBpc1BsYWluT2JqZWN0LCBtb21lbnQsIGRlZXBtZXJnZSB9IGZyb20gJy4vY29yZSc7XG5leHBvcnQgeyBjcmxmLCBMRiwgQ1JMRiwgQ1IgfSBmcm9tICcuL2NvcmUnO1xuXG5leHBvcnQgZGVmYXVsdCBleHBvcnRzIGFzIHR5cGVvZiBpbXBvcnQoJy4vaW5kZXgnKTtcbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7O0dBRUc7Ozs7Ozs7Ozs7OztBQUVILCtDQUFrRDtBQUN6QyxpQkFERixjQUFNLENBQ0U7QUFBRSxnQkFEQSxZQUFLLENBQ0E7QUFBRSxvQkFEQSxnQkFBUyxDQUNBO0FBRWpDLHNFQUE0QztBQUluQyx3QkFKRix5QkFBYSxDQUlFO0FBRnRCLCtCQUEwRTtBQUFsRCxxQ0FBQSxtQkFBbUIsQ0FBQTtBQUkzQyw2Q0FBK0U7QUFBdEUsZ0NBQUEsU0FBUyxDQUFBO0FBQUUsdUNBQUEsZ0JBQWdCLENBQUE7QUFBRSxzQ0FBQSxlQUFlLENBQUE7QUFFckQsa0JBQWUsT0FBbUMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQ3JlYXRlZCBieSB1c2VyIG9uIDIwMTgvMy8yNC8wMjQuXG4gKi9cblxuaW1wb3J0IG1kY29uZiwgeyBwYXJzZSwgc3RyaW5naWZ5IH0gZnJvbSAnLi9jb3JlJztcbmV4cG9ydCB7IG1kY29uZiwgcGFyc2UsIHN0cmluZ2lmeSB9XG5cbmltcG9ydCBpc1BsYWluT2JqZWN0IGZyb20gJ2lzLXBsYWluLW9iamVjdCc7XG5cbmV4cG9ydCB7IElPcHRpb25zUGFyc2UsIGRlZmF1bHRPcHRpb25zUGFyc2UsIElPYmplY3RQYXJzZSB9IGZyb20gJy4vY29yZSc7XG5cbmV4cG9ydCB7IGlzUGxhaW5PYmplY3QgfTtcblxuZXhwb3J0IHsgUmF3T2JqZWN0LCBTWU1CT0xfUkFXX1ZBTFVFLCBTWU1CT0xfUkFXX0RBVEEgfSBmcm9tICcuL2xpYi9SYXdPYmplY3QnO1xuXG5leHBvcnQgZGVmYXVsdCBleHBvcnRzIGFzIHR5cGVvZiBpbXBvcnQoJy4vaW5kZXgnKTtcbiJdfQ==

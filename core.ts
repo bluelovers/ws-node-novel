@@ -1,23 +1,20 @@
 /**
  * Module dependencies.
  */
-import { Token, TokensList, Tokens } from 'marked';
-import md from 'marked';
-import util from 'util';
+import md, { Token, Tokens } from 'marked';
 import { crlf, LF, CRLF, CR, chkcrlf } from 'crlf-normalize';
-import deepmerge from 'deepmerge-plus';
-import moment from 'moment';
+import { isMoment } from 'moment';
 import isPlainObject from 'is-plain-object';
-
-export { isPlainObject, moment, deepmerge }
-export { crlf, LF, CRLF, CR }
-
-export const SYMBOL_RAW_DATA = Symbol.for('raw_data');
-export const SYMBOL_RAW_VALUE = Symbol.for('raw_value');
+import { RawObject, IRawObjectTokenPlus, ITokenText2, IRawObjectPlus, IRawObjectDataPlus } from './lib/RawObject';
+import { createInlineLexer, makeCodeBlock, normalize, put, getobjectbyid } from './lib/core';
 
 export interface IOptionsParse
 {
-	crlf?: string,
+	/**
+	 * @deprecated
+	 */
+	crlf?: typeof LF | typeof CRLF | typeof CR,
+
 	oldParseApi?: boolean,
 
 	allowBlockquote?: boolean,
@@ -67,7 +64,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 	}
 
 	let source: string = str.toString();
-	let eol: string;
+	let eol: typeof LF | typeof CRLF | typeof CR;
 
 	if (1)
 	{
@@ -75,6 +72,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 		eol = LF;
 		source = crlf(source, eol);
 	}
+	/*
 	else if (options.crlf)
 	{
 		eol = options.crlf;
@@ -85,6 +83,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 		let ck = chkcrlf(source);
 		eol = ck.lf ? LF : (ck.crlf ? CRLF : CR);
 	}
+	 */
 
 	let lexer = new md.Lexer(options.markedOptions);
 
@@ -111,10 +110,9 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 	(toks as Token[]).forEach(function (tok, index)
 	{
-		// @ts-ignore
-		let val = tok.text;
+		let val: string = (tok as Tokens.Code).text ;
 		let _skip: boolean;
-		let type = tok.type;
+		let type: (Token | ITokenText2)["type"] = tok.type;
 
 		if (type == 'text' && val.match(/[a-z]+\:\/\//i))
 		{
@@ -123,7 +121,6 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 			if (val !== r && /^\s*<a href=/.test(r))
 			{
-				// @ts-ignore
 				type = 'text2';
 			}
 		}
@@ -175,13 +172,12 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 					if (!options.oldParseApi)
 					{
-						// @ts-ignore
 						val = new RawObject(val, {
 							type: 'blockquote',
 							text: paragraph,
 
 							paragraph: paragraph2,
-						});
+						}) as any;
 					}
 
 					put(conf, keys, val, true, undefined, options);
@@ -204,10 +200,8 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 				if (!options.oldParseApi)
 				{
-					// @ts-ignore
-					val = new RawObject(val, tok);
-					// @ts-ignore
-					val.getRawData()['paragraph'] = paragraph;
+					val = new RawObject(val, tok) as any;
+					(val as any as IRawObjectPlus).getRawData().paragraph = paragraph;
 				}
 
 				put(conf, keys, val, true, undefined, options);
@@ -220,10 +214,8 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 				if (!options.oldParseApi)
 				{
-					// @ts-ignore
-					val = new RawObject(val, tok);
-					// @ts-ignore
-					val.getRawData()['paragraph'] = paragraph;
+					val = new RawObject(val, tok) as any;
+					(val as any as IRawObjectPlus).getRawData().paragraph = paragraph;
 				}
 
 				put(conf, keys, val, true, undefined, options);
@@ -265,7 +257,7 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 
 				let ok = true;
 
-				for (let j in obj)
+				for (let j in obj as object)
 				{
 					if (!/^\d+$/.test(j))
 					{
@@ -286,118 +278,16 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 	return conf;
 }
 
-export function getobjectbyid(a, conf)
-{
-	let ret = conf;
-	for (let i of a)
-	{
-		ret = ret[i];
-	}
-	return ret;
-}
-
-/**
- * Add `str` to `obj` with the given `keys`
- * which represents the traversal path.
- *
- * @api private
- */
-export function put(obj, keys: string[], str: string, code?: boolean, table?: ITable, options: IOptionsParse = {}, others: {
-	type?: string,
-} = {})
-{
-	let target = obj;
-	let last;
-	let key;
-
-	for (let i = 0; i < keys.length; i++)
-	{
-		key = keys[i];
-		last = target;
-		target[key] = target[key] || {};
-		target = target[key];
-	}
-
-	// code
-	if (code)
-	{
-		if (!Array.isArray(last[key])) last[key] = [];
-		last[key].push(str);
-		return;
-	}
-
-	// table
-	if (table)
-	{
-		if (!Array.isArray(last[key])) last[key] = [];
-		for (let ri = 0; ri < table.rows.length; ri++)
-		{
-			let arrItem = {};
-			for (let hi = 0; hi < table.headers.length; hi++)
-			{
-				arrItem[normalize(table.headers[hi], options)] = table.rows[ri][hi];
-			}
-			last[key].push(arrItem);
-		}
-		return;
-	}
-
-	let isKey: boolean;
-	let i: number = str.indexOf(':');
-
-	if (options.filterObjectKey)
-	{
-		if (typeof options.filterObjectKey == 'function')
-		{
-			isKey = options.filterObjectKey(str, obj, others);
-		}
-		else
-		{
-			i = str.search(options.filterObjectKey);
-			isKey = i != -1;
-		}
-	}
-
-	// list
-	if ((isKey === false || -1 == i || others.type == 'text2'))
-	{
-		if (!Array.isArray(last[key])) last[key] = [];
-		last[key].push(str.trim());
-		return;
-	}
-
-	// map
-	key = normalize(str.slice(0, i), options);
-	let val = str.slice(i + 1).trim();
-	target[key] = val;
-}
-
-/**
- * Normalize `str`.
- */
-
-export function normalize(str: string, options: IOptionsParse = {}): string
-{
-	let key = str.replace(/\s+/g, ' ');
-
-	if (!options.disableKeyToLowerCase)
-	{
-		key = key.toLowerCase();
-	}
-
-	return key.trim();
-}
-
-export function stringify(dataInput, level: number = 1, skip = [], k?): string
+export function stringify(dataInput: unknown | IRawObjectPlus, level: number = 1, skip = [], k?): string
 {
 	let rs1: string[] = [];
 	let rs2: string[] = [];
 
-	let isRawObject = RawObject.isRawObject(dataInput);
+	let isRawObject: true | false;
 	let data = dataInput;
 	let desc;
 
-	if (isRawObject)
+	if (isRawObject = RawObject.isRawObject(dataInput))
 	{
 		let rawData = dataInput.getRawData();
 
@@ -407,6 +297,8 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 		}
 
 		data = dataInput.getRawValue();
+
+		isRawObject = true as true;
 	}
 
 	//console.log(k);
@@ -463,7 +355,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 				rs2.push('#'.repeat(level) + ' ' + k + LF);
 				rs2.push(stringify(row, level + 1));
 			}
-			else if (moment.isMoment(row))
+			else if (isMoment(row))
 			{
 				rs1.push(`- ${k}: ${row.format()}`);
 			}
@@ -515,20 +407,17 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 			rs2.push(desc);
 		}
 
-		let lang: string;
-
-		let val = data;
+		let val = data as string;
 
 		val = val.replace(/^[\r\n]+|\s+$/g, '');
 
 		if (isRawObject)
 		{
-			let rawData = dataInput.getRawData() || {};
-			lang = rawData.lang;
+			let rawData = (dataInput as IRawObjectPlus).getRawData() || {} as IRawObjectDataPlus;
 
 			if (rawData.type != 'html')
 			{
-				val = makeCodeBlock(val, lang);
+				val = makeCodeBlock(val, rawData.lang);
 			}
 			else
 			{
@@ -537,7 +426,7 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 		}
 		else
 		{
-			val = makeCodeBlock(val, lang);
+			val = makeCodeBlock(val);
 		}
 
 		rs2.push(val);
@@ -562,104 +451,5 @@ export function stringify(dataInput, level: number = 1, skip = [], k?): string
 	return out;
 }
 
-export function makeCodeBlock(value, lang?: string)
-{
-	return `\n\`\`\`${lang || ''}\n${value}\n\`\`\`\n`;
-}
-
-export class RawObject
-{
-	constructor(source, raw?)
-	{
-		if (raw)
-		{
-			this[SYMBOL_RAW_DATA] = raw;
-		}
-
-		this[SYMBOL_RAW_VALUE] = source;
-	}
-
-	inspect()
-	{
-		let pad = this[SYMBOL_RAW_DATA] && this[SYMBOL_RAW_DATA].type;
-
-		return 'Raw' + this.getTypeof().replace(/^[a-z]/, function (s)
-		{
-			return s.toUpperCase();
-		}) + `(${util.inspect(this.getRawValue())}${pad ? ', ' + pad : ''})`
-	}
-
-	toJSON()
-	{
-		return this.toString();
-	}
-
-	toString()
-	{
-		return this[SYMBOL_RAW_VALUE].toString();
-	}
-
-	getTypeof()
-	{
-		return Array.isArray(this[SYMBOL_RAW_VALUE]) ? 'array' : typeof this[SYMBOL_RAW_VALUE];
-	}
-
-	getRawData()
-	{
-		return this[SYMBOL_RAW_DATA];
-	}
-
-	getRawValue()
-	{
-		return this[SYMBOL_RAW_VALUE];
-	}
-
-	static isRawObject(v: object)
-	{
-		return (v instanceof RawObject);
-	}
-
-	/**
-	 * will remove hidden data and get source data
-	 *
-	 * @param {RawObject} data
-	 */
-	static removeRawData(data: RawObject)
-	static removeRawData(data)
-	static removeRawData(data)
-	{
-		if (this.isRawObject(data))
-		{
-			data = data.getRawValue();
-		}
-
-		if (typeof data == 'object')
-		{
-			for (let i in data)
-			{
-				data[i] = this.removeRawData(data[i]);
-			}
-		}
-
-		return data;
-	}
-
-}
-
-export interface ITable
-{
-	headers: string[],
-	rows,
-}
-
 export default exports as typeof import('./core');
 
-export function createInlineLexer(toks: md.TokensList, options: IOptionsParse)
-{
-	let opts = Object.assign({}, defaultOptionsParse.markedOptions, options.markedOptions);
-
-	// @ts-ignore
-	let inline = new md.InlineLexer(toks.links, opts);
-
-	return inline;
-}

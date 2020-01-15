@@ -5,9 +5,12 @@
 import mdconf, { parse, stringify } from './core';
 export { mdconf, parse, stringify }
 
-export { SYMBOL_RAW_DATA, SYMBOL_RAW_VALUE, IOptionsParse, defaultOptionsParse, IObjectParse, RawObject, ITable } from './core';
+import isPlainObject from 'is-plain-object';
 
-export { isPlainObject, moment, deepmerge } from './core';
-export { crlf, LF, CRLF, CR } from './core';
+export { IOptionsParse, defaultOptionsParse, IObjectParse } from './core';
+
+export { isPlainObject };
+
+export { RawObject, SYMBOL_RAW_VALUE, SYMBOL_RAW_DATA } from './lib/RawObject';
 
 export default exports as typeof import('./index');
