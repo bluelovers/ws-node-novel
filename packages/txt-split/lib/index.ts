@@ -16,7 +16,7 @@ import {
 } from './interface';
 import { splitVolumeSync } from './split';
 import { _handleReadFile, _outputFile, _wrapMethod } from './util';
-import fs = require('fs-extra');
+import fs from 'fs-extra';
 import { console } from './console';
 
 const DEFAULT_REGEXP_FLAGS = 'gimu';

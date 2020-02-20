@@ -1,7 +1,7 @@
 /**
  * Created by user on 2019/1/6/006.
  */
-import moment = require('moment');
+import moment from 'moment';
 import { defaultSortCallback, naturalCompare } from '@node-novel/sort';
 export { naturalCompare };
 export declare function createMoment(...argv: any[]): moment.Moment;

@@ -1,5 +1,5 @@
 import { parse} from './lib/parse';
-export * from './lib/types';
+export type * from './lib/types';
 
 export { parse }
 

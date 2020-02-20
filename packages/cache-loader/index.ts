@@ -11,10 +11,9 @@ import todayMomentTimestamp, {
 } from './lib/util';
 import { IMdconfMeta } from 'node-novel-info';
 import { EnumNovelStatus } from 'node-novel-info/lib/const';
-import path = require('upath2');
-//import fs = require('fs-extra');
+import path from 'upath2';
 import { array_unique } from 'array-hyper-unique';
-import sortObject = require('sort-object-keys2');
+import sortObject from 'sort-object-keys2';
 
 const openedMap = new WeakMap<Partial<INovelStatCacheOptions>, NovelStatCache>();
 
@@ -442,6 +441,7 @@ export class NovelStatCache
 									{
 										if (_src[key] != null)
 										{
+											// @ts-ignore
 											cache[key] = _src[key]
 										}
 									})

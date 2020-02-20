@@ -53,7 +53,7 @@ export function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I, options
 	// @ts-ignore
 	inputContent = fixContent(inputContent);
 
-	let matter = GrayMatter(inputContent, matterOptions);
+	let matter = GrayMatter(inputContent, matterOptions as any);
 	// @ts-ignore
 	let mdconf = parser(inputContent, parseOptions);
 
@@ -87,6 +87,7 @@ export function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I, options
 		stringify<T1 = D, T2 = OUT>(inputData: IStringifyData<T1, T2>): string
 		{
 			return stringify<T1, T2>(inputData, {
+				// @ts-ignore
 				matterOptions,
 				stringify: _stringify,
 			})

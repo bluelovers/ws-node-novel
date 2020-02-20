@@ -2,7 +2,7 @@
  * Created by user on 2019/5/29.
  */
 /// <reference types="node" />
-import { ICacheMap, IConstructorOptions, IReplaceOptions, ITextLayoutOptions, IToStrOptions, ITrimOptionsUser, IWordsAll, IWordsParsed, IWordsRuntime, ICacheMapRow } from './types';
+import { ICacheMap, IConstructorOptions, IReplaceOptions, ITextLayoutOptions, IToStrOptions, ITrimOptionsUser, IWordsAll, IWordsParsed, IWordsRuntime } from './types';
 export declare const SP_KEY = "#_@_#";
 export declare const SP_REGEXP = "(?:@|\uFF08\u00B7?\uFF09|-|/|\\(\\)|%|\uFFE5|_|\\?|\uFF1F|\\||#|\\$|[\uFF08\\(](?:\u548C\u8C10|\u6CB3\u87F9)[\\)\uFF09]|\uFF08\u6CB3\uFF09\uFF08\u87F9\uFF09|[\uFF08\\(][\u6CB3\u87F9]{1,2}[\\)\uFF09]| |\\.|[\u30FB\u00B7]|\\*|\u25A1|\u570C|[=\uFF1D]|\\\\\\\\|\\/\\/|\uFF5C)";
 /**
@@ -18,7 +18,7 @@ export declare class TextLayout {
             new: string[];
             data?: any;
         }[];
-        words: Map<IWordsRuntime, ICacheMapRow[]>;
+        words: ICacheMap;
     };
     protected _data_: {
         m0: RegExp;
@@ -30,7 +30,7 @@ export declare class TextLayout {
     constructor(options?: IConstructorOptions, ...argv: any[]);
     static create(options?: IConstructorOptions, ...argv: any[]): TextLayout;
     protected _init(arr: string[]): void;
-    readonly RegExp: typeof RegExp;
+    get RegExp(): typeof RegExp;
     /**
      * 簡易型樣式處理 適用於 屏蔽字或者人名或者因為編碼問題而變成 ? 那些之類的點
      *
@@ -50,7 +50,7 @@ export declare class TextLayout {
     replace_row(_ret: string, value: IWordsRuntime, cacheMap?: ICacheMap): string;
     replace_words(_ret: string, words: IWordsRuntime[], cacheMap?: ICacheMap | true): {
         value: string;
-        cache: Map<IWordsRuntime, ICacheMapRow[]>;
+        cache: ICacheMap;
     };
     /**
      * @deprecated

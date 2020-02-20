@@ -3,7 +3,7 @@
  */
 
 import { runAllJob, console } from '..';
-import path = require('upath2');
+import path from 'upath2';
 
 let git_repo = 'C:\\Home\\Temp\\test-no-git-lfs';
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { runAllJob, console } from '..';
-import path = require('upath2');
-import yargs = require('yargs');
+import path from 'upath2';
+import yargs from 'yargs';
 import fs = require('fs');
 
 let argv = yargs

@@ -1,11 +1,11 @@
 import { git_get_user } from '../index';
-import fs = require('fs-extra');
-import CrossSpawn = require('cross-spawn-extra');
-import Bluebird = require('bluebird');
-import path = require('upath2');
+import fs from 'fs-extra';
+import CrossSpawn from 'cross-spawn-extra';
+import Bluebird from 'bluebird';
+import path from 'upath2';
 import { checkGitOutput, crossSpawnSync, SpawnOptions, crossSpawnAsync } from '@git-lazy/util/spawn/git';
 import { createEmptyBranch } from '@git-lazy/branch';
-import moment = require('moment');
+import moment from 'moment';
 import { console } from '@git-lazy/util';
 
 export async function _createMode001(cwd: string)

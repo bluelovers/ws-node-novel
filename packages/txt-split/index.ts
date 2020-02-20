@@ -13,7 +13,7 @@ export {
 	readFile,
 	readFileSync,
 } from './lib';
-export * from './lib/interface';
+export type * from './lib/interface';
 export { console } from './lib/console';
 
 export default exports as typeof import('./index');

@@ -26,14 +26,15 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "yarn test",
+    "test": "ts-node test/demo"
   },
   "dependencies": {
     "@node-novel/sort": "^1.0.7",
     "array-hyper-unique": "^1.1.0",
     "fs-extra": "^8.1.0",
     "moment": "^2.24.0",
-    "node-novel-info": "^2.3.33",
+    "node-novel-info": "^3.0.0",
     "sort-object-keys2": "^1.1.0",
     "str-util": "^2.3.21",
     "upath2": "^2.1.3"

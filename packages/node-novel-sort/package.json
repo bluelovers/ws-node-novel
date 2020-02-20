@@ -19,10 +19,10 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "dependencies": {
-    "string-natural-compare": "^2.0.3"
+    "string-natural-compare": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"

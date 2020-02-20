@@ -1,15 +1,15 @@
-import dotenv = require('dotenv');
-import FastGlob = require('fast-glob');
-import fs = require('fs-extra');
-import CrossSpawn = require('cross-spawn-extra');
-import Bluebird = require('bluebird');
-import moment = require('moment');
+import dotenv from 'dotenv';
+import FastGlob from '@bluelovers/fast-glob';
+import fs from 'fs-extra';
+import CrossSpawn from 'cross-spawn-extra';
+import Bluebird from 'bluebird';
+import moment from 'moment';
 //import gitlog from 'gitlog2';
-import gitlog = require('gitlog2');
-import GitRoot = require('git-root2');
-import path = require('upath2');
-import emailNormalize = require('email-normalize');
-import UString = require('uni-string');
+import gitlog, { IParseCommit } from 'gitlog2';
+import GitRoot from 'git-root2';
+import path from 'upath2';
+import emailNormalize from 'email-normalize';
+import UString from 'uni-string';
 import { Console } from 'debug-color2';
 import { _createMode002, _createMode001 } from './lib/create-new-empty';
 import { console } from '@git-lazy/util';
@@ -25,7 +25,7 @@ export interface IFetchAllFileLogRow
 	log: IFetchAllFileLogRowLog,
 }
 
-export interface IFetchAllFileLogRowLog extends gitlog.IParseCommit
+export interface IFetchAllFileLogRowLog extends IParseCommit
 {
 	authorDateTimestamp?: number,
 	committerDateTimestamp?: number,

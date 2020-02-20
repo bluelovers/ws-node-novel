@@ -3,7 +3,7 @@
  */
 
 import create, { createFromJSON, INovelStatCache } from '../';
-import path = require('upath2');
+import path from 'upath2';
 
 /**
  * 從檔案來讀取設定

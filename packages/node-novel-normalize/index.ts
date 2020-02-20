@@ -2,7 +2,7 @@
  * Created by user on 2018/2/14/014.
  */
 
-import StrUtil = require('str-util');
+import StrUtil from 'str-util';
 import str2num from 'normalize-num';
 
 import { zh2jp } from 'cjk-conv';

@@ -2,11 +2,11 @@ import novelText from 'novel-text';
 import { console } from './console';
 import { makeOptions } from './index';
 import { IContext, IDataVolume, IOptions, IOptionsWithData, IPathLike, Resolvable } from './interface';
-import Bluebird = require('bluebird');
-import iconv = require('iconv-jschardet');
-import StrUtil = require('str-util');
+import Bluebird from 'bluebird';
+import { encode, detect } from 'iconv-jschardet';
+import { zh2num } from 'str-util';
 import { crlf, LF } from 'crlf-normalize';
-import fsIconv = require('fs-iconv');
+import { zh2jp } from 'cjk-conv/lib/jp';
 
 export function logWarn(...argv)
 {
@@ -15,13 +15,13 @@ export function logWarn(...argv)
 
 export function chkEncoding<O extends IOptions>(data: IContext, file?: string, options?: O)
 {
-	let chk = iconv.detect(data);
+	let chk = detect(data);
 
 	if (data.length === 0)
 	{
 		logWarn(file, '此檔案沒有內容');
 	}
-	else if (chk.encoding != 'UTF-8')
+	else if (chk.encoding !== 'UTF-8')
 	{
 		logWarn(file, '此檔案可能不是 UTF8 請檢查編碼或利用 MadEdit 等工具轉換', chk);
 	}
@@ -67,17 +67,17 @@ export function _handleReadFile<O extends IOptions>(data: IContext, file: IPathL
 
 	let txt: string;
 
-	if (options && options.autoFsIconv && chk.encoding != 'UTF-8')
+	if (options && options.autoFsIconv && chk.encoding !== 'UTF-8')
 	{
 		logWarn('嘗試自動將內容轉換為 UTF-8', chk);
 
-		let buf = iconv.encode(data);
+		let buf = encode(data);
 
 		let bool = buf.equals((Buffer.isBuffer(data) ? data : Buffer.from(data)));
 
 		if (bool)
 		{
-			let chk2 = iconv.detect(buf);
+			let chk2 = detect(buf);
 
 			logWarn(`內容變更`, chk, '=>', chk2);
 
@@ -120,7 +120,7 @@ export function fix_name(name: string): string
 
 	if (!/^\d+/.test(name))
 	{
-		name = StrUtil.zh2num(name).toString();
+		name = zh2num(name).toString();
 	}
 
 	name = name
@@ -128,7 +128,7 @@ export function fix_name(name: string): string
 		.replace(/[“”]/g, '')
 	;
 
-	name = StrUtil.zh2jp(name);
+	name = zh2jp(name);
 
 	//console.log([name]);
 

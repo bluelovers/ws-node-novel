@@ -273,7 +273,7 @@ export declare class NovelStatCache {
     /**
      * 取得今天的 timestamp
      */
-    readonly timestamp: number;
+    get timestamp(): number;
     /**
      * 取得指定 timestamp 的 history 資料
      */

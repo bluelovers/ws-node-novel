@@ -20,7 +20,7 @@ import {
 	ICacheMapRow,
 } from './types';
 import { _isIwordsArray, _isIwordsArray2, _isIwordsUserSp, _handleTextLayout } from './util';
-import StrUtil = require('str-util');
+import StrUtil from 'str-util';
 
 export const SP_KEY = "#_@_#";
 export const SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";

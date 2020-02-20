@@ -28,10 +28,10 @@
   },
   "dependencies": {
     "str-util": "^2.3.21",
-    "ts-type": "^1.2.12"
+    "ts-type": "^1.2.13"
   },
   "devDependencies": {
-    "regexp-cjk": "^3.3.8",
+    "regexp-cjk": "^3.3.10",
     "regexp-cjk-plugin-escape-unicode-property": "^1.0.1",
     "regexp-cjk-plugin-extra": "^1.0.5"
   },

@@ -2,10 +2,10 @@
  * Created by user on 2019/1/6/006.
  */
 
-import moment = require('moment');
+import moment from 'moment';
 import { _trim, createSortCallback, defaultSortCallback, EnumToLowerCase, naturalCompare } from '@node-novel/sort';
-import StrUtil = require('str-util');
-import sortObject = require('sort-object-keys2');
+import StrUtil from 'str-util';
+import sortObject from 'sort-object-keys2';
 
 let defaultOffset = 8;
 
