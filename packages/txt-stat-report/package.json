@@ -24,7 +24,7 @@
     "test": "test"
   },
   "scripts": {
-    "prepublishOnly": "npm test",
+    "prepublishOnly": "yarn test",
     "test": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\""
   },
   "dependencies": {

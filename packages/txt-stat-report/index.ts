@@ -2,7 +2,7 @@
  * Created by user on 2019/2/23.
  */
 
-import UString = require('uni-string');
+import UString from 'uni-string';
 import { array_unique } from 'array-hyper-unique';
 import { crlf, LF } from 'crlf-normalize';
 import { execall } from 'execall2';
