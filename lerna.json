@@ -1,5 +1,6 @@
 {
   "packages": [
+    "packages/@node-novel/*",
     "packages/*"
   ],
   "command": {

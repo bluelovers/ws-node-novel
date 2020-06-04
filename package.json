@@ -15,6 +15,7 @@
   "author": "",
   "main": "index.js",
   "workspaces": [
+    "packages/@node-novel/*",
     "packages/*"
   ],
   "scripts": {
