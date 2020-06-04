@@ -26,17 +26,18 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "jest",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "prepublish:lockfile": "npx sync-lockfile .",
-    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "prepublishOnly": "yarn run test",
     "postpublish_": "git commit -m \"chore(release): publish\" .",
     "ncu": "npx yarn-tool ncu -u",
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "cjk-conv": "^1.2.72",
+    "@lazy-cjk/novel-filename": "^1.0.8",
+    "@lazy-cjk/zh-slugify": "^1.0.17",
     "normalize-num": "^1.0.1",
     "str-util": "^2.3.21"
   },

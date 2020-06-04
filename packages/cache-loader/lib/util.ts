@@ -3,9 +3,12 @@
  */
 
 import moment from 'moment';
-import { _trim, createSortCallback, defaultSortCallback, EnumToLowerCase, naturalCompare } from '@node-novel/sort';
+import { defaultSortCallback, naturalCompare } from '@node-novel/sort';
 import StrUtil from 'str-util';
 import sortObject from 'sort-object-keys2';
+import { _trim } from '@node-novel/sort/lib/util';
+import { EnumToLowerCase } from '@node-novel/sort/lib/types';
+import { createSortCallback } from '@node-novel/sort/lib/core';
 
 let defaultOffset = 8;
 

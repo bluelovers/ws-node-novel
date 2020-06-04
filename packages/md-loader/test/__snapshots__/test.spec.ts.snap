@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`simple k.stringify v2 1`] = `
+"# novel
+
+- title: 破滅の魔導王とゴーレムの蛮妃
+- author: 
+- source: 
+- cover: 
+- publisher: 
+- date: 
+- status: 
+
+## series
+
+- name: 
+
+## preface
+
+
+\`\`\`
+
+\`\`\`
+
+## tags
+
+- node-novel
+
+# contribute
+
+
+# options
+
+## textlayout
+
+
+# aaa
+
+- bbb: 777
+
+
+"
+`;
+
+exports[`simple k.stringify(k) 1`] = `
+"---
+title: Home
+---
+# novel
+
+- title: 破滅の魔導王とゴーレムの蛮妃
+"
+`;
+
+exports[`simple parse 1`] = `
+Object {
+  "content": "# novel
+
+- title: 破滅の魔導王とゴーレムの蛮妃
+",
+  "data": Object {
+    "title": "Home",
+  },
+  "matter": Object {
+    "content": "# novel
+
+- title: 破滅の魔導王とゴーレムの蛮妃
+",
+    "data": Object {
+      "title": "Home",
+    },
+    "excerpt": "",
+    "isEmpty": false,
+  },
+  "mdconf": Object {
+    "novel": Object {
+      "title": "破滅の魔導王とゴーレムの蛮妃",
+    },
+    "options": Object {
+      "textlayout": Object {},
+    },
+  },
+  "stringify": [Function],
+}
+`;

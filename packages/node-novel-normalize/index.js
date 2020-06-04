@@ -9,8 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.normalize_val = exports.normalize_strip = void 0;
 const str_util_1 = __importDefault(require("str-util"));
 const normalize_num_1 = __importDefault(require("normalize-num"));
-const filename_1 = __importDefault(require("cjk-conv/lib/novel/filename"));
-const list_1 = require("cjk-conv/lib/zh/table/list");
+const novel_filename_1 = __importDefault(require("@lazy-cjk/novel-filename"));
+const zh_slugify_1 = require("@lazy-cjk/zh-slugify");
 function normalize_strip(str, isDir) {
     if (isDir) {
         if (/^p?\d{4,}[\s_](.+)(_\(\d+\))$/.exec(str)) {
@@ -35,7 +35,7 @@ exports.normalize_strip = normalize_strip;
 function normalize_val(str, padNum = 5, options = {}) {
     padNum = padNum || options.padNum;
     //console.log(111, str);
-    str = filename_1.default.filename(str);
+    str = novel_filename_1.default.filename(str);
     if (/^(?:序|プロローグ|Prologue)/i.test(str)) {
         str = '0_' + str;
     }
@@ -101,7 +101,7 @@ function normalize_val(str, padNum = 5, options = {}) {
         greedyTable: true,
     })[0];
     */
-    str = list_1.slugify(str, true);
+    str = zh_slugify_1.slugify(str, true);
     return str;
 }
 exports.normalize_val = normalize_val;

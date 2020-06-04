@@ -5,11 +5,8 @@
 import StrUtil from 'str-util';
 import str2num from 'normalize-num';
 
-import { zh2jp } from 'cjk-conv';
-import { cn2tw, tw2cn } from 'cjk-conv/lib/zh/convert/index';
-import zhTable = require('cjk-conv/lib/zh/table/index');
-import novelFilename from 'cjk-conv/lib/novel/filename';
-import { slugify } from 'cjk-conv/lib/zh/table/list';
+import novelFilename from '@lazy-cjk/novel-filename';
+import { slugify } from '@lazy-cjk/zh-slugify';
 
 export interface IOptions
 {

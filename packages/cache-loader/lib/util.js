@@ -12,6 +12,8 @@ const sort_1 = require("@node-novel/sort");
 Object.defineProperty(exports, "naturalCompare", { enumerable: true, get: function () { return sort_1.naturalCompare; } });
 const str_util_1 = __importDefault(require("str-util"));
 const sort_object_keys2_1 = __importDefault(require("sort-object-keys2"));
+const types_1 = require("@node-novel/sort/lib/types");
+const core_1 = require("@node-novel/sort/lib/core");
 let defaultOffset = 8;
 function createMoment(...argv) {
     return moment_1.default(...argv).utcOffset(defaultOffset);
@@ -45,13 +47,13 @@ Object.defineProperties(exports, {
         },
     },
 });
-exports.cacheSortCallback = sort_1.createSortCallback({
+exports.cacheSortCallback = core_1.createSortCallback({
     dotNum: true,
     transpileBase(input, isSub) {
         let s = str_util_1.default.toHalfWidth(input);
         return s;
     },
-    toLowerCase: sort_1.EnumToLowerCase.toLocaleLowerCase,
+    toLowerCase: types_1.EnumToLowerCase.toLocaleLowerCase,
 });
 function freezeProperty(who, prop, freeze) {
     if (freeze) {
