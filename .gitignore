@@ -35,3 +35,4 @@ package-lock.json
 **/node_modules/
 **/test/**/*.map
 /tsconfig.tsbuildinfo
+*.map

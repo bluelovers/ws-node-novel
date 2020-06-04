@@ -2,39 +2,44 @@
   "name": "ws-node-novel",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "lerna:ncu": "yarn-tool ws exec yarn-tool ncu -- -u",
-    "lerna:sort": "yarn-tool ws exec yarn-tool sort",
-    "lerna": "lerna publish --yes --bump patch",
-    "fix-pkg": "ts-node ./script/fix-pkg.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "",
+  "homepage": "https://github.com/bluelovers/ws-node-novel#readme",
+  "bugs": {
+    "url": "https://github.com/bluelovers/ws-node-novel/issues"
   },
-  "resolutions": {},
-  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bluelovers/ws-node-novel.git"
   },
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bluelovers/ws-node-novel/issues"
+  "author": "",
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lerna": "lerna publish --yes --bump patch",
+    "lerna:ncu": "yarn-tool ws exec yarn-tool ncu -- -u",
+    "lerna:sort": "yarn-tool ws exec yarn-tool sort",
+    "fix-pkg": "ts-node ./script/fix-pkg.js",
+    "ncu": "npx yarn-tool ncu -u && npx yarn-tool ws exec yarn-tool ncu -- -u",
+    "sort-package-json": "npx yarn-tool sort && npx yarn-tool ws exec yarn-tool sort"
   },
-  "homepage": "https://github.com/bluelovers/ws-node-novel#readme",
-  "description": "",
+  "resolutions": {},
   "dependencies": {
-    "fast-glob": "^3.1.1",
-    "fs-extra": "^8.1.0"
+    "fast-glob": "^3.2.2",
+    "fs-extra": "^9.0.1"
   },
   "devDependencies": {
-    "@bluelovers/tsconfig": "^1.0.17",
-    "@types/benchmark": "^1.0.31",
-    "@types/chai": "^4.2.9",
-    "@types/fs-extra": "^8.1.0",
-    "@types/mocha": "^7.0.1",
-    "@types/node": "^13.7.4"
+    "@bluelovers/tsconfig": "^1.0.19",
+    "@types/benchmark": "^1.0.33",
+    "@types/chai": "^4.2.11",
+    "@types/fs-extra": "^9.0.1",
+    "@types/jest": "^25.2.3",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^14.0.10",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0"
   }
 }

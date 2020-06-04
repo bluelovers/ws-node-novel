@@ -16,6 +16,6 @@ export const textLayout = create();
 /**
  * @deprecated
  */
-export const novelText = textLayout;
+export { textLayout as novelText }
 
 export default textLayout;

@@ -2,6 +2,7 @@
   "name": "@node-novel/git-diff-log",
   "version": "1.0.4",
   "description": "比對目標路徑下的 git 歷史變化 適用於任何符合 `主資料夾/副資料夾/子路徑` 這種結構的資料夾",
+  "keywords": [],
   "homepage": "https://github.com/bluelovers/ws-node-novel#readme",
   "bugs": {
     "url": "https://github.com/bluelovers/ws-node-novel/issues"
@@ -11,23 +12,31 @@
     "url": "git+https://github.com/bluelovers/ws-node-novel.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "bluelovers",
   "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
-    "ncu": "npx yarn-tool ncu -u",
-    "prepublishOnly": "yarn run ncu && yarn run sort-package-json",
+    "test": "echo \"Error: no test specified\"",
+    "npm:publish": "npm publish",
+    "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
+    "prepublish:lockfile": "npx sync-lockfile .",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
     "postpublish": "echo postpublish",
-    "sort-package-json": "npx yarn-tool sort",
-    "test": "echo \"Error: no test specified\""
+    "postpublish_": "git commit -m \"chore(release): publish\" .",
+    "ncu": "npx yarn-tool ncu -u",
+    "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
     "array-hyper-unique": "^1.1.0",
-    "git-diff-from": "^1.1.5",
-    "ts-type": "^1.2.13",
+    "git-diff-from": "^1.1.7",
+    "ts-type": "^1.2.17",
     "upath2": "^2.1.3"
   },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

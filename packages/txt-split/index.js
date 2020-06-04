@@ -4,13 +4,13 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var lib_1 = require("./lib");
-exports.autoFile = lib_1.autoFile;
-exports.makeOptions = lib_1.makeOptions;
-exports.outputFile = lib_1.outputFile;
-exports.outputFileSync = lib_1.outputFileSync;
-exports.readFile = lib_1.readFile;
-exports.readFileSync = lib_1.readFileSync;
+Object.defineProperty(exports, "autoFile", { enumerable: true, get: function () { return lib_1.autoFile; } });
+Object.defineProperty(exports, "makeOptions", { enumerable: true, get: function () { return lib_1.makeOptions; } });
+Object.defineProperty(exports, "outputFile", { enumerable: true, get: function () { return lib_1.outputFile; } });
+Object.defineProperty(exports, "outputFileSync", { enumerable: true, get: function () { return lib_1.outputFileSync; } });
+Object.defineProperty(exports, "readFile", { enumerable: true, get: function () { return lib_1.readFile; } });
+Object.defineProperty(exports, "readFileSync", { enumerable: true, get: function () { return lib_1.readFileSync; } });
 var console_1 = require("./lib/console");
-exports.console = console_1.console;
+Object.defineProperty(exports, "console", { enumerable: true, get: function () { return console_1.console; } });
 exports.default = exports;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUE7O0dBRUc7O0FBRUgsNkJBVWU7QUFUZCx5QkFBQSxRQUFRLENBQUE7QUFFUiw0QkFBQSxXQUFXLENBQUE7QUFFWCwyQkFBQSxVQUFVLENBQUE7QUFDViwrQkFBQSxjQUFjLENBQUE7QUFFZCx5QkFBQSxRQUFRLENBQUE7QUFDUiw2QkFBQSxZQUFZLENBQUE7QUFHYix5Q0FBd0M7QUFBL0IsNEJBQUEsT0FBTyxDQUFBO0FBRWhCLGtCQUFlLE9BQW1DLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgdXNlciBvbiAyMDE4LzExLzExLzAxMS5cbiAqL1xuXG5leHBvcnQge1xuXHRhdXRvRmlsZSxcblxuXHRtYWtlT3B0aW9ucyxcblxuXHRvdXRwdXRGaWxlLFxuXHRvdXRwdXRGaWxlU3luYyxcblxuXHRyZWFkRmlsZSxcblx0cmVhZEZpbGVTeW5jLFxufSBmcm9tICcuL2xpYic7XG5leHBvcnQgdHlwZSAqIGZyb20gJy4vbGliL2ludGVyZmFjZSc7XG5leHBvcnQgeyBjb25zb2xlIH0gZnJvbSAnLi9saWIvY29uc29sZSc7XG5cbmV4cG9ydCBkZWZhdWx0IGV4cG9ydHMgYXMgdHlwZW9mIGltcG9ydCgnLi9pbmRleCcpO1xuIl19
+//# sourceMappingURL=index.js.map

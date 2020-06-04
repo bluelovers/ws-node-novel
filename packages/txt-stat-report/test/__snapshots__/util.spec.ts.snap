@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`removePunctuation 1`] = `""`;
+
+exports[`txtReport 1`] = `
+Object {
+  "buf_length": 343,
+  "hanzi_length": 0,
+  "ja_length": 1,
+  "js_length": 142,
+  "line_length": 3,
+  "no_blank_line_length": 2,
+  "punctuation_length": 139,
+  "space_length": 0,
+  "uni_length": 142,
+}
+`;

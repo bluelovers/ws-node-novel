@@ -132,5 +132,3 @@ export function parsePathMainBase(pathMain: string)
 		pathMain_out,
 	}
 }
-
-exports = Object.freeze(exports);

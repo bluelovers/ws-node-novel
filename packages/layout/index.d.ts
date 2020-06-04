@@ -13,5 +13,5 @@ export declare const textLayout: TextLayout;
 /**
  * @deprecated
  */
-export declare const novelText: TextLayout;
+export { textLayout as novelText };
 export default textLayout;

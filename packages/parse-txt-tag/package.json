@@ -1,7 +1,7 @@
 {
   "name": "@node-novel/parse-txt-tag",
-  "private": false,
   "version": "1.0.6",
+  "private": false,
   "description": "分析 node-novel 風格的 txt",
   "keywords": [
     "@node-novel",
@@ -17,23 +17,33 @@
     "url": "git+https://github.com/bluelovers/ws-node-novel.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "bluelovers",
   "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
-    "ncu": "npx yarn-tool ncu -u",
-    "build-cache": "ts-node ./test/script/cache.ts",
-    "prepublishOnly": "yarn run test",
     "pretest": "yarn run build-cache",
-    "test": "ts-node ./test/demo.ts"
+    "test": "ts-node ./test/demo.ts",
+    "build-cache": "ts-node ./test/script/cache.ts",
+    "npm:publish": "npm publish",
+    "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
+    "prepublish:lockfile": "npx sync-lockfile .",
+    "prepublishOnly": "yarn run test",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "postpublish_": "git commit -m \"chore(release): publish\" .",
+    "ncu": "npx yarn-tool ncu -u",
+    "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
     "str-util": "^2.3.21",
-    "ts-type": "^1.2.13"
+    "ts-type": "^1.2.17"
   },
   "devDependencies": {
-    "regexp-cjk": "^3.3.10",
-    "regexp-cjk-plugin-escape-unicode-property": "^1.0.1",
-    "regexp-cjk-plugin-extra": "^1.0.5"
+    "regexp-cjk": "^3.3.38",
+    "regexp-cjk-plugin-escape-unicode-property": "^1.0.7",
+    "regexp-cjk-plugin-extra": "^1.0.11"
   },
   "publishConfig": {
     "access": "public"

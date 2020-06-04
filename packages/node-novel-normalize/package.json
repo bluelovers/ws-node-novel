@@ -20,17 +20,28 @@
     "url": "git+https://github.com/bluelovers/ws-node-novel.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "bluelovers",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\""
+    "test": "echo \"Error: no test specified\"",
+    "npm:publish": "npm publish",
+    "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
+    "prepublish:lockfile": "npx sync-lockfile .",
+    "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
+    "postpublish_": "git commit -m \"chore(release): publish\" .",
+    "ncu": "npx yarn-tool ncu -u",
+    "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "cjk-conv": "^1.2.40",
+    "cjk-conv": "^1.2.72",
     "normalize-num": "^1.0.1",
     "str-util": "^2.3.21"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
   }
 }

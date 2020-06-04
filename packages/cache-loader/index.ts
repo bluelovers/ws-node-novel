@@ -938,4 +938,3 @@ const { create, fixOptions, createFromJSON } = NovelStatCache;
 export { create, fixOptions, createFromJSON }
 
 export default NovelStatCache.create
-exports = Object.freeze(exports);

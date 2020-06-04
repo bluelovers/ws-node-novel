@@ -218,5 +218,3 @@ export function _trim(input: string): string
 		;
 }
 
-// @ts-ignore
-exports = Object.freeze(exports);

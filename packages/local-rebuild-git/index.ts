@@ -108,16 +108,19 @@ export function fetchAllFileLog(repo: string, options?: {
 			'.gitignore',
 			'.node-novel.epub.gitkeep',
 		], {
+		// @ts-ignore
 			deep: true,
 			onlyFiles: true,
 			cwd: repo,
 		}))
 		.reduce(async function (data, file)
 		{
+			// @ts-ignore
 			let row = await fetchFileLogRow(repo, file).catch();
 
 			if (row)
 			{
+				// @ts-ignore
 				data.push([file, row])
 			}
 
