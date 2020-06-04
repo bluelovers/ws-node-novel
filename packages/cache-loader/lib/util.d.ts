@@ -10,7 +10,7 @@ export declare let todayMomentOffset: number;
 export default todayMomentTimestamp;
 export declare function getTodayMomentTimestamp(): number;
 export declare function refreshTodayMoment(): boolean;
-export declare const cacheSortCallback: import("@node-novel/sort/lib/types").IFnSortCallback;
+export declare const cacheSortCallback: import("@node-novel/sort").IFnSortCallback;
 export declare function freezeProperty<T>(who: T, prop: keyof T, freeze?: boolean): T;
 export declare function baseSortObject<T>(data: T): T;
 export declare function tryRequireFS(): typeof import('fs-extra');
