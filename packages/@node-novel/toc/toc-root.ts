@@ -4,11 +4,10 @@
 
 import { array_unique } from 'array-hyper-unique';
 import { LF } from 'crlf-normalize';
-import FastGlob = require('fast-glob');
-import path = require('upath2');
-import BluebirdPromise = require('bluebird');
-import fs = require('fs-extra');
-import novelGlobby = require('node-novel-globby/g');
+import FastGlob from '@bluelovers/fast-glob';
+import path from 'upath2';
+import BluebirdPromise from 'bluebird';
+import fs from 'fs-extra';
 import { defaultPatternsExclude } from 'node-novel-globby/lib/options';
 import { IMdconfMeta } from 'node-novel-info';
 import {
@@ -21,7 +20,7 @@ import {
 	tocSortCallback,
 } from './lib/util';
 import { makeLink } from './toc_contents';
-import sortObject = require('sort-object-keys2');
+import sortObject from 'sort-object-keys2';
 import { defaultSortCallback, createSortCallback } from '@node-novel/sort';
 
 export function searchByRoot(rootPath: string)

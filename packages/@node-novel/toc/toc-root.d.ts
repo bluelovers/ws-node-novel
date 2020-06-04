@@ -1,7 +1,7 @@
 /**
  * Created by user on 2018/11/14/014.
  */
-import BluebirdPromise = require('bluebird');
+import BluebirdPromise from 'bluebird';
 import { IMdconfMeta } from 'node-novel-info';
 export declare function searchByRoot(rootPath: string): BluebirdPromise<string[]>;
 export declare function isNovelID(dir: string, rootPath?: string): BluebirdPromise<string>;

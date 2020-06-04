@@ -3,14 +3,14 @@
  */
 
 import { array_unique } from 'array-hyper-unique';
-import Promise = require('bluebird');
+import Bluebird from 'bluebird';
 import { Console } from 'debug-color2';
-import FastGlob = require('fast-glob');
-import fs = require('fs-extra');
+import FastGlob from '@bluelovers/fast-glob';
+import fs from 'fs-extra';
 import { IMdconfMeta, mdconf, mdconf_parse } from 'node-novel-info';
-import sortObjectKeys = require('sort-object-keys2');
+import sortObjectKeys from 'sort-object-keys2';
 import { getNovelTitles, md_href } from './lib/util';
-import path = require('upath2');
+import path from 'upath2';
 export { md_href }
 
 export const console = new Console(null, {
@@ -25,11 +25,11 @@ export const console = new Console(null, {
 
 console.enabledColor = true;
 
-export { Promise }
+export { Bluebird as Promise }
 
 export function get_ids(cwd: string, filter?: typeof defaultFilter)
 {
-	return Promise.resolve(FastGlob<string>([
+	return Bluebird.resolve(FastGlob<string>([
 			'*',
 			'!docs',
 			'!.*',
@@ -60,7 +60,7 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 		{
 			if (!ls.length)
 			{
-				return Promise.reject(`get_ids return empty`)
+				return Bluebird.reject(`get_ids return empty`)
 			}
 
 			return ls;
@@ -79,7 +79,7 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 
 			let bool = false;
 
-			await Promise
+			await Bluebird
 				.reduce(FastGlob<string>([
 					'*/README.md',
 				], {
@@ -206,62 +206,64 @@ export interface IRet
 	[k: string]: IRetRow
 }
 
-export function createReadmeData(cwd: string, ret: IRet, item: string): Promise<IRet>
-// @ts-ignore
-export async function createReadmeData(cwd: string, ret: IRet, item: string): Promise<IRet>
+export function createReadmeData(cwd: string, ret: IRet, item: string): Bluebird<IRet>
 {
-	let item_id = path.basename(path.dirname(item));
+	return Bluebird.resolve()
+		.then(async () => {
+			let item_id = path.basename(path.dirname(item));
 
-	let meta_file = path.join(cwd, item);
+			let meta_file = path.join(cwd, item);
 
-	let meta: IMdconfMeta = await fs.readFile(meta_file)
-		.then(mdconf_parse)
-		.catch(function (err)
-		{
-			console.error(err.toString());
+			let meta: IMdconfMeta = await fs.readFile(meta_file)
+				.then(mdconf_parse)
+				.catch(function (err)
+				{
+					console.error(err.toString());
 
-			return null;
+					return null;
+				})
+			;
+
+			ret[item_id] = {
+				titles: [],
+				tags: [],
+			};
+
+			{
+				let titles = [] as string[];
+
+				titles.push(item_id);
+
+				if (meta)
+				{
+					titles.push(...getNovelTitles(meta));
+
+					if (meta.novel.author)
+					{
+						ret[item_id].tags.push(meta.novel.author)
+					}
+				}
+
+				titles = array_unique(titles.filter(v => v));
+
+				if (titles.length == 1 && titles[0] == item_id)
+				{
+					titles = null;
+				}
+
+				ret[item_id].titles = titles;
+			}
+
+			if (meta && meta.novel.tags)
+			{
+				ret[item_id].tags = ret[item_id].tags
+					.concat(Object.values(meta.novel.tags))
+				;
+			}
+
+			return ret;
 		})
 	;
-
-	ret[item_id] = {
-		titles: [],
-		tags: [],
-	};
-
-	{
-		let titles = [] as string[];
-
-		titles.push(item_id);
-
-		if (meta)
-		{
-			titles.push(...getNovelTitles(meta));
-
-			if (meta.novel.author)
-			{
-				ret[item_id].tags.push(meta.novel.author)
-			}
-		}
-
-		titles = array_unique(titles.filter(v => v));
-
-		if (titles.length == 1 && titles[0] == item_id)
-		{
-			titles = null;
-		}
-
-		ret[item_id].titles = titles;
-	}
-
-	if (meta && meta.novel.tags)
-	{
-		ret[item_id].tags = ret[item_id].tags
-			.concat(Object.values(meta.novel.tags))
-		;
-	}
-
-	return ret;
 }
 
 export function defaultFilter(value: string): boolean

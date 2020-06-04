@@ -4,12 +4,12 @@
 
 import { normalize_strip } from '@node-novel/normalize';
 import { array_unique } from 'array-hyper-unique';
-import BluebirdPromise = require('bluebird');
-import fs = require('fs-extra');
-import novelGlobby = require('node-novel-globby/g');
+import BluebirdPromise from 'bluebird';
+import fs from 'fs-extra';
+import * as novelGlobby from 'node-novel-globby/g';
 import { sortTree } from 'node-novel-globby/lib/glob-sort';
 import { getNovelTitles, loadReadmeMetaSync, md_href, md_link_escape } from './lib/util';
-import path = require('upath2');
+import path from 'upath2';
 export { md_href, md_link_escape }
 
 /*
