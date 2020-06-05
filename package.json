@@ -20,11 +20,12 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lerna": "lerna publish --yes --bump patch",
+    "lerna": "lerna publish --yes --bump patch && yarn run postpublish:lerna",
     "lerna:ncu": "yarn-tool ws exec yarn-tool ncu -- -u",
     "lerna:sort": "yarn-tool ws exec yarn-tool sort",
     "fix-pkg": "ts-node ./script/fix-pkg.js",
     "ncu": "npx yarn-tool ncu -u && npx yarn-tool ws exec yarn-tool ncu -- -u",
+    "postpublish:lerna": "git subtree push https://github.com/bluelovers/mdconf.git master --prefix packages/mdconf2",
     "sort-package-json": "npx yarn-tool sort && npx yarn-tool ws exec yarn-tool sort"
   },
   "resolutions": {},
@@ -41,6 +42,7 @@
     "@types/mocha": "^7.0.2",
     "@types/node": "^14.0.11",
     "jest": "^26.0.1",
+    "chai": "^4.2.0",
     "ts-jest": "^26.1.0"
   }
 }
