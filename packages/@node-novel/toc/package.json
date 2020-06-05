@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/toc",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "此模組用來建立 novel 索引",
   "keywords": [],
   "homepage": "https://github.com/bluelovers/ws-node-novel/tree/master/packages/@node-novel/toc#readme",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@bluelovers/fast-glob": "^3.0.4",
-    "@node-novel/normalize": "^1.0.15",
+    "@node-novel/normalize": "^1.0.16",
     "@node-novel/sort": "^1.0.11",
     "array-hyper-unique": "^1.1.0",
     "bluebird": "^3.7.2",
