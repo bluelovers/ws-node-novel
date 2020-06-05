@@ -2,7 +2,7 @@
  * Created by user on 2018/2/9/009.
  */
 export * from './text';
-import StrUtil = require('str-util');
+import StrUtil from 'str-util';
 import { enspace } from './text';
 import tiebaHarmony from 'tieba-harmony';
 import chkBlankLine from 'blank-line';

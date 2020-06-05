@@ -2,10 +2,10 @@
  * Created by user on 2017/12/5/005.
  */
 
-import StrUtil = require('str-util');
+import StrUtil from 'str-util';
 import getMinMidMax from 'blank-line';
 import crlf, { LF } from 'crlf-normalize';
-import tiebaHarmony, { SP_REGEXP, SP_KEY } from 'tieba-harmony';
+import { SP_REGEXP, SP_KEY } from 'tieba-harmony';
 import { envVal, envBool } from 'env-bool';
 
 export { SP_REGEXP, SP_KEY };

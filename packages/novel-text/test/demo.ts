@@ -22,4 +22,3 @@ new_text = novelText.textlayout(new_text, options);
 //new_text = novelText.trim(new_text);
 
 console.log(new_text);
-
