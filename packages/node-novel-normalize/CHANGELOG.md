@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.15](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/normalize@1.0.14...@node-novel/normalize@1.0.15) (2020-06-05)
+
+**Note:** Version bump only for package @node-novel/normalize
+
+
+
+
+
 ## [1.0.14](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/normalize@1.0.13...@node-novel/normalize@1.0.14) (2020-06-04)
 
 
