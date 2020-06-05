@@ -49,12 +49,12 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.8",
+    "@lazy-cjk/novel-filename": "^1.0.9",
     "blank-line": "^1.0.1",
     "crlf-normalize": "^1.0.3",
     "env-bool": "^1.0.3",
     "str-util": "^2.3.21",
-    "tieba-harmony": "^2.0.1"
+    "tieba-harmony": "^2.0.2"
   },
   "devDependencies": {
     "@bluelovers/tsconfig": "^1.0.19",
