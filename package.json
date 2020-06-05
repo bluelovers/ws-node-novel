@@ -25,7 +25,7 @@
     "lerna:sort": "yarn-tool ws exec yarn-tool sort",
     "fix-pkg": "ts-node ./script/fix-pkg.js",
     "ncu": "npx yarn-tool ncu -u && npx yarn-tool ws exec yarn-tool ncu -- -u",
-    "postpublish:lerna": "git subtree push https://github.com/bluelovers/mdconf.git master --prefix packages/mdconf2",
+    "postpublish:lerna": "git subtree push https://github.com/bluelovers/mdconf.git master --prefix packages/mdconf2 && git subtree push https://github.com/bluelovers/node-novel-info.git master --prefix packages/node-novel-info",
     "sort-package-json": "npx yarn-tool sort && npx yarn-tool ws exec yarn-tool sort"
   },
   "resolutions": {},
@@ -34,6 +34,7 @@
     "fs-extra": "^9.0.1"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.155",
     "@bluelovers/tsconfig": "^1.0.19",
     "@types/benchmark": "^1.0.33",
     "@types/chai": "^4.2.11",
