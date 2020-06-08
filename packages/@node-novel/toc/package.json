@@ -36,7 +36,7 @@
     "debug-color2": "^1.1.7",
     "fast-glob": "^3.2.2",
     "fs-extra": "^9.0.1",
-    "node-novel-globby": "^2.0.16",
+    "node-novel-globby": "^2.0.17",
     "node-novel-info": "^3.0.3",
     "sort-object-keys2": "^2.0.3",
     "str-util": "^2.3.22",
