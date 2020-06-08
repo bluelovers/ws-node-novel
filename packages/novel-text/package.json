@@ -1,6 +1,6 @@
 {
   "name": "novel-text",
-  "version": "1.1.27",
+  "version": "1.1.28",
   "description": "node-novel core module",
   "keywords": [
     "chinese",
@@ -56,6 +56,5 @@
     "str-util": "^2.3.22",
     "tieba-harmony": "^2.0.8"
   },
-  "devDependencies": {},
   "gitHead": "88f44c655752fcbbb8e045991d316412f4719e9a"
 }
