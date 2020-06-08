@@ -37,14 +37,10 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "str-util": "^2.3.21",
+    "str-util": "^2.3.22",
     "ts-type": "^1.2.17"
   },
-  "devDependencies": {
-    "regexp-cjk": "^3.3.41",
-    "regexp-cjk-plugin-escape-unicode-property": "^1.0.8",
-    "regexp-cjk-plugin-extra": "^1.0.12"
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },

@@ -54,7 +54,7 @@
   },
   "peerDependencies": {
     "gray-matter": "^4",
-    "node-novel-info": "^3.0.1"
+    "node-novel-info": "^3"
   },
   "publishConfig": {
     "access": "public"

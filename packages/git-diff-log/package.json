@@ -31,8 +31,8 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "array-hyper-unique": "^1.1.0",
-    "git-diff-from": "^1.1.7",
+    "array-hyper-unique": "^1.1.2",
+    "git-diff-from": "^1.1.11",
     "ts-type": "^1.2.17",
     "upath2": "^2.1.3"
   },

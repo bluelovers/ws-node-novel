@@ -52,11 +52,11 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "array-hyper-unique": "^1.1.0",
+    "array-hyper-unique": "^1.1.2",
     "blank-line": "^1.0.1",
     "crlf-normalize": "^1.0.3",
     "env-bool": "^1.0.3",
-    "str-util": "^2.3.21"
+    "str-util": "^2.3.22"
   },
   "publishConfig": {
     "access": "public"

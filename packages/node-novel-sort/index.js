@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultSortCallback = exports.naturalCompare = void 0;
-const string_natural_compare_1 = __importDefault(require("string-natural-compare"));
+const string_natural_compare_1 = __importDefault(require("@bluelovers/string-natural-compare"));
 exports.naturalCompare = string_natural_compare_1.default;
 const core_1 = require("./lib/core");
 __exportStar(require("./lib/core"), exports);

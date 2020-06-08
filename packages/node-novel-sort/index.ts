@@ -2,7 +2,7 @@
  * Created by user on 2018/2/12/012.
  */
 
-import naturalCompare from 'string-natural-compare';
+import naturalCompare from '@bluelovers/string-natural-compare';
 import { createSortCallback } from './lib/core';
 
 export * from './lib/core';

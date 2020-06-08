@@ -1,4 +1,4 @@
-import novelText from 'novel-text';
+import novelText from '@node-novel/layout';
 import { console } from './console';
 import { makeOptions } from './index';
 import { IContext, IDataVolume, IOptions, IOptionsWithData, IPathLike, Resolvable } from './interface';

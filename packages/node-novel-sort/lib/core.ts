@@ -2,7 +2,7 @@
  * Created by user on 2020/6/5.
  */
 
-import naturalCompare from 'string-natural-compare';
+import naturalCompare from '@bluelovers/string-natural-compare';
 import { ICreateSortCallbackOptions, IFnSortCallback, EnumToLowerCase } from './types';
 import { _match, _trim } from './util';
 

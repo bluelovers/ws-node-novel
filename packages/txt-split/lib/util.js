@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fix_name = exports._outputFile = exports._handleReadFile = exports._wrapMethod = exports.padIndexEnd = exports.padIndexStart = exports.padIndex = exports.chkEncoding = exports.logWarn = void 0;
-const novel_text_1 = __importDefault(require("novel-text"));
+const layout_1 = __importDefault(require("@node-novel/layout"));
 const console_1 = require("./console");
 const index_1 = require("./index");
 const bluebird_1 = __importDefault(require("bluebird"));
@@ -67,7 +67,7 @@ function _handleReadFile(data, file, options) {
         }
     }
     txt = String(data);
-    return crlf_normalize_1.crlf(novel_text_1.default.trim(txt), crlf_normalize_1.LF);
+    return crlf_normalize_1.crlf(layout_1.default.trim(txt), crlf_normalize_1.LF);
 }
 exports._handleReadFile = _handleReadFile;
 function _outputFile(data, options) {
@@ -80,7 +80,7 @@ function _outputFile(data, options) {
 }
 exports._outputFile = _outputFile;
 function fix_name(name) {
-    name = novel_text_1.default.trim(name, {
+    name = layout_1.default.trim(name, {
         trim: true,
     }).trim();
     if (!/^\d+/.test(name)) {

@@ -7,7 +7,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSortCallback = void 0;
-const string_natural_compare_1 = __importDefault(require("string-natural-compare"));
+const string_natural_compare_1 = __importDefault(require("@bluelovers/string-natural-compare"));
 const types_1 = require("./types");
 const util_1 = require("./util");
 /**

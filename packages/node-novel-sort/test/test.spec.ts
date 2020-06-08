@@ -2,6 +2,8 @@ import { normalize_val } from '@node-novel/normalize';
 import { _match } from '../lib/util';
 import { ITriggerData } from '../lib/types';
 import { createSortCallback } from '../lib/core';
+import { inspect } from 'util';
+
 
 test(`createSortCallback`, () =>
 {
@@ -34,4 +36,3 @@ test(`createSortCallback`, () =>
 	expect(actual).toMatchSnapshot();
 
 });
-

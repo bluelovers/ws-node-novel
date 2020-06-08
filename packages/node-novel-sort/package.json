@@ -32,7 +32,7 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "string-natural-compare": "^3.0.1"
+    "@bluelovers/string-natural-compare": "^1.0.2"
   },
   "publishConfig": {
     "access": "public"
