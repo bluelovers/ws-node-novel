@@ -11,7 +11,7 @@ const bluebird_1 = __importDefault(require("bluebird"));
 const moment_1 = __importDefault(require("moment"));
 //import gitlog from 'gitlog2';
 const gitlog2_1 = __importDefault(require("gitlog2"));
-const git_root2_1 = __importDefault(require("git-root2"));
+const core_1 = __importDefault(require("git-root2/core"));
 const upath2_1 = __importDefault(require("upath2"));
 const email_normalize_1 = __importDefault(require("email-normalize"));
 const uni_string_1 = __importDefault(require("uni-string"));
@@ -240,7 +240,7 @@ function runAllJob(cwd) {
         if (!fs_extra_1.default.pathExistsSync(upath2_1.default.join(cwd, file))) {
             throw new RangeError(`'${file}' not exists`);
         }
-        let root = await git_root2_1.default.async(cwd)
+        let root = await core_1.default.async(cwd)
             .then(r => upath2_1.default.normalize(r));
         if (root !== cwd || !cwd || !root) {
             throw new RangeError(`'${cwd}' not a git root`);

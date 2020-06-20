@@ -47,8 +47,8 @@
     "debug-color2": "^1.2.3",
     "execall2": "^1.1.4",
     "fs-extra": "^9.0.1",
-    "fs-iconv": "^3.0.8",
-    "iconv-jschardet": "^2.0.8",
+    "fs-iconv": "^3.0.9",
+    "iconv-jschardet": "^2.0.9",
     "regexp-cjk": "^3.3.53",
     "upath2": "^3.0.6"
   },

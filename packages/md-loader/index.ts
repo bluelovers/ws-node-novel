@@ -2,7 +2,7 @@
  * Created by user on 2019/2/1/001.
  */
 
-import GrayMatter = require('gray-matter');
+import GrayMatter from 'gray-matter';
 import { IOptionsParse, mdconf_parse, stringify as mdconf_stringify } from 'node-novel-info';
 
 export interface IOptions<I extends IInput, OUT extends any, PO, GO>

@@ -2,9 +2,12 @@
 /**
  * Created by user on 2019/2/1/001.
  */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fixContent = exports.stringify = exports.parse = void 0;
-const GrayMatter = require("gray-matter");
+const gray_matter_1 = __importDefault(require("gray-matter"));
 const node_novel_info_1 = require("node-novel-info");
 function parse(inputContent, options) {
     let { matterOptions, parseOptions, parser = node_novel_info_1.mdconf_parse } = (options || {});
@@ -19,7 +22,7 @@ function parse(inputContent, options) {
     }
     // @ts-ignore
     inputContent = fixContent(inputContent);
-    let matter = GrayMatter(inputContent, matterOptions);
+    let matter = gray_matter_1.default(inputContent, matterOptions);
     // @ts-ignore
     let mdconf = parser(inputContent, parseOptions);
     if (!mdconf || mdconf && Object.keys(mdconf).length == 0) {
@@ -69,7 +72,7 @@ function stringify(inputData, options) {
         ? inputData.content
         // @ts-ignore
         : inputData.mdconf ? stringify(inputData.mdconf) : null;
-    return GrayMatter.stringify(fixContent(content), 
+    return gray_matter_1.default.stringify(fixContent(content), 
     // @ts-ignore
     inputData.data, 
     // @ts-ignore

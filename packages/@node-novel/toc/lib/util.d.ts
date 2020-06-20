@@ -1,9 +1,9 @@
 /**
  * Created by user on 2018/11/14/014.
  */
-import FastGlob = require('fast-glob');
+import FastGlob from '@bluelovers/fast-glob';
 import { IMdconfMeta } from 'node-novel-info';
-import BluebirdPromise = require('bluebird');
+import BluebirdPromise from 'bluebird';
 export declare function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file: string): Promise<T>;
 export declare function loadReadmeMetaSync<T extends IMdconfMeta = IMdconfMeta>(file: string): T;
 export declare function getNovelTitles<T extends IMdconfMeta = IMdconfMeta>(meta: T): string[];

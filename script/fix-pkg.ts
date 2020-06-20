@@ -2,10 +2,11 @@
  * Created by user on 2018/12/17/017.
  */
 
-import path = require('path');
-import fs = require('fs-extra');
-import FastGlob = require('fast-glob');
-import sortPackageJson = require('sort-package-json');
+import path from 'path';
+import fs from 'fs-extra';
+import FastGlob from '@bluelovers/fast-glob';
+// @ts-ignore
+import sortPackageJson from 'sort-package-json';
 
 FastGlob.async<string>([
 	'*/package.json',

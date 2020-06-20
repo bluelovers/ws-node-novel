@@ -2,7 +2,7 @@
  * Created by user on 2019/2/1/001.
  */
 /// <reference types="node" />
-import GrayMatter = require('gray-matter');
+import GrayMatter from 'gray-matter';
 import { IOptionsParse } from 'node-novel-info';
 export interface IOptions<I extends IInput, OUT extends any, PO, GO> {
     /**

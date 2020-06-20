@@ -2,17 +2,20 @@
 /**
  * Created by user on 2018/11/14/014.
  */
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tocSortCallback = exports.md_link_escape = exports.md_anchor_gitee = exports.md_href = exports.globFirst = exports.getNovelTitles = exports.loadReadmeMetaSync = exports.loadReadmeMeta = void 0;
 const sort_1 = require("@node-novel/sort");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const FastGlob = require("fast-glob");
-const fs = require("fs-iconv");
+const fast_glob_1 = __importDefault(require("@bluelovers/fast-glob"));
+const fs_iconv_1 = __importDefault(require("fs-iconv"));
 const node_novel_info_1 = require("node-novel-info");
-const BluebirdPromise = require("bluebird");
-const StrUtil = require("str-util");
+const bluebird_1 = __importDefault(require("bluebird"));
+const str_util_1 = __importDefault(require("str-util"));
 async function loadReadmeMeta(file) {
-    return fs.readFile(file)
+    return fs_iconv_1.default.readFile(file)
         .then(function (data) {
         return node_novel_info_1.mdconf_parse(data, {
             // 當沒有包含必要的內容時不產生錯誤
@@ -28,7 +31,7 @@ async function loadReadmeMeta(file) {
 exports.loadReadmeMeta = loadReadmeMeta;
 function loadReadmeMetaSync(file) {
     try {
-        let data = fs.readFileSync(file);
+        let data = fs_iconv_1.default.readFileSync(file);
         // @ts-ignore
         return node_novel_info_1.mdconf_parse(data, {
             // 當沒有包含必要的內容時不產生錯誤
@@ -74,8 +77,8 @@ function getNovelTitles(meta) {
 }
 exports.getNovelTitles = getNovelTitles;
 function globFirst(...argv) {
-    return new BluebirdPromise(function (resolve, reject) {
-        let fgs = FastGlob.stream(...argv);
+    return new bluebird_1.default(function (resolve, reject) {
+        let fgs = fast_glob_1.default.stream(...argv);
         fgs.on('data', (entry) => {
             resolve(entry);
             // @ts-ignore
@@ -109,7 +112,7 @@ exports.md_link_escape = md_link_escape;
 exports.tocSortCallback = sort_1.createSortCallback({
     dotNum: true,
     transpileBase(input, isSub) {
-        let s = StrUtil.toHalfWidth(input);
+        let s = str_util_1.default.toHalfWidth(input);
         return s;
     },
     toLowerCase: sort_1.EnumToLowerCase.toLocaleLowerCase,

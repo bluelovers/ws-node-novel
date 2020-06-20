@@ -3,7 +3,7 @@
  */
 
 import novelText, { ITextLayoutOptions } from '../';
-import fs = require('fs-extra');
+import fs from 'fs-extra';
 
 let text = '';
 let options: ITextLayoutOptions = {

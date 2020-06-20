@@ -4,11 +4,11 @@
 
 import { _trim, createSortCallback, defaultSortCallback, EnumToLowerCase } from '@node-novel/sort';
 import { array_unique } from 'array-hyper-unique';
-import FastGlob = require('fast-glob');
-import fs = require('fs-iconv');
+import FastGlob from '@bluelovers/fast-glob';
+import fs from 'fs-iconv';
 import { IMdconfMeta, mdconf_parse } from 'node-novel-info';
-import BluebirdPromise = require('bluebird');
-import StrUtil = require('str-util');
+import BluebirdPromise from 'bluebird';
+import StrUtil from 'str-util';
 
 export async function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file: string): Promise<T>
 {

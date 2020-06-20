@@ -6,7 +6,7 @@ import Bluebird from 'bluebird';
 import moment from 'moment';
 //import gitlog from 'gitlog2';
 import gitlog, { IParseCommit } from 'gitlog2';
-import GitRoot from 'git-root2';
+import GitRoot from 'git-root2/core';
 import path from 'upath2';
 import emailNormalize from 'email-normalize';
 import UString from 'uni-string';
