@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.11](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/md-loader@1.0.10...@node-novel/md-loader@1.0.11) (2020-06-20)
+
+
+### 🔖　Miscellaneous
+
+* . ([5b4c70f](https://github.com/bluelovers/ws-node-novel/commit/5b4c70fc018e2f2622187143859a9783c5370849))
+
+
+
+
+
 ## [1.0.10](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/md-loader@1.0.9...@node-novel/md-loader@1.0.10) (2020-06-20)
 
 

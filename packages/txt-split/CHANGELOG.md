@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.13](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/txt-split@1.1.12...@node-novel/txt-split@1.1.13) (2020-06-20)
+
+
+### 🔖　Miscellaneous
+
+* . ([5b4c70f](https://github.com/bluelovers/ws-node-novel/commit/5b4c70fc018e2f2622187143859a9783c5370849))
+
+
+
+
+
 ## [1.1.12](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/txt-split@1.1.11...@node-novel/txt-split@1.1.12) (2020-06-20)
 
 
