@@ -35,11 +35,11 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "array-hyper-unique": "^1.1.2",
+    "array-hyper-unique": "^1.1.8",
     "blank-line": "^1.0.1",
     "crlf-normalize": "^1.0.3",
     "execall2": "^1.1.4",
-    "uni-string": "^1.1.8"
+    "uni-string": "^1.1.9"
   },
   "publishConfig": {
     "access": "public"

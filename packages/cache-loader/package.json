@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "@node-novel/sort": "^1.0.14",
-    "array-hyper-unique": "^1.1.2",
+    "array-hyper-unique": "^1.1.8",
     "fs-extra": "^9.0.1",
-    "moment": "^2.26.0",
+    "moment": "^2.27.0",
     "node-novel-info": "^3.0.5",
     "sort-object-keys2": "^2.0.3",
-    "str-util": "^2.3.22",
-    "upath2": "^3.0.5"
+    "str-util": "^2.3.23",
+    "upath2": "^3.0.6"
   },
   "publishConfig": {
     "access": "public"

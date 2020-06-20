@@ -37,8 +37,8 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "str-util": "^2.3.22",
-    "ts-type": "^1.2.17"
+    "str-util": "^2.3.23",
+    "ts-type": "^1.2.23"
   },
   "publishConfig": {
     "access": "public"
