@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.31](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.30...novel-text@1.1.31) (2020-06-20)
+
+
+### 📦　Code Refactoring
+
+* update typescript and avoid bug of typescript ([9473fd1](https://github.com/bluelovers/ws-node-novel/commit/9473fd159a3e0774e7646ab2dc60d73a4667f09b))
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([96a6209](https://github.com/bluelovers/ws-node-novel/commit/96a62099f0774dae433a16b9e20f2c4ddd518749))
+
+
+
+
+
 ## [1.1.30](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.29...novel-text@1.1.30) (2020-06-09)
 
 **Note:** Version bump only for package novel-text

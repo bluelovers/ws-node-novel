@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.13](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/parse-txt-tag@1.0.12...@node-novel/parse-txt-tag@1.0.13) (2020-06-20)
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([96a6209](https://github.com/bluelovers/ws-node-novel/commit/96a62099f0774dae433a16b9e20f2c4ddd518749))
+
+
+
+
+
 ## [1.0.12](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/parse-txt-tag@1.0.11...@node-novel/parse-txt-tag@1.0.12) (2020-06-08)
 
 **Note:** Version bump only for package @node-novel/parse-txt-tag
