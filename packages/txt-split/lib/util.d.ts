@@ -1,7 +1,8 @@
 import { IContext, IDataVolume, IOptions, IOptionsWithData, IPathLike, Resolvable } from './interface';
 import Bluebird from 'bluebird';
+import { IDetectData } from 'iconv-jschardet';
 export declare function logWarn(...argv: any[]): void;
-export declare function chkEncoding<O extends IOptions>(data: IContext, file?: string, options?: O): import("iconv-jschardet").IDetectData;
+export declare function chkEncoding<O extends IOptions>(data: IContext, file?: string, options?: O): IDetectData;
 export declare function padIndex(n: number | string, maxLength?: number, fillString?: string | number): string;
 export declare function padIndexStart(n: number | string, maxLength?: number, fillString?: string | number): string;
 export declare function padIndexEnd(n: number | string, maxLength?: number, fillString?: string | number): string;

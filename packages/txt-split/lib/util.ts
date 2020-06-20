@@ -3,7 +3,7 @@ import { console } from './console';
 import { makeOptions } from './index';
 import { IContext, IDataVolume, IOptions, IOptionsWithData, IPathLike, Resolvable } from './interface';
 import Bluebird from 'bluebird';
-import { encode, detect } from 'iconv-jschardet';
+import { encode, detect, IDetectData } from 'iconv-jschardet';
 import { zh2num } from 'str-util';
 import { crlf, LF } from 'crlf-normalize';
 import { zh2jp } from 'cjk-conv/lib/jp';
@@ -13,7 +13,7 @@ export function logWarn(...argv)
 	return console.warn(...argv)
 }
 
-export function chkEncoding<O extends IOptions>(data: IContext, file?: string, options?: O)
+export function chkEncoding<O extends IOptions>(data: IContext, file?: string, options?: O): IDetectData
 {
 	let chk = detect(data);
 
