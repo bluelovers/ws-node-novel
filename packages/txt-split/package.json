@@ -42,15 +42,15 @@
   "dependencies": {
     "@node-novel/layout": "^2.0.11",
     "bluebird": "^3.7.2",
-    "cjk-conv": "^1.2.87",
-    "crlf-normalize": "^1.0.3",
+    "cjk-conv": "^1.2.92",
+    "crlf-normalize": "^1.0.5",
     "debug-color2": "^1.2.3",
-    "execall2": "^1.1.4",
+    "execall2": "^2.0.2",
     "fs-extra": "^9.0.1",
     "fs-iconv": "^3.0.9",
     "iconv-jschardet": "^2.0.9",
-    "regexp-cjk": "^3.3.53",
-    "upath2": "^3.0.6"
+    "regexp-cjk": "^3.3.58",
+    "upath2": "^3.1.4"
   },
   "publishConfig": {
     "access": "public"

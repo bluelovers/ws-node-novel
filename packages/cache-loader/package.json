@@ -43,8 +43,8 @@
     "moment": "^2.27.0",
     "node-novel-info": "^3.0.7",
     "sort-object-keys2": "^2.0.3",
-    "str-util": "^2.3.23",
-    "upath2": "^3.0.6"
+    "str-util": "^2.3.25",
+    "upath2": "^3.1.4"
   },
   "publishConfig": {
     "access": "public"

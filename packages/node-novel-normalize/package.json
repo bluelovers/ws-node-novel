@@ -36,10 +36,10 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.19",
-    "@lazy-cjk/zh-slugify": "^1.0.30",
-    "normalize-num": "^1.0.1",
-    "str-util": "^2.3.23"
+    "@lazy-cjk/novel-filename": "^1.0.21",
+    "@lazy-cjk/zh-slugify": "^1.0.34",
+    "normalize-num": "^1.0.2",
+    "str-util": "^2.3.25"
   },
   "publishConfig": {
     "access": "public"
