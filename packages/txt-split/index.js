@@ -3,6 +3,7 @@
  * Created by user on 2018/11/11/011.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.console = exports.readFileSync = exports.readFile = exports.outputFileSync = exports.outputFile = exports.makeOptions = exports.autoFile = void 0;
 var lib_1 = require("./lib");
 Object.defineProperty(exports, "autoFile", { enumerable: true, get: function () { return lib_1.autoFile; } });
 Object.defineProperty(exports, "makeOptions", { enumerable: true, get: function () { return lib_1.makeOptions; } });
