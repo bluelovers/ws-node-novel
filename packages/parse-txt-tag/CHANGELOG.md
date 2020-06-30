@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.16](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/parse-txt-tag@1.0.15...@node-novel/parse-txt-tag@1.0.16) (2020-06-30)
+
+
+### 🐛　Bug Fixes
+
+* @types/marked@< 1 ([de2118b](https://github.com/bluelovers/ws-node-novel/commit/de2118bde74358c4338e7d9ca7258df7d3ce24bb))
+
+
+
+
+
 ## [1.0.15](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/parse-txt-tag@1.0.14...@node-novel/parse-txt-tag@1.0.15) (2020-06-30)
 
 

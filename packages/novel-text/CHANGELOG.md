@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.34](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.33...novel-text@1.1.34) (2020-06-30)
+
+
+### 🐛　Bug Fixes
+
+* @types/marked@< 1 ([de2118b](https://github.com/bluelovers/ws-node-novel/commit/de2118bde74358c4338e7d9ca7258df7d3ce24bb))
+
+
+
+
+
 ## [1.1.33](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.32...novel-text@1.1.33) (2020-06-30)
 
 
