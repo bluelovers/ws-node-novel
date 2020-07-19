@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "str-util": "^2.3.25",
-    "ts-type": "^1.2.23"
+    "ts-type": "^1.2.25"
   },
   "publishConfig": {
     "access": "public"

@@ -31,26 +31,29 @@
   "resolutions": {},
   "dependencies": {
     "fast-glob": "^3.2.4",
-    "fs-extra": "^9.0.1"
+    "fs-extra": "^9.0.1",
+    "is-plain-object": "^3.0.1",
+    "lodash": "^4.17.19",
+    "lodash-decorators": "^6.0.1"
   },
   "devDependencies": {
-    "@bluelovers/tsconfig": "^1.0.19",
+    "@bluelovers/tsconfig": "^1.0.20",
     "@types/benchmark": "^1.0.33",
     "@types/chai": "^4.2.11",
     "@types/fs-extra": "^9.0.1",
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^26.0.5",
     "@types/lodash": "^4.14.157",
     "@types/marked": "< 1",
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^14.0.14",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^14.0.23",
     "@types/yargs": "^15.0.5",
     "chai": "^4.2.0",
     "fs-extra": "^9.0.1",
     "jest": "^26.1.0",
     "markdown-it": "^11.0.0",
-    "regexp-cjk": "^3.3.58",
-    "regexp-cjk-plugin-escape-unicode-property": "^1.0.14",
-    "regexp-cjk-plugin-extra": "^1.0.22",
-    "ts-jest": "^26.1.1"
+    "regexp-cjk": "^3.3.72",
+    "regexp-cjk-plugin-escape-unicode-property": "^1.0.18",
+    "regexp-cjk-plugin-extra": "^1.0.26",
+    "ts-jest": "^26.1.3"
   }
 }
