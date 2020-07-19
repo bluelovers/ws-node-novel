@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/txt-split",
-  "version": "1.1.15",
+  "version": "1.1.16",
   "description": "split from [node-novel/test/txt-split](https://github.com/bluelovers/node-novel/tree/master/test/txt-split)",
   "keywords": [
     "@node-novel",
@@ -40,7 +40,7 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@node-novel/layout": "^2.0.13",
+    "@node-novel/layout": "^2.0.14",
     "bluebird": "^3.7.2",
     "cjk-conv": "^1.2.106",
     "crlf-normalize": "^1.0.5",

@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/parse-txt-tag",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "private": false,
   "description": "分析 node-novel 風格的 txt",
   "keywords": [
