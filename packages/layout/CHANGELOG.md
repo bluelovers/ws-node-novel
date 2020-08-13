@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.15](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/layout@2.0.14...@node-novel/layout@2.0.15) (2020-08-13)
+
+
+### ♻️　Chores
+
+* update deps ([b8c67d7](https://github.com/bluelovers/ws-node-novel/commit/b8c67d7e0447d0afdedef9d1023f254c929efbeb))
+
+
+
+
+
 ## [2.0.14](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/layout@2.0.13...@node-novel/layout@2.0.14) (2020-07-19)
 
 
