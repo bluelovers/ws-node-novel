@@ -33,8 +33,8 @@
   "dependencies": {
     "array-hyper-unique": "^1.1.9",
     "git-diff-from": "^1.1.19",
-    "ts-type": "^1.2.25",
-    "upath2": "^3.1.5"
+    "ts-type": "^1.2.32",
+    "upath2": "^3.1.6"
   },
   "publishConfig": {
     "access": "public"

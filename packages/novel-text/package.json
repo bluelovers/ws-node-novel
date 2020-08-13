@@ -49,11 +49,11 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.29",
-    "blank-line": "^1.0.2",
+    "@lazy-cjk/novel-filename": "^1.0.32",
+    "blank-line": "^1.0.3",
     "crlf-normalize": "^1.0.5",
     "env-bool": "^1.0.3",
-    "str-util": "^2.3.25",
+    "str-util": "^2.3.26",
     "tieba-harmony": "^2.0.16"
   },
   "gitHead": "8ff7ca75e321ade4a7c9ed769752caa12a3f507a"

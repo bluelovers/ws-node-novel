@@ -39,8 +39,8 @@
     "node-novel-globby": "^2.0.18",
     "node-novel-info": "^3.0.10",
     "sort-object-keys2": "^2.0.3",
-    "str-util": "^2.3.25",
-    "upath2": "^3.1.5"
+    "str-util": "^2.3.26",
+    "upath2": "^3.1.6"
   },
   "publishConfig": {
     "access": "public"
