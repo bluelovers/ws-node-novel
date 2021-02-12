@@ -52,21 +52,7 @@ export declare function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I,
      * 用來將取得的物件轉換回 md
      * 當 content, mdconf 同時存在時 content > mdconf
      */
-    stringify<T1 = D, T2 = OUT>(inputData: IObject<({
-        data?: IObject<T1, {
-            [key: string]: any;
-        }>;
-    } & {
-        content: string | Buffer;
-    }) | ({
-        data?: IObject<T1, {
-            [key: string]: any;
-        }>;
-    } & {
-        mdconf: T2;
-    }), {
-        [key: string]: any;
-    }>): string;
+    stringify<T1 = D, T2 = OUT>(inputData: IStringifyData<T1, T2>): string;
 };
 /**
  * 用來將取得的物件轉換回 md
@@ -100,5 +86,5 @@ export declare type IObject<T extends any, B extends {
 } = {
     [key: string]: any;
 }> = B & T;
-declare const _default: typeof import(".");
+declare const _default: typeof import("./index");
 export default _default;

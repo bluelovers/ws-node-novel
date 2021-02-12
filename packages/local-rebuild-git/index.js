@@ -252,6 +252,7 @@ function runAllJob(cwd) {
             sortFn(a, b) {
                 return a.log.authorDateTimestamp - b.log.authorDateTimestamp;
             },
+            //sortDesc: true,
         });
     })
         .tap(async function (oldData) {

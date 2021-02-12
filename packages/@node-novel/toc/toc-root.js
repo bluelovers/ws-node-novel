@@ -53,6 +53,7 @@ function isNovelID(dir, rootPath) {
     let _path = upath2_1.default.resolve(...[rootPath, upath2_1.default.dirname(dir)].filter(v => typeof v !== 'undefined'));
     return util_1.globFirst([
         '**/*.txt',
+        //...defaultPatternsExclude,
     ], {
         cwd: _path,
         absolute: true,

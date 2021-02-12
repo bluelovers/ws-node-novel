@@ -21,5 +21,5 @@ export interface IRet {
 }
 export declare function createReadmeData(cwd: string, ret: IRet, item: string): Bluebird<IRet>;
 export declare function defaultFilter(value: string): boolean;
-declare const _default: typeof import(".");
+declare const _default: typeof import("./index");
 export default _default;

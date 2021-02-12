@@ -7,5 +7,5 @@ export interface IOptions {
 }
 export declare function normalize_strip(str: string, isDir?: boolean): string;
 export declare function normalize_val(str: string, padNum?: number, options?: IOptions): string;
-declare const _default: typeof import(".");
+declare const _default: typeof import("./index");
 export default _default;
