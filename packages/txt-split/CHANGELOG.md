@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.18](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/txt-split@1.1.17...@node-novel/txt-split@1.1.18) (2021-02-12)
+
+
+### ♻️　Chores
+
+* **deps:** update deps ([1bc0925](https://github.com/bluelovers/ws-node-novel/commit/1bc09257c16754054103f3aec637dcf18f81f25a))
+
+
+
+
+
 ## [1.1.17](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/txt-split@1.1.16...@node-novel/txt-split@1.1.17) (2020-08-13)
 
 
