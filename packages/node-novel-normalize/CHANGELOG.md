@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.27](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/normalize@1.0.26...@node-novel/normalize@1.0.27) (2021-02-12)
+
+
+### 🛠　Build System
+
+* update typescript ([90c2208](https://github.com/bluelovers/ws-node-novel/commit/90c22085d647eea8c5e8c4a24ca3dd63cbf784af))
+
+
+
+
+
 ## [1.0.26](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/normalize@1.0.25...@node-novel/normalize@1.0.26) (2021-02-12)
 
 

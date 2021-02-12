@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.13](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.12...@node-novel/local-rebuild-git@1.0.13) (2021-02-12)
+
+
+### 🛠　Build System
+
+* update typescript ([90c2208](https://github.com/bluelovers/ws-node-novel/commit/90c22085d647eea8c5e8c4a24ca3dd63cbf784af))
+
+
+
+
+
 ## [1.0.12](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.11...@node-novel/local-rebuild-git@1.0.12) (2021-02-12)
 
 

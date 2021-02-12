@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.38](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.37...novel-text@1.1.38) (2021-02-12)
+
+
+### 🛠　Build System
+
+* update typescript ([90c2208](https://github.com/bluelovers/ws-node-novel/commit/90c22085d647eea8c5e8c4a24ca3dd63cbf784af))
+
+
+
+
+
 ## [1.1.37](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.36...novel-text@1.1.37) (2021-02-12)
 
 

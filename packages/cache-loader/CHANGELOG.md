@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.34](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/cache-loader@1.0.33...@node-novel/cache-loader@1.0.34) (2021-02-12)
+
+
+### 🛠　Build System
+
+* update typescript ([90c2208](https://github.com/bluelovers/ws-node-novel/commit/90c22085d647eea8c5e8c4a24ca3dd63cbf784af))
+
+
+
+
+
 ## [1.0.33](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/cache-loader@1.0.32...@node-novel/cache-loader@1.0.33) (2021-02-12)
 
 
