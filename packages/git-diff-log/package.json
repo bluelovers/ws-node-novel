@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/git-diff-log",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "比對目標路徑下的 git 歷史變化 適用於任何符合 `主資料夾/副資料夾/子路徑` 這種結構的資料夾",
   "keywords": [],
   "homepage": "https://github.com/bluelovers/ws-node-novel#readme",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.39](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.38...novel-text@1.1.39) (2021-07-08)
+
+
+### 🛠　Build System
+
+* update deps and use tslib ([bc00796](https://github.com/bluelovers/ws-node-novel/commit/bc007968e0dde703a1b4e79d147bd7122fe3468b))
+
+
+
+
+
 ## [1.1.38](https://github.com/bluelovers/ws-node-novel/compare/novel-text@1.1.37...novel-text@1.1.38) (2021-02-12)
 
 
