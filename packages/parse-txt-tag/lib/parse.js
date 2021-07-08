@@ -14,10 +14,10 @@ function parse(source, options) {
     if (options.on) {
         context = context
             .replace(tags_1.reTxtHtmlTag, (s, tagName = '', attr = '', innerContext = '') => {
-            tagName = fullhalf_1.toHalfWidth(tagName).toLowerCase();
+            tagName = (0, fullhalf_1.toHalfWidth)(tagName).toLowerCase();
             let cb = options.on[tagName] || options.on.default;
             if (tagName === 'ruby') {
-                innerContext = util_1._fixRubyInnerContext(innerContext);
+                innerContext = (0, util_1._fixRubyInnerContext)(innerContext);
             }
             if (cb) {
                 let ret = cb({

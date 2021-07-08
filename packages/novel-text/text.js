@@ -2,33 +2,12 @@
 /**
  * Created by user on 2017/12/5/005.
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.enspace = exports.SP_KEY = exports.SP_REGEXP = void 0;
-const str_util_1 = __importDefault(require("str-util"));
-const blank_line_1 = __importDefault(require("blank-line"));
-const crlf_normalize_1 = __importStar(require("crlf-normalize"));
+const tslib_1 = require("tslib");
+const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
+const blank_line_1 = (0, tslib_1.__importDefault)(require("blank-line"));
+const crlf_normalize_1 = (0, tslib_1.__importStar)(require("crlf-normalize"));
 const tieba_harmony_1 = require("tieba-harmony");
 Object.defineProperty(exports, "SP_REGEXP", { enumerable: true, get: function () { return tieba_harmony_1.SP_REGEXP; } });
 Object.defineProperty(exports, "SP_KEY", { enumerable: true, get: function () { return tieba_harmony_1.SP_KEY; } });
@@ -319,7 +298,7 @@ class enspace {
             allow_nbsp: false,
             allow_bom: false,
         }, options);
-        let ret = crlf_normalize_1.default(str.toString(), options.LF || crlf_normalize_1.LF);
+        let ret = (0, crlf_normalize_1.default)(str.toString(), options.LF || crlf_normalize_1.LF);
         ret = str_util_1.default.normalize(ret, options);
         /*
         if (!options.allow_bom)
@@ -336,7 +315,7 @@ class enspace {
     }
     fixOptions(options) {
         Object.entries(options)
-            .forEach(([k, v]) => options[k] = env_bool_1.envVal(v));
+            .forEach(([k, v]) => options[k] = (0, env_bool_1.envVal)(v));
         return options;
     }
     reduceLine(html, options = {}) {
@@ -354,7 +333,7 @@ class enspace {
                 .replace(/\n{4,}/g, "\n\n\n\n");
         let _html = old;
         if (!_html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = blank_line_1.default(_html.toString());
+            let [min, mid, max] = (0, blank_line_1.default)(_html.toString());
             if (min > 2) {
                 options.allow_lf2 = false;
             }
@@ -395,7 +374,7 @@ class enspace {
                 .replace(/^[\n \t]+/g, '')
                 .replace(/\n{4,}/g, "\n\n\n\n");
         if (!html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = blank_line_1.default(html.toString());
+            let [min, mid, max] = (0, blank_line_1.default)(html.toString());
             if (min > 2) {
                 options.allow_lf2 = false;
             }

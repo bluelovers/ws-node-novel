@@ -1,20 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.runAllJob = exports.git_set_user = exports.git_get_user = exports.git_commit_file = exports.git_fake_author = exports.fetchAllFileLog = exports.fetchFileLogRow = exports.console = void 0;
-const fast_glob_1 = __importDefault(require("@bluelovers/fast-glob"));
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const cross_spawn_extra_1 = __importDefault(require("cross-spawn-extra"));
-const bluebird_1 = __importDefault(require("bluebird"));
-const moment_1 = __importDefault(require("moment"));
+const tslib_1 = require("tslib");
+const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
+const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
+const cross_spawn_extra_1 = (0, tslib_1.__importDefault)(require("cross-spawn-extra"));
+const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
+const moment_1 = (0, tslib_1.__importDefault)(require("moment"));
 //import gitlog from 'gitlog2';
-const gitlog2_1 = __importDefault(require("gitlog2"));
-const core_1 = __importDefault(require("git-root2/core"));
-const upath2_1 = __importDefault(require("upath2"));
-const email_normalize_1 = __importDefault(require("email-normalize"));
-const uni_string_1 = __importDefault(require("uni-string"));
+const gitlog2_1 = (0, tslib_1.__importDefault)(require("gitlog2"));
+const core_1 = (0, tslib_1.__importDefault)(require("git-root2/core"));
+const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
+const email_normalize_1 = (0, tslib_1.__importDefault)(require("email-normalize"));
+const uni_string_1 = (0, tslib_1.__importDefault)(require("uni-string"));
 const create_new_empty_1 = require("./lib/create-new-empty");
 const util_1 = require("@git-lazy/util");
 Object.defineProperty(exports, "console", { enumerable: true, get: function () { return util_1.console; } });
@@ -103,7 +101,7 @@ function fetchAllFileLog(repo, options) {
 }
 exports.fetchAllFileLog = fetchAllFileLog;
 function git_fake_author(name, email) {
-    email = email_normalize_1.default(email || 'testbot@test.test')
+    email = (0, email_normalize_1.default)(email || 'testbot@test.test')
         .replace(/^[\s　@]+|[\s　@]+$/g, '');
     if (email.split('@').length !== 2) {
         email = null;
@@ -166,7 +164,7 @@ function git_commit_file(row, cwd) {
             //'--short',
             '--untracked-files=no',
             // @ts-ignore
-            `--date=${moment_1.default(row.log.authorDateTimestamp).format(gitlog2_1.default.EnumGitDateFormat.ISO_8601)}`,
+            `--date=${(0, moment_1.default)(row.log.authorDateTimestamp).format(gitlog2_1.default.EnumGitDateFormat.ISO_8601)}`,
             `--author=${author_name}`,
             //'--dry-run',
             `-m`,
@@ -256,7 +254,7 @@ function runAllJob(cwd) {
         });
     })
         .tap(async function (oldData) {
-        await create_new_empty_1._createMode001(cwd);
+        await (0, create_new_empty_1._createMode001)(cwd);
         let { name, email } = await git_get_user(cwd);
         let _git_path = upath2_1.default.join(cwd, '.git');
         let _git_path_backup = upath2_1.default.join(cwd, 'backup.git');
@@ -290,7 +288,7 @@ function runAllJob(cwd) {
         });
         util_1.console.info(`開始偽造檔案歷史紀錄`);
         await bluebird_1.default.mapSeries(oldData, function (item, index, len) {
-            util_1.console.debug('[commit]', `[${index}/${len}]`, item[0], moment_1.default(item[1].log.authorDateTimestamp).format());
+            util_1.console.debug('[commit]', `[${index}/${len}]`, item[0], (0, moment_1.default)(item[1].log.authorDateTimestamp).format());
             return git_commit_file(item[1], cwd);
         });
     })

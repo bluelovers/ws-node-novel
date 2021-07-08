@@ -32,9 +32,10 @@
   },
   "dependencies": {
     "array-hyper-unique": "^1.1.9",
-    "git-diff-from": "^1.1.21",
-    "ts-type": "^1.2.34",
-    "upath2": "^3.1.6"
+    "git-diff-from": "^1.1.22",
+    "ts-type": "^1.2.35",
+    "tslib": "^2.3.0",
+    "upath2": "^3.1.9"
   },
   "publishConfig": {
     "access": "public"

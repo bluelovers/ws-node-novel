@@ -15,7 +15,7 @@ function splitVolumeSync(txt, cache) {
     }
     MAIN: if (cache.volume && !cache.volume.disable) {
         let _r = cache.volume.r;
-        let _m = execall2_1.execall(_r, txt, {
+        let _m = (0, execall2_1.execall)(_r, txt, {
             cloneRegexp,
         });
         //console.debug(_r, _m, txt);
@@ -41,14 +41,14 @@ function splitVolumeSync(txt, cache) {
     for (let vn in _vs) {
         let txt = _vs[vn];
         let _r = cache.chapter.r;
-        let _m = execall2_1.execall(_r, txt, {
+        let _m = (0, execall2_1.execall)(_r, txt, {
             cloneRegexp,
         });
         //console.log(_r, _m, txt);
         //console.log(cache.ix);
         if (!_m || !_m.length) {
             // @ts-ignore
-            let id = util_1.padIndex(cache.ix++, 5, '0');
+            let id = (0, util_1.padIndex)(cache.ix++, 5, '0');
             _out[vn] = {};
             _out[vn][`${id}_unknow`] = txt;
             continue;
@@ -109,7 +109,7 @@ function splitChapterSync(txt, cache, _m, splitOption) {
         }
         if (!m_last && idx == 0 && m.index != 0) {
             //console.log(m);
-            let id = util_1.padIndex(ii, 5, '0');
+            let id = (0, util_1.padIndex)(ii, 5, '0');
             let name = 'unknow';
             if (ignoreCb && ignoreCb({
                 i,
@@ -168,8 +168,8 @@ function splitChapterSync(txt, cache, _m, splitOption) {
             }
         }
         else if (m_last) {
-            let id = util_1.padIndex(ii, 5, '0');
-            let name = util_1.fix_name(m_last.match);
+            let id = (0, util_1.padIndex)(ii, 5, '0');
+            let name = (0, util_1.fix_name)(m_last.match);
             if (ignoreCb && ignoreCb({
                 i,
                 id,
@@ -223,8 +223,8 @@ function splitChapterSync(txt, cache, _m, splitOption) {
     }
     MAIN2: if (idx < txt.length - 1) {
         ii = (i_int + ix + 1 - ii_rebase).toString();
-        let id = util_1.padIndex(ii, 5, '0');
-        let name = util_1.fix_name(m_last.match);
+        let id = (0, util_1.padIndex)(ii, 5, '0');
+        let name = (0, util_1.fix_name)(m_last.match);
         const id_old = id;
         let _skip;
         if (ignoreRe && ignoreRe.test(m_last.match)) {

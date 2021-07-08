@@ -2,22 +2,20 @@
 /**
  * Created by user on 2018/5/1/001.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultFilter = exports.createReadmeData = exports.processToc = exports.get_ids = exports.Promise = exports.console = exports.md_href = void 0;
+const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const bluebird_1 = __importDefault(require("bluebird"));
+const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
 exports.Promise = bluebird_1.default;
 const debug_color2_1 = require("debug-color2");
-const fast_glob_1 = __importDefault(require("@bluelovers/fast-glob"));
-const fs_extra_1 = __importDefault(require("fs-extra"));
+const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
+const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
 const node_novel_info_1 = require("node-novel-info");
-const sort_object_keys2_1 = __importDefault(require("sort-object-keys2"));
+const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
 const util_1 = require("./lib/util");
 Object.defineProperty(exports, "md_href", { enumerable: true, get: function () { return util_1.md_href; } });
-const upath2_1 = __importDefault(require("upath2"));
+const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
 exports.console = new debug_color2_1.Console(null, {
     enabled: true,
     inspectOptions: {
@@ -29,7 +27,7 @@ exports.console = new debug_color2_1.Console(null, {
 });
 exports.console.enabledColor = true;
 function get_ids(cwd, filter) {
-    return bluebird_1.default.resolve(fast_glob_1.default([
+    return bluebird_1.default.resolve((0, fast_glob_1.default)([
         '*',
         '!docs',
         '!.*',
@@ -66,7 +64,7 @@ function processToc(DIST_NOVEL_ROOT, filter) {
         //console.log(`[TOC] 檢查 ${pathMain}`);
         let bool = false;
         await bluebird_1.default
-            .reduce(fast_glob_1.default([
+            .reduce((0, fast_glob_1.default)([
             '*/README.md',
         ], {
             cwd,
@@ -85,21 +83,21 @@ function processToc(DIST_NOVEL_ROOT, filter) {
                 .sort()
                 .reduce(function (a, item_id) {
                 let item = ret[item_id];
-                item.link = `[${item_id}](${util_1.md_href(item_id)}/)`;
+                item.link = `[${item_id}](${(0, util_1.md_href)(item_id)}/)`;
                 let target_id = IS_OUT ? pathMain.replace(/_out$/, '') : pathMain + '_out';
                 let link_path = upath2_1.default.join(DIST_NOVEL_ROOT, target_id, item_id);
                 //console.log(link_path, fs.existsSync(link_path));
                 if (fs_extra_1.default.existsSync(link_path)) {
                     item[IS_OUT
                         ? 'link_source'
-                        : 'link_output'] = `[${item_id}](../${target_id}/${util_1.md_href(item_id)}/)`;
+                        : 'link_output'] = `[${item_id}](../${target_id}/${(0, util_1.md_href)(item_id)}/)`;
                 }
                 if (Array.isArray(item.titles)) {
-                    item.titles = array_hyper_unique_1.array_unique(item.titles)
+                    item.titles = (0, array_hyper_unique_1.array_unique)(item.titles)
                         .filter(v => v);
                 }
                 if (Array.isArray(item.tags)) {
-                    item.tags = array_hyper_unique_1.array_unique(item.tags)
+                    item.tags = (0, array_hyper_unique_1.array_unique)(item.tags)
                         .filter(v => v);
                 }
                 if (!item.titles) {
@@ -113,7 +111,7 @@ function processToc(DIST_NOVEL_ROOT, filter) {
                     // @ts-ignore
                     item.tags = item.tags.join(' , ');
                 }
-                sort_object_keys2_1.default(item, {
+                (0, sort_object_keys2_1.default)(item, {
                     useSource: true,
                     keys: [
                         'link',
@@ -159,12 +157,12 @@ function createReadmeData(cwd, ret, item) {
             let titles = [];
             titles.push(item_id);
             if (meta) {
-                titles.push(...util_1.getNovelTitles(meta));
+                titles.push(...(0, util_1.getNovelTitles)(meta));
                 if (meta.novel.author) {
                     ret[item_id].tags.push(meta.novel.author);
                 }
             }
-            titles = array_hyper_unique_1.array_unique(titles.filter(v => v));
+            titles = (0, array_hyper_unique_1.array_unique)(titles.filter(v => v));
             if (titles.length == 1 && titles[0] == item_id) {
                 titles = null;
             }

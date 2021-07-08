@@ -1,15 +1,7 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArrayUniqueDecorator = exports.NovelDiffFromLogParser = void 0;
+const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
 class NovelDiffFromLogParser {
     constructor(data) {
@@ -67,42 +59,42 @@ class NovelDiffFromLogParser {
         return ls;
     }
 }
-__decorate([
+(0, tslib_1.__decorate)([
     ArrayUniqueDecorator,
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", []),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "pathMains", null);
-__decorate([
+(0, tslib_1.__decorate)([
     ArrayUniqueDecorator,
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", []),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "novelIDs", null);
-__decorate([
+(0, tslib_1.__decorate)([
     ArrayUniqueDecorator,
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Function]),
-    __metadata("design:returntype", void 0)
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", [Function]),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "files", null);
-__decorate([
+(0, tslib_1.__decorate)([
     ArrayUniqueDecorator,
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", [Object]),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], NovelDiffFromLogParser, "novelIDs", null);
-__decorate([
+(0, tslib_1.__decorate)([
     ArrayUniqueDecorator,
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Function]),
-    __metadata("design:returntype", void 0)
+    (0, tslib_1.__metadata)("design:type", Function),
+    (0, tslib_1.__metadata)("design:paramtypes", [Object, Function]),
+    (0, tslib_1.__metadata)("design:returntype", void 0)
 ], NovelDiffFromLogParser, "files", null);
 exports.NovelDiffFromLogParser = NovelDiffFromLogParser;
 function ArrayUniqueDecorator(target, propertyKey, descriptor) {
     const old = descriptor.value;
     // @ts-ignore
     descriptor.value = function (...argv) {
-        return array_hyper_unique_1.array_unique(old.apply(this, argv));
+        return (0, array_hyper_unique_1.array_unique)(old.apply(this, argv));
     };
 }
 exports.ArrayUniqueDecorator = ArrayUniqueDecorator;

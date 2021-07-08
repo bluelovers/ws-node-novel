@@ -2,12 +2,10 @@
 /**
  * Created by user on 2019/6/18.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.novelDiffFromLog = void 0;
-const git_diff_from_1 = __importDefault(require("git-diff-from"));
+const tslib_1 = require("tslib");
+const git_diff_from_1 = (0, tslib_1.__importDefault)(require("git-diff-from"));
 const upath2_1 = require("upath2");
 const baseHashDefault = 5;
 const targetTreeDefault = 'origin/master';
@@ -17,8 +15,8 @@ const targetTreeDefault = 'origin/master';
  */
 function novelDiffFromLog(options) {
     let { targetTree = targetTreeDefault, novelRoot = process.cwd(), baseHash = baseHashDefault } = options;
-    novelRoot = upath2_1.resolve(novelRoot);
-    let ls = git_diff_from_1.default(baseHash, targetTree, {
+    novelRoot = (0, upath2_1.resolve)(novelRoot);
+    let ls = (0, git_diff_from_1.default)(baseHash, targetTree, {
         cwd: novelRoot,
     });
     let ret = {

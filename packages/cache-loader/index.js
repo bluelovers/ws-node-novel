@@ -2,34 +2,13 @@
 /**
  * Created by user on 2019/1/6/006.
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createFromJSON = exports.fixOptions = exports.create = exports.EnumFilterNovelType = exports.EnumBeforeSave = exports.NovelStatCache = exports.createMoment = void 0;
-const util_1 = __importStar(require("./lib/util"));
+const tslib_1 = require("tslib");
+const util_1 = (0, tslib_1.__importStar)(require("./lib/util"));
 Object.defineProperty(exports, "createMoment", { enumerable: true, get: function () { return util_1.createMoment; } });
 const array_hyper_unique_1 = require("array-hyper-unique");
-const sort_object_keys2_1 = __importDefault(require("sort-object-keys2"));
+const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
 const openedMap = new WeakMap();
 const defaultOptions = Object.freeze({
     history_max: 14,
@@ -74,22 +53,22 @@ class NovelStatCache {
         this.options = options;
         this.file = this.options.file;
         this.file_git = this.options.file_git;
-        util_1.freezeProperty(this, 'options', true);
-        util_1.freezeProperty(this, 'file');
-        util_1.freezeProperty(this, 'file_git');
+        (0, util_1.freezeProperty)(this, 'options', true);
+        (0, util_1.freezeProperty)(this, 'file');
+        (0, util_1.freezeProperty)(this, 'file_git');
         this.open();
     }
     /**
      * 檢查 file 是否存在
      */
     exists() {
-        const fs = util_1.tryRequireFS();
+        const fs = (0, util_1.tryRequireFS)();
         return this.file && fs && fs.pathExistsSync(this.file);
     }
     open() {
         if (!this.inited) {
             this.inited = true;
-            const fs = util_1.tryRequireFS();
+            const fs = (0, util_1.tryRequireFS)();
             if (this.data) {
                 //
             }
@@ -105,7 +84,7 @@ class NovelStatCache {
             this.data.novels = this.data.novels || {};
             this.data.mdconf = this.data.mdconf || {};
             this.data.meta = this.data.meta || {};
-            util_1.freezeProperty(this, 'inited');
+            (0, util_1.freezeProperty)(this, 'inited');
         }
         return this;
     }
@@ -113,7 +92,7 @@ class NovelStatCache {
      * 取得所有在 data.novels / data.mdconf 內存在的 pathMain
      */
     pathMainList() {
-        return array_hyper_unique_1.array_unique(Object.keys(this.data.novels)
+        return (0, array_hyper_unique_1.array_unique)(Object.keys(this.data.novels)
             .concat(Object.keys(this.data.mdconf)))
             .sort();
     }
@@ -140,10 +119,10 @@ class NovelStatCache {
                     return -1;
                 }
             }
-            return util_1.naturalCompare(a, b);
+            return (0, util_1.naturalCompare)(a, b);
         })
             .reduce((ls, pathMain) => {
-            let { is_out, pathMain_base } = util_1.parsePathMainBase(pathMain);
+            let { is_out, pathMain_base } = (0, util_1.parsePathMainBase)(pathMain);
             ls[pathMain_base] = ls[pathMain_base] || {};
             Object.entries(self._mdconf_get_main(pathMain))
                 .forEach(function ([novelID, mdconf]) {
@@ -268,12 +247,12 @@ class NovelStatCache {
             let _list = new Set();
             let today = this.data.history[timestamp];
             if (today.epub) {
-                array_hyper_unique_1.array_unique(today.epub, {
+                (0, array_hyper_unique_1.array_unique)(today.epub, {
                     overwrite: true,
                 });
                 today.epub.sort(function (a, b) {
-                    return util_1.cacheSortCallback(a[0], b[0])
-                        || util_1.cacheSortCallback(a[1], b[1]);
+                    return (0, util_1.cacheSortCallback)(a[0], b[0])
+                        || (0, util_1.cacheSortCallback)(a[1], b[1]);
                 });
                 today.epub_count = today.epub.length | 0;
                 if (!today.epub_count) {
@@ -289,12 +268,12 @@ class NovelStatCache {
                 }
             }
             if (today.segment) {
-                array_hyper_unique_1.array_unique(today.segment, {
+                (0, array_hyper_unique_1.array_unique)(today.segment, {
                     overwrite: true,
                 });
                 today.segment.sort(function (a, b) {
-                    return util_1.cacheSortCallback(a[0], b[0])
-                        || util_1.cacheSortCallback(a[1], b[1]);
+                    return (0, util_1.cacheSortCallback)(a[0], b[0])
+                        || (0, util_1.cacheSortCallback)(a[1], b[1]);
                 });
                 today.segment_count = today.segment.length | 0;
                 if (!today.segment_count) {
@@ -336,7 +315,7 @@ class NovelStatCache {
                         data.update_count = (data.update_count | 0) + 1;
                     }
                 });
-                this.data.meta.timestamp = util_1.createMoment().valueOf();
+                this.data.meta.timestamp = (0, util_1.createMoment)().valueOf();
             }
             this.data.meta.todayTimestamp = timestamp;
         }
@@ -352,7 +331,7 @@ class NovelStatCache {
                 ks.sort().slice(0, (0 - this.options.history_keep)).forEach(k => delete this.data.history[k]);
             }
         }
-        sort_object_keys2_1.default(this.data, {
+        (0, sort_object_keys2_1.default)(this.data, {
             useSource: true,
             keys: [
                 'meta',
@@ -372,7 +351,7 @@ class NovelStatCache {
         if (this.options.readonly) {
             throw new Error(`options.readonly is set, can't not save file`);
         }
-        const fs = util_1.tryRequireFS();
+        const fs = (0, util_1.tryRequireFS)();
         fs && fs.outputJSONSync(this.file, this.toJSON(bool || true), {
             spaces: 2,
         });
@@ -439,7 +418,7 @@ class NovelStatCache {
         };
         options.history_max = options.history_max > 0 ? options.history_max : defaultOptions.history_max;
         options.history_keep = options.history_keep > 0 ? options.history_keep : defaultOptions.history_keep;
-        options = util_1.baseSortObject(options);
+        options = (0, util_1.baseSortObject)(options);
         return options;
     }
     /**

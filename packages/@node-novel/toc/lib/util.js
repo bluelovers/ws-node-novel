@@ -2,22 +2,20 @@
 /**
  * Created by user on 2018/11/14/014.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tocSortCallback = exports.md_link_escape = exports.md_anchor_gitee = exports.md_href = exports.globFirst = exports.getNovelTitles = exports.loadReadmeMetaSync = exports.loadReadmeMeta = void 0;
+const tslib_1 = require("tslib");
 const sort_1 = require("@node-novel/sort");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const fast_glob_1 = __importDefault(require("@bluelovers/fast-glob"));
-const fs_iconv_1 = __importDefault(require("fs-iconv"));
+const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
+const fs_iconv_1 = (0, tslib_1.__importDefault)(require("fs-iconv"));
 const node_novel_info_1 = require("node-novel-info");
-const bluebird_1 = __importDefault(require("bluebird"));
-const str_util_1 = __importDefault(require("str-util"));
+const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
+const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
 async function loadReadmeMeta(file) {
     return fs_iconv_1.default.readFile(file)
         .then(function (data) {
-        return node_novel_info_1.mdconf_parse(data, {
+        return (0, node_novel_info_1.mdconf_parse)(data, {
             // 當沒有包含必要的內容時不產生錯誤
             throw: false,
             // 允許不標準的 info 內容
@@ -33,7 +31,7 @@ function loadReadmeMetaSync(file) {
     try {
         let data = fs_iconv_1.default.readFileSync(file);
         // @ts-ignore
-        return node_novel_info_1.mdconf_parse(data, {
+        return (0, node_novel_info_1.mdconf_parse)(data, {
             // 當沒有包含必要的內容時不產生錯誤
             throw: false,
             // 允許不標準的 info 內容
@@ -66,7 +64,7 @@ function getNovelTitles(meta) {
             arr.push(meta.novel.series.name);
             arr.push(meta.novel.series.name_short);
         }
-        arr = array_hyper_unique_1.array_unique(arr.filter(v => v && ![
+        arr = (0, array_hyper_unique_1.array_unique)(arr.filter(v => v && ![
             'undefined',
             '長編 【連載】',
             '連載中',
@@ -109,7 +107,7 @@ function md_link_escape(text) {
     });
 }
 exports.md_link_escape = md_link_escape;
-exports.tocSortCallback = sort_1.createSortCallback({
+exports.tocSortCallback = (0, sort_1.createSortCallback)({
     dotNum: true,
     transpileBase(input, isSub) {
         let s = str_util_1.default.toHalfWidth(input);

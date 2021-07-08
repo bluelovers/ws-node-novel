@@ -2,36 +2,15 @@
 /**
  * Created by user on 2018/11/11/011.
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.outputFileSync = exports.outputFile = exports.readFileSync = exports.readFile = exports.autoFile = exports._handleOptions = exports.makeOptions = exports.defaultOptions = void 0;
-const fs_iconv_1 = __importStar(require("fs-iconv"));
+const tslib_1 = require("tslib");
+const fs_iconv_1 = (0, tslib_1.__importStar)(require("fs-iconv"));
 const regexp_cjk_1 = require("regexp-cjk");
-const upath2_1 = __importDefault(require("upath2"));
+const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
 const split_1 = require("./split");
 const util_1 = require("./util");
-const fs_extra_1 = __importDefault(require("fs-extra"));
+const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
 const DEFAULT_REGEXP_FLAGS = 'gimu';
 const DEFAULT_REGEXP_FLAGS_IGNORE = 'iu';
 exports.defaultOptions = Object.freeze({
@@ -140,7 +119,7 @@ async function readFile(inputFile, options) {
     let cache = makeOptions(inputFile, options);
     let txt = await fs_iconv_1.default.readFile(cache.file)
         .then(function (data) {
-        return util_1._handleReadFile(data, cache.file, cache);
+        return (0, util_1._handleReadFile)(data, cache.file, cache);
     })
         .then(async (txt) => {
         if (options.readFileAfter) {
@@ -151,7 +130,7 @@ async function readFile(inputFile, options) {
         }
         return txt;
     });
-    let data = await split_1.splitVolumeSync(txt, cache);
+    let data = await (0, split_1.splitVolumeSync)(txt, cache);
     return {
         options: cache,
         data,
@@ -163,7 +142,7 @@ function readFileSync(inputFile, options) {
     let txt;
     {
         let data = fs_iconv_1.default.readFileSync(cache.file);
-        txt = util_1._handleReadFile(data, cache.file);
+        txt = (0, util_1._handleReadFile)(data, cache.file);
         if (options.readFileAfter) {
             let ret = options.readFileAfter(txt);
             if (typeof ret === 'string') {
@@ -171,7 +150,7 @@ function readFileSync(inputFile, options) {
             }
         }
     }
-    let data = split_1.splitVolumeSync(txt, cache);
+    let data = (0, split_1.splitVolumeSync)(txt, cache);
     return {
         options: cache,
         data,
@@ -179,12 +158,12 @@ function readFileSync(inputFile, options) {
 }
 exports.readFileSync = readFileSync;
 async function outputFile(data, options) {
-    ({ data, options } = util_1._outputFile(data, options));
+    ({ data, options } = (0, util_1._outputFile)(data, options));
     let path_main = options.outDir || upath2_1.default.join(options.dirname, 'out');
     let ls = [];
     for (let vn in data) {
         for (let cn in data[vn]) {
-            let file = upath2_1.default.join(fs_iconv_1.trimFilename(vn), fs_iconv_1.trimFilename(cn) + '.txt');
+            let file = upath2_1.default.join((0, fs_iconv_1.trimFilename)(vn), (0, fs_iconv_1.trimFilename)(cn) + '.txt');
             let full_file = upath2_1.default.join(path_main, file);
             let txt = data[vn][cn];
             if (options.saveFileBefore) {
@@ -211,12 +190,12 @@ async function outputFile(data, options) {
 }
 exports.outputFile = outputFile;
 function outputFileSync(data, options) {
-    ({ data, options } = util_1._outputFile(data, options));
+    ({ data, options } = (0, util_1._outputFile)(data, options));
     let path_main = options.outDir || upath2_1.default.join(options.dirname, 'out');
     let ls = [];
     for (let vn in data) {
         for (let cn in data[vn]) {
-            let file = upath2_1.default.join(fs_iconv_1.trimFilename(vn), fs_iconv_1.trimFilename(cn) + '.txt');
+            let file = upath2_1.default.join((0, fs_iconv_1.trimFilename)(vn), (0, fs_iconv_1.trimFilename)(cn) + '.txt');
             fs_extra_1.default.outputFileSync(upath2_1.default.join(path_main, file), data[vn][cn]);
             ls.push(file);
         }
@@ -230,7 +209,7 @@ exports.outputFileSync = outputFileSync;
     'readFile',
 ]
     .forEach(function (key) {
-    exports[key] = util_1._wrapMethod(exports[key]);
+    exports[key] = (0, util_1._wrapMethod)(exports[key]);
 });
 exports.default = autoFile;
 //# sourceMappingURL=index.js.map

@@ -17,8 +17,8 @@ function _fixRubyInnerContext(innerContext) {
 exports._fixRubyInnerContext = _fixRubyInnerContext;
 function _replaceHtmlTag(replacer) {
     return ($0, $1, $2, ...argv) => {
-        $1 = fullhalf_1.toHalfWidth($1);
-        $2 = fullhalf_1.toHalfWidth($2);
+        $1 = (0, fullhalf_1.toHalfWidth)($1);
+        $2 = (0, fullhalf_1.toHalfWidth)($2);
         return replacer($0, $1, $2, ...argv);
     };
 }

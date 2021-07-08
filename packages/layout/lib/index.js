@@ -2,36 +2,15 @@
 /**
  * Created by user on 2019/5/29.
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = exports.TextLayout = exports.SP_REGEXP = exports.SP_KEY = void 0;
-const blank_line_1 = __importDefault(require("blank-line"));
-const crlf_normalize_1 = __importStar(require("crlf-normalize"));
+const tslib_1 = require("tslib");
+const blank_line_1 = (0, tslib_1.__importDefault)(require("blank-line"));
+const crlf_normalize_1 = (0, tslib_1.__importStar)(require("crlf-normalize"));
 const env_bool_1 = require("env-bool");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const util_1 = require("./util");
-const str_util_1 = __importDefault(require("str-util"));
+const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
 exports.SP_KEY = "#_@_#";
 exports.SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
 /**
@@ -101,7 +80,7 @@ class TextLayout {
     _words1(arr, words = []) {
         const SP_REGEXP = this.SP_REGEXP;
         const RC = this.RegExp;
-        array_hyper_unique_1.array_unique(arr)
+        (0, array_hyper_unique_1.array_unique)(arr)
             .forEach(function (value) {
             let a = value.split('@');
             /*
@@ -133,7 +112,7 @@ class TextLayout {
             if (value.no_regex) {
                 return value;
             }
-            if (util_1._isIwordsArray(value)) {
+            if ((0, util_1._isIwordsArray)(value)) {
                 value = {
                     _source: value,
                     s: value[0],
@@ -141,10 +120,10 @@ class TextLayout {
                     flags: value[2],
                 };
             }
-            if (util_1._isIwordsArray2(value)) {
+            if ((0, util_1._isIwordsArray2)(value)) {
                 return value[0];
             }
-            else if (util_1._isIwordsUserSp(value)) {
+            else if ((0, util_1._isIwordsUserSp)(value)) {
                 if (!value._source)
                     value._source = value.s;
                 let a = value.s.split(exports.SP_KEY);
@@ -306,7 +285,7 @@ class TextLayout {
             allow_nbsp: false,
             allow_bom: false,
         }, options);
-        let ret = crlf_normalize_1.default(str.toString(), options.LF || crlf_normalize_1.LF);
+        let ret = (0, crlf_normalize_1.default)(str.toString(), options.LF || crlf_normalize_1.LF);
         ret = str_util_1.default.normalize(ret, options);
         /*
         if (!options.allow_bom)
@@ -323,7 +302,7 @@ class TextLayout {
     }
     fixOptions(options) {
         Object.entries(options)
-            .forEach(([k, v]) => options[k] = env_bool_1.envVal(v));
+            .forEach(([k, v]) => options[k] = (0, env_bool_1.envVal)(v));
         return options;
     }
     /**
@@ -344,7 +323,7 @@ class TextLayout {
                 .replace(/\n{4,}/g, "\n\n\n\n");
         let _html = old;
         if (!_html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = blank_line_1.default(_html.toString());
+            let [min, mid, max] = (0, blank_line_1.default)(_html.toString());
             if (min > 2) {
                 options.allow_lf2 = false;
             }
@@ -382,7 +361,7 @@ class TextLayout {
             .replace(/[\s\u3000]+$/g, '')
             .replace(/^[\n \t]+/g, '')
             .replace(/\n{4,}/g, "\n\n\n\n" /* LF4 */);
-        return util_1._handleTextLayout(html, options);
+        return (0, util_1._handleTextLayout)(html, options);
     }
 }
 exports.TextLayout = TextLayout;

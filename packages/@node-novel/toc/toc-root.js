@@ -2,21 +2,19 @@
 /**
  * Created by user on 2018/11/14/014.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTocRoot = exports.stringifyDataAuthor = exports.processDataByAuthor = exports.filterList = exports.isNovelID = exports.searchByRoot = void 0;
+const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const crlf_normalize_1 = require("crlf-normalize");
-const fast_glob_1 = __importDefault(require("@bluelovers/fast-glob"));
-const upath2_1 = __importDefault(require("upath2"));
-const bluebird_1 = __importDefault(require("bluebird"));
-const fs_extra_1 = __importDefault(require("fs-extra"));
+const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
+const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
+const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
+const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
 const options_1 = require("node-novel-globby/lib/options");
 const util_1 = require("./lib/util");
 const toc_contents_1 = require("./toc_contents");
-const sort_object_keys2_1 = __importDefault(require("sort-object-keys2"));
+const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
 function searchByRoot(rootPath) {
     return bluebird_1.default.resolve(fast_glob_1.default.async([
         '!README.md',
@@ -51,7 +49,7 @@ exports.searchByRoot = searchByRoot;
 function isNovelID(dir, rootPath) {
     // @ts-ignore
     let _path = upath2_1.default.resolve(...[rootPath, upath2_1.default.dirname(dir)].filter(v => typeof v !== 'undefined'));
-    return util_1.globFirst([
+    return (0, util_1.globFirst)([
         '**/*.txt',
         //...defaultPatternsExclude,
     ], {
@@ -90,7 +88,7 @@ exports.filterList = filterList;
 function processDataByAuthor(ls, rootPath, options) {
     return bluebird_1.default.reduce(ls, async function (data, file) {
         let dl = file.split('/');
-        let meta = await util_1.loadReadmeMeta(upath2_1.default.join(rootPath, file));
+        let meta = await (0, util_1.loadReadmeMeta)(upath2_1.default.join(rootPath, file));
         let author = 'unknow';
         if (meta) {
             if (meta.novel) {
@@ -119,12 +117,12 @@ function processDataByAuthor(ls, rootPath, options) {
         return data;
     }, {})
         .then(data => {
-        sort_object_keys2_1.default(data, {
+        (0, sort_object_keys2_1.default)(data, {
             sort: util_1.tocSortCallback,
             useSource: true,
         });
         Object.keys(data).forEach(function (author) {
-            sort_object_keys2_1.default(data[author], {
+            (0, sort_object_keys2_1.default)(data[author], {
                 sort: util_1.tocSortCallback,
                 useSource: true,
             });
@@ -166,7 +164,7 @@ function stringifyDataAuthor(data, rootPath, options) {
                     link = link2;
                 }
                 skip.push(novelID);
-                let md = toc_contents_1.makeLink(`${novelID}`, link);
+                let md = (0, toc_contents_1.makeLink)(`${novelID}`, link);
                 let text = `- ${md} - *${item.pathMain}*`;
                 if (options.cbForEachSubNovel) {
                     let ret = options.cbForEachSubNovel(text, item);
@@ -175,9 +173,9 @@ function stringifyDataAuthor(data, rootPath, options) {
                     }
                 }
                 arr_item.push(text);
-                titles = titles.concat(util_1.getNovelTitles(item.meta));
+                titles = titles.concat((0, util_1.getNovelTitles)(item.meta));
             });
-            titles = array_hyper_unique_1.array_unique(titles)
+            titles = (0, array_hyper_unique_1.array_unique)(titles)
                 .filter(v => v && v != 'undefined')
                 .filter(v => !skip.includes(v));
             if (titles.length) {
@@ -188,7 +186,7 @@ function stringifyDataAuthor(data, rootPath, options) {
         });
     });
     let authors_anchor = authors.map(name => {
-        return `[${util_1.md_link_escape(name)}](#${util_1.md_anchor_gitee(name)})`;
+        return `[${(0, util_1.md_link_escape)(name)}](#${(0, util_1.md_anchor_gitee)(name)})`;
     }).join('\n  ／  ');
     arr.push(`> ${authors_anchor}\n`);
     arr = arr.concat(arr_author);

@@ -29,8 +29,8 @@
     "test": "jest",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
+    "preversion": "yarn test",
     "prepublish:lockfile": "npx sync-lockfile .",
-    "prepublishOnly": "yarn test",
     "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
     "postpublish_": "git commit -m \"chore(release): publish\" .",
     "ncu": "npx yarn-tool ncu -u",
@@ -39,12 +39,13 @@
   "dependencies": {
     "@node-novel/sort": "^1.0.17",
     "array-hyper-unique": "^1.1.9",
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.0.0",
     "moment": "^2.29.1",
     "node-novel-info": "^3.0.13",
     "sort-object-keys2": "^2.0.3",
-    "str-util": "^2.3.26",
-    "upath2": "^3.1.6"
+    "str-util": "^2.3.27",
+    "tslib": "^2.3.0",
+    "upath2": "^3.1.9"
   },
   "publishConfig": {
     "access": "public"

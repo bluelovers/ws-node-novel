@@ -2,13 +2,11 @@
 /**
  * Created by user on 2019/5/29.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports._handleTextLayout = exports._isIwordsUserSp = exports._isIwordsArray2 = exports._isIwordsArray = void 0;
+const tslib_1 = require("tslib");
 const index_1 = require("./index");
-const blank_line_1 = __importDefault(require("blank-line"));
+const blank_line_1 = (0, tslib_1.__importDefault)(require("blank-line"));
 function _isIwordsArray(value) {
     return Array.isArray(value) && (value.length > 1);
 }
@@ -23,7 +21,7 @@ function _isIwordsUserSp(value) {
 exports._isIwordsUserSp = _isIwordsUserSp;
 function _handleTextLayout(html, options) {
     if (!html.match(/[^\n]\n[^\n]/g)) {
-        let [min, mid, max] = blank_line_1.default(html);
+        let [min, mid, max] = (0, blank_line_1.default)(html);
         if (min > 2) {
             options.allow_lf2 = false;
         }

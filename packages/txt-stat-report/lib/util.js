@@ -40,8 +40,8 @@ function regexMerge(list) {
         source.push(a.source);
         a.flags && flags.push(...a.flags.split(''));
     });
-    array_hyper_unique_1.array_unique_overwrite(source);
-    array_hyper_unique_1.array_unique_overwrite(flags);
+    (0, array_hyper_unique_1.array_unique_overwrite)(source);
+    (0, array_hyper_unique_1.array_unique_overwrite)(flags);
     return new RegExp(source.join('|'), flags.join(''));
 }
 exports.regexMerge = regexMerge;

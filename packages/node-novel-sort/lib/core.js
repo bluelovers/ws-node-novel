@@ -2,12 +2,10 @@
 /**
  * Created by user on 2020/6/5.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSortCallback = void 0;
-const string_natural_compare_1 = __importDefault(require("@bluelovers/string-natural-compare"));
+const tslib_1 = require("tslib");
+const string_natural_compare_1 = (0, tslib_1.__importDefault)(require("@bluelovers/string-natural-compare"));
 const types_1 = require("./types");
 const util_1 = require("./util");
 /**

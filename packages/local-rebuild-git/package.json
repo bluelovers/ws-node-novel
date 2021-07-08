@@ -38,21 +38,22 @@
   },
   "dependencies": {
     "@bluelovers/fast-glob": "^3.0.4",
-    "@git-lazy/branch": "^1.0.27",
-    "@git-lazy/util": "^1.0.23",
+    "@git-lazy/branch": "^1.0.28",
+    "@git-lazy/util": "^1.0.26",
     "array-hyper-unique": "^1.1.9",
     "bluebird": "^3.7.2",
     "cross-spawn-extra": "^2.1.0",
     "debug-color2": "^1.2.3",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "email-normalize": "^1.0.0",
-    "fs-extra": "^9.1.0",
-    "git-diff-from": "^1.1.21",
-    "git-root2": "^1.0.20",
-    "gitlog2": "^5.0.17",
+    "fs-extra": "^10.0.0",
+    "git-diff-from": "^1.1.22",
+    "git-root2": "^1.0.23",
+    "gitlog2": "^5.0.18",
     "moment": "^2.29.1",
-    "uni-string": "^1.1.10",
-    "upath2": "^3.1.6",
-    "yargs": "^16.2.0"
+    "tslib": "^2.3.0",
+    "uni-string": "^1.1.11",
+    "upath2": "^3.1.9",
+    "yargs": "^17.0.1"
   }
 }

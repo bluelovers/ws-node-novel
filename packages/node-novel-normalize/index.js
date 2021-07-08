@@ -2,14 +2,12 @@
 /**
  * Created by user on 2018/2/14/014.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.normalize_val = exports.normalize_strip = void 0;
-const str_util_1 = __importDefault(require("str-util"));
-const normalize_num_1 = __importDefault(require("normalize-num"));
-const novel_filename_1 = __importDefault(require("@lazy-cjk/novel-filename"));
+const tslib_1 = require("tslib");
+const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
+const normalize_num_1 = (0, tslib_1.__importDefault)(require("normalize-num"));
+const novel_filename_1 = (0, tslib_1.__importDefault)(require("@lazy-cjk/novel-filename"));
 const zh_slugify_1 = require("@lazy-cjk/zh-slugify");
 function normalize_strip(str, isDir) {
     if (isDir) {
@@ -50,7 +48,7 @@ function normalize_val(str, padNum = 5, options = {}) {
         flags: 'ug',
     }).toString();
     //console.log(str);
-    str = normalize_num_1.default(str, {
+    str = (0, normalize_num_1.default)(str, {
         all: true,
         roman: options.checkRoman,
     });
@@ -101,7 +99,7 @@ function normalize_val(str, padNum = 5, options = {}) {
         greedyTable: true,
     })[0];
     */
-    str = zh_slugify_1.slugify(str, true);
+    str = (0, zh_slugify_1.slugify)(str, true);
     return str;
 }
 exports.normalize_val = normalize_val;

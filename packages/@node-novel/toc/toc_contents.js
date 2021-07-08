@@ -2,44 +2,23 @@
 /**
  * Created by user on 2018/8/13/013.
  */
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getList = exports.makeLink = exports.makeHeader = exports.makeHeaderAsync = exports.processTocContents = exports.md_link_escape = exports.md_href = void 0;
+const tslib_1 = require("tslib");
 const normalize_1 = require("@node-novel/normalize");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const bluebird_1 = __importDefault(require("bluebird"));
-const fs_extra_1 = __importDefault(require("fs-extra"));
-const novelGlobby = __importStar(require("node-novel-globby/g"));
+const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
+const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
+const novelGlobby = (0, tslib_1.__importStar)(require("node-novel-globby/g"));
 const glob_sort_1 = require("node-novel-globby/lib/glob-sort");
 const util_1 = require("./lib/util");
 Object.defineProperty(exports, "md_href", { enumerable: true, get: function () { return util_1.md_href; } });
 Object.defineProperty(exports, "md_link_escape", { enumerable: true, get: function () { return util_1.md_link_escape; } });
-const upath2_1 = __importDefault(require("upath2"));
+const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
 function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     return getList(basePath)
         .then(function (ls) {
-        return glob_sort_1.sortTree(ls);
+        return (0, glob_sort_1.sortTree)(ls);
     })
         .then(async function (ls) {
         if (!ls.length) {
@@ -104,11 +83,11 @@ function makeHeader(basePath, ...argv) {
     let titles = [
         upath2_1.default.basename(basePath),
     ];
-    let meta = util_1.loadReadmeMetaSync(upath2_1.default.join(basePath, 'README.md'));
+    let meta = (0, util_1.loadReadmeMetaSync)(upath2_1.default.join(basePath, 'README.md'));
     if (meta && meta.novel) {
-        let arr = util_1.getNovelTitles(meta);
+        let arr = (0, util_1.getNovelTitles)(meta);
         if (arr.length) {
-            titles = array_hyper_unique_1.array_unique(titles.concat(arr));
+            titles = (0, array_hyper_unique_1.array_unique)(titles.concat(arr));
         }
     }
     let arr = [
@@ -159,12 +138,12 @@ function makeHeader(basePath, ...argv) {
 }
 exports.makeHeader = makeHeader;
 function makeLink(title, link, isDir) {
-    let t = normalize_1.normalize_strip(title, isDir);
+    let t = (0, normalize_1.normalize_strip)(title, isDir);
     if (!isDir) {
         t = upath2_1.default.basename(t, '.txt');
     }
-    t = util_1.md_link_escape(t);
-    return `[${t}](${util_1.md_href(link)})`;
+    t = (0, util_1.md_link_escape)(t);
+    return `[${t}](${(0, util_1.md_href)(link)})`;
 }
 exports.makeLink = makeLink;
 function getList(basePath) {

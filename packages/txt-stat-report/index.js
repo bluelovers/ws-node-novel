@@ -2,41 +2,39 @@
 /**
  * Created by user on 2019/2/23.
  */
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.txtReportSum = exports.txtReport = void 0;
-const uni_string_1 = __importDefault(require("uni-string"));
+const tslib_1 = require("tslib");
+const uni_string_1 = (0, tslib_1.__importDefault)(require("uni-string"));
 const crlf_normalize_1 = require("crlf-normalize");
 const execall2_1 = require("execall2");
 const util_1 = require("./lib/util");
 function txtReport(input) {
     let buf_length = Buffer.from(input).length;
-    input = crlf_normalize_1.crlf(util_1.removeBom(input), crlf_normalize_1.LF);
+    input = (0, crlf_normalize_1.crlf)((0, util_1.removeBom)(input), crlf_normalize_1.LF);
     let js_length = input.length;
     let uni_length = uni_string_1.default.size(input);
-    let line_length = execall2_1.execall(/\n/g, input).length;
+    let line_length = (0, execall2_1.execall)(/\n/g, input).length;
     let no_blank_line_length;
     {
-        let s = util_1.removeSpace(input)
+        let s = (0, util_1.removeSpace)(input)
             .replace(/\n{2,}/g, '\n')
             .replace(/^\n+|\n+$/g, '');
-        no_blank_line_length = execall2_1.execall(/\n/g, s).length;
-        if (util_1.removeLine(s).length) {
+        no_blank_line_length = (0, execall2_1.execall)(/\n/g, s).length;
+        if ((0, util_1.removeLine)(s).length) {
             no_blank_line_length += 1;
         }
     }
-    let hanzi_length = execall2_1.execall(/[\u3400-\u4DBF\u4E00-\u9FFF\u{20000}-\u{2FA1F}]/ug, input).length;
-    let ja_length = execall2_1.execall(/[\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF]/ug, input).length;
+    let hanzi_length = (0, execall2_1.execall)(/[\u3400-\u4DBF\u4E00-\u9FFF\u{20000}-\u{2FA1F}]/ug, input).length;
+    let ja_length = (0, execall2_1.execall)(/[\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF]/ug, input).length;
     let punctuation_length;
     {
-        let s = util_1.removePunctuation(input);
+        let s = (0, util_1.removePunctuation)(input);
         punctuation_length = js_length - s.length;
     }
     let space_length;
     {
-        let s = util_1.removeSpace(input);
+        let s = (0, util_1.removeSpace)(input);
         space_length = js_length - s.length;
     }
     return {

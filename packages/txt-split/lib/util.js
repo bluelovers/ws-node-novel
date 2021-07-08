@@ -1,13 +1,11 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fix_name = exports._outputFile = exports._handleReadFile = exports._wrapMethod = exports.padIndexEnd = exports.padIndexStart = exports.padIndex = exports.chkEncoding = exports.logWarn = void 0;
-const layout_1 = __importDefault(require("@node-novel/layout"));
+const tslib_1 = require("tslib");
+const layout_1 = (0, tslib_1.__importDefault)(require("@node-novel/layout"));
 const console_1 = require("./console");
 const index_1 = require("./index");
-const bluebird_1 = __importDefault(require("bluebird"));
+const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
 const iconv_jschardet_1 = require("iconv-jschardet");
 const str_util_1 = require("str-util");
 const crlf_normalize_1 = require("crlf-normalize");
@@ -17,7 +15,7 @@ function logWarn(...argv) {
 }
 exports.logWarn = logWarn;
 function chkEncoding(data, file, options) {
-    let chk = iconv_jschardet_1.detect(data);
+    let chk = (0, iconv_jschardet_1.detect)(data);
     if (data.length === 0) {
         logWarn(file, '此檔案沒有內容');
     }
@@ -55,10 +53,10 @@ function _handleReadFile(data, file, options) {
     let txt;
     if (options && options.autoFsIconv && chk.encoding !== 'UTF-8') {
         logWarn('嘗試自動將內容轉換為 UTF-8', chk);
-        let buf = iconv_jschardet_1.encode(data);
+        let buf = (0, iconv_jschardet_1.encode)(data);
         let bool = buf.equals((Buffer.isBuffer(data) ? data : Buffer.from(data)));
         if (bool) {
-            let chk2 = iconv_jschardet_1.detect(buf);
+            let chk2 = (0, iconv_jschardet_1.detect)(buf);
             logWarn(`內容變更`, chk, '=>', chk2);
             data = buf;
         }
@@ -67,7 +65,7 @@ function _handleReadFile(data, file, options) {
         }
     }
     txt = String(data);
-    return crlf_normalize_1.crlf(layout_1.default.trim(txt), crlf_normalize_1.LF);
+    return (0, crlf_normalize_1.crlf)(layout_1.default.trim(txt), crlf_normalize_1.LF);
 }
 exports._handleReadFile = _handleReadFile;
 function _outputFile(data, options) {
@@ -75,7 +73,7 @@ function _outputFile(data, options) {
         options = Object.assign({}, data.options, options);
         data = data.data;
     }
-    options = index_1.makeOptions(options.file, options);
+    options = (0, index_1.makeOptions)(options.file, options);
     return { data, options };
 }
 exports._outputFile = _outputFile;
@@ -84,12 +82,12 @@ function fix_name(name) {
         trim: true,
     }).trim();
     if (!/^\d+/.test(name)) {
-        name = str_util_1.zh2num(name).toString();
+        name = (0, str_util_1.zh2num)(name).toString();
     }
     name = name
         //.replace(/^(\d+)[\-話话\s]*/, '$1　')
         .replace(/[“”]/g, '');
-    name = jp_1.zh2jp(name);
+    name = (0, jp_1.zh2jp)(name);
     //console.log([name]);
     return name;
 }
