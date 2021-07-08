@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.18](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/sort@1.0.17...@node-novel/sort@1.0.18) (2021-07-08)
+
+
+### 🛠　Build System
+
+* update deps and use tslib ([bc00796](https://github.com/bluelovers/ws-node-novel/commit/bc007968e0dde703a1b4e79d147bd7122fe3468b))
+
+
+
+
+
 ## [1.0.17](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/sort@1.0.16...@node-novel/sort@1.0.17) (2020-07-19)
 
 

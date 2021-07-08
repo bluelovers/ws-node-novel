@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.15](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.13...@node-novel/local-rebuild-git@1.0.15) (2021-07-08)
+
+
+### 🛠　Build System
+
+* update deps and use tslib ([bc00796](https://github.com/bluelovers/ws-node-novel/commit/bc007968e0dde703a1b4e79d147bd7122fe3468b))
+
+
+### 🔖　Miscellaneous
+
+* . ([fd9c06a](https://github.com/bluelovers/ws-node-novel/commit/fd9c06a1e1bc526117eee710e13814cc174c4bf4))
+
+
+
+
+
 ## [1.0.14](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.13...@node-novel/local-rebuild-git@1.0.14) (2021-07-08)
 
 
