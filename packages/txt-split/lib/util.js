@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fix_name = exports._outputFile = exports._handleReadFile = exports._wrapMethod = exports.padIndexEnd = exports.padIndexStart = exports.padIndex = exports.chkEncoding = exports.logWarn = void 0;
 const tslib_1 = require("tslib");
-const layout_1 = (0, tslib_1.__importDefault)(require("@node-novel/layout"));
+const layout_1 = tslib_1.__importDefault(require("@node-novel/layout"));
 const console_1 = require("./console");
 const index_1 = require("./index");
-const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
+const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
 const iconv_jschardet_1 = require("iconv-jschardet");
 const str_util_1 = require("str-util");
 const crlf_normalize_1 = require("crlf-normalize");

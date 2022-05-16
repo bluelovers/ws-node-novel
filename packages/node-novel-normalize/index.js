@@ -5,9 +5,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.normalize_val = exports.normalize_strip = void 0;
 const tslib_1 = require("tslib");
-const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
-const normalize_num_1 = (0, tslib_1.__importDefault)(require("normalize-num"));
-const novel_filename_1 = (0, tslib_1.__importDefault)(require("@lazy-cjk/novel-filename"));
+const str_util_1 = tslib_1.__importDefault(require("str-util"));
+const normalize_num_1 = tslib_1.__importDefault(require("normalize-num"));
+const novel_filename_1 = tslib_1.__importDefault(require("@lazy-cjk/novel-filename"));
 const zh_slugify_1 = require("@lazy-cjk/zh-slugify");
 function normalize_strip(str, isDir) {
     if (isDir) {

@@ -5,9 +5,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.enspace = exports.SP_KEY = exports.SP_REGEXP = void 0;
 const tslib_1 = require("tslib");
-const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
-const blank_line_1 = (0, tslib_1.__importDefault)(require("blank-line"));
-const crlf_normalize_1 = (0, tslib_1.__importStar)(require("crlf-normalize"));
+const str_util_1 = tslib_1.__importDefault(require("str-util"));
+const blank_line_1 = tslib_1.__importDefault(require("blank-line"));
+const crlf_normalize_1 = tslib_1.__importStar(require("crlf-normalize"));
 const tieba_harmony_1 = require("tieba-harmony");
 Object.defineProperty(exports, "SP_REGEXP", { enumerable: true, get: function () { return tieba_harmony_1.SP_REGEXP; } });
 Object.defineProperty(exports, "SP_KEY", { enumerable: true, get: function () { return tieba_harmony_1.SP_KEY; } });

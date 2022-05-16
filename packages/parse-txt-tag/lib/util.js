@@ -25,8 +25,8 @@ function _replaceHtmlTag(replacer) {
 exports._replaceHtmlTag = _replaceHtmlTag;
 function _convertHtmlTag001(input) {
     return input
-        .replace(new RegExp("&lt;|\\u003C|\uFF1C" /* OPEN */, 'ig'), '<')
-        .replace(new RegExp("&gt;|\\u003E|\uFF1E" /* CLOSE */, 'ig'), '>');
+        .replace(new RegExp("&lt;|\\u003C|\uFF1C" /* EnumHtmlTag.OPEN */, 'ig'), '<')
+        .replace(new RegExp("&gt;|\\u003E|\uFF1E" /* EnumHtmlTag.CLOSE */, 'ig'), '>');
 }
 exports._convertHtmlTag001 = _convertHtmlTag001;
 //# sourceMappingURL=util.js.map

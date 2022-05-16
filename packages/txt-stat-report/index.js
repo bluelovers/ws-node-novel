@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.txtReportSum = exports.txtReport = void 0;
 const tslib_1 = require("tslib");
-const uni_string_1 = (0, tslib_1.__importDefault)(require("uni-string"));
+const uni_string_1 = tslib_1.__importDefault(require("uni-string"));
 const crlf_normalize_1 = require("crlf-normalize");
 const execall2_1 = require("execall2");
 const util_1 = require("./lib/util");

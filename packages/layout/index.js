@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.novelText = exports.textLayout = void 0;
 const tslib_1 = require("tslib");
-(0, tslib_1.__exportStar)(require("./lib"), exports);
+tslib_1.__exportStar(require("./lib"), exports);
 const lib_1 = require("./lib");
 /**
  * 預設的 排版處理核心 如需要自訂預設值 可以 使用 `TextLayout.create(options)`

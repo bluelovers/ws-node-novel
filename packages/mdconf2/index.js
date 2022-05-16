@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SYMBOL_RAW_DATA = exports.SYMBOL_RAW_VALUE = exports.RawObject = exports.isPlainObject = exports.defaultOptionsParse = exports.stringify = exports.parse = exports.mdconf = void 0;
 const tslib_1 = require("tslib");
-const core_1 = (0, tslib_1.__importStar)(require("./core"));
+const core_1 = tslib_1.__importStar(require("./core"));
 exports.mdconf = core_1.default;
 Object.defineProperty(exports, "parse", { enumerable: true, get: function () { return core_1.parse; } });
 Object.defineProperty(exports, "stringify", { enumerable: true, get: function () { return core_1.stringify; } });

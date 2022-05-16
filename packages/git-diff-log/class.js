@@ -59,35 +59,35 @@ class NovelDiffFromLogParser {
         return ls;
     }
 }
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     ArrayUniqueDecorator,
-    (0, tslib_1.__metadata)("design:type", Function),
-    (0, tslib_1.__metadata)("design:paramtypes", []),
-    (0, tslib_1.__metadata)("design:returntype", void 0)
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "pathMains", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     ArrayUniqueDecorator,
-    (0, tslib_1.__metadata)("design:type", Function),
-    (0, tslib_1.__metadata)("design:paramtypes", []),
-    (0, tslib_1.__metadata)("design:returntype", void 0)
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", []),
+    tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "novelIDs", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     ArrayUniqueDecorator,
-    (0, tslib_1.__metadata)("design:type", Function),
-    (0, tslib_1.__metadata)("design:paramtypes", [Function]),
-    (0, tslib_1.__metadata)("design:returntype", void 0)
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Function]),
+    tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "files", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     ArrayUniqueDecorator,
-    (0, tslib_1.__metadata)("design:type", Function),
-    (0, tslib_1.__metadata)("design:paramtypes", [Object]),
-    (0, tslib_1.__metadata)("design:returntype", void 0)
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object]),
+    tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser, "novelIDs", null);
-(0, tslib_1.__decorate)([
+tslib_1.__decorate([
     ArrayUniqueDecorator,
-    (0, tslib_1.__metadata)("design:type", Function),
-    (0, tslib_1.__metadata)("design:paramtypes", [Object, Function]),
-    (0, tslib_1.__metadata)("design:returntype", void 0)
+    tslib_1.__metadata("design:type", Function),
+    tslib_1.__metadata("design:paramtypes", [Object, Function]),
+    tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser, "files", null);
 exports.NovelDiffFromLogParser = NovelDiffFromLogParser;
 function ArrayUniqueDecorator(target, propertyKey, descriptor) {

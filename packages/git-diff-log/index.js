@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.novelDiffFromLog = void 0;
 const tslib_1 = require("tslib");
-const git_diff_from_1 = (0, tslib_1.__importDefault)(require("git-diff-from"));
+const git_diff_from_1 = tslib_1.__importDefault(require("git-diff-from"));
 const upath2_1 = require("upath2");
 const baseHashDefault = 5;
 const targetTreeDefault = 'origin/master';

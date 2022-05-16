@@ -7,11 +7,11 @@ exports.tocSortCallback = exports.md_link_escape = exports.md_anchor_gitee = exp
 const tslib_1 = require("tslib");
 const sort_1 = require("@node-novel/sort");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
-const fs_iconv_1 = (0, tslib_1.__importDefault)(require("fs-iconv"));
+const fast_glob_1 = tslib_1.__importDefault(require("@bluelovers/fast-glob"));
+const fs_iconv_1 = tslib_1.__importDefault(require("fs-iconv"));
 const node_novel_info_1 = require("node-novel-info");
-const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
-const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
+const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
+const str_util_1 = tslib_1.__importDefault(require("str-util"));
 async function loadReadmeMeta(file) {
     return fs_iconv_1.default.readFile(file)
         .then(function (data) {

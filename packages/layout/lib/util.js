@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports._handleTextLayout = exports._isIwordsUserSp = exports._isIwordsArray2 = exports._isIwordsArray = void 0;
 const tslib_1 = require("tslib");
 const index_1 = require("./index");
-const blank_line_1 = (0, tslib_1.__importDefault)(require("blank-line"));
+const blank_line_1 = tslib_1.__importDefault(require("blank-line"));
 function _isIwordsArray(value) {
     return Array.isArray(value) && (value.length > 1);
 }
@@ -56,14 +56,14 @@ function _handleTextLayout(html, options) {
     */
     html = html
         .replace(/^\n+|[\s\u3000]+$/g, '')
-        .replace(/(\n){4,}/g, "\n\n\n\n" /* LF4 */);
+        .replace(/(\n){4,}/g, "\n\n\n\n" /* EnumLF.LF4 */);
     if (options.allow_lf3) {
         html = html
-            .replace(/(\n){3,}/g, "\n\n\n" /* LF3 */);
+            .replace(/(\n){3,}/g, "\n\n\n" /* EnumLF.LF3 */);
     }
     else {
         html = html
-            .replace(/(\n){3}/g, "\n\n" /* LF2 */);
+            .replace(/(\n){3}/g, "\n\n" /* EnumLF.LF2 */);
     }
     return html;
 }

@@ -5,12 +5,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.outputFileSync = exports.outputFile = exports.readFileSync = exports.readFile = exports.autoFile = exports._handleOptions = exports.makeOptions = exports.defaultOptions = void 0;
 const tslib_1 = require("tslib");
-const fs_iconv_1 = (0, tslib_1.__importStar)(require("fs-iconv"));
+const fs_iconv_1 = tslib_1.__importStar(require("fs-iconv"));
 const regexp_cjk_1 = require("regexp-cjk");
-const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
+const upath2_1 = tslib_1.__importDefault(require("upath2"));
 const split_1 = require("./split");
 const util_1 = require("./util");
-const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
+const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
 const DEFAULT_REGEXP_FLAGS = 'gimu';
 const DEFAULT_REGEXP_FLAGS_IGNORE = 'iu';
 exports.defaultOptions = Object.freeze({

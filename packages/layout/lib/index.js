@@ -5,12 +5,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = exports.TextLayout = exports.SP_REGEXP = exports.SP_KEY = void 0;
 const tslib_1 = require("tslib");
-const blank_line_1 = (0, tslib_1.__importDefault)(require("blank-line"));
-const crlf_normalize_1 = (0, tslib_1.__importStar)(require("crlf-normalize"));
+const blank_line_1 = tslib_1.__importDefault(require("blank-line"));
+const crlf_normalize_1 = tslib_1.__importStar(require("crlf-normalize"));
 const env_bool_1 = require("env-bool");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const util_1 = require("./util");
-const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
+const str_util_1 = tslib_1.__importDefault(require("str-util"));
 exports.SP_KEY = "#_@_#";
 exports.SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
 /**
@@ -360,7 +360,7 @@ class TextLayout {
             .replace(/[ \u3000\t]+\n/g, "\n")
             .replace(/[\s\u3000]+$/g, '')
             .replace(/^[\n \t]+/g, '')
-            .replace(/\n{4,}/g, "\n\n\n\n" /* LF4 */);
+            .replace(/\n{4,}/g, "\n\n\n\n" /* EnumLF.LF4 */);
         return (0, util_1._handleTextLayout)(html, options);
     }
 }

@@ -7,14 +7,14 @@ exports.getList = exports.makeLink = exports.makeHeader = exports.makeHeaderAsyn
 const tslib_1 = require("tslib");
 const normalize_1 = require("@node-novel/normalize");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
-const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
-const novelGlobby = (0, tslib_1.__importStar)(require("node-novel-globby/g"));
+const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
+const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
+const novelGlobby = tslib_1.__importStar(require("node-novel-globby/g"));
 const glob_sort_1 = require("node-novel-globby/lib/glob-sort");
 const util_1 = require("./lib/util");
 Object.defineProperty(exports, "md_href", { enumerable: true, get: function () { return util_1.md_href; } });
 Object.defineProperty(exports, "md_link_escape", { enumerable: true, get: function () { return util_1.md_link_escape; } });
-const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
+const upath2_1 = tslib_1.__importDefault(require("upath2"));
 function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
     return getList(basePath)
         .then(function (ls) {

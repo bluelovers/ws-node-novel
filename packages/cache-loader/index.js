@@ -5,10 +5,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createFromJSON = exports.fixOptions = exports.create = exports.EnumFilterNovelType = exports.EnumBeforeSave = exports.NovelStatCache = exports.createMoment = void 0;
 const tslib_1 = require("tslib");
-const util_1 = (0, tslib_1.__importStar)(require("./lib/util"));
+const util_1 = tslib_1.__importStar(require("./lib/util"));
 Object.defineProperty(exports, "createMoment", { enumerable: true, get: function () { return util_1.createMoment; } });
 const array_hyper_unique_1 = require("array-hyper-unique");
-const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
+const sort_object_keys2_1 = tslib_1.__importDefault(require("sort-object-keys2"));
 const openedMap = new WeakMap();
 const defaultOptions = Object.freeze({
     history_max: 14,

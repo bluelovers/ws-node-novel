@@ -6,7 +6,7 @@ const tslib_1 = require("tslib");
  * Module dependencies.
  */
 const marked_1 = require("marked");
-const md = (0, tslib_1.__importStar)(require("marked"));
+const md = tslib_1.__importStar(require("marked"));
 const crlf_normalize_1 = require("crlf-normalize");
 const moment_1 = require("moment");
 const is_plain_object_1 = require("is-plain-object");

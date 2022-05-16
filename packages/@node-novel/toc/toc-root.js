@@ -7,14 +7,14 @@ exports.createTocRoot = exports.stringifyDataAuthor = exports.processDataByAutho
 const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const crlf_normalize_1 = require("crlf-normalize");
-const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
-const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
-const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
-const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
+const fast_glob_1 = tslib_1.__importDefault(require("@bluelovers/fast-glob"));
+const upath2_1 = tslib_1.__importDefault(require("upath2"));
+const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
+const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
 const options_1 = require("node-novel-globby/lib/options");
 const util_1 = require("./lib/util");
 const toc_contents_1 = require("./toc_contents");
-const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
+const sort_object_keys2_1 = tslib_1.__importDefault(require("sort-object-keys2"));
 function searchByRoot(rootPath) {
     return bluebird_1.default.resolve(fast_glob_1.default.async([
         '!README.md',

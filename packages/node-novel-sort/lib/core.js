@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSortCallback = void 0;
 const tslib_1 = require("tslib");
-const string_natural_compare_1 = (0, tslib_1.__importDefault)(require("@bluelovers/string-natural-compare"));
+const string_natural_compare_1 = tslib_1.__importDefault(require("@bluelovers/string-natural-compare"));
 const types_1 = require("./types");
 const util_1 = require("./util");
 /**

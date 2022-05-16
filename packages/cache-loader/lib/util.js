@@ -5,11 +5,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parsePathMainBase = exports.tryRequireFS = exports.baseSortObject = exports.freezeProperty = exports.cacheSortCallback = exports.refreshTodayMoment = exports.getTodayMomentTimestamp = exports.todayMomentOffset = exports.todayMomentTimestamp = exports.createMoment = exports.naturalCompare = void 0;
 const tslib_1 = require("tslib");
-const moment_1 = (0, tslib_1.__importDefault)(require("moment"));
+const moment_1 = tslib_1.__importDefault(require("moment"));
 const sort_1 = require("@node-novel/sort");
 Object.defineProperty(exports, "naturalCompare", { enumerable: true, get: function () { return sort_1.naturalCompare; } });
-const str_util_1 = (0, tslib_1.__importDefault)(require("str-util"));
-const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
+const str_util_1 = tslib_1.__importDefault(require("str-util"));
+const sort_object_keys2_1 = tslib_1.__importDefault(require("sort-object-keys2"));
 const types_1 = require("@node-novel/sort/lib/types");
 const core_1 = require("@node-novel/sort/lib/core");
 let defaultOffset = 8;

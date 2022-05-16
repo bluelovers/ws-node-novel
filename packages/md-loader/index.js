@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fixContent = exports.stringify = exports.parse = void 0;
 const tslib_1 = require("tslib");
-const gray_matter_1 = (0, tslib_1.__importDefault)(require("gray-matter"));
+const gray_matter_1 = tslib_1.__importDefault(require("gray-matter"));
 const node_novel_info_1 = require("node-novel-info");
 function parse(inputContent, options) {
     let { matterOptions, parseOptions, parser = node_novel_info_1.mdconf_parse } = (options || {});

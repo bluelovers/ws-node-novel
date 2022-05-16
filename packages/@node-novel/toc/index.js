@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultFilter = exports.createReadmeData = exports.processToc = exports.get_ids = exports.Promise = exports.console = exports.md_href = void 0;
 const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
-const bluebird_1 = (0, tslib_1.__importDefault)(require("bluebird"));
+const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
 exports.Promise = bluebird_1.default;
 const debug_color2_1 = require("debug-color2");
-const fast_glob_1 = (0, tslib_1.__importDefault)(require("@bluelovers/fast-glob"));
-const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
+const fast_glob_1 = tslib_1.__importDefault(require("@bluelovers/fast-glob"));
+const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
 const node_novel_info_1 = require("node-novel-info");
-const sort_object_keys2_1 = (0, tslib_1.__importDefault)(require("sort-object-keys2"));
+const sort_object_keys2_1 = tslib_1.__importDefault(require("sort-object-keys2"));
 const util_1 = require("./lib/util");
 Object.defineProperty(exports, "md_href", { enumerable: true, get: function () { return util_1.md_href; } });
-const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
+const upath2_1 = tslib_1.__importDefault(require("upath2"));
 exports.console = new debug_color2_1.Console(null, {
     enabled: true,
     inspectOptions: {
