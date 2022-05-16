@@ -17,7 +17,7 @@ const zhRegExp = _zhRegExp.use({
 			autoVoice: true,
 			autoLocale: true,
 			autoDeburr: true,
-			autoFullHaif: true,
+			autoFullHalf: true,
 		})
 	],
 	unsafe: true,
