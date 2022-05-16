@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.17](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.15...@node-novel/local-rebuild-git@1.0.17) (2022-05-16)
+
+
+### 📦　Code Refactoring
+
+* update yargs ([3a8b5f1](https://github.com/bluelovers/ws-node-novel/commit/3a8b5f1e80f5b7f3eff0e59deb2f95f095a38862))
+
+
+### 🔖　Miscellaneous
+
+* . ([57ee43d](https://github.com/bluelovers/ws-node-novel/commit/57ee43d121d63feb6ec6588641bebc7343a18342))
+
+
+
+
+
 ## [1.0.16](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.15...@node-novel/local-rebuild-git@1.0.16) (2022-05-16)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/cache-loader",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "讀寫分析 novel-stat.json",
   "keywords": [
     "@node-novel",
@@ -37,11 +37,11 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@node-novel/sort": "^1.0.18",
+    "@node-novel/sort": "^1.0.20",
     "array-hyper-unique": "^2.0.6",
     "fs-extra": "^10.1.0",
     "moment": "^2.29.3",
-    "node-novel-info": "^3.0.14",
+    "node-novel-info": "^3.0.15",
     "sort-object-keys2": "^2.0.3",
     "str-util": "^2.3.28",
     "tslib": "^2",
