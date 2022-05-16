@@ -42,16 +42,16 @@
   "dependencies": {
     "@node-novel/layout": "^2.0.17",
     "bluebird": "^3.7.2",
-    "cjk-conv": "^1.2.126",
-    "crlf-normalize": "^1.0.6",
-    "debug-color2": "^1.2.3",
-    "execall2": "^2.0.9",
-    "fs-extra": "^10.0.0",
-    "fs-iconv": "^3.0.16",
-    "iconv-jschardet": "^2.0.17",
-    "regexp-cjk": "^3.3.92",
-    "tslib": "^2.3.0",
-    "upath2": "^3.1.9"
+    "cjk-conv": "^1.2.139",
+    "crlf-normalize": "^1.0.7",
+    "debug-color2": "^1.2.7",
+    "execall2": "^2.0.21",
+    "fs-extra": "^10.1.0",
+    "fs-iconv": "^3.1.9",
+    "iconv-jschardet": "^2.0.26",
+    "regexp-cjk": "^3.3.106",
+    "tslib": "^2",
+    "upath2": "^3.1.13"
   },
   "publishConfig": {
     "access": "public"

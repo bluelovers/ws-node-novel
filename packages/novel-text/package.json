@@ -49,13 +49,13 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.36",
-    "blank-line": "^1.0.4",
-    "crlf-normalize": "^1.0.6",
-    "env-bool": "^1.0.3",
-    "str-util": "^2.3.27",
-    "tieba-harmony": "^2.0.21",
-    "tslib": "^2.3.0"
+    "@lazy-cjk/novel-filename": "^1.0.46",
+    "blank-line": "^1.0.5",
+    "crlf-normalize": "^1.0.7",
+    "env-bool": "^2.0.1",
+    "str-util": "^2.3.28",
+    "tieba-harmony": "^2.0.31",
+    "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"
 }

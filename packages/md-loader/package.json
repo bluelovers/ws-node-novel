@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "tslib": "^2.3.0"
+    "tslib": "^2"
   },
   "peerDependencies": {
     "gray-matter": "^4",

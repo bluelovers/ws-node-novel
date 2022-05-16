@@ -35,12 +35,12 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "array-hyper-unique": "^1.1.9",
-    "blank-line": "^1.0.4",
-    "crlf-normalize": "^1.0.6",
-    "execall2": "^2.0.9",
-    "tslib": "^2.3.0",
-    "uni-string": "^1.1.11"
+    "array-hyper-unique": "^2.0.6",
+    "blank-line": "^1.0.5",
+    "crlf-normalize": "^1.0.7",
+    "execall2": "^2.0.21",
+    "tslib": "^2",
+    "uni-string": "^1.1.12"
   },
   "publishConfig": {
     "access": "public"

@@ -32,8 +32,8 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@bluelovers/string-natural-compare": "^1.1.2",
-    "tslib": "^2.3.0"
+    "@bluelovers/string-natural-compare": "^2.0.5",
+    "tslib": "^2"
   },
   "publishConfig": {
     "access": "public"
