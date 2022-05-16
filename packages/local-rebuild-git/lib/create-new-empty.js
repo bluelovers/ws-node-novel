@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports._createMode002 = exports._createMode001 = void 0;
 const tslib_1 = require("tslib");
 const index_1 = require("../index");
-const fs_extra_1 = (0, tslib_1.__importDefault)(require("fs-extra"));
-const upath2_1 = (0, tslib_1.__importDefault)(require("upath2"));
+const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
+const upath2_1 = tslib_1.__importDefault(require("upath2"));
 const git_1 = require("@git-lazy/util/spawn/git");
 const branch_1 = require("@git-lazy/branch");
-const moment_1 = (0, tslib_1.__importDefault)(require("moment"));
+const moment_1 = tslib_1.__importDefault(require("moment"));
 const util_1 = require("@git-lazy/util");
 async function _createMode001(cwd) {
     let { name, email } = await (0, index_1.git_get_user)(cwd);

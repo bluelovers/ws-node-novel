@@ -3,7 +3,6 @@
 import { runAllJob, console } from '..';
 import path from 'upath2';
 import yargs from 'yargs';
-import fs = require('fs');
 
 let argv = yargs
 	.option('cwd', {
@@ -13,7 +12,7 @@ let argv = yargs
 		alias: ['c'],
 	})
 	.help()
-	.argv
+	.parseSync()
 ;
 
 let git_repo = path.resolve(argv.cwd);
