@@ -35,12 +35,12 @@ export interface ITextLayoutOptions extends ITrimOptions {
     allow_lf2?: boolean;
     allow_lf3?: boolean;
 }
-export declare type IWordsRuntime = IWordsParsed | IWordsFunction;
-export declare type IWordsAll = IWordsArray | IWordsArray2 | IWordsUser | IWordsUserSP;
+export type IWordsRuntime = IWordsParsed | IWordsFunction;
+export type IWordsAll = IWordsArray | IWordsArray2 | IWordsUser | IWordsUserSP;
 /**
  * 推薦使用此格式 簡單方便
  */
-export declare type IWordsArray = [string | RegExp, string | IRegExpCallback, string?, ...unknown[]];
+export type IWordsArray = [string | RegExp, string | IRegExpCallback, string?, ...unknown[]];
 /**
  * 接收目前文字內容並輸出新文字內容
  */
@@ -87,12 +87,12 @@ export interface IRegExpCallback {
     (substring: string, ...args: string[]): string;
     (substring: string, ...args: any[]): string;
 }
-export declare type ICacheMap = Map<IWordsRuntime, ICacheMapRow[]>;
+export type ICacheMap = Map<IWordsRuntime, ICacheMapRow[]>;
 export interface ICacheMapRow {
     old: string;
     new: string;
 }
-export declare type ITrimOptionsUser = ITrimOptions | ITrimOptions["trim"];
+export type ITrimOptionsUser = ITrimOptions | ITrimOptions["trim"];
 export declare const enum EnumLF {
     LF1 = "\n",
     LF2 = "\n\n",

@@ -5,7 +5,7 @@
 import { parse, stringify } from './index';
 import { EnumNovelStatus } from './lib/const';
 import { IOptionsParse, IMdconfMeta, IMdconfMetaOptionsNovelSite } from './lib/types';
-export declare type INodeNovelInfoOptions = IOptionsParse & {};
+export type INodeNovelInfoOptions = IOptionsParse & {};
 export declare class NodeNovelInfo<T extends IMdconfMeta> {
     raw: T;
     pathMain?: string;

@@ -4,26 +4,26 @@
 /// <reference types="node" />
 import { execall } from 'execall2';
 import { zhRegExp } from 'regexp-cjk';
-export declare type IPathLike = string;
-export declare type IContext = string | Buffer;
-export declare type IRegExpLike = typeof RegExp | typeof zhRegExp | {
+export type IPathLike = string;
+export type IContext = string | Buffer;
+export type IRegExpLike = typeof RegExp | typeof zhRegExp | {
     new (...argv: any[]): RegExp;
 } | {
     new (...argv: any[]): zhRegExp;
 };
-export declare type Diff<T extends string, U extends string> = ({
+export type Diff<T extends string, U extends string> = ({
     [P in T]: P;
 } & {
     [P in U]: never;
 } & {
     [x: string]: never;
 })[T];
-export declare type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
-export declare type Overwrite<T, U> = Omit<T, Diff<keyof T, Diff<keyof T, keyof U>>> & U;
+export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+export type Overwrite<T, U> = Omit<T, Diff<keyof T, Diff<keyof T, keyof U>>> & U;
 export interface IOptionsRequired<P = boolean | IRegExpLike> extends IOptions<P> {
     chapter: ISplitOption;
 }
-export declare type IOptionsRequiredUser = Overwrite<IOptionsRequired, IOptionsRequiredLazyInput> | IOptionsRequired;
+export type IOptionsRequiredUser = Overwrite<IOptionsRequired, IOptionsRequiredLazyInput> | IOptionsRequired;
 export interface IOptionsRequiredLazyInput {
     volume?: ISplitOptionVolume<string | RegExp | string[]>;
     chapter: ISplitOption<string | RegExp | string[]>;
@@ -65,7 +65,7 @@ export interface ISaveFileBeforeCache {
     cn: string;
     vn: string;
 }
-export declare type ISplitOptionVolume<T extends RegExp | string | string[] = RegExp> = ISplitOption<T> & {
+export type ISplitOptionVolume<T extends RegExp | string | string[] = RegExp> = ISplitOption<T> & {
     /**
      * 禁用此規則
      */
@@ -112,8 +112,8 @@ export interface ISplitCache extends IOptions {
      */
     readonly ic_all: number;
 }
-export declare type ISplitMatch = ReturnType<typeof execall>;
-export declare type ISplitMatchItem = ISplitMatch[0];
+export type ISplitMatch = ReturnType<typeof execall>;
+export type ISplitMatchItem = ISplitMatch[0];
 export interface ISplitCBParameters extends ISplitCBReturn {
     /**
      * 於 match 列表中的 index 序列
@@ -190,4 +190,4 @@ export interface IDataVolume<T extends IContext = string> {
 export interface IDataChapter<T extends IContext = string> {
     [chapter: string]: T;
 }
-export declare type Resolvable<R> = R | PromiseLike<R>;
+export type Resolvable<R> = R | PromiseLike<R>;

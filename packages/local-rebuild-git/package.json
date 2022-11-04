@@ -14,7 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/local-rebuild-git"
   },
   "license": "ISC",
   "author": "bluelovers",
@@ -27,9 +28,15 @@
     "test": "test"
   },
   "scripts": {
+    "coverage": "yarn run test -- --coverage",
     "test": "echo \"Error: no test specified\"",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
+    "preversion": "yarn run test",
     "prepublish:lockfile": "npx sync-lockfile .",
     "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
     "postpublish_": "git commit -m \"chore(release): publish\" .",
@@ -38,22 +45,22 @@
   },
   "dependencies": {
     "@bluelovers/fast-glob": "^3.0.4",
-    "@git-lazy/branch": "^1.0.35",
-    "@git-lazy/util": "^1.0.32",
-    "array-hyper-unique": "^2.0.6",
+    "@git-lazy/branch": "^1.0.44",
+    "@git-lazy/util": "^1.0.40",
+    "array-hyper-unique": "^2.1.4",
     "bluebird": "^3.7.2",
     "cross-spawn-extra": "^2.1.0",
-    "debug-color2": "^1.2.7",
-    "dotenv": "^16.0.1",
+    "debug-color2": "^1.3.2",
+    "dotenv": "^16.0.3",
     "email-normalize": "^1.0.0",
     "fs-extra": "^10.1.0",
-    "git-diff-from": "^1.1.29",
-    "git-root2": "^1.0.29",
-    "gitlog2": "^5.0.25",
-    "moment": "^2.29.3",
+    "git-diff-from": "^1.1.37",
+    "git-root2": "^1.0.38",
+    "gitlog2": "^5.0.32",
+    "moment": "^2.29.4",
     "tslib": "^2",
-    "uni-string": "^1.1.12",
-    "upath2": "^3.1.13",
-    "yargs": "^17.5.1"
+    "uni-string": "^2.0.3",
+    "upath2": "^3.1.19",
+    "yargs": "^17.6.2"
   }
 }

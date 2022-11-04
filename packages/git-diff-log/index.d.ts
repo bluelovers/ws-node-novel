@@ -8,7 +8,7 @@ import { ITSPickExtra } from 'ts-type';
  * 適用於任何符合 `主資料夾/副資料夾/子路徑` 這種結構的資料夾
  */
 export declare function novelDiffFromLog(options: ITSPickExtra<IOptions, 'novelRoot'>): INovelDiffFromLog;
-export declare type IListFileRow = IGitDiffFromRow & {
+export type IListFileRow = IGitDiffFromRow & {
     /**
      * 主資料夾 ID
      */
@@ -20,7 +20,7 @@ export declare type IListFileRow = IGitDiffFromRow & {
     basename: string;
     subpath: string;
 };
-export declare type IListNovelRow = IListFileRow[] & {
+export type IListNovelRow = IListFileRow[] & {
     /**
      * 主資料夾 ID
      */
@@ -30,10 +30,10 @@ export declare type IListNovelRow = IListFileRow[] & {
      */
     readonly novelID: string;
 };
-export declare type IListMain = {
+export type IListMain = {
     [pathMain: string]: IListMainRow;
 };
-export declare type IListMainRow = {
+export type IListMainRow = {
     [novelID: string]: IListNovelRow;
 };
 export interface IOptions {

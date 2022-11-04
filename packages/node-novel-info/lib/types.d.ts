@@ -1,7 +1,7 @@
 import { IOptionsParse as _IOptionsParse } from 'mdconf2';
 import { EnumNovelStatus } from './const';
-export declare type INumber = number | string;
-export declare type IOptionsParse = _IOptionsParse & {
+export type INumber = number | string;
+export type IOptionsParse = _IOptionsParse & {
     chk?: boolean;
     throw?: boolean;
     /**

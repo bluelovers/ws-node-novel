@@ -24,7 +24,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/mdconf2"
   },
   "license": "ISC",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
@@ -38,6 +39,10 @@
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
     "test": "jest",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "preversion": "yarn run test",
@@ -50,11 +55,11 @@
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
   "dependencies": {
-    "crlf-normalize": "^1.0.7",
+    "crlf-normalize": "^1.0.18",
     "deepmerge-plus": "^2.1.3",
     "is-plain-object": "^5.0.0",
-    "marked": "< 1 & >= 0.8.2",
-    "moment": "^2.29.3",
+    "marked": "<1 >=0.8.2",
+    "moment": "^2.29.4",
     "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"

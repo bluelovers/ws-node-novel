@@ -1,9 +1,9 @@
 /**
  * Created by user on 2018/1/28/028.
  */
-declare type IFilterPatternFn<T extends unknown> = ((key: string, value: T | unknown) => boolean);
-declare type IFilterPattern<T extends unknown> = IFilterPatternFn<T> | string | RegExp;
-declare type IEntries<T extends unknown> = [string, T][];
+type IFilterPatternFn<T extends unknown> = ((key: string, value: T | unknown) => boolean);
+type IFilterPattern<T extends unknown> = IFilterPatternFn<T> | string | RegExp;
+type IEntries<T extends unknown> = [string, T][];
 export declare function _prefix_to_fn<T extends unknown>(prefix: IFilterPattern<T>): IFilterPatternFn<T>;
 export declare function filterByPrefix<T extends unknown>(prefix: IFilterPattern<T>, obj: {
     [k: string]: T | unknown;

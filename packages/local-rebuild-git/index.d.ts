@@ -4,7 +4,7 @@ import Bluebird from 'bluebird';
 import { IParseCommit } from 'gitlog2';
 import { console } from '@git-lazy/util';
 export { console };
-export declare type IFetchAllFileLog = [string, IFetchAllFileLogRow][];
+export type IFetchAllFileLog = [string, IFetchAllFileLogRow][];
 export interface IFetchAllFileLogRow {
     file: string;
     fullpath: string;

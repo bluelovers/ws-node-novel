@@ -22,7 +22,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/node-novel-info"
   },
   "license": "ISC",
   "author": "bluelovers",
@@ -35,7 +36,11 @@
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
     "test": "jest",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
     "test:mocha": "npx mocha --require ts-node/register \"!(node_modules)/**/*.{test,spec}.{ts,tsx}\"",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "preversion": "yarn run test",
@@ -47,9 +52,9 @@
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
   "dependencies": {
-    "array-hyper-unique": "^2.0.6",
+    "array-hyper-unique": "^2.1.4",
     "chai": "^4.3.6",
-    "crlf-normalize": "^1.0.7",
+    "crlf-normalize": "^1.0.18",
     "deepmerge-plus": "^2.1.3",
     "env-bool": "^2.0.1",
     "hex-lib": "^1.0.2",
@@ -58,8 +63,8 @@
     "lodash": "^4.17.21",
     "lodash-decorators": "^6.0.1",
     "mdconf2": "^2.0.16",
-    "moment": "^2.29.3",
-    "sort-object-keys2": "^2.0.3",
+    "moment": "^2.29.4",
+    "sort-object-keys2": "^3.0.5",
     "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"

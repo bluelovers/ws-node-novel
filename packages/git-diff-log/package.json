@@ -9,7 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/git-diff-log"
   },
   "license": "ISC",
   "author": "bluelovers",
@@ -21,8 +22,13 @@
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
     "test": "echo \"Error: no test specified\"",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
+    "preversion": "yarn run test",
     "prepublish:lockfile": "npx sync-lockfile .",
     "prepublishOnly_": "yarn run ncu && yarn run sort-package-json && yarn run test",
     "postpublish": "echo postpublish",
@@ -31,11 +37,11 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "array-hyper-unique": "^2.0.6",
-    "git-diff-from": "^1.1.29",
-    "ts-type": "^2.1.6",
+    "array-hyper-unique": "^2.1.4",
+    "git-diff-from": "^1.1.37",
+    "ts-type": "^3.0.1",
     "tslib": "^2",
-    "upath2": "^3.1.13"
+    "upath2": "^3.1.19"
   },
   "publishConfig": {
     "access": "public"

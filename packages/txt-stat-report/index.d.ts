@@ -1,7 +1,7 @@
 /**
  * Created by user on 2019/2/23.
  */
-export declare type ITxtReport = ReturnType<typeof txtReport>;
+export type ITxtReport = ReturnType<typeof txtReport>;
 export declare function txtReport(input: string): {
     /**
      * buffer

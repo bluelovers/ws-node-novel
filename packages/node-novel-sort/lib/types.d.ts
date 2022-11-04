@@ -13,7 +13,7 @@ export interface IFnSortCallback {
     transpileBase(input: any, isSub?: any, ...argv: any[]): string;
     fnSortCallback(a: string, b: string, isSub?: boolean): number;
 }
-export declare type ICreateSortCallbackOptions = {
+export type ICreateSortCallbackOptions = {
     dotNum?: boolean;
     /**
      * will change base input value

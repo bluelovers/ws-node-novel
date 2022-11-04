@@ -4,7 +4,7 @@
 import BluebirdPromise from 'bluebird';
 import { md_href, md_link_escape } from './lib/util';
 export { md_href, md_link_escape };
-export declare type IFnHeader = typeof makeHeader | typeof makeHeaderAsync | any;
+export type IFnHeader = typeof makeHeader | typeof makeHeaderAsync | any;
 export declare function processTocContents(basePath: string, outputFile?: string, fnHeader?: IFnHeader): BluebirdPromise<string>;
 export declare function makeHeaderAsync(basePath: string, ...argv: any[]): BluebirdPromise<string[]>;
 export declare function makeHeader(basePath: string, ...argv: any[]): string[];

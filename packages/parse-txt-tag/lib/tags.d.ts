@@ -5,7 +5,7 @@ export declare const enum EnumHtmlTag {
     OPEN = "&lt;|\\u003C|\uFF1C",
     CLOSE = "&gt;|\\u003E|\uFF1E"
 }
-export declare type IAllowedHtmlTagList = "s" | "ruby" | "i" | "b" | "sup" | "sub";
+export type IAllowedHtmlTagList = "s" | "ruby" | "i" | "b" | "sup" | "sub";
 export declare const allowedHtmlTagList: readonly ["s", "ruby", "i", "b", "sup", "sub"];
 export declare const reTxtHtmlTag: RegExp;
 export declare const reHtmlRubyRt: RegExp;

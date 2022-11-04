@@ -4,10 +4,10 @@
 import { Token, Tokens } from 'marked';
 export declare const SYMBOL_RAW_DATA: unique symbol;
 export declare const SYMBOL_RAW_VALUE: unique symbol;
-export declare type IRawObjectData = Token | IRawObjectBlockquote | IRawObjectDataPlus;
-export declare type IRawObjectDataPlus = IRawObjectTokenPlus<Tokens.HTML> | IRawObjectTokenPlus<Tokens.Code>;
-export declare type IRawObjectPlus = RawObject<string, IRawObjectDataPlus>;
-export declare type IRawObjectTokenPlus<T extends Tokens.HTML | Tokens.Code> = T & {
+export type IRawObjectData = Token | IRawObjectBlockquote | IRawObjectDataPlus;
+export type IRawObjectDataPlus = IRawObjectTokenPlus<Tokens.HTML> | IRawObjectTokenPlus<Tokens.Code>;
+export type IRawObjectPlus = RawObject<string, IRawObjectDataPlus>;
+export type IRawObjectTokenPlus<T extends Tokens.HTML | Tokens.Code> = T & {
     paragraph: string[];
 };
 export interface ITokenText2 extends Omit<Tokens.Text, 'type'> {

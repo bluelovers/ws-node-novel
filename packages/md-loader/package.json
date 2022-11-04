@@ -30,7 +30,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/md-loader"
   },
   "license": "ISC",
   "author": "bluelovers",
@@ -40,7 +41,12 @@
     "test": "test"
   },
   "scripts": {
+    "coverage": "yarn run test -- --coverage",
     "test": "jest",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "preversion": "yarn run test",
@@ -55,7 +61,7 @@
   },
   "peerDependencies": {
     "gray-matter": "^4",
-    "node-novel-info": "^3"
+    "node-novel-info": "^3.0.15"
   },
   "publishConfig": {
     "access": "public"

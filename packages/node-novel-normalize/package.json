@@ -17,7 +17,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/node-novel-normalize"
   },
   "license": "ISC",
   "author": "bluelovers",
@@ -26,7 +27,12 @@
     "test": "test"
   },
   "scripts": {
+    "coverage": "yarn run test -- --coverage",
     "test": "jest",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "preversion": "yarn run test",
@@ -36,10 +42,10 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.46",
-    "@lazy-cjk/zh-slugify": "^1.0.82",
-    "normalize-num": "^1.0.5",
-    "str-util": "^2.3.28",
+    "@lazy-cjk/novel-filename": "^1.0.49",
+    "@lazy-cjk/zh-slugify": "^1.0.85",
+    "normalize-num": "^1.0.14",
+    "str-util": "^2.3.37",
     "tslib": "^2"
   },
   "publishConfig": {

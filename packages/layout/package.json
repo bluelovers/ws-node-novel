@@ -29,7 +29,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bluelovers/ws-node-novel.git"
+    "url": "git+https://github.com/bluelovers/ws-node-novel.git",
+    "directory": "packages/layout"
   },
   "license": "ISC",
   "author": "bluelovers",
@@ -42,6 +43,10 @@
     "coverage": "npx nyc yarn run test",
     "lint": "npx eslint **/*.ts",
     "test": "jest -u",
+    "test:jest": "jest --passWithNoTests",
+    "test:jest:snapshot": "yarn run test:jest -- -u",
+    "test:snapshot": "yarn run test -- -u",
+    "test:tsd": "ynpx tsd",
     "npm:publish": "npm publish",
     "npm:publish:lerna": "npx lerna publish --yes --cd-version patch",
     "preversion": "yarn run test",
@@ -52,11 +57,11 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "array-hyper-unique": "^2.0.6",
-    "blank-line": "^1.0.5",
-    "crlf-normalize": "^1.0.7",
+    "array-hyper-unique": "^2.1.4",
+    "blank-line": "^2.0.3",
+    "crlf-normalize": "^1.0.18",
     "env-bool": "^2.0.1",
-    "str-util": "^2.3.28",
+    "str-util": "^2.3.37",
     "tslib": "^2"
   },
   "publishConfig": {

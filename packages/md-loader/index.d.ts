@@ -69,19 +69,19 @@ export declare function fixContent<I extends IInput>(inputContent: I): string;
 /**
  * 最後處理時 都會被轉為 string
  */
-export declare type IInput = Buffer | string;
-export declare type IParseOptions<PO> = (IOptionsParse | object) | PO;
+export type IInput = Buffer | string;
+export type IParseOptions<PO> = (IOptionsParse | object) | PO;
 /**
  * 當 content, mdconf 同時存在時 content > mdconf
  */
-export declare type IStringifyData<T extends any, OUT extends any> = IObject<{
+export type IStringifyData<T extends any, OUT extends any> = IObject<{
     data?: IObject<T>;
 } & ({
     content: IInput;
 } | {
     mdconf: OUT;
 })>;
-export declare type IObject<T extends any, B extends {
+export type IObject<T extends any, B extends {
     [key: string]: any;
 } = {
     [key: string]: any;
