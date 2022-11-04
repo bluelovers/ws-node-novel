@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.22](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/git-diff-log@1.0.21...@node-novel/git-diff-log@1.0.22) (2022-11-04)
+
+
+
+### 📌　Dependencies
+
+* update deps ([cde1cb8](https://github.com/bluelovers/ws-node-novel/commit/cde1cb8cc36615d5a71b88cca9121d6219746811))
+
+
+
 ## [1.0.21](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/git-diff-log@1.0.19...@node-novel/git-diff-log@1.0.21) (2022-05-16)
 
 
