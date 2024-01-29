@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/md-loader",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "支援 Front Matter 的 node-novel-info / mdconf",
   "keywords": [
     "@node-novel",

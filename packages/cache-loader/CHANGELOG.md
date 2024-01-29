@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.38](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/cache-loader@1.0.37...@node-novel/cache-loader@1.0.38) (2024-01-29)
+
+
+### BREAKING CHANGES
+
+* use sub pkg
+
+
+
+### 📌　Dependencies
+
+* use sub pkg ([c056f09](https://github.com/bluelovers/ws-node-novel/commit/c056f09ac5a6d20f72cf974a126a82113e6637ca))
+
+
+### 🔖　Miscellaneous
+
+* . ([d45bae6](https://github.com/bluelovers/ws-node-novel/commit/d45bae6b88f64b145431df81649ec04be2817785))
+
+
+
 ## [1.0.37](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/cache-loader@1.0.36...@node-novel/cache-loader@1.0.37) (2022-11-04)
 
 

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.32](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/normalize@1.0.31...@node-novel/normalize@1.0.32) (2024-01-29)
+
+
+
+### 🔖　Miscellaneous
+
+* . ([69de575](https://github.com/bluelovers/ws-node-novel/commit/69de5751edca049c0a4c350ed67acb3046ceb02c))
+
+
+
 ## [1.0.31](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/normalize@1.0.30...@node-novel/normalize@1.0.31) (2022-11-04)
 
 

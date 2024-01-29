@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.25](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/txt-split@1.1.24...@node-novel/txt-split@1.1.25) (2024-01-29)
+
+
+### BREAKING CHANGES
+
+* use sub pkg
+
+
+
+### 📌　Dependencies
+
+* use sub pkg ([c056f09](https://github.com/bluelovers/ws-node-novel/commit/c056f09ac5a6d20f72cf974a126a82113e6637ca))
+
+
+
 ## [1.1.24](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/txt-split@1.1.23...@node-novel/txt-split@1.1.24) (2022-11-04)
 
 
