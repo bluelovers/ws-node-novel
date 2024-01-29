@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`README2.md authors 1`] = `
-Array [
+[
   "流優",
 ]
 `;
 
 exports[`README2.md createFromString 1`] = `
-Object {
-  "contribute": Array [
+{
+  "contribute": [
     "-妖妖幻想",
     "gasai谢丽尔",
     "二階堂真紅",
@@ -17,13 +17,13 @@ Object {
     "猫也学外语",
     "萌與幻想",
   ],
-  "link": Array [
+  "link": [
     "[dip.jp](https://narou.nar.jp/search.php?text=n2671do&novel=all&genre=all&new_genre=all&length=0&down=0&up=100) - 小説家になろう　更新情報検索",
-    "[想自由生活的魔王默示录吧](https://tieba.baidu.com/f?kw=%E6%83%B3%E8%87%AA%E7%94%B1%E7%94%9F%E6%B4%BB%E7%9A%84%E9%AD%94%E7%8E%8B%E9%BB%98%E7%A4%BA%E5%BD%95&ie=utf-8 \\"想自由生活的魔王默示录\\")",
-    "[【魔王默示录 - 整合】](https://tieba.baidu.com/p/5822195807 \\"【魔王默示录 - 整合】\\")",
+    "[想自由生活的魔王默示录吧](https://tieba.baidu.com/f?kw=%E6%83%B3%E8%87%AA%E7%94%B1%E7%94%9F%E6%B4%BB%E7%9A%84%E9%AD%94%E7%8E%8B%E9%BB%98%E7%A4%BA%E5%BD%95&ie=utf-8 "想自由生活的魔王默示录")",
+    "[【魔王默示录 - 整合】](https://tieba.baidu.com/p/5822195807 "【魔王默示录 - 整合】")",
     "[comic-walker](https://comic-walker.com/contents/detail/KDCW_FS01200334010000_68/)",
   ],
-  "novel": Object {
+  "novel": {
     "author": "流優",
     "cover": "https://images-na.ssl-images-amazon.com/images/I/91r6R0%2B9L5L.jpg",
     "date": "2018-10-29T08:11:00+08:00",
@@ -38,12 +38,12 @@ Object {
 　書籍化しました。カドカワＢＯＯＫＳ様より、１～３巻が発売しています。やったぜ。
 　コミカライズしました！　ドラドラドラゴンエイジ様と、コミックウォーカー様にて連載しております！",
     "publisher": "syosetu",
-    "series": Object {
+    "series": {
       "name": "魔王になったので、ダンジョン造って人外娘とほのぼのする",
     },
     "source": "http://ncode.syosetu.com/n2671do/",
     "status": "連載",
-    "tags": Array [
+    "tags": [
       "R15",
       "node-novel",
       "syosetu",
@@ -68,29 +68,29 @@ Object {
     "title": "魔王になったので、ダンジョン造って人外娘とほのぼのする",
     "title_zh": "想自由生活的魔王默示錄",
   },
-  "options": Object {
-    "downloadOptions": Object {
+  "options": {
+    "downloadOptions": {
       "filePrefixMode": 4,
       "noFilePadend": true,
       "startIndex": 1,
     },
-    "syosetu": Object {
+    "syosetu": {
       "novel_id": "n2671do",
       "txtdownload_id": "922579",
     },
-    "textlayout": Object {
+    "textlayout": {
       "allow_lf2": true,
     },
   },
 }
 `;
 
-exports[`README2.md illusts 1`] = `Array []`;
+exports[`README2.md illusts 1`] = `[]`;
 
 exports[`README2.md sites 1`] = `
-Array [
-  Object {
-    "data": Object {
+[
+  {
+    "data": {
       "novel_id": "n2671do",
       "txtdownload_id": "922579",
     },
@@ -100,7 +100,7 @@ Array [
 `;
 
 exports[`README2.md sources 1`] = `
-Array [
+[
   "http://ncode.syosetu.com/n2671do/",
 ]
 `;
@@ -108,7 +108,7 @@ Array [
 exports[`README2.md title 1`] = `"想自由生活的魔王默示錄"`;
 
 exports[`README2.md titles 1`] = `
-Array [
+[
   "魔王になったので、ダンジョン造って人外娘とほのぼのする",
   "想自由生活的魔王默示錄",
 ]

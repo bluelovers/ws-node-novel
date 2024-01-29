@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`createSortCallback 1`] = `
-Array [
+[
   "",
   "大会議　㊤",
   "大会議　㊦",

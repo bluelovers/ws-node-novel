@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.20](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.18...@node-novel/local-rebuild-git@1.0.20) (2024-01-29)
+
+
+
+### 🔖　Miscellaneous
+
+* . ([aad4463](https://github.com/bluelovers/ws-node-novel/commit/aad44632110bdef6a39c21d62f8b70963f49e2d5))
+* . ([69de575](https://github.com/bluelovers/ws-node-novel/commit/69de5751edca049c0a4c350ed67acb3046ceb02c))
+
+
+
 ## [1.0.19](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/local-rebuild-git@1.0.18...@node-novel/local-rebuild-git@1.0.19) (2024-01-29)
 
 

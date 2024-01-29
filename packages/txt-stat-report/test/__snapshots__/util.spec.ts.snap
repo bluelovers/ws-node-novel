@@ -3,7 +3,7 @@
 exports[`removePunctuation 1`] = `""`;
 
 exports[`txtReport 1`] = `
-Object {
+{
   "buf_length": 343,
   "hanzi_length": 0,
   "ja_length": 1,

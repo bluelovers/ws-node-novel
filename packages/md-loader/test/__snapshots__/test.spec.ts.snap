@@ -53,31 +53,31 @@ title: Home
 `;
 
 exports[`simple parse 1`] = `
-Object {
+{
   "content": "# novel
 
 - title: 破滅の魔導王とゴーレムの蛮妃
 ",
-  "data": Object {
+  "data": {
     "title": "Home",
   },
-  "matter": Object {
+  "matter": {
     "content": "# novel
 
 - title: 破滅の魔導王とゴーレムの蛮妃
 ",
-    "data": Object {
+    "data": {
       "title": "Home",
     },
     "excerpt": "",
     "isEmpty": false,
   },
-  "mdconf": Object {
-    "novel": Object {
+  "mdconf": {
+    "novel": {
       "title": "破滅の魔導王とゴーレムの蛮妃",
     },
-    "options": Object {
-      "textlayout": Object {},
+    "options": {
+      "textlayout": {},
     },
   },
   "stringify": [Function],
