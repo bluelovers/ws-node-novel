@@ -463,7 +463,7 @@ var EnumBeforeSave;
     EnumBeforeSave[EnumBeforeSave["NONE"] = 0] = "NONE";
     EnumBeforeSave[EnumBeforeSave["OPTIMIZE"] = 1] = "OPTIMIZE";
     EnumBeforeSave[EnumBeforeSave["OPTIMIZE_AND_UPDATE"] = 2] = "OPTIMIZE_AND_UPDATE";
-})(EnumBeforeSave = exports.EnumBeforeSave || (exports.EnumBeforeSave = {}));
+})(EnumBeforeSave || (exports.EnumBeforeSave = EnumBeforeSave = {}));
 var EnumFilterNovelType;
 (function (EnumFilterNovelType) {
     /**
@@ -478,7 +478,7 @@ var EnumFilterNovelType;
      * 只取得 _out 後資料
      */
     EnumFilterNovelType[EnumFilterNovelType["OUTPUT_ONLY"] = 2] = "OUTPUT_ONLY";
-})(EnumFilterNovelType = exports.EnumFilterNovelType || (exports.EnumFilterNovelType = {}));
+})(EnumFilterNovelType || (exports.EnumFilterNovelType = EnumFilterNovelType = {}));
 NovelStatCache.fixOptions = NovelStatCache.fixOptions.bind(NovelStatCache);
 NovelStatCache.create = NovelStatCache.create.bind(NovelStatCache);
 NovelStatCache.createFromJSON = NovelStatCache.createFromJSON.bind(NovelStatCache);

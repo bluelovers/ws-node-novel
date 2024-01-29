@@ -8,7 +8,7 @@ const tslib_1 = require("tslib");
 const moment_1 = tslib_1.__importDefault(require("moment"));
 const sort_1 = require("@node-novel/sort");
 Object.defineProperty(exports, "naturalCompare", { enumerable: true, get: function () { return sort_1.naturalCompare; } });
-const str_util_1 = tslib_1.__importDefault(require("str-util"));
+const fullhalf_1 = require("@lazy-cjk/fullhalf");
 const sort_object_keys2_1 = tslib_1.__importDefault(require("sort-object-keys2"));
 const types_1 = require("@node-novel/sort/lib/types");
 const core_1 = require("@node-novel/sort/lib/core");
@@ -48,7 +48,7 @@ Object.defineProperties(exports, {
 exports.cacheSortCallback = (0, core_1.createSortCallback)({
     dotNum: true,
     transpileBase(input, isSub) {
-        let s = str_util_1.default.toHalfWidth(input);
+        let s = (0, fullhalf_1.toHalfWidth)(input);
         return s;
     },
     toLowerCase: types_1.EnumToLowerCase.toLocaleLowerCase,

@@ -7,7 +7,7 @@ const console_1 = require("./console");
 const index_1 = require("./index");
 const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
 const iconv_jschardet_1 = require("iconv-jschardet");
-const str_util_1 = require("str-util");
+const zh2num_1 = require("@lazy-cjk/zh2num");
 const crlf_normalize_1 = require("crlf-normalize");
 const jp_1 = require("cjk-conv/lib/jp");
 function logWarn(...argv) {
@@ -82,7 +82,7 @@ function fix_name(name) {
         trim: true,
     }).trim();
     if (!/^\d+/.test(name)) {
-        name = (0, str_util_1.zh2num)(name).toString();
+        name = (0, zh2num_1.zh2num)(name).toString();
     }
     name = name
         //.replace(/^(\d+)[\-話话\s]*/, '$1　')

@@ -8,7 +8,7 @@ import FastGlob from '@bluelovers/fast-glob';
 import fs from 'fs-iconv';
 import { IMdconfMeta, mdconf_parse } from 'node-novel-info';
 import BluebirdPromise from 'bluebird';
-import StrUtil from 'str-util';
+import { toHalfWidth } from '@lazy-cjk/fullhalf';
 
 export async function loadReadmeMeta<T extends IMdconfMeta = IMdconfMeta>(file: string): Promise<T>
 {
@@ -142,7 +142,7 @@ export const tocSortCallback = createSortCallback({
 	dotNum: true,
 	transpileBase(input: string, isSub?: any)
 	{
-		let s = StrUtil.toHalfWidth(input);
+		let s = toHalfWidth(input);
 		return s
 	},
 	toLowerCase: EnumToLowerCase.toLocaleLowerCase,

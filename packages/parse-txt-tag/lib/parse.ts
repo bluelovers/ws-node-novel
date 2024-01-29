@@ -3,7 +3,7 @@
  */
 
 import { reTxtHtmlTag, reTxtImgTag, IAllowedHtmlTagList } from './tags';
-import { toHalfWidth } from 'str-util/lib/fullhalf';
+import { toHalfWidth } from '@lazy-cjk/fullhalf';
 import { _fixRubyInnerContext } from './util';
 import { IParseOptions, IParseOnTag, IParseOnMapCallback, IParseCacheMap, IAttachMap } from './types';
 

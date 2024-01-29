@@ -43,7 +43,7 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "str-util": "^2.3.37",
+    "@lazy-cjk/fullhalf": "^1.0.1",
     "ts-type": "^3.0.1",
     "tslib": "^2"
   },

@@ -4,7 +4,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports._convertHtmlTag001 = exports._replaceHtmlTag = exports._fixRubyInnerContext = void 0;
-const fullhalf_1 = require("str-util/lib/fullhalf");
+const fullhalf_1 = require("@lazy-cjk/fullhalf");
 const tags_1 = require("./tags");
 function _fixRubyInnerContext(innerContext) {
     let fn = _replaceHtmlTag(($0, $1, $2, $3) => {

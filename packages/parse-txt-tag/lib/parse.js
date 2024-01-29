@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parse = void 0;
 const tags_1 = require("./tags");
-const fullhalf_1 = require("str-util/lib/fullhalf");
+const fullhalf_1 = require("@lazy-cjk/fullhalf");
 const util_1 = require("./util");
 function parse(source, options) {
     let context = source;

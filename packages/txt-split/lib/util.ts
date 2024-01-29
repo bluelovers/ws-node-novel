@@ -4,7 +4,7 @@ import { makeOptions } from './index';
 import { IContext, IDataVolume, IOptions, IOptionsWithData, IPathLike, Resolvable } from './interface';
 import Bluebird from 'bluebird';
 import { encode, detect, IDetectData } from 'iconv-jschardet';
-import { zh2num } from 'str-util';
+import { zh2num } from '@lazy-cjk/zh2num';
 import { crlf, LF } from 'crlf-normalize';
 import { zh2jp } from 'cjk-conv/lib/jp';
 

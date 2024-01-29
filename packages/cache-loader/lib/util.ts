@@ -4,7 +4,7 @@
 
 import moment from 'moment';
 import { defaultSortCallback, naturalCompare } from '@node-novel/sort';
-import StrUtil from 'str-util';
+import { toHalfWidth } from '@lazy-cjk/fullhalf';
 import sortObject from 'sort-object-keys2';
 import { _trim } from '@node-novel/sort/lib/util';
 import { EnumToLowerCase } from '@node-novel/sort/lib/types';
@@ -62,7 +62,7 @@ export const cacheSortCallback = createSortCallback({
 	dotNum: true,
 	transpileBase(input: string, isSub?: any)
 	{
-		let s = StrUtil.toHalfWidth(input);
+		let s = toHalfWidth(input);
 		return s
 	},
 	toLowerCase: EnumToLowerCase.toLocaleLowerCase,

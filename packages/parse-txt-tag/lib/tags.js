@@ -8,7 +8,7 @@ var EnumHtmlTag;
 (function (EnumHtmlTag) {
     EnumHtmlTag["OPEN"] = "&lt;|\\u003C|\uFF1C";
     EnumHtmlTag["CLOSE"] = "&gt;|\\u003E|\uFF1E";
-})(EnumHtmlTag = exports.EnumHtmlTag || (exports.EnumHtmlTag = {}));
+})(EnumHtmlTag || (exports.EnumHtmlTag = EnumHtmlTag = {}));
 exports.allowedHtmlTagList = Object.freeze([
     "s",
     "ruby",

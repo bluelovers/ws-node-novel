@@ -2,7 +2,7 @@
  * Created by user on 2020/1/4.
  */
 
-import { toHalfWidth } from 'str-util/lib/fullhalf';
+import { toHalfWidth } from '@lazy-cjk/fullhalf';
 import { reHtmlRubyRt, reHtmlRubyRp, EnumHtmlTag } from './tags';
 
 export function _fixRubyInnerContext(innerContext: string)

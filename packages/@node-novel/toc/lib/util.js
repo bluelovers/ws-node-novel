@@ -11,7 +11,7 @@ const fast_glob_1 = tslib_1.__importDefault(require("@bluelovers/fast-glob"));
 const fs_iconv_1 = tslib_1.__importDefault(require("fs-iconv"));
 const node_novel_info_1 = require("node-novel-info");
 const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
-const str_util_1 = tslib_1.__importDefault(require("str-util"));
+const fullhalf_1 = require("@lazy-cjk/fullhalf");
 async function loadReadmeMeta(file) {
     return fs_iconv_1.default.readFile(file)
         .then(function (data) {
@@ -110,7 +110,7 @@ exports.md_link_escape = md_link_escape;
 exports.tocSortCallback = (0, sort_1.createSortCallback)({
     dotNum: true,
     transpileBase(input, isSub) {
-        let s = str_util_1.default.toHalfWidth(input);
+        let s = (0, fullhalf_1.toHalfWidth)(input);
         return s;
     },
     toLowerCase: sort_1.EnumToLowerCase.toLocaleLowerCase,
