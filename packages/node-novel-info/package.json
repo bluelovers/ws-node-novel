@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "array-hyper-unique": "^2.1.4",
-    "chai": "^5.0.3",
+    "chai": "<5 >=4.4.1",
     "crlf-normalize": "^1.0.20",
     "deepmerge-plus": "^3.0.2",
     "env-bool": "^2.0.1",
