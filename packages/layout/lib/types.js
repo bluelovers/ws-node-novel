@@ -7,5 +7,5 @@ var EnumLF;
     EnumLF["LF2"] = "\n\n";
     EnumLF["LF3"] = "\n\n\n";
     EnumLF["LF4"] = "\n\n\n\n";
-})(EnumLF = exports.EnumLF || (exports.EnumLF = {}));
+})(EnumLF || (exports.EnumLF = EnumLF = {}));
 //# sourceMappingURL=types.js.map

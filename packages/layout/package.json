@@ -58,10 +58,10 @@
   },
   "dependencies": {
     "array-hyper-unique": "^2.1.4",
-    "blank-line": "^2.0.3",
-    "crlf-normalize": "^1.0.18",
+    "blank-line": "^2.0.7",
+    "crlf-normalize": "^1.0.20",
     "env-bool": "^2.0.1",
-    "str-util": "^2.3.37",
+    "str-util": "^3.0.1",
     "tslib": "^2"
   },
   "publishConfig": {

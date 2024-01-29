@@ -55,11 +55,11 @@
     "tsc:esm": "tsc -p tsconfig.esm.json"
   },
   "dependencies": {
-    "crlf-normalize": "^1.0.18",
-    "deepmerge-plus": "^2.1.3",
+    "crlf-normalize": "^1.0.20",
+    "deepmerge-plus": "^3.0.2",
     "is-plain-object": "^5.0.0",
     "marked": "<1 >=0.8.2",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"

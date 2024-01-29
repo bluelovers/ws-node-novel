@@ -202,6 +202,7 @@ class NodeNovelInfo {
         return (0, index_1.stringify)(this.raw);
     }
 }
+exports.NodeNovelInfo = NodeNovelInfo;
 NodeNovelInfo.parse = index_1.parse;
 NodeNovelInfo.stringify = index_1.stringify;
 tslib_1.__decorate([
@@ -222,6 +223,5 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object, Object, Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], NodeNovelInfo, "createFromString", null);
-exports.NodeNovelInfo = NodeNovelInfo;
 exports.default = NodeNovelInfo;
 //# sourceMappingURL=class.js.map

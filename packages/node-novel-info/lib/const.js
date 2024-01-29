@@ -74,7 +74,7 @@ var EnumNovelStatus;
      * 自印/同人
      */
     EnumNovelStatus[EnumNovelStatus["P_PRINT"] = 32768] = "P_PRINT";
-})(EnumNovelStatus = exports.EnumNovelStatus || (exports.EnumNovelStatus = {}));
+})(EnumNovelStatus || (exports.EnumNovelStatus = EnumNovelStatus = {}));
 exports.deepmergeOptions = {
     isMergeableObject(value, isMergeableObject) {
         let bool;

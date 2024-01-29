@@ -59,6 +59,7 @@ class NovelDiffFromLogParser {
         return ls;
     }
 }
+exports.NovelDiffFromLogParser = NovelDiffFromLogParser;
 tslib_1.__decorate([
     ArrayUniqueDecorator,
     tslib_1.__metadata("design:type", Function),
@@ -89,7 +90,6 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [Object, Function]),
     tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser, "files", null);
-exports.NovelDiffFromLogParser = NovelDiffFromLogParser;
 function ArrayUniqueDecorator(target, propertyKey, descriptor) {
     const old = descriptor.value;
     // @ts-ignore

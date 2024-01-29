@@ -2,7 +2,7 @@
  * Created by user on 2018/2/3/003.
  */
 import { IMdconfMeta } from './lib/types';
-export declare module JsonMd {
+export declare namespace JsonMd {
     interface IOptions {
         tags?: string[];
         contribute?: string[];

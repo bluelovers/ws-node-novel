@@ -206,6 +206,6 @@ ${(data.novel_desc || data.data.desc || '').replace(/\`/g, '\\`')}
         return ret;
     }
     JsonMd.toNovelInfo = toNovelInfo;
-})(JsonMd = exports.JsonMd || (exports.JsonMd = {}));
+})(JsonMd || (exports.JsonMd = JsonMd = {}));
 exports.default = JsonMd;
 //# sourceMappingURL=json.js.map

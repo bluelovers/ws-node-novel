@@ -42,11 +42,11 @@
   },
   "dependencies": {
     "array-hyper-unique": "^2.1.4",
-    "blank-line": "^2.0.3",
-    "crlf-normalize": "^1.0.18",
-    "execall2": "^2.0.22",
+    "blank-line": "^2.0.7",
+    "crlf-normalize": "^1.0.20",
+    "execall2": "^2.0.23",
     "tslib": "^2",
-    "uni-string": "^2.0.3"
+    "uni-string": "^2.0.7"
   },
   "publishConfig": {
     "access": "public"

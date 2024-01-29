@@ -53,9 +53,9 @@
   },
   "dependencies": {
     "array-hyper-unique": "^2.1.4",
-    "chai": "^4.3.6",
-    "crlf-normalize": "^1.0.18",
-    "deepmerge-plus": "^2.1.3",
+    "chai": "^5.0.3",
+    "crlf-normalize": "^1.0.20",
+    "deepmerge-plus": "^3.0.2",
     "env-bool": "^2.0.1",
     "hex-lib": "^1.0.2",
     "is-plain-object": "^5.0.0",
@@ -63,7 +63,7 @@
     "lodash": "^4.17.21",
     "lodash-decorators": "^6.0.1",
     "mdconf2": "^2.0.17",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "sort-object-keys2": "^3.0.5",
     "tslib": "^2"
   },

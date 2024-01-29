@@ -8,5 +8,5 @@ var EnumToLowerCase;
 (function (EnumToLowerCase) {
     EnumToLowerCase[EnumToLowerCase["toLowerCase"] = 1] = "toLowerCase";
     EnumToLowerCase[EnumToLowerCase["toLocaleLowerCase"] = 2] = "toLocaleLowerCase";
-})(EnumToLowerCase = exports.EnumToLowerCase || (exports.EnumToLowerCase = {}));
+})(EnumToLowerCase || (exports.EnumToLowerCase = EnumToLowerCase = {}));
 //# sourceMappingURL=types.js.map
