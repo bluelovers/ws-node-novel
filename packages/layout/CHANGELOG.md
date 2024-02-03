@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.24](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/layout@2.0.23...@node-novel/layout@2.0.24) (2024-02-03)
+
+
+
+### 📦　Code Refactoring
+
+* update import ([489012e](https://github.com/bluelovers/ws-node-novel/commit/489012e46d35eae5d7c26d18dc6ad306ec869773))
+
+
+
 ## [2.0.23](https://github.com/bluelovers/ws-node-novel/compare/@node-novel/layout@2.0.20...@node-novel/layout@2.0.23) (2024-01-29)
 
 

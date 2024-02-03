@@ -1,6 +1,6 @@
 {
   "name": "@node-novel/normalize",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "normalize file name for sort",
   "keywords": [
     "@node-novel",
