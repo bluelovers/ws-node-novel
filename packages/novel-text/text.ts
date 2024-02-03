@@ -3,8 +3,12 @@
  */
 
 import StrUtil from 'str-util';
-import getMinMidMax from 'blank-line';
-import crlf, { LF } from 'crlf-normalize';
+import { trim as strUtilTrim } from '@lazy-cjk/str-util-trim';
+import { normalize as strUtilNormalize } from '@lazy-cjk/str-util-normalize';
+import { zh2num, num2zh } from '@lazy-cjk/zh2num';
+import { toFullNumber, toHalfNumber, toFullEnglish, toHalfEnglish, toFullWidth, toHalfWidth } from '@lazy-cjk/fullhalf';
+import { getMinMidMax } from 'blank-line';
+import { crlf, LF } from 'crlf-normalize';
 import { SP_REGEXP, SP_KEY } from 'tieba-harmony';
 import { envVal, envBool } from 'env-bool';
 
@@ -422,11 +426,11 @@ export class enspace
 		{
 			if (typeof options.trim == 'string')
 			{
-				ret = StrUtil.trim(ret, '　' + options.trim);
+				ret = strUtilTrim(ret, '　' + options.trim);
 			}
 			else if (options.trim)
 			{
-				ret = StrUtil.trim(ret, '　');
+				ret = strUtilTrim(ret, '　');
 			}
 		}
 
@@ -461,7 +465,7 @@ export class enspace
 			*/
 		;
 
-		ret = StrUtil.normalize(ret, options);
+		ret = strUtilNormalize(ret, options);
 
 		/*
 		if (!options.allow_bom)

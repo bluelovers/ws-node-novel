@@ -42,10 +42,10 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.50",
-    "@lazy-cjk/zh-slugify": "^1.0.86",
+    "@lazy-cjk/novel-filename": "^1.0.51",
+    "@lazy-cjk/zh-slugify": "^1.0.87",
     "normalize-num": "^1.0.16",
-    "str-util": "^3.0.1",
+    "str-util": "^3.0.2",
     "tslib": "^2"
   },
   "publishConfig": {

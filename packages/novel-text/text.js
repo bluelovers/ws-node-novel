@@ -4,10 +4,10 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.enspace = exports.SP_KEY = exports.SP_REGEXP = void 0;
-const tslib_1 = require("tslib");
-const str_util_1 = tslib_1.__importDefault(require("str-util"));
-const blank_line_1 = tslib_1.__importDefault(require("blank-line"));
-const crlf_normalize_1 = tslib_1.__importStar(require("crlf-normalize"));
+const str_util_trim_1 = require("@lazy-cjk/str-util-trim");
+const str_util_normalize_1 = require("@lazy-cjk/str-util-normalize");
+const blank_line_1 = require("blank-line");
+const crlf_normalize_1 = require("crlf-normalize");
 const tieba_harmony_1 = require("tieba-harmony");
 Object.defineProperty(exports, "SP_REGEXP", { enumerable: true, get: function () { return tieba_harmony_1.SP_REGEXP; } });
 Object.defineProperty(exports, "SP_KEY", { enumerable: true, get: function () { return tieba_harmony_1.SP_KEY; } });
@@ -279,10 +279,10 @@ class enspace {
         }
         if (options) {
             if (typeof options.trim == 'string') {
-                ret = str_util_1.default.trim(ret, '　' + options.trim);
+                ret = (0, str_util_trim_1.trim)(ret, '　' + options.trim);
             }
             else if (options.trim) {
-                ret = str_util_1.default.trim(ret, '　');
+                ret = (0, str_util_trim_1.trim)(ret, '　');
             }
         }
         return ret;
@@ -298,8 +298,8 @@ class enspace {
             allow_nbsp: false,
             allow_bom: false,
         }, options);
-        let ret = (0, crlf_normalize_1.default)(str.toString(), options.LF || crlf_normalize_1.LF);
-        ret = str_util_1.default.normalize(ret, options);
+        let ret = (0, crlf_normalize_1.crlf)(str.toString(), options.LF || crlf_normalize_1.LF);
+        ret = (0, str_util_normalize_1.normalize)(ret, options);
         /*
         if (!options.allow_bom)
         {
@@ -333,7 +333,7 @@ class enspace {
                 .replace(/\n{4,}/g, "\n\n\n\n");
         let _html = old;
         if (!_html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = (0, blank_line_1.default)(_html.toString());
+            let [min, mid, max] = (0, blank_line_1.getMinMidMax)(_html.toString());
             if (min > 2) {
                 options.allow_lf2 = false;
             }
@@ -374,7 +374,7 @@ class enspace {
                 .replace(/^[\n \t]+/g, '')
                 .replace(/\n{4,}/g, "\n\n\n\n");
         if (!html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = (0, blank_line_1.default)(html.toString());
+            let [min, mid, max] = (0, blank_line_1.getMinMidMax)(html.toString());
             if (min > 2) {
                 options.allow_lf2 = false;
             }

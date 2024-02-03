@@ -47,17 +47,17 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/zh2num": "^1.0.1",
+    "@lazy-cjk/zh2num": "^1.0.2",
     "@node-novel/layout": "^2.0.23",
     "bluebird": "^3.7.2",
-    "cjk-conv": "^1.2.143",
+    "cjk-conv": "^1.2.144",
     "crlf-normalize": "^1.0.20",
     "debug-color2": "^1.3.2",
-    "execall2": "^2.0.23",
+    "execall2": "^2.0.24",
     "fs-extra": "^11.2.0",
     "fs-iconv": "^3.1.17",
     "iconv-jschardet": "^2.0.32",
-    "regexp-cjk": "^3.3.110",
+    "regexp-cjk": "^3.3.111",
     "tslib": "^2",
     "upath2": "^3.1.19"
   },

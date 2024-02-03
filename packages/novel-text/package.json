@@ -56,12 +56,12 @@
     "sort-package-json": "npx yarn-tool sort"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.50",
-    "blank-line": "^2.0.7",
+    "@lazy-cjk/novel-filename": "^1.0.51",
+    "blank-line": "^2.0.8",
     "crlf-normalize": "^1.0.20",
     "env-bool": "^2.0.1",
-    "str-util": "^3.0.1",
-    "tieba-harmony": "^2.0.37",
+    "str-util": "^3.0.2",
+    "tieba-harmony": "^2.0.38",
     "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"

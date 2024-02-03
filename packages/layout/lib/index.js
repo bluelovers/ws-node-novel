@@ -4,13 +4,13 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.create = exports.TextLayout = exports.SP_REGEXP = exports.SP_KEY = void 0;
-const tslib_1 = require("tslib");
-const blank_line_1 = tslib_1.__importDefault(require("blank-line"));
-const crlf_normalize_1 = tslib_1.__importStar(require("crlf-normalize"));
+const blank_line_1 = require("blank-line");
+const crlf_normalize_1 = require("crlf-normalize");
 const env_bool_1 = require("env-bool");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const util_1 = require("./util");
-const str_util_1 = tslib_1.__importDefault(require("str-util"));
+const str_util_trim_1 = require("@lazy-cjk/str-util-trim");
+const str_util_normalize_1 = require("@lazy-cjk/str-util-normalize");
 exports.SP_KEY = "#_@_#";
 exports.SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
 /**
@@ -263,10 +263,10 @@ class TextLayout {
             .replace(/^\n+|[\s\u3000\xA0\u3000]+$/g, '');
         if (options) {
             if (typeof options.trim == 'string') {
-                ret = str_util_1.default.trim(ret, '\u3000' + options.trim);
+                ret = (0, str_util_trim_1.trim)(ret, '\u3000' + options.trim);
             }
             else if (options.trim) {
-                ret = str_util_1.default.trim(ret, '\u3000');
+                ret = (0, str_util_trim_1.trim)(ret, '\u3000');
             }
         }
         return ret;
@@ -285,8 +285,8 @@ class TextLayout {
             allow_nbsp: false,
             allow_bom: false,
         }, options);
-        let ret = (0, crlf_normalize_1.default)(str.toString(), options.LF || crlf_normalize_1.LF);
-        ret = str_util_1.default.normalize(ret, options);
+        let ret = (0, crlf_normalize_1.crlf)(str.toString(), options.LF || crlf_normalize_1.LF);
+        ret = (0, str_util_normalize_1.normalize)(ret, options);
         /*
         if (!options.allow_bom)
         {
@@ -323,7 +323,7 @@ class TextLayout {
                 .replace(/\n{4,}/g, "\n\n\n\n");
         let _html = old;
         if (!_html.match(/[^\n]\n[^\n]/g)) {
-            let [min, mid, max] = (0, blank_line_1.default)(_html.toString());
+            let [min, mid, max] = (0, blank_line_1.getMinMidMax)(_html.toString());
             if (min > 2) {
                 options.allow_lf2 = false;
             }

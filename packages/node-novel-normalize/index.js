@@ -5,8 +5,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.normalize_val = exports.normalize_strip = void 0;
 const tslib_1 = require("tslib");
-const str_util_1 = tslib_1.__importDefault(require("str-util"));
-const normalize_num_1 = tslib_1.__importDefault(require("normalize-num"));
+const str_util_trim_1 = require("@lazy-cjk/str-util-trim");
+const zh2num_1 = require("@lazy-cjk/zh2num");
+const fullhalf_1 = require("@lazy-cjk/fullhalf");
+const normalize_num_1 = require("normalize-num");
 const novel_filename_1 = tslib_1.__importDefault(require("@lazy-cjk/novel-filename"));
 const zh_slugify_1 = require("@lazy-cjk/zh-slugify");
 function normalize_strip(str, isDir) {
@@ -26,7 +28,7 @@ function normalize_strip(str, isDir) {
             str = RegExp.$1;
         }
     }
-    str = str_util_1.default.trim(str, '　');
+    str = (0, str_util_trim_1.trim)(str, '　');
     return str;
 }
 exports.normalize_strip = normalize_strip;
@@ -39,16 +41,16 @@ function normalize_val(str, padNum = 5, options = {}) {
     }
     str = str.replace(/^(web)版(\d+)/i, '$1$2');
     //str = str.replace(/^[cp](\d{4,}_)/, '$1');
-    str = str_util_1.default.toHalfWidth(str)
+    str = (0, fullhalf_1.toHalfWidth)(str)
         .toLowerCase();
-    str = str_util_1.default.trim(str, '　');
-    str = str_util_1.default.zh2num(str).toString();
-    str = str_util_1.default.zh2num(str, {
+    str = (0, str_util_trim_1.trim)(str, '　');
+    str = (0, zh2num_1.zh2num)(str).toString();
+    str = (0, zh2num_1.zh2num)(str, {
         truncateOne: 2,
         flags: 'ug',
     }).toString();
     //console.log(str);
-    str = (0, normalize_num_1.default)(str, {
+    str = (0, normalize_num_1.str2num)(str, {
         all: true,
         roman: options.checkRoman,
     });

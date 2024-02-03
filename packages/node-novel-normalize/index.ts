@@ -3,7 +3,11 @@
  */
 
 import StrUtil from 'str-util';
-import str2num from 'normalize-num';
+import { trim as strUtilTrim } from '@lazy-cjk/str-util-trim';
+import { zh2num, num2zh } from '@lazy-cjk/zh2num';
+import { toFullNumber, toHalfNumber, toFullEnglish, toHalfEnglish, toFullWidth, toHalfWidth } from '@lazy-cjk/fullhalf';
+
+import { str2num } from 'normalize-num';
 
 import novelFilename from '@lazy-cjk/novel-filename';
 import { slugify } from '@lazy-cjk/zh-slugify';
@@ -39,7 +43,7 @@ export function normalize_strip(str: string, isDir?: boolean)
 		}
 	}
 
-	str = StrUtil.trim(str, '　');
+	str = strUtilTrim(str, '　');
 
 	return str;
 }
@@ -61,14 +65,14 @@ export function normalize_val(str: string, padNum: number = 5, options: IOptions
 
 	//str = str.replace(/^[cp](\d{4,}_)/, '$1');
 
-	str = StrUtil.toHalfWidth(str)
+	str = toHalfWidth(str)
 		.toLowerCase()
 	;
-	str = StrUtil.trim(str, '　');
+	str = strUtilTrim(str, '　');
 
-	str = StrUtil.zh2num(str).toString();
+	str = zh2num(str).toString();
 
-	str = StrUtil.zh2num(str, {
+	str = zh2num(str, {
 		truncateOne: 2,
 		flags: 'ug',
 	}).toString();

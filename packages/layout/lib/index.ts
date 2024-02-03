@@ -2,8 +2,8 @@
  * Created by user on 2019/5/29.
  */
 
-import getMinMidMax from 'blank-line';
-import crlf, { LF } from 'crlf-normalize';
+import { getMinMidMax } from 'blank-line';
+import { crlf, LF } from 'crlf-normalize';
 import { envVal } from 'env-bool';
 import { array_unique } from 'array-hyper-unique';
 import {
@@ -20,7 +20,9 @@ import {
 	ICacheMapRow,
 } from './types';
 import { _isIwordsArray, _isIwordsArray2, _isIwordsUserSp, _handleTextLayout } from './util';
-import StrUtil from 'str-util';
+import { trim as strUtilTrim } from '@lazy-cjk/str-util-trim';
+import { normalize as strUtilNormalize } from '@lazy-cjk/str-util-normalize';
+
 
 export const SP_KEY = "#_@_#";
 export const SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
@@ -409,11 +411,11 @@ export class TextLayout
 		{
 			if (typeof options.trim == 'string')
 			{
-				ret = StrUtil.trim(ret, '\u3000' + options.trim);
+				ret = strUtilTrim(ret, '\u3000' + options.trim);
 			}
 			else if (options.trim)
 			{
-				ret = StrUtil.trim(ret, '\u3000');
+				ret = strUtilTrim(ret, '\u3000');
 			}
 		}
 
@@ -449,7 +451,7 @@ export class TextLayout
 			*/
 		;
 
-		ret = StrUtil.normalize(ret, options);
+		ret = strUtilNormalize(ret, options);
 
 		/*
 		if (!options.allow_bom)
