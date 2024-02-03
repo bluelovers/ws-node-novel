@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.18](https://github.com/bluelovers/ws-node-novel/compare/node-novel-info@3.0.17...node-novel-info@3.0.18) (2024-02-03)
+
+
+
+### 🔖　Miscellaneous
+
+* . ([e11d55f](https://github.com/bluelovers/ws-node-novel/commit/e11d55f5c2c00cf5bf816c57df8cfd605a4604a4))
+
+
+
 ## [3.0.17](https://github.com/bluelovers/ws-node-novel/compare/node-novel-info@3.0.16...node-novel-info@3.0.17) (2024-01-29)
 
 
