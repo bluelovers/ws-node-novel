@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`describe normalize_strip 1`] = `"2章 不希望獨占的日子結束的面具工薪族版_二百四十四話　逐漸増加的春季預予于於定.txt"`;
+
+exports[`describe normalize_val 1`] = `"00090_00002章_不希望独佔の日子結束の面具工薪族坂_00244䛡_逐渐増加の春季預予于于定.txt"`;

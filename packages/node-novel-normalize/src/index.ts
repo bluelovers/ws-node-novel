@@ -2,13 +2,10 @@
  * Created by user on 2018/2/14/014.
  */
 
-import StrUtil from 'str-util';
 import { trim as strUtilTrim } from '@lazy-cjk/str-util-trim';
-import { zh2num, num2zh } from '@lazy-cjk/zh2num';
-import { toFullNumber, toHalfNumber, toFullEnglish, toHalfEnglish, toFullWidth, toHalfWidth } from '@lazy-cjk/fullhalf';
-
+import { zh2num } from '@lazy-cjk/zh2num';
+import { toHalfWidth } from '@lazy-cjk/fullhalf';
 import { str2num } from 'normalize-num';
-
 import { filename as novelFilename } from '@lazy-cjk/novel-filename';
 import { slugify } from '@lazy-cjk/zh-slugify';
 
@@ -144,4 +141,16 @@ export function normalize_val(str: string, padNum: number = 5, options: IOptions
 	return str;
 }
 
-export default exports as typeof import('./index');
+// @ts-ignore
+if (process.env.TSDX_FORMAT !== 'esm')
+{
+	Object.defineProperty(normalize_val, "__esModule", { value: true });
+
+	Object.defineProperty(normalize_val, 'normalize_val', { value: normalize_val });
+	Object.defineProperty(normalize_val, 'default', { value: normalize_val });
+
+	Object.defineProperty(normalize_val, 'normalize_strip', { value: normalize_strip });
+
+}
+
+export default normalize_val;

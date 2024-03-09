@@ -1,4 +1,4 @@
-import { normalize_strip, normalize_val } from '../index';
+import { normalize_strip, normalize_val } from '../src/index';
 
 describe(`describe`, () =>
 {
@@ -21,6 +21,7 @@ describe(`describe`, () =>
 
 		expect(actual).toMatch(/244/);
 
+		expect(actual).toMatchSnapshot();
 	});
 
 })
