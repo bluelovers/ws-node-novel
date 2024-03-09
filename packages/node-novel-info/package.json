@@ -54,7 +54,7 @@
     "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
   "dependencies": {
-    "array-hyper-unique": "^2.1.4",
+    "array-hyper-unique": "^2.1.6",
     "chai": "<5 >=4.4.1",
     "crlf-normalize": "^1.0.20",
     "deepmerge-plus": "^3.0.2",
@@ -66,7 +66,7 @@
     "lodash-decorators": "^6.0.1",
     "mdconf2": "^2.0.19",
     "moment": "^2.30.1",
-    "sort-object-keys2": "^3.0.5",
+    "sort-object-keys2": "^3.0.7",
     "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"

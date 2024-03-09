@@ -59,7 +59,7 @@
     "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
   "dependencies": {
-    "array-hyper-unique": "^2.1.4",
+    "array-hyper-unique": "^2.1.6",
     "blank-line": "^2.0.8",
     "crlf-normalize": "^1.0.20",
     "env-bool": "^2.0.1",
