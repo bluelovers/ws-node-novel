@@ -57,6 +57,7 @@
     "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
   "dependencies": {
+    "@node-novel/marked-raw-object": "^1.0.0",
     "crlf-normalize": "^1.0.20",
     "deepmerge-plus": "^3.0.2",
     "is-plain-object": "^5.0.0",

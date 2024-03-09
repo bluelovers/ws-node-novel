@@ -15,7 +15,9 @@ fs.readFile('./res/README.md')
 	})
 	.then(function (conf)
 	{
-		console.log(conf);
+		console.dir(conf, {
+			depth: null
+		});
 
 		console.log(novelInfo.stringify(conf));
 	})
