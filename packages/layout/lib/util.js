@@ -3,22 +3,22 @@
  * Created by user on 2019/5/29.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports._handleTextLayout = exports._isIwordsUserSp = exports._isIwordsArray2 = exports._isIwordsArray = void 0;
+exports._isIwordsArray = _isIwordsArray;
+exports._isIwordsArray2 = _isIwordsArray2;
+exports._isIwordsUserSp = _isIwordsUserSp;
+exports._handleTextLayout = _handleTextLayout;
 const tslib_1 = require("tslib");
 const index_1 = require("./index");
 const blank_line_1 = tslib_1.__importDefault(require("blank-line"));
 function _isIwordsArray(value) {
     return Array.isArray(value) && (value.length > 1);
 }
-exports._isIwordsArray = _isIwordsArray;
 function _isIwordsArray2(value) {
     return Array.isArray(value) && value.length == 1 && typeof value[0] == 'function';
 }
-exports._isIwordsArray2 = _isIwordsArray2;
 function _isIwordsUserSp(value) {
     return typeof value.s == 'string' && new RegExp(`${index_1.SP_KEY}(.+)$`).test(value.s);
 }
-exports._isIwordsUserSp = _isIwordsUserSp;
 function _handleTextLayout(html, options) {
     if (!html.match(/[^\n]\n[^\n]/g)) {
         let [min, mid, max] = (0, blank_line_1.default)(html);
@@ -67,5 +67,4 @@ function _handleTextLayout(html, options) {
     }
     return html;
 }
-exports._handleTextLayout = _handleTextLayout;
 //# sourceMappingURL=util.js.map

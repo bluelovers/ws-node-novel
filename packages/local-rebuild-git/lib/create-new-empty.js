@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports._createMode002 = exports._createMode001 = void 0;
+exports._createMode001 = _createMode001;
+exports._createMode002 = _createMode002;
 const tslib_1 = require("tslib");
 const index_1 = require("../index");
 const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
@@ -24,7 +25,6 @@ async function _createMode001(cwd) {
         cwd,
     });
 }
-exports._createMode001 = _createMode001;
 async function _createMode002(cwd) {
     let new_name = 'rebuild/' + (0, moment_1.default)().format('YYYY-MM-DD-HH-mm-ss');
     await (0, branch_1.createEmptyBranch)(new_name, {
@@ -32,5 +32,4 @@ async function _createMode002(cwd) {
     });
     util_1.console.info(`create branch "${new_name}"`);
 }
-exports._createMode002 = _createMode002;
 //# sourceMappingURL=create-new-empty.js.map

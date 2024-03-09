@@ -3,7 +3,14 @@
  * Created by user on 2019/1/6/006.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parsePathMainBase = exports.tryRequireFS = exports.baseSortObject = exports.freezeProperty = exports.cacheSortCallback = exports.refreshTodayMoment = exports.getTodayMomentTimestamp = exports.todayMomentOffset = exports.todayMomentTimestamp = exports.createMoment = exports.naturalCompare = void 0;
+exports.cacheSortCallback = exports.todayMomentOffset = exports.todayMomentTimestamp = exports.naturalCompare = void 0;
+exports.createMoment = createMoment;
+exports.getTodayMomentTimestamp = getTodayMomentTimestamp;
+exports.refreshTodayMoment = refreshTodayMoment;
+exports.freezeProperty = freezeProperty;
+exports.baseSortObject = baseSortObject;
+exports.tryRequireFS = tryRequireFS;
+exports.parsePathMainBase = parsePathMainBase;
 const tslib_1 = require("tslib");
 const moment_1 = tslib_1.__importDefault(require("moment"));
 const sort_1 = require("@node-novel/sort");
@@ -16,7 +23,6 @@ let defaultOffset = 8;
 function createMoment(...argv) {
     return (0, moment_1.default)(...argv).utcOffset(defaultOffset);
 }
-exports.createMoment = createMoment;
 const todayMoment = createMoment().startOf('day');
 exports.todayMomentTimestamp = todayMoment.valueOf();
 exports.todayMomentOffset = todayMoment.utcOffset();
@@ -24,7 +30,6 @@ exports.default = exports.todayMomentTimestamp;
 function getTodayMomentTimestamp() {
     return todayMoment.valueOf();
 }
-exports.getTodayMomentTimestamp = getTodayMomentTimestamp;
 function refreshTodayMoment() {
     let k = createMoment()
         //.add(7, 'days')
@@ -34,7 +39,6 @@ function refreshTodayMoment() {
         return true;
     }
 }
-exports.refreshTodayMoment = refreshTodayMoment;
 Object.defineProperties(exports, {
     todayMomentTimestamp: {
         get: getTodayMomentTimestamp,
@@ -68,14 +72,12 @@ function freezeProperty(who, prop, freeze) {
     });
     return who;
 }
-exports.freezeProperty = freezeProperty;
 function baseSortObject(data) {
     return (0, sort_object_keys2_1.default)(data, {
         useSource: true,
         keys: Object.keys(data).sort(),
     });
 }
-exports.baseSortObject = baseSortObject;
 function tryRequireFS() {
     let fs;
     try {
@@ -85,7 +87,6 @@ function tryRequireFS() {
     catch (e) {
     }
 }
-exports.tryRequireFS = tryRequireFS;
 function parsePathMainBase(pathMain) {
     let is_out = null;
     let pathMain_base = undefined;
@@ -102,5 +103,4 @@ function parsePathMainBase(pathMain) {
         pathMain_out,
     };
 }
-exports.parsePathMainBase = parsePathMainBase;
 //# sourceMappingURL=util.js.map

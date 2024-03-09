@@ -3,7 +3,14 @@
  * Created by user on 2018/11/14/014.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tocSortCallback = exports.md_link_escape = exports.md_anchor_gitee = exports.md_href = exports.globFirst = exports.getNovelTitles = exports.loadReadmeMetaSync = exports.loadReadmeMeta = void 0;
+exports.tocSortCallback = void 0;
+exports.loadReadmeMeta = loadReadmeMeta;
+exports.loadReadmeMetaSync = loadReadmeMetaSync;
+exports.getNovelTitles = getNovelTitles;
+exports.globFirst = globFirst;
+exports.md_href = md_href;
+exports.md_anchor_gitee = md_anchor_gitee;
+exports.md_link_escape = md_link_escape;
 const tslib_1 = require("tslib");
 const sort_1 = require("@node-novel/sort");
 const array_hyper_unique_1 = require("array-hyper-unique");
@@ -26,7 +33,6 @@ async function loadReadmeMeta(file) {
         return null;
     });
 }
-exports.loadReadmeMeta = loadReadmeMeta;
 function loadReadmeMetaSync(file) {
     try {
         let data = fs_iconv_1.default.readFileSync(file);
@@ -42,7 +48,6 @@ function loadReadmeMetaSync(file) {
     }
     return null;
 }
-exports.loadReadmeMetaSync = loadReadmeMetaSync;
 function getNovelTitles(meta) {
     if (meta && meta.novel) {
         let arr = [
@@ -73,7 +78,6 @@ function getNovelTitles(meta) {
     }
     return [];
 }
-exports.getNovelTitles = getNovelTitles;
 function globFirst(...argv) {
     return new bluebird_1.default(function (resolve, reject) {
         let fgs = fast_glob_1.default.stream(...argv);
@@ -86,11 +90,9 @@ function globFirst(...argv) {
         fgs.once('end', () => resolve(undefined));
     });
 }
-exports.globFirst = globFirst;
 function md_href(href) {
     return href.split('/').map(encodeURIComponent).join('/');
 }
-exports.md_href = md_href;
 function md_anchor_gitee(title) {
     let anchor = title
         .replace(/[a-z]+/ig, function (s) {
@@ -100,13 +102,11 @@ function md_anchor_gitee(title) {
         .replace(/[ ]/g, '-');
     return md_href(anchor);
 }
-exports.md_anchor_gitee = md_anchor_gitee;
 function md_link_escape(text) {
     return text.replace(/[\[\]]/g, function (s) {
         return '\\' + s;
     });
 }
-exports.md_link_escape = md_link_escape;
 exports.tocSortCallback = (0, sort_1.createSortCallback)({
     dotNum: true,
     transpileBase(input, isSub) {

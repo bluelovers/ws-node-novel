@@ -3,7 +3,11 @@
  * Created by user on 2018/5/1/001.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defaultFilter = exports.createReadmeData = exports.processToc = exports.get_ids = exports.Promise = exports.console = exports.md_href = void 0;
+exports.Promise = exports.console = exports.md_href = void 0;
+exports.get_ids = get_ids;
+exports.processToc = processToc;
+exports.createReadmeData = createReadmeData;
+exports.defaultFilter = defaultFilter;
 const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const bluebird_1 = tslib_1.__importDefault(require("bluebird"));
@@ -46,7 +50,6 @@ function get_ids(cwd, filter) {
         return ls;
     });
 }
-exports.get_ids = get_ids;
 function processToc(DIST_NOVEL_ROOT, filter) {
     return get_ids(DIST_NOVEL_ROOT, filter)
         .then(async function (ls) {
@@ -137,7 +140,6 @@ function processToc(DIST_NOVEL_ROOT, filter) {
         exports.console.debug(`[TOC] 結束建立 toc 列表`);
     });
 }
-exports.processToc = processToc;
 function createReadmeData(cwd, ret, item) {
     return bluebird_1.default.resolve()
         .then(async () => {
@@ -175,10 +177,8 @@ function createReadmeData(cwd, ret, item) {
         return ret;
     });
 }
-exports.createReadmeData = createReadmeData;
 function defaultFilter(value) {
     return true;
 }
-exports.defaultFilter = defaultFilter;
 exports.default = exports;
 //# sourceMappingURL=index.js.map

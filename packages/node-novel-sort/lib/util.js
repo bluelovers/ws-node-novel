@@ -3,7 +3,8 @@
  * Created by user on 2020/6/5.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports._trim = exports._match = void 0;
+exports._match = _match;
+exports._trim = _trim;
 function _match(a, b, { r, mainFn, }) {
     let ta;
     let tb;
@@ -25,12 +26,10 @@ function _match(a, b, { r, mainFn, }) {
         return mainFn(a1, b1, true);
     }
 }
-exports._match = _match;
 function _trim(input) {
     return input
         .replace(/^[_\s]+(\d+)/, '$1')
         .replace(/^\D(\d+)/, '$1')
         .trim();
 }
-exports._trim = _trim;
 //# sourceMappingURL=util.js.map

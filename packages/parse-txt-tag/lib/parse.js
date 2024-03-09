@@ -3,7 +3,7 @@
  * Created by user on 2020/1/4.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parse = void 0;
+exports.parse = parse;
 const tags_1 = require("./tags");
 const fullhalf_1 = require("@lazy-cjk/fullhalf");
 const util_1 = require("./util");
@@ -58,5 +58,4 @@ function parse(source, options) {
         attach,
     };
 }
-exports.parse = parse;
 //# sourceMappingURL=parse.js.map

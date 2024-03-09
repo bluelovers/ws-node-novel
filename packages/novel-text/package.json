@@ -41,6 +41,7 @@
     "coverage": "yarn run test -- --coverage",
     "test": "echo \"Error: no test specified\"",
     "test:jest": "jest --passWithNoTests",
+    "test:jest:coverage": "yarn run test:jest -- --coverage",
     "test:jest:snapshot": "yarn run test:jest -- -u",
     "test:snapshot": "yarn run test -- -u",
     "test:tsd": "ynpx tsd",
@@ -53,15 +54,16 @@
     "postpublish_": "git commit -m \"chore(release): publish\" .",
     "local-link": "npm link str-util",
     "ncu": "npx yarn-tool ncu -u",
-    "sort-package-json": "npx yarn-tool sort"
+    "sort-package-json": "npx yarn-tool sort",
+    "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.51",
+    "@lazy-cjk/novel-filename": "^1.0.53",
     "blank-line": "^2.0.8",
     "crlf-normalize": "^1.0.20",
     "env-bool": "^2.0.1",
     "str-util": "^3.0.2",
-    "tieba-harmony": "^2.0.38",
+    "tieba-harmony": "^2.0.39",
     "tslib": "^2"
   },
   "gitHead": "f655723796683dc127d290d13d4106f21279bdae"

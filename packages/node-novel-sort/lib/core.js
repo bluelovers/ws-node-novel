@@ -3,7 +3,7 @@
  * Created by user on 2020/6/5.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSortCallback = void 0;
+exports.createSortCallback = createSortCallback;
 const tslib_1 = require("tslib");
 const string_natural_compare_1 = tslib_1.__importDefault(require("@bluelovers/string-natural-compare"));
 const types_1 = require("./types");
@@ -79,5 +79,4 @@ function createSortCallback(options = {}) {
     fnSortCallback.fnSortCallback = fnSortCallback;
     return fnSortCallback;
 }
-exports.createSortCallback = createSortCallback;
 //# sourceMappingURL=core.js.map

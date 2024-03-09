@@ -3,7 +3,14 @@
  * Created by user on 2018/11/11/011.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.outputFileSync = exports.outputFile = exports.readFileSync = exports.readFile = exports.autoFile = exports._handleOptions = exports.makeOptions = exports.defaultOptions = void 0;
+exports.defaultOptions = void 0;
+exports.makeOptions = makeOptions;
+exports._handleOptions = _handleOptions;
+exports.autoFile = autoFile;
+exports.readFile = readFile;
+exports.readFileSync = readFileSync;
+exports.outputFile = outputFile;
+exports.outputFileSync = outputFileSync;
 const tslib_1 = require("tslib");
 const fs_iconv_1 = tslib_1.__importStar(require("fs-iconv"));
 const regexp_cjk_1 = require("regexp-cjk");
@@ -35,7 +42,6 @@ function makeOptions(inputFile, options) {
     }
     return cache;
 }
-exports.makeOptions = makeOptions;
 function _handleOptions(options) {
     let opts = Object.assign({
         ...exports.defaultOptions,
@@ -105,7 +111,6 @@ function _handleOptions(options) {
     // @ts-ignore
     return opts;
 }
-exports._handleOptions = _handleOptions;
 async function autoFile(inputFile, options) {
     let opts = _handleOptions(options);
     let ret = await readFile(inputFile, opts);
@@ -114,7 +119,6 @@ async function autoFile(inputFile, options) {
         ls,
     });
 }
-exports.autoFile = autoFile;
 async function readFile(inputFile, options) {
     let cache = makeOptions(inputFile, options);
     let txt = await fs_iconv_1.default.readFile(cache.file)
@@ -136,7 +140,6 @@ async function readFile(inputFile, options) {
         data,
     };
 }
-exports.readFile = readFile;
 function readFileSync(inputFile, options) {
     let cache = makeOptions(inputFile, options);
     let txt;
@@ -156,7 +159,6 @@ function readFileSync(inputFile, options) {
         data,
     };
 }
-exports.readFileSync = readFileSync;
 async function outputFile(data, options) {
     ({ data, options } = (0, util_1._outputFile)(data, options));
     let path_main = options.outDir || upath2_1.default.join(options.dirname, 'out');
@@ -188,7 +190,6 @@ async function outputFile(data, options) {
     }
     return ls;
 }
-exports.outputFile = outputFile;
 function outputFileSync(data, options) {
     ({ data, options } = (0, util_1._outputFile)(data, options));
     let path_main = options.outDir || upath2_1.default.join(options.dirname, 'out');
@@ -202,7 +203,6 @@ function outputFileSync(data, options) {
     }
     return ls;
 }
-exports.outputFileSync = outputFileSync;
 [
     'outputFile',
     'autoFile',

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.splitChapterSync = exports.splitVolumeSync = void 0;
+exports.splitVolumeSync = splitVolumeSync;
+exports.splitChapterSync = splitChapterSync;
 const util_1 = require("./util");
 const execall2_1 = require("execall2");
 const console_1 = require("./console");
@@ -71,7 +72,6 @@ function splitVolumeSync(txt, cache) {
     //console.log(_out);
     return _out;
 }
-exports.splitVolumeSync = splitVolumeSync;
 function splitChapterSync(txt, cache, _m, splitOption) {
     let _files = {};
     let idx = 0;
@@ -286,5 +286,4 @@ function splitChapterSync(txt, cache, _m, splitOption) {
     cache.ix = parseInt(ii) + 1;
     return _files;
 }
-exports.splitChapterSync = splitChapterSync;
 //# sourceMappingURL=split.js.map

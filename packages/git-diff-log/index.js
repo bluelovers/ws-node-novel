@@ -3,7 +3,7 @@
  * Created by user on 2019/6/18.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.novelDiffFromLog = void 0;
+exports.novelDiffFromLog = novelDiffFromLog;
 const tslib_1 = require("tslib");
 const git_diff_from_1 = tslib_1.__importDefault(require("git-diff-from"));
 const upath2_1 = require("upath2");
@@ -81,6 +81,5 @@ function novelDiffFromLog(options) {
     }
     return ret;
 }
-exports.novelDiffFromLog = novelDiffFromLog;
 exports.default = novelDiffFromLog;
 //# sourceMappingURL=index.js.map

@@ -3,7 +3,10 @@
  * Created by user on 2020/1/16.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isHexValue = exports.chkInfo = exports.sortKeys = exports.getNovelTitleFromMeta = void 0;
+exports.getNovelTitleFromMeta = getNovelTitleFromMeta;
+exports.sortKeys = sortKeys;
+exports.chkInfo = chkInfo;
+exports.isHexValue = isHexValue;
 const tslib_1 = require("tslib");
 const index_1 = require("./index");
 const array_hyper_unique_1 = require("array-hyper-unique");
@@ -40,7 +43,6 @@ function getNovelTitleFromMeta(meta) {
     }
     return [];
 }
-exports.getNovelTitleFromMeta = getNovelTitleFromMeta;
 function sortKeys(ret) {
     // @ts-ignore
     ret = (0, sort_object_keys2_1.default)(ret, [
@@ -124,7 +126,6 @@ function sortKeys(ret) {
     // @ts-ignore
     return ret;
 }
-exports.sortKeys = sortKeys;
 function chkInfo(ret, options = {}) {
     if (!ret
         || ((!options || !options.lowCheckLevel)
@@ -171,9 +172,7 @@ function chkInfo(ret, options = {}) {
     }
     return ret;
 }
-exports.chkInfo = chkInfo;
 function isHexValue(value) {
     return typeof value === 'string' && /^0x[\da-f]+$/i.test(value);
 }
-exports.isHexValue = isHexValue;
 //# sourceMappingURL=util.js.map

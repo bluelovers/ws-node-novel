@@ -1,6 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runAllJob = exports.git_set_user = exports.git_get_user = exports.git_commit_file = exports.git_fake_author = exports.fetchAllFileLog = exports.fetchFileLogRow = exports.console = void 0;
+exports.console = void 0;
+exports.fetchFileLogRow = fetchFileLogRow;
+exports.fetchAllFileLog = fetchAllFileLog;
+exports.git_fake_author = git_fake_author;
+exports.git_commit_file = git_commit_file;
+exports.git_get_user = git_get_user;
+exports.git_set_user = git_set_user;
+exports.runAllJob = runAllJob;
 const tslib_1 = require("tslib");
 const fast_glob_1 = tslib_1.__importDefault(require("@bluelovers/fast-glob"));
 const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
@@ -56,7 +63,6 @@ async function fetchFileLogRow(repo, file) {
         return row;
     }
 }
-exports.fetchFileLogRow = fetchFileLogRow;
 function trim(text) {
     return text
         .replace(/^\s+|\s+$/g, '');
@@ -99,7 +105,6 @@ function fetchAllFileLog(repo, options) {
         return ls;
     });
 }
-exports.fetchAllFileLog = fetchAllFileLog;
 function git_fake_author(name, email) {
     email = (0, email_normalize_1.default)(email || 'testbot@test.test')
         .replace(/^[\s　@]+|[\s　@]+$/g, '');
@@ -131,7 +136,6 @@ function git_fake_author(name, email) {
     }
     return `${name || 'testbot'} <${email || 'testbot@test.test'}>`;
 }
-exports.git_fake_author = git_fake_author;
 function git_commit_file(row, cwd) {
     let author_name = git_fake_author(row.log.authorName, row.log.authorEmail);
     if (!cwd) {
@@ -177,7 +181,6 @@ function git_commit_file(row, cwd) {
         });
     });
 }
-exports.git_commit_file = git_commit_file;
 async function git_get_user(cwd) {
     let cp = await cross_spawn_extra_1.default.async('git', [
         'config',
@@ -202,7 +205,6 @@ async function git_get_user(cwd) {
         email,
     };
 }
-exports.git_get_user = git_get_user;
 async function git_set_user(name, email, cwd) {
     await cross_spawn_extra_1.default.async('git', [
         'config',
@@ -223,7 +225,6 @@ async function git_set_user(name, email, cwd) {
         cwd,
     });
 }
-exports.git_set_user = git_set_user;
 function runAllJob(cwd) {
     cwd = upath2_1.default.normalize(cwd);
     return bluebird_1.default.resolve()
@@ -296,5 +297,4 @@ function runAllJob(cwd) {
         util_1.console.debug(`Done`);
     });
 }
-exports.runAllJob = runAllJob;
 //# sourceMappingURL=index.js.map

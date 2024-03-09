@@ -3,7 +3,11 @@
  * Created by user on 2018/1/27/027.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mdconf_parse = exports._handleDataForStringify = exports._handleData = exports.parse = exports.stringify = exports.defaultOptionsParse = exports.envBool = exports.envVal = exports.deepmergeOptions = exports.mdconf = void 0;
+exports.mdconf_parse = exports.defaultOptionsParse = exports.envBool = exports.envVal = exports.deepmergeOptions = exports.mdconf = void 0;
+exports.stringify = stringify;
+exports.parse = parse;
+exports._handleData = _handleData;
+exports._handleDataForStringify = _handleDataForStringify;
 const tslib_1 = require("tslib");
 const const_1 = require("./lib/const");
 Object.defineProperty(exports, "deepmergeOptions", { enumerable: true, get: function () { return const_1.deepmergeOptions; } });
@@ -30,7 +34,6 @@ function stringify(data, d2, ...argv) {
     data = _handleDataForStringify(data, d2, ...argv);
     return (0, mdconf2_1.stringify)(data) + crlf_normalize_1.LF.repeat(2);
 }
-exports.stringify = stringify;
 function parse(data, options = {}) {
     var _a;
     if (options.removeRawData) {
@@ -72,7 +75,6 @@ function parse(data, options = {}) {
     // @ts-ignore
     return ret;
 }
-exports.parse = parse;
 function _handleData(data, d2, ...argv) {
     // @ts-ignore
     data = json_1.default.toNovelInfo(data, d2 || {}, {
@@ -86,7 +88,6 @@ function _handleData(data, d2, ...argv) {
     // @ts-ignore
     return data;
 }
-exports._handleData = _handleData;
 function _handleDataForStringify(data, d2, ...argv) {
     var _a;
     data = _handleData(data, d2, ...argv);
@@ -100,7 +101,6 @@ function _handleDataForStringify(data, d2, ...argv) {
     // @ts-ignore
     return data;
 }
-exports._handleDataForStringify = _handleDataForStringify;
 exports.mdconf_parse = parse;
 exports.default = exports;
 //# sourceMappingURL=index.js.map

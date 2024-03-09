@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ArrayUniqueDecorator = exports.NovelDiffFromLogParser = void 0;
+exports.NovelDiffFromLogParser = void 0;
+exports.ArrayUniqueDecorator = ArrayUniqueDecorator;
 const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
 class NovelDiffFromLogParser {
@@ -97,6 +98,5 @@ function ArrayUniqueDecorator(target, propertyKey, descriptor) {
         return (0, array_hyper_unique_1.array_unique)(old.apply(this, argv));
     };
 }
-exports.ArrayUniqueDecorator = ArrayUniqueDecorator;
 exports.default = NovelDiffFromLogParser;
 //# sourceMappingURL=class.js.map

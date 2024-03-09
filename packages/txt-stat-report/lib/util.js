@@ -3,7 +3,12 @@
  * Created by user on 2019/2/23.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeBom = exports.regexMerge = exports.removeLine = exports.removeSpace = exports.removePunctuation = exports.regexpPunctuation = void 0;
+exports.regexpPunctuation = void 0;
+exports.removePunctuation = removePunctuation;
+exports.removeSpace = removeSpace;
+exports.removeLine = removeLine;
+exports.regexMerge = regexMerge;
+exports.removeBom = removeBom;
 const array_hyper_unique_1 = require("array-hyper-unique");
 exports.regexpPunctuation = regexMerge([
     /\p{Punctuation}+/gu,
@@ -16,7 +21,6 @@ function removePunctuation(input) {
     return input
         .replace(exports.regexpPunctuation, '');
 }
-exports.removePunctuation = removePunctuation;
 function removeSpace(input) {
     return input
         .replace(/\s+/g, function (s) {
@@ -24,12 +28,10 @@ function removeSpace(input) {
     })
         .replace(/[\xA0 　]+/gu, '');
 }
-exports.removeSpace = removeSpace;
 function removeLine(input) {
     return input
         .replace(/[\r\n]+/gu, '');
 }
-exports.removeLine = removeLine;
 /**
  * 合併多個 regexp 為一個
  */
@@ -44,10 +46,8 @@ function regexMerge(list) {
     (0, array_hyper_unique_1.array_unique_overwrite)(flags);
     return new RegExp(source.join('|'), flags.join(''));
 }
-exports.regexMerge = regexMerge;
 function removeBom(input) {
     return input
         .replace(/\uFEFF/gu, '');
 }
-exports.removeBom = removeBom;
 //# sourceMappingURL=util.js.map

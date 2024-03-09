@@ -3,7 +3,12 @@
  * Created by user on 2018/8/13/013.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getList = exports.makeLink = exports.makeHeader = exports.makeHeaderAsync = exports.processTocContents = exports.md_link_escape = exports.md_href = void 0;
+exports.md_link_escape = exports.md_href = void 0;
+exports.processTocContents = processTocContents;
+exports.makeHeaderAsync = makeHeaderAsync;
+exports.makeHeader = makeHeader;
+exports.makeLink = makeLink;
+exports.getList = getList;
 const tslib_1 = require("tslib");
 const normalize_1 = require("@node-novel/normalize");
 const array_hyper_unique_1 = require("array-hyper-unique");
@@ -74,11 +79,9 @@ function processTocContents(basePath, outputFile, fnHeader = makeHeader) {
         }
     });
 }
-exports.processTocContents = processTocContents;
 function makeHeaderAsync(basePath, ...argv) {
     return bluebird_1.default.resolve(makeHeader(basePath));
 }
-exports.makeHeaderAsync = makeHeaderAsync;
 function makeHeader(basePath, ...argv) {
     let titles = [
         upath2_1.default.basename(basePath),
@@ -136,7 +139,6 @@ function makeHeader(basePath, ...argv) {
     }
     return arr;
 }
-exports.makeHeader = makeHeader;
 function makeLink(title, link, isDir) {
     let t = (0, normalize_1.normalize_strip)(title, isDir);
     if (!isDir) {
@@ -145,7 +147,6 @@ function makeLink(title, link, isDir) {
     t = (0, util_1.md_link_escape)(t);
     return `[${t}](${(0, util_1.md_href)(link)})`;
 }
-exports.makeLink = makeLink;
 function getList(basePath) {
     return novelGlobby.globbyASync([
         '**/*.txt',
@@ -154,6 +155,5 @@ function getList(basePath) {
         throwEmpty: false,
     });
 }
-exports.getList = getList;
 exports.default = processTocContents;
 //# sourceMappingURL=toc_contents.js.map

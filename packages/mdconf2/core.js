@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stringify = exports.parse = exports.defaultOptionsParse = void 0;
+exports.defaultOptionsParse = void 0;
+exports.parse = parse;
+exports.stringify = stringify;
 const tslib_1 = require("tslib");
 /**
  * Module dependencies.
@@ -184,7 +186,6 @@ function parse(str, options = {}) {
     }
     return conf;
 }
-exports.parse = parse;
 function stringify(dataInput, level = 1, skip = [], k) {
     let rs1 = [];
     let rs2 = [];
@@ -297,6 +298,5 @@ function stringify(dataInput, level = 1, skip = [], k) {
     }
     return out;
 }
-exports.stringify = stringify;
 exports.default = exports;
 //# sourceMappingURL=core.js.map

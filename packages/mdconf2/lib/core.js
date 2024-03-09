@@ -3,7 +3,11 @@
  * Created by user on 2020/1/15.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createInlineLexer = exports.makeCodeBlock = exports.normalize = exports.put = exports.getobjectbyid = void 0;
+exports.getobjectbyid = getobjectbyid;
+exports.put = put;
+exports.normalize = normalize;
+exports.makeCodeBlock = makeCodeBlock;
+exports.createInlineLexer = createInlineLexer;
 const marked_1 = require("marked");
 const core_1 = require("../core");
 function getobjectbyid(a, conf) {
@@ -13,7 +17,6 @@ function getobjectbyid(a, conf) {
     }
     return ret;
 }
-exports.getobjectbyid = getobjectbyid;
 /**
  * Add `str` to `obj` with the given `keys`
  * which represents the traversal path.
@@ -73,7 +76,6 @@ function put(obj, keys, str, code, table, options = {}, others = {}) {
     let val = str.slice(i + 1).trim();
     target[key] = val;
 }
-exports.put = put;
 /**
  * Normalize `str`.
  */
@@ -84,16 +86,13 @@ function normalize(str, options = {}) {
     }
     return key.trim();
 }
-exports.normalize = normalize;
 function makeCodeBlock(value, lang) {
     return `\n\`\`\`${lang || ''}\n${value}\n\`\`\`\n`;
 }
-exports.makeCodeBlock = makeCodeBlock;
 function createInlineLexer(toks, options) {
     let opts = Object.assign({}, core_1.defaultOptionsParse.markedOptions, options.markedOptions);
     // @ts-ignore
     let inline = new marked_1.InlineLexer(toks.links, opts);
     return inline;
 }
-exports.createInlineLexer = createInlineLexer;
 //# sourceMappingURL=core.js.map

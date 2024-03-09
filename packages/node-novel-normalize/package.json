@@ -30,6 +30,7 @@
     "coverage": "yarn run test -- --coverage",
     "test": "jest",
     "test:jest": "jest --passWithNoTests",
+    "test:jest:coverage": "yarn run test:jest -- --coverage",
     "test:jest:snapshot": "yarn run test:jest -- -u",
     "test:snapshot": "yarn run test -- -u",
     "test:tsd": "ynpx tsd",
@@ -39,11 +40,12 @@
     "prepublish:lockfile": "npx sync-lockfile .",
     "postpublish_": "git commit -m \"chore(release): publish\" .",
     "ncu": "npx yarn-tool ncu -u",
-    "sort-package-json": "npx yarn-tool sort"
+    "sort-package-json": "npx yarn-tool sort",
+    "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
   "dependencies": {
-    "@lazy-cjk/novel-filename": "^1.0.51",
-    "@lazy-cjk/zh-slugify": "^1.0.87",
+    "@lazy-cjk/novel-filename": "^1.0.53",
+    "@lazy-cjk/zh-slugify": "^1.0.89",
     "normalize-num": "^1.0.16",
     "str-util": "^3.0.2",
     "tslib": "^2"

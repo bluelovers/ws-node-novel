@@ -3,7 +3,8 @@
  * Created by user on 2018/2/14/014.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.normalize_val = exports.normalize_strip = void 0;
+exports.normalize_strip = normalize_strip;
+exports.normalize_val = normalize_val;
 const tslib_1 = require("tslib");
 const str_util_trim_1 = require("@lazy-cjk/str-util-trim");
 const zh2num_1 = require("@lazy-cjk/zh2num");
@@ -31,7 +32,6 @@ function normalize_strip(str, isDir) {
     str = (0, str_util_trim_1.trim)(str, '　');
     return str;
 }
-exports.normalize_strip = normalize_strip;
 function normalize_val(str, padNum = 5, options = {}) {
     padNum = padNum || options.padNum;
     //console.log(111, str);
@@ -104,6 +104,5 @@ function normalize_val(str, padNum = 5, options = {}) {
     str = (0, zh_slugify_1.slugify)(str, true);
     return str;
 }
-exports.normalize_val = normalize_val;
 exports.default = exports;
 //# sourceMappingURL=index.js.map

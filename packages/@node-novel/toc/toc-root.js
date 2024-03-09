@@ -3,7 +3,12 @@
  * Created by user on 2018/11/14/014.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createTocRoot = exports.stringifyDataAuthor = exports.processDataByAuthor = exports.filterList = exports.isNovelID = exports.searchByRoot = void 0;
+exports.searchByRoot = searchByRoot;
+exports.isNovelID = isNovelID;
+exports.filterList = filterList;
+exports.processDataByAuthor = processDataByAuthor;
+exports.stringifyDataAuthor = stringifyDataAuthor;
+exports.createTocRoot = createTocRoot;
 const tslib_1 = require("tslib");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const crlf_normalize_1 = require("crlf-normalize");
@@ -45,7 +50,6 @@ function searchByRoot(rootPath) {
         }
     });
 }
-exports.searchByRoot = searchByRoot;
 function isNovelID(dir, rootPath) {
     // @ts-ignore
     let _path = upath2_1.default.resolve(...[rootPath, upath2_1.default.dirname(dir)].filter(v => typeof v !== 'undefined'));
@@ -59,7 +63,6 @@ function isNovelID(dir, rootPath) {
     });
     //.tap(v => console.log(v))
 }
-exports.isNovelID = isNovelID;
 function filterList(ls, rootPath) {
     return bluebird_1.default.reduce(ls, async function (arr, dir) {
         let dl = dir.split('/');
@@ -84,7 +87,6 @@ function filterList(ls, rootPath) {
         }
     });
 }
-exports.filterList = filterList;
 function processDataByAuthor(ls, rootPath, options) {
     return bluebird_1.default.reduce(ls, async function (data, file) {
         let dl = file.split('/');
@@ -136,7 +138,6 @@ function processDataByAuthor(ls, rootPath, options) {
         return data;
     });
 }
-exports.processDataByAuthor = processDataByAuthor;
 function stringifyDataAuthor(data, rootPath, options) {
     let arr = [
         `# TOC\n`,
@@ -193,7 +194,6 @@ function stringifyDataAuthor(data, rootPath, options) {
     arr.push(crlf_normalize_1.LF);
     return arr.join(crlf_normalize_1.LF);
 }
-exports.stringifyDataAuthor = stringifyDataAuthor;
 function createTocRoot(_root, outputFile, options) {
     options = options || {};
     return searchByRoot(_root)
@@ -209,7 +209,6 @@ function createTocRoot(_root, outputFile, options) {
         }
     });
 }
-exports.createTocRoot = createTocRoot;
 exports.default = createTocRoot;
 //createTocRoot('D:/Users/Documents/The Project/nodejs-test/node-novel2/dist_novel').tap(v => console.dir(v))
 //# sourceMappingURL=toc-root.js.map

@@ -3,7 +3,9 @@
  * Created by user on 2019/2/1/001.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fixContent = exports.stringify = exports.parse = void 0;
+exports.parse = parse;
+exports.stringify = stringify;
+exports.fixContent = fixContent;
 const tslib_1 = require("tslib");
 const gray_matter_1 = tslib_1.__importDefault(require("gray-matter"));
 const node_novel_info_1 = require("node-novel-info");
@@ -57,7 +59,6 @@ function parse(inputContent, options) {
         },
     };
 }
-exports.parse = parse;
 /**
  * 用來將取得的物件轉換回 md
  * 當 content, mdconf 同時存在時 content > mdconf
@@ -76,7 +77,6 @@ function stringify(inputData, options) {
     // @ts-ignore
     matterOptions);
 }
-exports.stringify = stringify;
 /**
  * 將 inputContent 轉為 string
  */
@@ -89,6 +89,5 @@ function fixContent(inputContent) {
         return inputContent;
     }
 }
-exports.fixContent = fixContent;
 exports.default = exports;
 //# sourceMappingURL=index.js.map

@@ -3,7 +3,8 @@
  * Created by user on 2019/2/23.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.txtReportSum = exports.txtReport = void 0;
+exports.txtReport = txtReport;
+exports.txtReportSum = txtReportSum;
 const tslib_1 = require("tslib");
 const uni_string_1 = tslib_1.__importDefault(require("uni-string"));
 const crlf_normalize_1 = require("crlf-normalize");
@@ -77,7 +78,6 @@ function txtReport(input) {
         space_length,
     };
 }
-exports.txtReport = txtReport;
 /**
  * 將多個報告總和起來
  */
@@ -90,5 +90,4 @@ function txtReportSum(arr) {
         return a;
     }, {});
 }
-exports.txtReportSum = txtReportSum;
 //# sourceMappingURL=index.js.map

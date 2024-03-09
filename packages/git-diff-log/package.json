@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "array-hyper-unique": "^2.1.4",
-    "git-diff-from": "^1.1.37",
+    "git-diff-from": "^1.1.39",
     "ts-type": "^3.0.1",
     "tslib": "^2",
     "upath2": "^3.1.19"
