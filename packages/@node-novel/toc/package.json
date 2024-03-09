@@ -37,7 +37,7 @@
   "dependencies": {
     "@bluelovers/fast-glob": "^3.0.4",
     "@lazy-cjk/fullhalf": "^1.0.1",
-    "@node-novel/normalize": "^1.0.33",
+    "@node-novel/normalize": "^2.0.0",
     "@node-novel/sort": "^1.0.23",
     "array-hyper-unique": "^2.1.4",
     "bluebird": "^3.7.2",
