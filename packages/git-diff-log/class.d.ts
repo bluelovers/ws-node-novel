@@ -22,5 +22,4 @@ export declare class NovelDiffFromLogParser {
     static filterFiles(list: IListFileRow[], filter: (value: IListFileRow) => boolean): IListFileRow[];
     static files(list: INovelDiffFromLog["list"], filter?: (value: IListFileRow) => boolean): IListFileRow[];
 }
-export declare function ArrayUniqueDecorator<T extends Function>(target: object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>): void;
 export default NovelDiffFromLogParser;

@@ -1,9 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NovelDiffFromLogParser = void 0;
-exports.ArrayUniqueDecorator = ArrayUniqueDecorator;
 const tslib_1 = require("tslib");
-const array_hyper_unique_1 = require("array-hyper-unique");
+const array_hyper_unique_decorator_1 = require("@lazy-array/array-hyper-unique-decorator");
 class NovelDiffFromLogParser {
     constructor(data) {
         this.data = data;
@@ -62,41 +61,34 @@ class NovelDiffFromLogParser {
 }
 exports.NovelDiffFromLogParser = NovelDiffFromLogParser;
 tslib_1.__decorate([
-    ArrayUniqueDecorator,
+    (0, array_hyper_unique_decorator_1.ArrayUniqueDecorator)(),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "pathMains", null);
 tslib_1.__decorate([
-    ArrayUniqueDecorator,
+    (0, array_hyper_unique_decorator_1.ArrayUniqueDecorator)(),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", []),
     tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "novelIDs", null);
 tslib_1.__decorate([
-    ArrayUniqueDecorator,
+    (0, array_hyper_unique_decorator_1.ArrayUniqueDecorator)(),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Function]),
     tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser.prototype, "files", null);
 tslib_1.__decorate([
-    ArrayUniqueDecorator,
+    (0, array_hyper_unique_decorator_1.ArrayUniqueDecorator)(),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object]),
     tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser, "novelIDs", null);
 tslib_1.__decorate([
-    ArrayUniqueDecorator,
+    (0, array_hyper_unique_decorator_1.ArrayUniqueDecorator)(),
     tslib_1.__metadata("design:type", Function),
     tslib_1.__metadata("design:paramtypes", [Object, Function]),
     tslib_1.__metadata("design:returntype", void 0)
 ], NovelDiffFromLogParser, "files", null);
-function ArrayUniqueDecorator(target, propertyKey, descriptor) {
-    const old = descriptor.value;
-    // @ts-ignore
-    descriptor.value = function (...argv) {
-        return (0, array_hyper_unique_1.array_unique)(old.apply(this, argv));
-    };
-}
 exports.default = NovelDiffFromLogParser;
 //# sourceMappingURL=class.js.map

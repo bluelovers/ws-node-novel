@@ -2,8 +2,7 @@
  * Created by user on 2019/6/18.
  */
 import { IListFileRow, IListMain, IListMainRow, INovelDiffFromLog } from './index';
-import { array_unique } from 'array-hyper-unique';
-import { ITSTypeBuildIn } from 'ts-type'
+import { ArrayUniqueDecorator } from '@lazy-array/array-hyper-unique-decorator';
 
 export class NovelDiffFromLogParser
 {
@@ -27,7 +26,7 @@ export class NovelDiffFromLogParser
 	/**
 	 * 回傳所有 pathMain 列表
 	 */
-	@ArrayUniqueDecorator
+	@ArrayUniqueDecorator()
 	pathMains()
 	{
 		return Object.keys(this.data.list);
@@ -36,7 +35,7 @@ export class NovelDiffFromLogParser
 	/**
 	 * 回傳所有 novelID 列表
 	 */
-	@ArrayUniqueDecorator
+	@ArrayUniqueDecorator()
 	novelIDs()
 	{
 		return NovelDiffFromLogParser.novelIDs(this.data.list)
@@ -45,13 +44,13 @@ export class NovelDiffFromLogParser
 	/**
 	 * 回傳所有檔案列表
 	 */
-	@ArrayUniqueDecorator
+	@ArrayUniqueDecorator()
 	files(filter?: (value: IListFileRow) => boolean)
 	{
 		return NovelDiffFromLogParser.files(this.data.list, filter)
 	}
 
-	@ArrayUniqueDecorator
+	@ArrayUniqueDecorator()
 	static novelIDs(list: INovelDiffFromLog["list"])
 	{
 		return Object.values(list)
@@ -66,7 +65,7 @@ export class NovelDiffFromLogParser
 		return list.filter(filter)
 	}
 
-	@ArrayUniqueDecorator
+	@ArrayUniqueDecorator()
 	static files(list: INovelDiffFromLog["list"], filter?: (value: IListFileRow) => boolean)
 	{
 		let ls = Object.values(list)
@@ -87,17 +86,6 @@ export class NovelDiffFromLogParser
 		}
 
 		return ls;
-	}
-}
-
-export function ArrayUniqueDecorator<T extends Function>(target: object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>)
-{
-	const old = descriptor.value;
-
-	// @ts-ignore
-	descriptor.value = function (...argv)
-	{
-		return array_unique(old.apply(this, argv))
 	}
 }
 

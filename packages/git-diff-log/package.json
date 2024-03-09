@@ -39,7 +39,7 @@
     "tsc:showConfig": "ynpx get-current-tsconfig -p"
   },
   "dependencies": {
-    "array-hyper-unique": "^2.1.4",
+    "@lazy-array/array-hyper-unique-decorator": "^1.0.2",
     "git-diff-from": "^1.1.39",
     "ts-type": "^3.0.1",
     "tslib": "^2",
