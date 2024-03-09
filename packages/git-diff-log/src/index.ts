@@ -5,6 +5,7 @@
 import { gitDiffFrom, IGitDiffFromRow } from 'git-diff-from';
 import { ITSPickExtra } from 'ts-type'
 import { resolve } from 'upath2'
+import { NovelDiffFromLogParser } from './class';
 
 const baseHashDefault = 5;
 const targetTreeDefault = 'origin/master';
@@ -70,7 +71,8 @@ export function novelDiffFromLog(options: ITSPickExtra<IOptions, 'novelRoot'>): 
 
 				if (a[pathMain][novelID] == null)
 				{
-					a[pathMain][novelID] = a[pathMain][novelID] || [];
+					// @ts-ignore
+					a[pathMain][novelID] ||= [];
 
 					Object.defineProperties(a[pathMain][novelID], {
 						pathMain: {
@@ -103,7 +105,7 @@ export function novelDiffFromLog(options: ITSPickExtra<IOptions, 'novelRoot'>): 
 			}
 
 			return a;
-		}, {});
+		}, {} as IListMain);
 	}
 
 	return ret;
@@ -193,5 +195,7 @@ export interface INovelDiffFromLog extends IOptions
 		file: number;
 	};
 }
+
+export { NovelDiffFromLogParser }
 
 export default novelDiffFromLog

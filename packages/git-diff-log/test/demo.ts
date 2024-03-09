@@ -1,8 +1,7 @@
 /**
  * Created by user on 2019/6/18.
  */
-import { novelDiffFromLog } from '../index';
-import { NovelDiffFromLogParser } from '../class';
+import { novelDiffFromLog, NovelDiffFromLogParser } from '../src/index';
 import { extname } from 'upath2'
 
 let data = novelDiffFromLog({
