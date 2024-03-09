@@ -2,7 +2,7 @@
  * Created by user on 2019/6/18.
  */
 
-import gitDiffFrom, { IGitDiffFromRow } from 'git-diff-from';
+import { gitDiffFrom, IGitDiffFromRow } from 'git-diff-from';
 import { ITSPickExtra } from 'ts-type'
 import { resolve } from 'upath2'
 

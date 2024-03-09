@@ -5,12 +5,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.normalize_strip = normalize_strip;
 exports.normalize_val = normalize_val;
-const tslib_1 = require("tslib");
 const str_util_trim_1 = require("@lazy-cjk/str-util-trim");
 const zh2num_1 = require("@lazy-cjk/zh2num");
 const fullhalf_1 = require("@lazy-cjk/fullhalf");
 const normalize_num_1 = require("normalize-num");
-const novel_filename_1 = tslib_1.__importDefault(require("@lazy-cjk/novel-filename"));
+const novel_filename_1 = require("@lazy-cjk/novel-filename");
 const zh_slugify_1 = require("@lazy-cjk/zh-slugify");
 function normalize_strip(str, isDir) {
     if (isDir) {
@@ -35,7 +34,7 @@ function normalize_strip(str, isDir) {
 function normalize_val(str, padNum = 5, options = {}) {
     padNum = padNum || options.padNum;
     //console.log(111, str);
-    str = novel_filename_1.default.filename(str);
+    str = (0, novel_filename_1.filename)(str);
     if (/^(?:序|プロローグ|Prologue)/i.test(str)) {
         str = '0_' + str;
     }

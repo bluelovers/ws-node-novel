@@ -9,7 +9,7 @@ import { toFullNumber, toHalfNumber, toFullEnglish, toHalfEnglish, toFullWidth, 
 
 import { str2num } from 'normalize-num';
 
-import novelFilename from '@lazy-cjk/novel-filename';
+import { filename as novelFilename } from '@lazy-cjk/novel-filename';
 import { slugify } from '@lazy-cjk/zh-slugify';
 
 export interface IOptions
@@ -54,7 +54,7 @@ export function normalize_val(str: string, padNum: number = 5, options: IOptions
 
 	//console.log(111, str);
 
-	str = novelFilename.filename(str);
+	str = novelFilename(str);
 
 	if (/^(?:序|プロローグ|Prologue)/i.test(str))
 	{

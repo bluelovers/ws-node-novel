@@ -4,8 +4,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.novelDiffFromLog = novelDiffFromLog;
-const tslib_1 = require("tslib");
-const git_diff_from_1 = tslib_1.__importDefault(require("git-diff-from"));
+const git_diff_from_1 = require("git-diff-from");
 const upath2_1 = require("upath2");
 const baseHashDefault = 5;
 const targetTreeDefault = 'origin/master';
@@ -16,7 +15,7 @@ const targetTreeDefault = 'origin/master';
 function novelDiffFromLog(options) {
     let { targetTree = targetTreeDefault, novelRoot = process.cwd(), baseHash = baseHashDefault } = options;
     novelRoot = (0, upath2_1.resolve)(novelRoot);
-    let ls = (0, git_diff_from_1.default)(baseHash, targetTree, {
+    let ls = (0, git_diff_from_1.gitDiffFrom)(baseHash, targetTree, {
         cwd: novelRoot,
     });
     let ret = {
