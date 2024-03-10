@@ -1,8 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
 import FastGlob from '@bluelovers/fast-glob';
+import { __ROOT_TEST_MDCONF } from '../../../__root_ws';
 
-const TEST_CASES_DIRECTORY = path.join(__dirname, 'cases');
+const TEST_CASES_DIRECTORY = path.join(__ROOT_TEST_MDCONF, 'cases');
 
 
 

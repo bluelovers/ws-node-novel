@@ -5,8 +5,10 @@
 import novelInfo from '..';
 // @ts-ignore
 import fs from 'fs-extra';
+import { join } from 'path';
+import { __ROOT_TEST_MDCONF } from '../../../__root_ws';
 
-fs.readFile('./res/README.md')
+fs.readFile(join(__ROOT_TEST_MDCONF, './res/README.md'))
 	.then(function (buf)
 	{
 		return novelInfo.parse(buf, {
