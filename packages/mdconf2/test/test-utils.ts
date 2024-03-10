@@ -19,6 +19,7 @@ export function getTestCasesSync()
 		json: any,
 		md: string,
 		testName: string,
+		filename: string,
 	}[] = [];
 
 	for (let i = 0; i < directories.length; i++)
@@ -36,7 +37,12 @@ export function getTestCasesSync()
 			const markdownFile = fs.readFileSync(
 				resolveTestCaseFile(filename), 'utf-8',
 			);
-			testCases.push({ json: jsonFile, md: markdownFile, testName });
+			testCases.push({
+				json: jsonFile,
+				md: markdownFile,
+				testName,
+				filename,
+			});
 		}
 	}
 

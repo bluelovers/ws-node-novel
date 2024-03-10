@@ -1,0 +1,53 @@
+# defaults
+
+## upload
+
+- max: 200mb
+- dir: /tmp
+
+### thumbnail sizes
+
+- 50x50
+- 300x300
+- 600x600
+- 900x900
+
+## s3
+
+- api key: 111111
+- secret: 222222
+
+### buckets
+
+- avatars: myapp-avatars
+- assets: myapp-assets
+- files: myapp-files
+
+# production
+
+## upload
+
+- max: 200mb
+
+## sites
+
+### 0
+
+- hostname: google.com
+- build: passing
+- coverage: 94%
+### 1
+
+- hostname: facebook.com
+- build: passing
+- coverage: 97%
+### 2
+
+- hostname: twitter.com
+- build: failed
+- coverage: 81%
+### 3
+
+- hostname: myspace.com
+- build: unkown
+- coverage: 0%
