@@ -1,5 +1,4 @@
 /// <reference types="node" />
-import CrossSpawn from 'cross-spawn-extra';
 import Bluebird from 'bluebird';
 import { IParseCommit } from 'gitlog2';
 import { console } from '@git-lazy/util';
@@ -20,7 +19,7 @@ export declare function fetchAllFileLog(repo: string, options?: {
     sortDesc?: boolean;
 }): Bluebird<IFetchAllFileLog>;
 export declare function git_fake_author(name?: string, email?: string): string;
-export declare function git_commit_file(row: IFetchAllFileLogRow, cwd?: string): Bluebird<CrossSpawn.SpawnASyncReturns<Buffer>>;
+export declare function git_commit_file(row: IFetchAllFileLogRow, cwd?: string): Bluebird<import("cross-spawn-extra").SpawnASyncReturns<Buffer>>;
 export declare function git_get_user(cwd: string): Promise<{
     name: string;
     email: string;
