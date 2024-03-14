@@ -4,7 +4,7 @@
 
 import { crlf, LF } from 'crlf-normalize';
 import { deepmergeOptions } from './lib/const';
-import deepmerge from 'deepmerge-plus';
+import { deepmergeAll, IOptions as IOptionsDeepmerge } from 'deepmerge-plus';
 import moment from 'moment';
 import { stringify as MdconfStringify } from './index';
 import { array_unique } from 'array-hyper-unique';
@@ -58,7 +58,7 @@ export module JsonMd
 		} as Partial<IMdconfMeta & IJsonmdData_v1 & IOptions>;
 
 		{
-			data = deepmerge.all([data, json_data, data, options], deepmergeOptions);
+			data = deepmergeAll([data, json_data, data, options], deepmergeOptions);
 			data.data = data.data || {};
 
 			if (json_data.novel_date)
@@ -166,7 +166,7 @@ ${(data.novel_desc || data.data.desc || '').replace(/\`/g, '\\`')}
 	{
 		let ret: IMdconfMeta;
 
-		let data = deepmerge.all([
+		let data = deepmergeAll([
 			{},
 			inputData || {},
 			...argv,
@@ -243,7 +243,7 @@ ${(data.novel_desc || data.data.desc || '').replace(/\`/g, '\\`')}
 			});
 		}
 
-		ret = deepmerge.all([
+		ret = deepmergeAll([
 			...ls,
 			{
 				novel: {
@@ -264,7 +264,7 @@ ${(data.novel_desc || data.data.desc || '').replace(/\`/g, '\\`')}
 		], Object.assign({
 			keyValueOrMode: true,
 			// @ts-ignore
-		}, deepmergeOptions) as deepmerge.Options);
+		}, deepmergeOptions) as IOptionsDeepmerge);
 
 		chkInfo(ret);
 

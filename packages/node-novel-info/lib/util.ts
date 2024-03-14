@@ -6,7 +6,7 @@ import { filterByPrefixReturnKeys, anyToArray } from './index';
 import { array_unique } from 'array-hyper-unique';
 import { IOptionsParse, IMdconfMeta } from './types';
 import { envVal } from 'env-bool';
-import sortObjectKeys from 'sort-object-keys2';
+import { sortObjectKeys } from 'sort-object-keys2';
 import { isPlainObject } from 'is-plain-object';
 
 export function getNovelTitleFromMeta(meta: IMdconfMeta): string[]

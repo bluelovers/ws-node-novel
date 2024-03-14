@@ -5,7 +5,7 @@
 import { deepmergeOptions } from './lib/const';
 import { parse as _parse, stringify as _stringify, RawObject, mdconf } from 'mdconf2';
 import { crlf, LF } from 'crlf-normalize';
-import deepmerge from 'deepmerge-plus';
+import { deepmerge } from 'deepmerge-plus';
 import { array_unique } from 'array-hyper-unique';
 import JsonMd from './json';
 import { envVal, envBool } from 'env-bool';

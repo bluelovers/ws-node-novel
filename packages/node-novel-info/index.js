@@ -14,7 +14,7 @@ Object.defineProperty(exports, "deepmergeOptions", { enumerable: true, get: func
 const mdconf2_1 = require("mdconf2");
 Object.defineProperty(exports, "mdconf", { enumerable: true, get: function () { return mdconf2_1.mdconf; } });
 const crlf_normalize_1 = require("crlf-normalize");
-const deepmerge_plus_1 = tslib_1.__importDefault(require("deepmerge-plus"));
+const deepmerge_plus_1 = require("deepmerge-plus");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const json_1 = tslib_1.__importDefault(require("./json"));
 const env_bool_1 = require("env-bool");
@@ -48,7 +48,7 @@ function parse(data, options = {}) {
             ret.novel.preface = (Array.isArray(ret.novel.preface)) ? ret.novel.preface.join(crlf_normalize_1.LF) : ret.novel.preface;
         }
         if (!options.lowCheckLevel || ret.options) {
-            ret.options = (0, deepmerge_plus_1.default)(ret.options || {}, {
+            ret.options = (0, deepmerge_plus_1.deepmerge)(ret.options || {}, {
                 textlayout: {},
             }, const_1.deepmergeOptions);
         }

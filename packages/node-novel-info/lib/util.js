@@ -7,11 +7,10 @@ exports.getNovelTitleFromMeta = getNovelTitleFromMeta;
 exports.sortKeys = sortKeys;
 exports.chkInfo = chkInfo;
 exports.isHexValue = isHexValue;
-const tslib_1 = require("tslib");
 const index_1 = require("./index");
 const array_hyper_unique_1 = require("array-hyper-unique");
 const env_bool_1 = require("env-bool");
-const sort_object_keys2_1 = tslib_1.__importDefault(require("sort-object-keys2"));
+const sort_object_keys2_1 = require("sort-object-keys2");
 const is_plain_object_1 = require("is-plain-object");
 function getNovelTitleFromMeta(meta) {
     if (meta === null || meta === void 0 ? void 0 : meta.novel) {
@@ -45,7 +44,7 @@ function getNovelTitleFromMeta(meta) {
 }
 function sortKeys(ret) {
     // @ts-ignore
-    ret = (0, sort_object_keys2_1.default)(ret, [
+    ret = (0, sort_object_keys2_1.sortObjectKeys)(ret, [
         'novel',
         'contribute',
         'options',
@@ -120,7 +119,7 @@ function sortKeys(ret) {
             return;
         }
         if ((0, is_plain_object_1.isPlainObject)(obj)) {
-            parent[key] = (0, sort_object_keys2_1.default)(obj, sortList);
+            parent[key] = (0, sort_object_keys2_1.sortObjectKeys)(obj, sortList);
         }
     }
     // @ts-ignore

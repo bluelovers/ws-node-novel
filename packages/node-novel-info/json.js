@@ -7,7 +7,7 @@ exports.JsonMd = void 0;
 const tslib_1 = require("tslib");
 const crlf_normalize_1 = require("crlf-normalize");
 const const_1 = require("./lib/const");
-const deepmerge_plus_1 = tslib_1.__importDefault(require("deepmerge-plus"));
+const deepmerge_plus_1 = require("deepmerge-plus");
 const moment_1 = tslib_1.__importDefault(require("moment"));
 const index_1 = require("./index");
 const array_hyper_unique_1 = require("array-hyper-unique");
@@ -20,7 +20,7 @@ var JsonMd;
             contribute: [],
         };
         {
-            data = deepmerge_plus_1.default.all([data, json_data, data, options], const_1.deepmergeOptions);
+            data = (0, deepmerge_plus_1.deepmergeAll)([data, json_data, data, options], const_1.deepmergeOptions);
             data.data = data.data || {};
             if (json_data.novel_date) {
                 data.novel_date = json_data.novel_date;
@@ -98,7 +98,7 @@ ${(data.novel_desc || data.data.desc || '').replace(/\`/g, '\\`')}
     JsonMd.stringify = stringify;
     function toNovelInfo(initData, inputData, ...argv) {
         let ret;
-        let data = deepmerge_plus_1.default.all([
+        let data = (0, deepmerge_plus_1.deepmergeAll)([
             {},
             inputData || {},
             ...argv,
@@ -164,7 +164,7 @@ ${(data.novel_desc || data.data.desc || '').replace(/\`/g, '\\`')}
                 },
             });
         }
-        ret = deepmerge_plus_1.default.all([
+        ret = (0, deepmerge_plus_1.deepmergeAll)([
             ...ls,
             {
                 novel: {

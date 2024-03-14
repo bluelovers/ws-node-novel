@@ -4,10 +4,9 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deepmergeOptions = exports.EnumNovelStatus = void 0;
-const tslib_1 = require("tslib");
 const moment_1 = require("moment");
 const jsdom_url_1 = require("jsdom-url");
-const RawObject_1 = tslib_1.__importDefault(require("mdconf2/lib/RawObject"));
+const marked_raw_object_1 = require("@node-novel/marked-raw-object");
 /**
  * 小說狀態 flag 根據 readme.md 內設定
  */
@@ -78,7 +77,7 @@ var EnumNovelStatus;
 exports.deepmergeOptions = {
     isMergeableObject(value, isMergeableObject) {
         let bool;
-        if ((0, moment_1.isMoment)(value) || RawObject_1.default.isRawObject(value)) {
+        if ((0, moment_1.isMoment)(value) || (0, marked_raw_object_1.isRawObject)(value)) {
             return false;
         }
         if (value instanceof jsdom_url_1.URL || value && typeof value.href == 'string') {
