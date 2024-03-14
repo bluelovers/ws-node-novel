@@ -3,12 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultOptionsParse = void 0;
 exports.parse = parse;
 exports.stringify = stringify;
-const tslib_1 = require("tslib");
 /**
  * Module dependencies.
  */
 const marked_1 = require("marked");
-const md = tslib_1.__importStar(require("marked"));
 const crlf_normalize_1 = require("crlf-normalize");
 const moment_1 = require("moment");
 const is_plain_object_1 = require("is-plain-object");
@@ -17,7 +15,7 @@ const core_1 = require("./lib/core");
 exports.defaultOptionsParse = {
     crlf: crlf_normalize_1.LF,
     allowBlockquote: true,
-    markedOptions: Object.assign({}, md.defaults, {
+    markedOptions: Object.assign({}, marked_1.defaults, {
         breaks: true,
     }),
 };

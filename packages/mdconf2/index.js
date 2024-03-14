@@ -3,7 +3,7 @@
  * Created by user on 2018/3/24/024.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SYMBOL_RAW_DATA = exports.SYMBOL_RAW_VALUE = exports.RawObject = exports.isPlainObject = exports.defaultOptionsParse = exports.stringify = exports.parse = exports.mdconf = void 0;
+exports.SYMBOL_RAW_VALUE = exports.SYMBOL_RAW_DATA = exports.RawObject = exports.isPlainObject = exports.defaultOptionsParse = exports.stringify = exports.parse = exports.mdconf = void 0;
 const tslib_1 = require("tslib");
 const core_1 = tslib_1.__importStar(require("./core"));
 exports.mdconf = core_1.default;
@@ -15,7 +15,7 @@ var core_2 = require("./core");
 Object.defineProperty(exports, "defaultOptionsParse", { enumerable: true, get: function () { return core_2.defaultOptionsParse; } });
 var RawObject_1 = require("./lib/RawObject");
 Object.defineProperty(exports, "RawObject", { enumerable: true, get: function () { return RawObject_1.RawObject; } });
-Object.defineProperty(exports, "SYMBOL_RAW_VALUE", { enumerable: true, get: function () { return RawObject_1.SYMBOL_RAW_VALUE; } });
 Object.defineProperty(exports, "SYMBOL_RAW_DATA", { enumerable: true, get: function () { return RawObject_1.SYMBOL_RAW_DATA; } });
+Object.defineProperty(exports, "SYMBOL_RAW_VALUE", { enumerable: true, get: function () { return RawObject_1.SYMBOL_RAW_VALUE; } });
 exports.default = exports;
 //# sourceMappingURL=index.js.map

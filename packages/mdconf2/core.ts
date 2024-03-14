@@ -1,8 +1,13 @@
 /**
  * Module dependencies.
  */
-import { Token, Tokens, MarkedOptions, Lexer } from 'marked';
-import * as md from 'marked';
+import {
+	Token,
+	Tokens,
+	MarkedOptions,
+	Lexer,
+	defaults as mdDefaults
+} from 'marked';
 import { crlf, LF, CRLF, CR, chkcrlf } from 'crlf-normalize';
 import { isMoment } from 'moment';
 import { isPlainObject } from 'is-plain-object';
@@ -32,7 +37,7 @@ export const defaultOptionsParse: IOptionsParse = {
 	allowBlockquote: true,
 
 	markedOptions: Object.assign({},
-		md.defaults,
+		mdDefaults,
 		{
 			breaks: true,
 		},

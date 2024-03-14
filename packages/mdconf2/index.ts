@@ -11,6 +11,10 @@ export { IOptionsParse, defaultOptionsParse, IObjectParse } from './core';
 
 export { isPlainObject };
 
-export { RawObject, SYMBOL_RAW_VALUE, SYMBOL_RAW_DATA } from './lib/RawObject';
+export {
+	RawObject,
+	SYMBOL_RAW_DATA,
+	SYMBOL_RAW_VALUE
+} from './lib/RawObject';
 
 export default exports as typeof import('./index');
