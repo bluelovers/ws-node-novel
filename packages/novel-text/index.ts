@@ -8,9 +8,17 @@ import { enspace } from './text';
 import tiebaHarmony from 'tieba-harmony';
 import chkBlankLine from 'blank-line';
 
+/**
+ * novel-text 模組
+ * novel-text module
+ */
 export { StrUtil }
 export { chkBlankLine }
 export { tiebaHarmony }
 
+/**
+ * 小說文字處理器
+ * Novel text processor
+ */
 export const novelText = enspace.create();
 export default novelText;

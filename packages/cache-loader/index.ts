@@ -15,6 +15,10 @@ import path from 'upath2';
 import { array_unique } from 'array-hyper-unique';
 import sortObject from 'sort-object-keys2';
 
+/**
+ * 已開啟的快取映射
+ * Opened cache map
+ */
 const openedMap = new WeakMap<Partial<INovelStatCacheOptions>, NovelStatCache>();
 
 export { createMoment }
@@ -553,8 +557,10 @@ export class NovelStatCache
 
 	/**
 	 * @deprecated
+	 * @param {boolean | number | EnumBeforeSave} [bool] - 清理物件多餘資料 / Clean up excess object data
+	 * @returns {this} 本身 / This instance
 	 */
-	_beforeSave(bool?: boolean | number)
+	_beforeSave(bool?: boolean | number | EnumBeforeSave)
 	{
 		let timestamp = this.timestamp;
 
@@ -666,6 +672,7 @@ export class NovelStatCache
 			{
 				delete this.data.history[timestamp];
 			}
+			// @ts-ignore
 			else if (bool > 1 || bool == EnumBeforeSave.OPTIMIZE_AND_UPDATE)
 			{
 				_list.forEach(function (data)

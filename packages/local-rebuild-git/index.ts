@@ -14,10 +14,22 @@ import { Console } from 'debug-color2';
 import { _createMode002, _createMode001 } from './lib/create-new-empty';
 import { console } from '@git-lazy/util';
 
+/**
+ * 匯出控制台
+ * Export console
+ */
 export { console }
 
+/**
+ * 檔案歷史紀錄類型
+ * File history log type
+ */
 export type IFetchAllFileLog = [string, IFetchAllFileLogRow][];
 
+/**
+ * 檔案歷史紀錄項目介面
+ * File history log item interface
+ */
 export interface IFetchAllFileLogRow
 {
 	file: string,
@@ -25,6 +37,10 @@ export interface IFetchAllFileLogRow
 	log: IFetchAllFileLogRowLog,
 }
 
+/**
+ * 檔案歷史紀錄項目日誌介面
+ * File history log item log interface
+ */
 export interface IFetchAllFileLogRowLog extends IParseCommit
 {
 	authorDateTimestamp?: number,
@@ -50,6 +66,14 @@ export interface IFetchAllFileLogRowLog extends IParseCommit
 
 //fetchFileLogRow(path.join(git_repo, 'cm'), '由于世界魔物满载.epub').then(ret => console.log(ret));
 
+/**
+ * 取得檔案的歷史紀錄
+ * Get file history log
+ *
+ * @param {string} repo - 儲存庫路徑 / Repository path
+ * @param {string} file - 檔案路徑 / File path
+ * @returns {Promise<IFetchAllFileLogRow | null>} 檔案歷史紀錄 / File history log
+ */
 export async function fetchFileLogRow(repo: string, file: string)
 {
 	let fullpath = path.join(repo, file);
@@ -92,6 +116,16 @@ function trim(text: string)
 		;
 }
 
+/**
+ * 取得所有檔案的歷史紀錄
+ * Get all files history log
+ *
+ * @param {string} repo - 儲存庫路徑 / Repository path
+ * @param {object} [options] - 選項 / Options
+ * @param {function} [options.sortFn] - 排序函數 / Sort function
+ * @param {boolean} [options.sortDesc] - 是否倒序 / Sort descending
+ * @returns {Promise<IFetchAllFileLog>} 檔案歷史紀錄 / File history log
+ */
 export function fetchAllFileLog(repo: string, options?: {
 	sortFn?(a: IFetchAllFileLogRow, b: IFetchAllFileLogRow): number,
 	sortDesc?: boolean,
@@ -146,6 +180,14 @@ export function fetchAllFileLog(repo: string, options?: {
 		;
 }
 
+/**
+ * 產生偽造的作者資訊
+ * Generate fake author information
+ *
+ * @param {string} [name] - 作者名稱 / Author name
+ * @param {string} [email] - 作者郵箱 / Author email
+ * @returns {string} 偽造的作者資訊 / Fake author information
+ */
 export function git_fake_author(name?: string, email?: string)
 {
 	email = emailNormalize(email || 'testbot@test.test')
@@ -199,6 +241,14 @@ export function git_fake_author(name?: string, email?: string)
 	return `${name || 'testbot'} <${email || 'testbot@test.test'}>`;
 }
 
+/**
+ * 提交檔案
+ * Commit file
+ *
+ * @param {IFetchAllFileLogRow} row - 檔案歷史紀錄項目 / File history log item
+ * @param {string} [cwd] - 工作目錄 / Working directory
+ * @returns {Promise<any>} 提交結果 / Commit result
+ */
 export function git_commit_file(row: IFetchAllFileLogRow, cwd?: string)
 {
 	let author_name: string = git_fake_author(row.log.authorName, row.log.authorEmail);
@@ -266,6 +316,13 @@ export function git_commit_file(row: IFetchAllFileLogRow, cwd?: string)
 	})
 }
 
+/**
+ * 取得 git 使用者資訊
+ * Get git user information
+ *
+ * @param {string} cwd - 工作目錄 / Working directory
+ * @returns {Promise<{name: string, email: string}>} 使用者資訊 / User information
+ */
 export async function git_get_user(cwd: string)
 {
 	let cp = await CrossSpawn.async('git', [
@@ -296,6 +353,15 @@ export async function git_get_user(cwd: string)
 	}
 }
 
+/**
+ * 設定 git 使用者資訊
+ * Set git user information
+ *
+ * @param {string} name - 使用者名稱 / User name
+ * @param {string} email - 使用者郵箱 / User email
+ * @param {string} cwd - 工作目錄 / Working directory
+ * @returns {Promise<void>}
+ */
 export async function git_set_user(name: string, email: string, cwd: string)
 {
 	await CrossSpawn.async('git', [
@@ -319,6 +385,13 @@ export async function git_set_user(name: string, email: string, cwd: string)
 	});
 }
 
+/**
+ * 執行所有任務
+ * Run all jobs
+ *
+ * @param {string} cwd - 工作目錄 / Working directory
+ * @returns {Promise<void>}
+ */
 export function runAllJob(cwd: string)
 {
 	cwd = path.normalize(cwd);

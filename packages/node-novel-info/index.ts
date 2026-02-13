@@ -14,6 +14,10 @@ import { expect } from 'chai';
 import { chkInfo, sortKeys, isHexValue } from './lib/util';
 import { IOptionsParse, IMdconfMeta } from './lib/types';
 
+/**
+ * node-novel-info 模組
+ * node-novel-info module
+ */
 export * from './lib/util';
 export * from './lib/types';
 export { IMdconfMeta, IOptionsParse } from './lib/types';
@@ -23,11 +27,24 @@ export { mdconf }
 export { deepmergeOptions }
 export { envVal, envBool }
 
+/**
+ * 預設解析選項
+ * Default parse options
+ */
 export const defaultOptionsParse: IOptionsParse = {
 	removeRawData: true,
 	disableKeyToLowerCase: true,
 };
 
+/**
+ * 將資料轉換為 mdconf 字串
+ * Convert data to mdconf string
+ *
+ * @param {any} data - 輸入資料 / Input data
+ * @param {any} [d2] - 第二個參數 / Second parameter
+ * @param {...any[]} argv - 其他參數 / Other parameters
+ * @returns {string} mdconf 字串 / mdconf string
+ */
 export function stringify(data, d2?, ...argv): string
 {
 	data = _handleDataForStringify(data, d2, ...argv);
@@ -35,6 +52,15 @@ export function stringify(data, d2?, ...argv): string
 	return _stringify(data) + LF.repeat(2);
 }
 
+/**
+ * 解析 mdconf 字串
+ * Parse mdconf string
+ *
+ * @template T - 回傳型別 / Return type
+ * @param {string | {toString(): string}} data - 輸入資料 / Input data
+ * @param {IOptionsParse} [options] - 解析選項 / Parse options
+ * @returns {T} 解析後的物件 / Parsed object
+ */
 export function parse<T = IMdconfMeta>(data: {
 	toString(): string,
 }, options?: IOptionsParse): T
@@ -104,6 +130,16 @@ export function parse<T extends IMdconfMeta>(data, options: IOptionsParse = {}):
 	return ret;
 }
 
+/**
+ * 處理資料
+ * Handle data
+ *
+ * @template T - 回傳型別 / Return type
+ * @param {any} data - 輸入資料 / Input data
+ * @param {any} [d2] - 第二個參數 / Second parameter
+ * @param {...any[]} argv - 其他參數 / Other parameters
+ * @returns {T} 處理後的資料 / Processed data
+ */
 export function _handleData<T extends IMdconfMeta>(data, d2?, ...argv): T
 {
 	// @ts-ignore
@@ -121,6 +157,16 @@ export function _handleData<T extends IMdconfMeta>(data, d2?, ...argv): T
 	return data;
 }
 
+/**
+ * 處理資料以供轉換為字串
+ * Handle data for string conversion
+ *
+ * @template T - 回傳型別 / Return type
+ * @param {any} data - 輸入資料 / Input data
+ * @param {any} [d2] - 第二個參數 / Second parameter
+ * @param {...any[]} argv - 其他參數 / Other parameters
+ * @returns {T} 處理後的資料 / Processed data
+ */
 export function _handleDataForStringify<T extends IMdconfMeta>(data, d2?, ...argv): T
 {
 	data = _handleData(data, d2, ...argv);
@@ -141,6 +187,14 @@ export function _handleDataForStringify<T extends IMdconfMeta>(data, d2?, ...arg
 	return data;
 }
 
+/**
+ * mdconf 解析函數別名
+ * mdconf parse function alias
+ */
 export const mdconf_parse = parse;
 
+/**
+ * node-novel-info 模組預設匯出
+ * node-novel-info module default export
+ */
 export default exports as typeof import('./index');

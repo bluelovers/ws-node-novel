@@ -7,12 +7,24 @@ import { ITSPickExtra } from 'ts-type'
 import { resolve } from 'upath2'
 import { NovelDiffFromLogParser } from './class';
 
+/**
+ * 預設的 baseHash 數量
+ * Default baseHash count
+ */
 const baseHashDefault = 5;
+
+/**
+ * 預設的目標分支
+ * Default target tree
+ */
 const targetTreeDefault = 'origin/master';
 
 /**
  * 比對目標路徑下的 git 歷史變化
  * 適用於任何符合 `主資料夾/副資料夾/子路徑` 這種結構的資料夾
+ *
+ * @param {ITSPickExtra<IOptions, 'novelRoot'>} options - 選項 / Options
+ * @returns {INovelDiffFromLog} 比對結果 / Comparison result
  */
 export function novelDiffFromLog(options: ITSPickExtra<IOptions, 'novelRoot'>): INovelDiffFromLog
 {
@@ -111,6 +123,10 @@ export function novelDiffFromLog(options: ITSPickExtra<IOptions, 'novelRoot'>): 
 	return ret;
 }
 
+/**
+ * 檔案列表項目類型
+ * File list item type
+ */
 export type IListFileRow = IGitDiffFromRow & {
 	/**
 	 * 主資料夾 ID
@@ -124,6 +140,10 @@ export type IListFileRow = IGitDiffFromRow & {
 	subpath: string,
 }
 
+/**
+ * 小說列表項目類型
+ * Novel list item type
+ */
 export type IListNovelRow = IListFileRow[] & {
 	/**
 	 * 主資料夾 ID
@@ -135,14 +155,26 @@ export type IListNovelRow = IListFileRow[] & {
 	readonly novelID: string,
 }
 
+/**
+ * 主資料夾列表類型
+ * Main folder list type
+ */
 export type IListMain = {
 	[pathMain: string]: IListMainRow,
 }
 
+/**
+ * 主資料夾列表項目類型
+ * Main folder list item type
+ */
 export type IListMainRow = {
 	[novelID: string]: IListNovelRow
 }
 
+/**
+ * 選項介面
+ * Options interface
+ */
 export interface IOptions
 {
 	/**
@@ -161,6 +193,10 @@ export interface IOptions
 	targetTree: string,
 }
 
+/**
+ * 小說差異日誌介面
+ * Novel diff log interface
+ */
 export interface INovelDiffFromLog extends IOptions
 {
 	/**

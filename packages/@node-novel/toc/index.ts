@@ -11,8 +11,17 @@ import { IMdconfMeta, mdconf, mdconf_parse } from 'node-novel-info';
 import sortObjectKeys from 'sort-object-keys2';
 import { getNovelTitles, md_href } from './lib/util';
 import path from 'upath2';
+
+/**
+ * 匯出 md_href 函數
+ * Export md_href function
+ */
 export { md_href }
 
+/**
+ * 建立除錯控制台
+ * Create debug console
+ */
 export const console = new Console(null, {
 	enabled: true,
 	inspectOptions: {
@@ -23,10 +32,26 @@ export const console = new Console(null, {
 	},
 });
 
+/**
+ * 啟用顏色輸出
+ * Enable color output
+ */
 console.enabledColor = true;
 
+/**
+ * 匯出 Bluebird 為 Promise
+ * Export Bluebird as Promise
+ */
 export { Bluebird as Promise }
 
+/**
+ * 取得目錄 ID 列表
+ * Get directory ID list
+ *
+ * @param {string} cwd - 工作目錄 / Working directory
+ * @param {typeof defaultFilter} [filter] - 過濾函數 / Filter function
+ * @returns {Bluebird<string[]>} 目錄 ID 列表 / Directory ID list
+ */
 export function get_ids(cwd: string, filter?: typeof defaultFilter)
 {
 	return Bluebird.resolve(FastGlob<string>([
@@ -53,6 +78,14 @@ export function get_ids(cwd: string, filter?: typeof defaultFilter)
 		;
 }
 
+/**
+ * 處理目錄結構並建立 TOC
+ * Process directory structure and create TOC
+ *
+ * @param {string} DIST_NOVEL_ROOT - 目錄根路徑 / Directory root path
+ * @param {typeof defaultFilter} [filter] - 過濾函數 / Filter function
+ * @returns {Bluebird<{[k: string]: IRet}>} TOC 列表 / TOC list
+ */
 export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilter)
 {
 	return get_ids(DIST_NOVEL_ROOT, filter)
@@ -193,6 +226,10 @@ export function processToc(DIST_NOVEL_ROOT: string, filter?: typeof defaultFilte
 
 }
 
+/**
+ * 回傳資料列介面
+ * Return data row interface
+ */
 export interface IRetRow
 {
 	titles: string[],
@@ -201,11 +238,24 @@ export interface IRetRow
 	link?: string,
 }
 
+/**
+ * 回傳資料介面
+ * Return data interface
+ */
 export interface IRet
 {
 	[k: string]: IRetRow
 }
 
+/**
+ * 建立 README 資料
+ * Create README data
+ *
+ * @param {string} cwd - 工作目錄 / Working directory
+ * @param {IRet} ret - 回傳資料 / Return data
+ * @param {string} item - 項目路徑 / Item path
+ * @returns {Bluebird<IRet>} 更新後的回傳資料 / Updated return data
+ */
 export function createReadmeData(cwd: string, ret: IRet, item: string): Bluebird<IRet>
 {
 	return Bluebird.resolve()
@@ -266,6 +316,13 @@ export function createReadmeData(cwd: string, ret: IRet, item: string): Bluebird
 	;
 }
 
+/**
+ * 預設過濾函數
+ * Default filter function
+ *
+ * @param {string} value - 要過濾的值 / Value to filter
+ * @returns {boolean} 是否通過過濾 / Whether it passes the filter
+ */
 export function defaultFilter(value: string): boolean
 {
 	return true;

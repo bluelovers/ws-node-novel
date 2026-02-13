@@ -5,6 +5,15 @@
 import GrayMatter from 'gray-matter';
 import { IOptionsParse, mdconf_parse, stringify as mdconf_stringify } from 'node-novel-info';
 
+/**
+ * md-loader 模組
+ * md-loader module
+ */
+
+/**
+ * 解析選項介面
+ * Parse options interface
+ */
 export interface IOptions<I extends IInput, OUT extends any, PO, GO>
 {
 	/**
@@ -31,6 +40,14 @@ export interface IOptions<I extends IInput, OUT extends any, PO, GO>
 	stringify?(input): string,
 }
 
+/**
+ * 解析 markdown 檔案
+ * Parse markdown file
+ *
+ * @param {I} inputContent - 輸入內容 / Input content
+ * @param {IOptions<I, OUT, PO, GO>} [options] - 選項 / Options
+ * @returns {object} 解析結果 / Parse result
+ */
 export function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I, options?: IOptions<I, OUT, PO, GO>)
 {
 	let { matterOptions, parseOptions, parser = mdconf_parse } = (options || {} as null);
@@ -96,8 +113,13 @@ export function parse<I extends IInput, D, OUT, PO, GO>(inputContent: I, options
 }
 
 /**
- * 用來將取得的物件轉換回 md
+ * 將物件轉換回 markdown
+ * Convert object back to markdown
  * 當 content, mdconf 同時存在時 content > mdconf
+ *
+ * @param {IStringifyData<T1, T2>} inputData - 輸入資料 / Input data
+ * @param {object} [options] - 選項 / Options
+ * @returns {string} markdown 字串 / Markdown string
  */
 export function stringify<T1, T2>(inputData: IStringifyData<T1, T2>, options?: IObject<{
 	matterOptions?: GrayMatter.GrayMatterOption<IInput, any>,
@@ -124,7 +146,11 @@ export function stringify<T1, T2>(inputData: IStringifyData<T1, T2>, options?: I
 }
 
 /**
- * 將 inputContent 轉為 string
+ * 將輸入內容轉為 string
+ * Convert input content to string
+ *
+ * @param {I} inputContent - 輸入內容 / Input content
+ * @returns {string} 處理後的字串 / Processed string
  */
 export function fixContent<I extends IInput>(inputContent: I): string
 {
@@ -142,12 +168,14 @@ export function fixContent<I extends IInput>(inputContent: I): string
 
 /**
  * 最後處理時 都會被轉為 string
+ * Will be converted to string at final processing
  */
 export type IInput = Buffer | string;
 export type IParseOptions<PO> = (IOptionsParse | object) | PO;
 
 /**
  * 當 content, mdconf 同時存在時 content > mdconf
+ * When content and mdconf exist simultaneously, content > mdconf
  */
 export type IStringifyData<T extends any, OUT extends any> = IObject<{
 	data?: IObject<T>,

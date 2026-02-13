@@ -10,6 +10,11 @@ import { filename as novelFilename } from '@lazy-cjk/novel-filename';
 import { slugify } from '@lazy-cjk/zh-slugify';
 
 /**
+ * node-novel-normalize 模組
+ * node-novel-normalize module
+ */
+
+/**
  * 設定選項介面
  * Options interface for normalization settings
  */
@@ -196,6 +201,10 @@ export function normalize_val(str: string, padNum: number = 5, options: IOptions
 	return str;
 }
 
+/**
+ * 模組匯出處理
+ * Module export handling
+ */
 // @ts-ignore
 if (process.env.TSDX_FORMAT !== 'esm')
 {
@@ -208,4 +217,8 @@ if (process.env.TSDX_FORMAT !== 'esm')
 
 }
 
+/**
+ * 預設匯出
+ * Default export
+ */
 export default normalize_val;

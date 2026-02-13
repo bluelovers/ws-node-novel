@@ -17,4 +17,8 @@ export {
 	SYMBOL_RAW_VALUE
 } from './lib/RawObject';
 
+/**
+ * mdconf2 模組
+ * mdconf2 module
+ */
 export default exports as typeof import('./index');

@@ -8,8 +8,19 @@ import { crlf, LF } from 'crlf-normalize';
 import { execall } from 'execall2';
 import { removeBom, removeLine, removePunctuation, removeSpace } from './lib/util';
 
+/**
+ * txt-stat-report 模組
+ * txt-stat-report module
+ */
 export type ITxtReport = ReturnType<typeof txtReport>;
 
+/**
+ * 產生文字統計報告
+ * Generate text statistics report
+ *
+ * @param {string} input - 輸入文字 / Input text
+ * @returns {ITxtReport} 統計報告 / Statistics report
+ */
 export function txtReport(input: string)
 {
 	let buf_length = Buffer.from(input).length;
@@ -104,6 +115,11 @@ export function txtReport(input: string)
 
 /**
  * 將多個報告總和起來
+ * Sum multiple reports
+ *
+ * @template T - 報告型別 / Report type
+ * @param {T[]} arr - 報告陣列 / Report array
+ * @returns {T} 總和報告 / Summed report
  */
 export function txtReportSum<T extends ITxtReport>(arr: T[])
 {
