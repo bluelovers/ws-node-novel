@@ -80,7 +80,6 @@
     "marked": "<1 >=0.8.2"
   },
   "peerDependencies": {},
-  "packageManager": "yarn@1.22.19",
   "publishConfig": {
     "access": "public"
   }

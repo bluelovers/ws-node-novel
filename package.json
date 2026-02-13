@@ -43,6 +43,9 @@
     "ci:build": "echo ci:build",
     "lerna:publish": "yarn run prepublishOnly:root && lerna publish && yarn run postpublishOnly",
     "lerna:publish:yes": "yarn run prepublishOnly:root && lerna publish --yes --bump patch && yarn run postpublishOnly",
+    "lerna:publish:yes:major": "yarn run prepublishOnly:root && lerna publish --no-private --yes --bump major && yarn run postpublishOnly",
+    "lerna:publish:yes:minor": "yarn run prepublishOnly:root && lerna publish --no-private --yes --bump minor && yarn run postpublishOnly",
+    "lerna:publish:yes:patch": "yarn run prepublishOnly:root && lerna publish --no-private --yes --bump patch && yarn run postpublishOnly",
     "ws:fix-all": "yarn-tool fix-all  --overwriteHostedGitInfo",
     "ws:fix-all:resetStaticFiles": "yarn run ws:fix-all -- --resetStaticFiles",
     "preversion": "yarn run test",
@@ -103,5 +106,6 @@
     "regexp-cjk-plugin-escape-unicode-property": "^1.0.38",
     "regexp-cjk-plugin-extra": "^1.0.43",
     "ts-jest": "^29.1.2"
-  }
+  },
+  "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
 }
