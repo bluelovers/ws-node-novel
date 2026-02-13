@@ -4,3 +4,6 @@ packages:
   # exclude packages that are inside test/ directories
   - '!**/test/**'
   - packages/@node-novel/*
+publicHoistPattern:
+  - "@lazy-cjk/*"
+  - "@node-novel/*"
