@@ -1,48 +1,57 @@
 # node-novel-info
 
-> mdconf module for node-novel
+> node-novel 的 mdconf 模組 / mdconf Module for node-novel
 
-`npm install node-novel-info`
+[![npm version](https://img.shields.io/npm/v/node-novel-info.svg)](https://www.npmjs.com/package/node-novel-info)
+[![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC)
 
-## demo
+## 簡介
 
-[README.md](test/res/README.md)
+此模組是 node-novel 的 mdconf 解析模組，用於解析與生成小說資訊設定檔。
 
+## 安裝
+
+```bash
+# 使用 yarn
+yarn add node-novel-info
+
+# 使用 npm
+npm install node-novel-info
 ```
+
+## 使用方法
+
+```ts
+// CommonJS
 const novelInfo = require('node-novel-info');
+
+// ES Module
 import * as novelInfo from 'node-novel-info';
 import novelInfo from 'node-novel-info';
 ```
 
 ### mdconf_parse
 
-<!-- js
-var novelInfo = require('.');
-var fs = require('fs-extra');
-var Mdconf = novelInfo;
--->
-
 ```js
+import * as novelInfo from 'node-novel-info';
+import * as fs from 'fs-extra';
+
 fs.readFile('./test/res/README.md')
-	.then(function (buf)
-	{
-		return novelInfo.parse(buf, {
-			//chk: false
-		});
-	})
-	.then(function (conf)
-	{
-		console.log(conf);
-		
-		return conf;
-	})
-;
+  .then(function (buf) {
+    return novelInfo.parse(buf, {
+      // chk: false
+    });
+  })
+  .then(function (conf) {
+    console.log(conf);
+    return conf;
+  });
 ```
 
-#### output
+#### 輸出範例
 
 ```
-{ novel: 
+{ novel:
    { title: '自卫队三部曲',
      author: '有川浩',
      source: 'http://www.wenku8.com/modules/article/reader.php?aid=350',
@@ -58,25 +67,23 @@ fs.readFile('./test/res/README.md')
 ### Mdconf.stringify
 
 ```js
-var moment = require("moment");
+import * as novelInfo from 'node-novel-info';
+import moment from 'moment';
+
 console.log(novelInfo.stringify({
-	novel: {
-		test: true,
-	},
-
-	options: {
-
-		textlayout: {
-			lf: true,
-		},
-
-		data: moment(),
-
-	}
+  novel: {
+    test: true,
+  },
+  options: {
+    textlayout: {
+      lf: true,
+    },
+    data: moment(),
+  }
 }));
 ```
 
-#### output
+#### 輸出範例
 
 ```markdown
 #novel
@@ -92,9 +99,21 @@ console.log(novelInfo.stringify({
 - lf: true
 ```
 
-## links
+## API
 
+### parse(content: Buffer | string, options?: IParseOptions): IConf
+
+解析 Markdown 設定檔內容。
+
+### stringify(data: IConf): string
+
+將設定物件轉換為 Markdown 格式。
+
+## 相關連結
+
+- [ws-node-novel](https://github.com/bluelovers/ws-node-novel) - 父專案
+- [README.md](test/res/README.md) - 範例檔案
 - [node-novel-info](https://www.npmjs.com/package/node-novel-info)
 - [mdconf2](https://www.npmjs.com/package/mdconf2)
 - [mdconf-stringify](https://www.npmjs.com/package/mdconf-stringify)
-
+- [Issues](https://github.com/bluelovers/ws-node-novel/issues)

@@ -38,18 +38,19 @@ Node.js 小說文本處理工具集合 (Monorepo)
 |---------|-------------|
 | [@node-novel/cache-loader](./packages/cache-loader/) | 讀寫分析 novel-stat.json |
 | [@node-novel/git-diff-log](./packages/git-diff-log/) | 比對 git 歷史變化 |
+| [@node-novel/layout](./packages/layout/) | 小說文字排版與格式化 |
+| [@node-novel/local-rebuild-git](./packages/local-rebuild-git/) | 本地重建 git 歷史 |
+| [@node-novel/marked-raw-object](./packages/@node-novel/marked-raw-object/) | Markdown 原始物件解析 |
 | [@node-novel/md-loader](./packages/md-loader/) | 支援 Front Matter 的 mdconf |
-| [novel-text](./packages/novel-text/) | 小說核心文字處理模組 |
-| [node-novel-info](./packages/node-novel-info/) | mdconf 模組 |
+| [@node-novel/normalize](./packages/node-novel-normalize/) | 檔案名稱標準化處理 |
+| [@node-novel/parse-txt-tag](./packages/parse-txt-tag/) | 解析 txt 標籤 |
+| [@node-novel/sort](./packages/node-novel-sort/) | 排序工具 |
+| [@node-novel/toc](./packages/@node-novel/toc/) | 建立小說索引目錄 |
 | [@node-novel/txt-split](./packages/txt-split/) | 分割 txt 檔案 |
-| [txt-split](./packages/txt-split/) | txt 檔案分割工具 |
-| [parse-txt-tag](./packages/parse-txt-tag/) | 解析 txt 標籤 |
-| [node-novel-normalize](./packages/node-novel-normalize/) | 標準化處理 |
-| [node-novel-sort](./packages/node-novel-sort/) | 排序工具 |
+| [@node-novel/txt-stat-report](./packages/txt-stat-report/) | 統計報告 |
 | [mdconf2](./packages/mdconf2/) | mdconf 解析與字串化 |
-| [layout](./packages/layout/) | 版面配置 |
-| [local-rebuild-git](./packages/local-rebuild-git/) | 本地重建 git |
-| [txt-stat-report](./packages/txt-stat-report/) | 統計報告 |
+| [node-novel-info](./packages/node-novel-info/) | mdconf 模組 |
+| [novel-text](./packages/novel-text/) | 小說核心文字處理模組 |
 
 ## 安裝
 
