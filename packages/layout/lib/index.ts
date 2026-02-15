@@ -1,5 +1,11 @@
 /**
  * Created by user on 2019/5/29.
+ * 
+ * 文字排版處理模組
+ * Text Layout Processing Module
+ * 
+ * 提供文字排版、替換、修剪等功能，適用於小說文字處理。
+ * Provides text layout, replacement, and trimming functions for novel text processing.
  */
 
 import { getMinMidMax } from 'blank-line';
@@ -24,11 +30,37 @@ import { trim as strUtilTrim } from '@lazy-cjk/str-util-trim';
 import { normalize as strUtilNormalize } from '@lazy-cjk/str-util-normalize';
 
 
+/**
+ * 特殊分隔鍵
+ * Special separator key
+ * 
+ * 用於標記需要特殊處理的分隔符位置。
+ * Used to mark positions requiring special separator handling.
+ */
 export const SP_KEY = "#_@_#";
+
+/**
+ * 特殊分隔符正則表達式
+ * Special separator regex pattern
+ * 
+ * 匹配各種可能的分隔符，包括和諧字、特殊符號等。
+ * Matches various possible separators, including harmonized characters and special symbols.
+ */
 export const SP_REGEXP = "(?:@|（·?）|-|/|\\(\\)|%|￥|_|\\?|？|\\||#|\\$|[（\\(](?:和谐|河蟹)[\\)）]|（河）（蟹）|[（\\(][河蟹]{1,2}[\\)）]| |\\.|[・·]|\\*|□|圌|[=＝]|\\\\\\\\|\\/\\/|｜)";
 
 /**
- * 排版處理核心
+ * 文字排版處理類別
+ * Text Layout Processing Class
+ * 
+ * 提供文字排版處理的核心功能，包括：
+ * - 文字替換與正則處理
+ * - 空白與換行調整
+ * - 英文文字間距處理
+ * 
+ * Provides core functionality for text layout processing, including:
+ * - Text replacement and regex processing
+ * - Whitespace and line break adjustment
+ * - English text spacing handling
  */
 export class TextLayout
 {

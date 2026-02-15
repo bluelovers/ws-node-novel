@@ -1,5 +1,11 @@
 /**
  * Module dependencies.
+ * 
+ * Markdown 配置解析核心模組
+ * Markdown Configuration Parsing Core Module
+ * 
+ * 提供將 Markdown 文件解析為結構化物件，以及將物件轉換回 Markdown 的功能。
+ * Provides functionality to parse Markdown files into structured objects and convert objects back to Markdown.
  */
 import {
 	Token,
@@ -14,24 +20,54 @@ import { isPlainObject } from 'is-plain-object';
 import { RawObject, IRawObjectTokenPlus, ITokenText2, IRawObjectPlus, IRawObjectDataPlus } from './lib/RawObject';
 import { createInlineLexer, makeCodeBlock, normalize, put, getobjectbyid } from './lib/core';
 
+/**
+ * 解析選項介面
+ * Parse options interface
+ */
 export interface IOptionsParse
 {
 	/**
+	 * 換行符類型 (已停用)
+	 * Line ending type (deprecated)
 	 * @deprecated
 	 */
 	crlf?: typeof LF | typeof CRLF | typeof CR,
 
+	/**
+	 * 是否使用舊版解析 API
+	 * Whether to use legacy parse API
+	 */
 	oldParseApi?: boolean,
 
+	/**
+	 * 是否允許區塊引用
+	 * Whether to allow blockquotes
+	 */
 	allowBlockquote?: boolean,
 
+	/**
+	 * 是否停用鍵值轉小寫
+	 * Whether to disable key conversion to lowercase
+	 */
 	disableKeyToLowerCase?: boolean,
 
+	/**
+	 * Marked 解析器選項
+	 * Marked parser options
+	 */
 	markedOptions?: MarkedOptions,
 
+	/**
+	 * 物件鍵值過濾器
+	 * Object key filter
+	 */
 	filterObjectKey?,
 }
 
+/**
+ * 預設解析選項
+ * Default parse options
+ */
 export const defaultOptionsParse: IOptionsParse = {
 	crlf: LF,
 	allowBlockquote: true,
@@ -44,17 +80,25 @@ export const defaultOptionsParse: IOptionsParse = {
 	),
 };
 
+/**
+ * 解析結果物件介面
+ * Parsed result object interface
+ */
 export interface IObjectParse
 {
 	[key: string]: any
 }
 
 /**
- * Parse the given `str` of markdown.
- *
- * @param {String | Buffer} str
- * @param {Object} options
- * @return {Object}
+ * 解析 Markdown 字串
+ * Parse Markdown String
+ * 
+ * 將 Markdown 格式的字串解析為結構化的 JavaScript 物件。
+ * Parses a Markdown-formatted string into a structured JavaScript object.
+ * 
+ * @param {String | Buffer} str - 要解析的 Markdown 內容 / Markdown content to parse
+ * @param {IOptionsParse} [options] - 解析選項 / Parse options
+ * @returns {IObjectParse} 解析後的物件 / Parsed object
  * @api public
  */
 export function parse(str: string, options?: IOptionsParse): IObjectParse
@@ -284,6 +328,19 @@ export function parse(str: string | Buffer, options: IOptionsParse = {}): IObjec
 	return conf;
 }
 
+/**
+ * 將物件轉換為 Markdown 字串
+ * Convert Object to Markdown String
+ * 
+ * 將 JavaScript 物件轉換回 Markdown 格式的字串。
+ * Converts a JavaScript object back to a Markdown-formatted string.
+ * 
+ * @param {unknown | IRawObjectPlus} dataInput - 要轉換的資料 / Data to convert
+ * @param {number} [level=1] - 標題層級 / Heading level
+ * @param {string[]} [skip=[]] - 要跳過的鍵值 / Keys to skip
+ * @param {string} [k] - 當前鍵值 / Current key
+ * @returns {string} Markdown 格式字串 / Markdown-formatted string
+ */
 export function stringify(dataInput: unknown | IRawObjectPlus, level: number = 1, skip = [], k?): string
 {
 	let rs1: string[] = [];

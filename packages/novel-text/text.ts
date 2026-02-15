@@ -1,5 +1,19 @@
 /**
- * Created by user on 2017/12/5/005.
+ * 小說文字處理模組
+ * Novel Text Processing Module
+ *
+ * 此模組提供小說文字的格式化、清理和轉換功能。
+ * This module provides formatting, cleaning, and conversion functions for novel text.
+ *
+ * 主要功能 / Main Features:
+ * - 英文文字填充 / English text padding
+ * - 詞語替換規則處理 / Word replacement rule processing
+ * - 換行符和空白處理 / Line break and whitespace handling
+ * - 段落排版調整 / Paragraph layout adjustment
+ *
+ * @module novel-text/text
+ * @author user
+ * @created 2017/12/5
  */
 
 import StrUtil from 'str-util';
@@ -14,37 +28,176 @@ import { envVal, envBool } from 'env-bool';
 
 export { SP_REGEXP, SP_KEY };
 
+/**
+ * 文字處理選項介面
+ * Text Processing Options Interface
+ *
+ * 用於配置文字替換和格式化的行為。
+ * Used to configure text replacement and formatting behavior.
+ *
+ * @interface IOptions
+ */
 export interface IOptions
 {
+	/**
+	 * 是否執行詞語替換
+	 * Whether to perform word replacement
+	 *
+	 * 啟用後會應用預定義的詞語替換規則。
+	 * When enabled, predefined word replacement rules will be applied.
+	 */
 	words?: boolean
+
+	/**
+	 * 是否在英文周圍添加空白填充
+	 * Whether to add space padding around English text
+	 *
+	 * 啟用後會在英文單詞與中文之間添加空白。
+	 * When enabled, spaces will be added between English words and Chinese characters.
+	 */
 	pad_eng?: boolean
 }
 
+/**
+ * 詞語替換輸出介面
+ * Word Replacement Output Interface
+ *
+ * 定義詞語替換規則的結構。
+ * Defines the structure of word replacement rules.
+ *
+ * @interface IWordsOutput
+ */
 export interface IWordsOutput
 {
+	/**
+	 * 原始資料來源
+	 * Original data source
+	 *
+	 * 儲存轉換前的原始規則資料。
+	 * Stores the original rule data before transformation.
+	 */
 	_source?: any,
 
+	/**
+	 * 匹配用的正則表達式
+	 * Regular expression for matching
+	 *
+	 * 用於在文字中查找需要替換的模式。
+	 * Used to find patterns in text that need replacement.
+	 */
 	s?: RegExp,
+
+	/**
+	 * 替換字串或回調函數
+	 * Replacement string or callback function
+	 *
+	 * 可以是直接替換的字串，或是動態生成替換結果的函數。
+	 * Can be a direct replacement string or a function that dynamically generates replacement results.
+	 */
 	r?: string | IRegExpCallback,
 
+	/**
+	 * 正則表達式旗標
+	 * Regular expression flags
+	 *
+	 * 如 'g' (全局)、'i' (不區分大小寫) 等。
+	 * Such as 'g' (global), 'i' (case-insensitive), etc.
+	 */
 	flags?: string,
 }
 
+/**
+ * 正則表達式回調函數介面
+ * Regular Expression Callback Function Interface
+ *
+ * 用於自定義替換邏輯的回調函數類型。
+ * Callback function type for custom replacement logic.
+ *
+ * @interface IRegExpCallback
+ */
 export interface IRegExpCallback
 {
+	/**
+	 * 回調函數簽名
+	 * Callback function signature
+	 *
+	 * @param $0 - 完整匹配的字串 / The fully matched string
+	 * @param $1 - 第一個捕獲組 / The first capture group
+	 * @param $2 - 第二個捕獲組 / The second capture group
+	 * @param $3 - 第三個捕獲組 / The third capture group
+	 * @param argv - 其他參數 / Additional arguments
+	 * @returns 替換後的字串 / The replacement string
+	 */
 	($0: string, $1?: string, $2?: string, $3?: string, ...argv): string;
 }
 
+/**
+ * 轉換為字串選項介面
+ * Convert to String Options Interface
+ *
+ * 定義將輸入轉換為字串時的選項。
+ * Defines options when converting input to string.
+ *
+ * @interface IToStrOptions
+ */
 export interface IToStrOptions
 {
+	/**
+	 * 換行符類型
+	 * Line break type
+	 *
+	 * 指定使用的換行符，預設為 "\n"。
+	 * Specifies the line break to use, defaults to "\n".
+	 */
 	LF?: string,
+
+	/**
+	 * 是否允許不斷行空白
+	 * Whether to allow non-breaking spaces
+	 *
+	 * 啟用後保留不斷行空白字元。
+	 * When enabled, non-breaking space characters are preserved.
+	 */
 	allow_nbsp?: boolean,
+
+	/**
+	 * 是否允許 BOM 字元
+	 * Whether to allow BOM characters
+	 *
+	 * 啟用後保留位元組順序標記 (BOM)。
+	 * When enabled, Byte Order Mark (BOM) is preserved.
+	 */
 	allow_bom?: boolean,
 }
 
+/**
+ * 文字排版選項介面
+ * Text Layout Options Interface
+ *
+ * 擴展 IToStrOptions，增加段落排版相關選項。
+ * Extends IToStrOptions with paragraph layout related options.
+ *
+ * @interface ITextLayoutOptions
+ * @extends IToStrOptions
+ */
 export interface ITextLayoutOptions extends IToStrOptions
 {
+	/**
+	 * 是否允許連續兩個換行
+	 * Whether to allow two consecutive line breaks
+	 *
+	 * 啟用後保留段落間的雙換行。
+	 * When enabled, double line breaks between paragraphs are preserved.
+	 */
 	allow_lf2?: boolean,
+
+	/**
+	 * 是否允許連續三個換行
+	 * Whether to allow three consecutive line breaks
+	 *
+	 * 啟用後保留更大的段落間距。
+	 * When enabled, larger spacing between paragraphs is preserved.
+	 */
 	allow_lf3?: boolean,
 }
 
